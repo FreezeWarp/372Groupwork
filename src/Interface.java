@@ -21,6 +21,10 @@ public class Interface {
         "Help"
     };
 
+    static String commandMethods[] = {
+        "addClient",
+    };
+
     public static void main(String args[]) {
         for (int i = 0; i < commands.length; i++) {
             System.out.println(i + ": " + commands[i]);
@@ -29,7 +33,30 @@ public class Interface {
         int commandNumber;
         while ((commandNumber = promptInt("Make a selection: ", 0, commands.length - 1)) != 0) {
             // Do stuff
+
+            switch (commandNumber) {
+                case 1: addClient(); break;
+                case 2: removeClient(); break;
+                case 3: listClients(); break;
+                case 4: addCustomer(); break;
+            }
         }
+    }
+
+    public static void addClient() {
+
+    }
+
+    public static void removeClient() {
+
+    }
+
+    public static void listClients() {
+
+    }
+
+    public static void addCustomer() {
+        
     }
 
     public static int promptInt(String promptText, int min, int max) {
