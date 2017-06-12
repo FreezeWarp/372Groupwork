@@ -1,7 +1,6 @@
-package PACKAGE_NAME;
-
 /**
  * Created by joseph on 12/06/17.
  */
-public class Customer {
+public class Customer extends Account {
+    CreditCard creditCard;
 }
