@@ -65,26 +65,36 @@ public class Interface {
     public static void addClient() {
         String name = InterfacePrompts.promptLine("Client name? ");
         String address = InterfacePrompts.promptLine("Client address? ");
-        long phone = InterfacePrompts.promptIntRange("Phone number? ", 0, 9999999999l);
+        long phone = InterfacePrompts.promptIntRange("Phone number? ", 0, 9999999999L);
+
+        Theater.getClientList().addClient(new Client(name, address, phone));
     }
 
     /**
      * @author Joseph
      */
     public static void removeClient() {
+        int id = (int) InterfacePrompts.promptInt("Client ID? ");
 
+        if (Theater.getClientList().removeClient(id)) {
+            System.out.println("The client was removed.");
+        }
+        else {
+            System.out.println("The client could not be removed; does it exist?");
+        }
     }
 
     /**
      * @author Joseph
      */
     public static void listClients() {
-
+        for (Client client : Theater.getClientList()) {
+            System.out.println(client);
+        }
     }
 
 
     public static void addCustomer() {
-
     }
 
     public static void removeCustomer() {

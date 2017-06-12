@@ -2,9 +2,49 @@
  * Created by joseph on 12/06/17.
  */
 public class Account {
-    int id;
-    String name;
-    String address;
-    int phoneNumber;
-    int balance;
+    private int id;
+    private String name;
+    private String address;
+    private long phoneNumber;
+    private int balance = 0;
+
+    public Account(int id, String name, String address, long phoneNumber) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public long getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public int getBalance() {
+        return balance;
+    }
+
+    @Override
+    public String toString() {
+        return id +
+                ": " + name +
+                ", " + address +
+                ", " + phoneNumber +
+                ", " + balance;
+    }
+
+    public int adjustBalance(int balanceAdjustment) {
+        return this.balance += balanceAdjustment;
+    }
 }
