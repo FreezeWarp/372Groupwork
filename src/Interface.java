@@ -41,6 +41,9 @@ public class Interface {
         }
     }
 
+    /**
+     * @author Joseph
+     */
     public static void addClient() {
         String name = InterfacePrompts.promptLine("Client name? ");
         String address = InterfacePrompts.promptLine("Client address? ");
@@ -49,14 +52,23 @@ public class Interface {
         //int creditCardExpiration = promptInt("Credit card expiration? "); // TODO: date
     }
 
+    /**
+     * @author Joseph
+     */
     public static void removeClient() {
-
+        
     }
 
+    /**
+     * @author Joseph
+     */
     public static void listClients() {
 
     }
 
+    /**
+     * @author Joseph
+     */
     public static void addCustomer() {
 
     }
