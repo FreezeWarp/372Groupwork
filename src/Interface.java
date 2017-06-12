@@ -115,7 +115,7 @@ public class Interface {
     public static void storeData() {
 
     }
-prompt
+
     public static void retrieveData() {
 
     }
