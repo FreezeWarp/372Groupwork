@@ -44,7 +44,11 @@ public class Interface {
     }
 
     public static void addClient() {
-
+        String name = promptLine("Client name? ");
+        String address = promptLine("Client address? ");
+        //int phone = promptInt("Phone number? ", 0, 9999999999); // TODO: allow string input
+        //int creditCardNo = promptInt("Credit card number? "); // TODO: allow string input
+        //int creditCardExpiration = promptInt("Credit card expiration? "); // TODO: allow string input
     }
 
     public static void removeClient() {
@@ -56,14 +60,14 @@ public class Interface {
     }
 
     public static void addCustomer() {
-        
+
     }
 
     public static int promptInt(String promptText, int min, int max) {
         Scanner s  = new Scanner(System.in);
         int inputInt = 0;
 
-        System.out.println(promptText);
+        System.out.print(promptText);
 
         while (true) {
             String input = s.next();
@@ -86,5 +90,15 @@ public class Interface {
         }
 
         return inputInt;
+    }
+
+    public static String promptLine(String promptText) {
+        Scanner s  = new Scanner(System.in);
+
+        System.out.print(promptText);
+
+        String input = s.nextLine();
+
+        return input;
     }
 }
