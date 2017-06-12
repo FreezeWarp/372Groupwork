@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 /**
  * Created by joseph on 12/06/17.
  */
@@ -30,11 +28,11 @@ public class Interface {
             System.out.println(i + ": " + commands[i]);
         }
 
-        int commandNumber;
-        while ((commandNumber = promptInt("Make a selection: ", 0, commands.length - 1)) != 0) {
+        long commandNumber;
+        while ((commandNumber = InterfacePrompts.promptIntRange("Make a selection: ", 0, commands.length - 1)) != 0) {
             // Do stuff
 
-            switch (commandNumber) {
+            switch ((int) commandNumber) {
                 case 1: addClient(); break;
                 case 2: removeClient(); break;
                 case 3: listClients(); break;
@@ -44,11 +42,11 @@ public class Interface {
     }
 
     public static void addClient() {
-        String name = promptLine("Client name? ");
-        String address = promptLine("Client address? ");
-        //int phone = promptInt("Phone number? ", 0, 9999999999); // TODO: allow string input
-        //int creditCardNo = promptInt("Credit card number? "); // TODO: allow string input
-        //int creditCardExpiration = promptInt("Credit card expiration? "); // TODO: allow string input
+        String name = InterfacePrompts.promptLine("Client name? ");
+        String address = InterfacePrompts.promptLine("Client address? ");
+        long phone = InterfacePrompts.promptIntRange("Phone number? ", 0, 9999999999l);
+        long creditCardNo = InterfacePrompts.promptInt("Credit card number? ");
+        //int creditCardExpiration = promptInt("Credit card expiration? "); // TODO: date
     }
 
     public static void removeClient() {
@@ -61,44 +59,5 @@ public class Interface {
 
     public static void addCustomer() {
 
-    }
-
-    public static int promptInt(String promptText, int min, int max) {
-        Scanner s  = new Scanner(System.in);
-        int inputInt = 0;
-
-        System.out.print(promptText);
-
-        while (true) {
-            String input = s.next();
-
-            try {
-                inputInt = Integer.parseInt(input);
-
-                if (inputInt < min) {
-                    System.out.println("That number is too low. Please enter a number between " + min + " and " + max);
-                }
-                else if (inputInt > max) {
-                    System.out.println("That number is too high. Please enter a number between " + min + " and " + max);
-                }
-                else {
-                    break;
-                }
-            } catch (Exception ex) {
-                System.out.println("That is not a number. Please enter a number.");
-            }
-        }
-
-        return inputInt;
-    }
-
-    public static String promptLine(String promptText) {
-        Scanner s  = new Scanner(System.in);
-
-        System.out.print(promptText);
-
-        String input = s.nextLine();
-
-        return input;
     }
 }
