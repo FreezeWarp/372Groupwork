@@ -10,6 +10,7 @@ public class Theater implements Serializable {
 
     private Theater() {
         clientList = ClientList.getInstance();
+        customerList = CustomerList.getInstance();
     }
 
     public static Theater getInstance() {
@@ -93,8 +94,12 @@ public class Theater implements Serializable {
 
     /* Theater Core */
     private ClientList clientList;
+    private CustomerList customerList;
     public ClientList getClientList() {
         return clientList;
+    }
+    public CustomerList getCustomerList() {
+        return customerList;
     }
 
 

@@ -71,7 +71,7 @@ public class Interface {
         String address = InterfacePrompts.promptLine("Client address? ");
         long phone = InterfacePrompts.promptPhone("Phone number? ");
 
-        Theater.getInstance().getClientList().addClient(new Client(name, address, phone));
+        Theater.getInstance().getClientList().addAccount(new Client(name, address, phone));
     }
 
     /**
@@ -80,7 +80,7 @@ public class Interface {
     public static void removeClient() {
         int id = (int) InterfacePrompts.promptInt("Client ID? ");
 
-        if (Theater.getInstance().getClientList().removeClient(id)) {
+        if (Theater.getInstance().getClientList().removeAccount(id)) {
             System.out.println("The client was removed.");
         }
         else {
@@ -88,9 +88,7 @@ public class Interface {
         }
     }
 
-    /**
-     * @author Joseph
-     */
+
     public static void listClients() {
         for (Client client : Theater.getInstance().getClientList()) {
             System.out.println(client);
@@ -99,11 +97,13 @@ public class Interface {
 
 
     public static void addCustomer() {
+        //long creditCardNo = InterfacePrompts.promptCreditCard("Credit card number? ");
+        //int creditCardExpiration = promptInt("Credit card expiration? "); // TODO: date
+
+        Theater.getInstance().getCustomerList().addAccount(new Customer("Bob", "12 North Hampton Ln", 9998001111L));
     }
 
     public static void removeCustomer() {
-        long creditCardNo = InterfacePrompts.promptCreditCard("Credit card number? ");
-        //int creditCardExpiration = promptInt("Credit card expiration? "); // TODO: date
     }
 
     public static void addCreditCard() {
@@ -115,7 +115,9 @@ public class Interface {
     }
 
     public static void listCustomers() {
-
+        for (Customer customer : Theater.getInstance().getCustomerList()) {
+            System.out.println(customer);
+        }
     }
 
     public static void addShow() {
