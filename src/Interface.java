@@ -30,9 +30,9 @@ public class Interface {
 
 
     public static void main(String args[]) {
-        //if (InterfacePrompts.promptYesOrNo("Would you like to load available application data before starting? ")) {
-        //    storeData();
-        //}
+        if (Theater.hasData() && InterfacePrompts.promptYesOrNo("Would you like to load available application data before starting? ")) {
+            Theater.retrieveData();
+        }
 
         help();
 
@@ -57,9 +57,9 @@ public class Interface {
             }
         }
 
-        //if (InterfacePrompts.promptYesOrNo("Would you like to save the application data before exiting? ")) {
-        //    storeData();
-        //}
+        if (InterfacePrompts.promptYesOrNo("Would you like to save the application data before exiting? ")) {
+            Theater.storeData();
+        }
     }
 
 

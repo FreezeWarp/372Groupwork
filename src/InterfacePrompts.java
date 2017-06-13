@@ -93,7 +93,6 @@ public class InterfacePrompts {
     }
 
 
-
     public static String promptLine(String promptText) {
         Scanner s = new Scanner(System.in);
 
@@ -102,5 +101,10 @@ public class InterfacePrompts {
         String input = s.nextLine();
 
         return input;
+    }
+
+
+    public static boolean promptYesOrNo(String promptText) {
+        return promptLine(promptText).substring(0, 1).toLowerCase().equals("y");
     }
 }

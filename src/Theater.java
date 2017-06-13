@@ -6,6 +6,7 @@ import java.io.*;
 public class Theater implements Serializable {
     /* Singleton */
     private static Theater INSTANCE;
+    private static final File persistenceFile = new File(new File(System.getProperty("user.dir")), "372Groupwork_Persistence.bin");
 
     private Theater() {
         clientList = ClientList.getInstance();
@@ -54,10 +55,13 @@ public class Theater implements Serializable {
 
     /* Helper Methods to Write/Read to/from Disk */
 
+    public static boolean hasData() {
+        return persistenceFile.exists();
+    }
+
     public static boolean storeData() {
         try {
-            File file = new File(new File(System.getProperty("user.dir")), "372Groupwork_Persistence.bin");
-            FileOutputStream out = new FileOutputStream(file);
+            FileOutputStream out = new FileOutputStream(persistenceFile);
             ObjectOutputStream oos = new ObjectOutputStream(out);
 
             oos.writeObject(INSTANCE);
@@ -72,7 +76,7 @@ public class Theater implements Serializable {
 
     public static Theater retrieveData() {
         try {
-            FileInputStream in = new FileInputStream("372Groupwork_Persistence.bin");
+            FileInputStream in = new FileInputStream(persistenceFile);
             ObjectInputStream ois = new ObjectInputStream(in);
             ois.readObject();
             return INSTANCE;
