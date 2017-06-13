@@ -1,3 +1,7 @@
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by joseph on 12/06/17.
  */
@@ -107,11 +111,27 @@ public class Interface {
     }
 
 
+    /**
+     * Asks for a customer's information and sends a newly-created customer object to the CustomerList.
+     *
+     * @author Eric
+     */
     public static void addCustomer() {
-        //long creditCardNo = InterfacePrompts.promptCreditCard("Credit card number? ");
-        //int creditCardExpiration = promptInt("Credit card expiration? "); // TODO: date
+    	 // Inputs
+        String name = InterfacePrompts.promptLine("Client name? ");
+        String address = InterfacePrompts.promptLine("Client address? ");
+        long phone = InterfacePrompts.promptPhone("Phone number? ");
+        long creditCardNo = InterfacePrompts.promptCreditCard("Credit card number? ");
+        
+        int creditCardExpiration = InterfacePrompts.promptInt("Credit card expiration (mmyyyy)? "); 
+        DateFormat  formattedDate = new  SimpleDateFormat("mmyyyy");
+        Date expiryDate = formattedDate.parse(creditCardExpiration);
+        
+        CreditCard creditCard = new CreditCard(creditCardNo, creditCardExpiration);
 
-        Theater.getInstance().getCustomerList().addAccount(new Customer("Bob", "12 North Hampton Ln", 9998001111L));
+        // Add New Account Object to Customer List
+     //   Theater.getInstance().getCustomerList().addAccount(new Customer("Bob", "12 North Hampton Ln", 9998001111L));
+        Theater.getInstance().getCustomerList().addAccount(new Customer(name, address, phone, creditCard));
     }
 
 
