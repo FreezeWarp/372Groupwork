@@ -4,6 +4,13 @@ import java.util.Scanner;
  * Created by joseph on 12/06/17.
  */
 public class InterfacePrompts {
+    /**
+     * Prompts the user for an integer.
+     *
+     * @param promptText The text to display for the prompt.
+     *
+     * @return An integer value input by the user.
+     */
     public static int promptInt(String promptText) {
         Scanner s  = new Scanner(System.in);
         int inputInt = 0;
@@ -28,7 +35,15 @@ public class InterfacePrompts {
     }
 
 
-
+    /**
+     * Prompts the user for an integer that must fall between min and max
+     *
+     * @param promptText The text to display for the prompt.
+     * @param min The minimum allowed integer.
+     * @param max The maximum allowed integer.
+     *
+     * @return An integer value input by the user.
+     */
     public static int promptIntRange(String promptText, int min, int max) {
         int inputInt;
 
@@ -50,7 +65,13 @@ public class InterfacePrompts {
     }
 
 
-
+    /**
+     * Prompts the user for a phone number.
+     *
+     * @param promptText The text to display for the prompt.
+     *
+     * @return A long value input by the user.
+     */
     public static long promptPhone(String promptText) {
         while(true) {
             try {
@@ -62,6 +83,13 @@ public class InterfacePrompts {
     }
 
 
+    /**
+     * Prompts the user for a credit card number.
+     *
+     * @param promptText The text to display for the prompt.
+     *
+     * @return A long value input by the user.
+     */
     public static long promptCreditCard(String promptText) {
         while(true) {
             try {
@@ -73,6 +101,15 @@ public class InterfacePrompts {
     }
 
 
+    /**
+     * Prompts the user for a string of text matching certain parameters.
+     * @param promptText The text to display for the prompt.
+     * @param regexToFilterOut A regex that will be removed from the user's input text.
+     * @param regexToMatch A regex that the user's text must match, after regexToFilterOut has been applied.
+     * @param failText Text to display when regexToMatch fails.
+     *
+     * @return A string that matches regexToMatch and doesn't contain regexToFilterOut.
+     */
     public static String promptLineRegex(String promptText, String regexToFilterOut, String regexToMatch, String failText) {
         Scanner s  = new Scanner(System.in);
 
@@ -93,6 +130,13 @@ public class InterfacePrompts {
     }
 
 
+    /**
+     * Prompts the user for a line of text.
+     *
+     * @param promptText The text to display for the prompt.
+     *
+     * @return A string of text, up to (but not including) a new line.
+     */
     public static String promptLine(String promptText) {
         Scanner s = new Scanner(System.in);
 
@@ -104,6 +148,13 @@ public class InterfacePrompts {
     }
 
 
+    /**
+     * Prompts the user for a yes or no answer.
+     *
+     * @param promptText The text to display for the prompt.
+     *
+     * @return True if the user answered yes; false otherwise.
+     */
     public static boolean promptYesOrNo(String promptText) {
         return promptLine(promptText).substring(0, 1).toLowerCase().equals("y");
     }

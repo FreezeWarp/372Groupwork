@@ -30,16 +30,16 @@ public class Interface {
 
 
     public static void main(String args[]) {
+        /* If we have saved data, prompt to load it. */
         if (Theater.hasData() && InterfacePrompts.promptYesOrNo("Would you like to load available application data before starting? ")) {
             Theater.retrieveData();
         }
 
-        help();
+        help(); // Show help at first launch.
 
+        /* Loop until exit command is entered. Process other commands as entered. */
         int commandNumber;
         while ((commandNumber = InterfacePrompts.promptIntRange("Make a selection: ", 0, commands.length - 1)) != 0) {
-            // Do stuff
-
             switch (commandNumber) {
                 case 1: addClient(); break;
                 case 2: removeClient(); break;
@@ -57,6 +57,7 @@ public class Interface {
             }
         }
 
+        /* We're about to exit, so prompt the user if they'd like to save data or not. */
         if (InterfacePrompts.promptYesOrNo("Would you like to save the application data before exiting? ")) {
             Theater.storeData();
         }
@@ -64,17 +65,24 @@ public class Interface {
 
 
     /**
+     * Asks for a client's information and sends a newly-created client object to the ClientList.
+     *
      * @author Joseph
      */
     public static void addClient() {
+        // Inputs
         String name = InterfacePrompts.promptLine("Client name? ");
         String address = InterfacePrompts.promptLine("Client address? ");
         long phone = InterfacePrompts.promptPhone("Phone number? ");
 
+        // Add New Account Object to Client List
         Theater.getInstance().getClientList().addAccount(new Client(name, address, phone));
     }
 
+
     /**
+     * Asks for a client's ID and asks the client list to remove the client with the corresponding ID.
+     *
      * @author Joseph
      */
     public static void removeClient() {
@@ -89,6 +97,9 @@ public class Interface {
     }
 
 
+    /**
+     * Lists all clients in the ClientList.
+     */
     public static void listClients() {
         for (Client client : Theater.getInstance().getClientList()) {
             System.out.println(client);
@@ -103,30 +114,40 @@ public class Interface {
         Theater.getInstance().getCustomerList().addAccount(new Customer("Bob", "12 North Hampton Ln", 9998001111L));
     }
 
+
     public static void removeCustomer() {
     }
+
 
     public static void addCreditCard() {
 
     }
 
+
     public static void removeCreditCard() {
 
     }
 
+
+    /**
+     * Lists all customers in the CustomerList.
+     */
     public static void listCustomers() {
         for (Customer customer : Theater.getInstance().getCustomerList()) {
             System.out.println(customer);
         }
     }
 
+
     public static void addShow() {
 
     }
 
+
     public static void listShows() {
 
     }
+
 
     /**
      * Shows a list of commands that can be used.

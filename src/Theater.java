@@ -6,7 +6,6 @@ import java.io.*;
 public class Theater implements Serializable {
     /* Singleton */
     private static Theater INSTANCE;
-    private static final File persistenceFile = new File(new File(System.getProperty("user.dir")), "372Groupwork_Persistence.bin");
 
     private Theater() {
         clientList = ClientList.getInstance();
@@ -24,6 +23,11 @@ public class Theater implements Serializable {
 
 
     /* Singleton Serialisation */
+    /**
+     * Reads the Theater object (and its static instance variable) from the ObjectOutputStream.
+     *
+     * @param input
+     */
     private void readObject(java.io.ObjectInputStream input) {
         try {
             input.defaultReadObject();
@@ -41,6 +45,12 @@ public class Theater implements Serializable {
         }
     }
 
+
+    /**
+     * Writes the Theater object (and its static instance variable) to the ObjectOutputStream.
+     *
+     * @param output
+     */
     private void writeObject(java.io.ObjectOutputStream output) {
         try {
             output.defaultWriteObject();
@@ -55,11 +65,23 @@ public class Theater implements Serializable {
 
 
     /* Helper Methods to Write/Read to/from Disk */
+    /**
+     * A file object corresponding to the persistence file, whether or whether not it exists.
+     */
+    private static final File persistenceFile = new File(new File(System.getProperty("user.dir")), "372Groupwork_Persistence.bin");
 
+
+    /**
+     * @return True if the persistence file exists, false otherwise.
+     */
     public static boolean hasData() {
         return persistenceFile.exists();
     }
 
+
+    /**
+     * Writes Theater's state to the persistence file.
+     */
     public static boolean storeData() {
         try {
             FileOutputStream out = new FileOutputStream(persistenceFile);
@@ -75,6 +97,9 @@ public class Theater implements Serializable {
     }
 
 
+    /**
+     * Loads in data from the persistence file.
+     */
     public static Theater retrieveData() {
         try {
             FileInputStream in = new FileInputStream(persistenceFile);

@@ -1,4 +1,6 @@
 /**
+ * A Theater Customer's Account.
+ *
  * Created by joseph on 12/06/17.
  */
 public class Customer extends Account {

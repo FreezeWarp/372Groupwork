@@ -1,6 +1,8 @@
 import java.io.Serializable;
 
 /**
+ * A Theater Client's Account.
+ *
  * Created by joseph on 12/06/17.
  */
 public class Client extends Account implements Serializable {

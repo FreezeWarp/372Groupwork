@@ -1,4 +1,6 @@
 /**
+ * A list of Clients, complying with AccountList.
+ *
  * Created by joseph on 12/06/17.
  */
 public class ClientList extends AccountList<Client> {

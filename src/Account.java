@@ -1,6 +1,8 @@
 import java.io.Serializable;
 
 /**
+ * A generic financial account.
+ *
  * Created by joseph on 12/06/17.
  */
 public class Account implements Serializable {
