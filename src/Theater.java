@@ -53,7 +53,7 @@ public class Theater implements Serializable {
 
 
     /* Helper Methods to Write/Read to/from Disk */
-    
+
     public static boolean storeData() {
         try {
             File file = new File(new File(System.getProperty("user.dir")), "372Groupwork_Persistence.bin");
