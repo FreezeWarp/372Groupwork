@@ -9,7 +9,7 @@
  */
 public class AccountList<E extends Account> extends SingletonHashmap<E> {
     /* Singleton Stuff */
-    protected static AccountList INSTANCE;
+    private static AccountList INSTANCE;
 
     protected AccountList() { }
 

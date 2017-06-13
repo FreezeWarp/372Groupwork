@@ -9,7 +9,7 @@ import java.util.Map;
  */
 public class SingletonHashmap<E> implements Iterable<E>, Serializable {
     /* Singleton Stuff */
-    protected static SingletonHashmap INSTANCE;
+    private static SingletonHashmap INSTANCE;
 
     protected SingletonHashmap() { }
 

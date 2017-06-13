@@ -1,0 +1,75 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+hide empty members
+
+class SingletonHashmap<E> {
+    -INSTANCE: SingletonHashmap
+    -singletonHashmap : Hashmap<Integer, E>
+    -lastId: int
+    #SingletonHashmap()
+    +getInstance() : SingletonHashmap
+    +getNewId(): int
+    +addEntry(keyId: int, entry: E)
+    +removeEntry(keyId: int): boolean
+    -readObject(ObjectInputStream)
+    -writeObject(ObjectInputStream)
+}
+
+class AccountList<E extends Account> {
+    -INSTANCE: AccountList
+    +AccountList()
+    +getInstance() : SingletonHashmap
+    +getNewAccountId(): int
+    +addAccount(account: E)
+    +removeEntry(accountId: int): boolean
+}
+
+class ClientList {
+    -INSTANCE: ClientList
+    +ClientList()
+    +getInstance() : ClientList
+}
+
+class CustomerList {
+    -INSTANCE: ClientList
+    +ClientList()
+    +getInstance() : ClientList
+}
+
+class Account {
+    -id: int
+    -name: String
+    -address: string
+    -phoneNumber: long
+    -balance: int
+    +getId(): int
+    +getName(): String
+    +getAddress(): String
+    +getPhoneNumber(): long
+    +getBalance(): int
+    +toString(): String
+}
+
+class Customer {
+    -creditCard: CreditCard
+}
+
+SingletonHashmap <|-- "SingletonHashmap<Account>" : "«bind» E::Account"
+SingletonHashmap <|-- "SingletonHashmap<Show>" : "«bind» E::Show"
+"SingletonHashmap<Account>" <|-- AccountList
+"SingletonHashmap<Show>" <|-- ShowList
+AccountList <|-- "AccountList<Client>" : "«bind» E::Client"
+AccountList <|-- "AccountList<Customer>" : "«bind» E::Customer"
+"AccountList<Client>" <|-- ClientList
+"AccountList<Customer>" <|-- CustomerList
+
+Account <|-- Client
+Account <|-- Customer
+
+AccountList *-- Account
+ClientList *-- Client
+CustomerList *-- Customer
+ShowList *-- Show
+
+@enduml
