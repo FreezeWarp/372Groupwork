@@ -1,3 +1,4 @@
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -8,6 +9,7 @@ import java.util.Date;
 public class CreditCard {
    private long cardNumber;
    private Date expirationDate;
+   private final SimpleDateFormat dateFormat = new SimpleDateFormat("MM/yyyy");
     
     public CreditCard(long cardNumber, Date expirationDate) {
     	this.cardNumber = cardNumber;
@@ -24,6 +26,6 @@ public class CreditCard {
     
     @Override
     public String toString() {
-       return ", CC: " + cardNumber + " EXP: " + expirationDate.toString();
+       return ", CC: " + cardNumber + " EXP: " + dateFormat.format(expirationDate);
     }
 }

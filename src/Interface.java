@@ -124,11 +124,10 @@ public class Interface {
         String address = InterfacePrompts.promptLine("Client address? ");
         long phone = InterfacePrompts.promptPhone("Phone number? ");
         long creditCardNo = InterfacePrompts.promptCreditCard("Credit card number? ");
-        String creditCardExpiration = InterfacePrompts.promptCreditCardExpiry("Credit card expiration (mmyyyy)? "); 
+        String creditCardExpiration = InterfacePrompts.promptCreditCardExpiry("Credit card expiration (MMyyyy)? "); 
         //TODO: need to perform a check on the credit card expiry date to make sure it hasn't already expired, make another prompt method in InterfacePrompts
-     
-       DateFormat formattedDate = new SimpleDateFormat("MMyyyy");
-       Date expiryDate = formattedDate.parse(creditCardExpiration);
+       SimpleDateFormat dateFormat = new SimpleDateFormat("MMyyyy");
+       Date expiryDate = dateFormat.parse(creditCardExpiration);
         
         CreditCard creditCard = new CreditCard(creditCardNo, expiryDate);
 	

@@ -168,6 +168,16 @@ public class InterfacePrompts {
      * @return A string containing the expiry date of the credit card
      */
     public static String promptCreditCardExpiry(String promptText) {
-        return promptLine(promptText);
+    	 while(true) {
+             try {
+            	 
+            	 
+            	 
+                 return (promptLineRegex(promptText, "[\\s\\W]+", "^[0-9]{6}$", "That is not a valid expiry date. Please enter the 6 digit expiry date in the format MMyyyy."));
+             } catch (Exception ex) {
+                 System.out.println("That credit card expiry date could not be parsed. This may reflect an internal error, but you probably just typed something really strange. Please try re-entering the expiry date in the format MMyyyy.");
+             }
+         }
+          
     }
 }
