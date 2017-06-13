@@ -1,0 +1,12 @@
+@startuml
+
+actor Interface
+participant Theater
+
+Interface -> Theater : getClientList()
+Theater -> Interface: ClientList
+create Client
+Interface -> Client: new
+Interface -> ClientList : addAccount()
+
+@enduml

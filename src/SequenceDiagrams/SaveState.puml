@@ -1,0 +1,42 @@
+@startuml
+
+actor Interface
+participant Theater
+participant ClientList
+participant CustomerList
+participant ShowList
+database Disk
+
+Interface -> Theater : storeData()
+activate Theater
+
+Theater -> Disk: writeObject()
+activate Disk
+Disk --> Theater: status
+
+Theater -> ClientList: writeObject()
+activate ClientList
+ClientList -> Disk: writeObject()
+Disk --> ClientList: status
+ClientList --> Theater: status
+deactivate ClientList
+
+Theater -> CustomerList: writeObject()
+activate CustomerList
+CustomerList -> Disk: writeObject()
+Disk --> CustomerList: status
+CustomerList --> Theater: status
+deactivate CustomerList
+
+Theater -> ShowList: writeObject()
+activate ShowList
+ShowList -> Disk: writeObject()
+Disk --> ShowList: status
+ShowList --> Theater: status
+deactivate ShowList
+
+Theater --> Interface: status
+deactivate Theater
+deactivate Disk
+
+@enduml
