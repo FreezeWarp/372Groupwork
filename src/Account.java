@@ -39,16 +39,16 @@ public class Account implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder phoneNumberString = new StringBuilder(Long.toString(phoneNumber));
+/*        StringBuilder phoneNumberString = new StringBuilder(Long.toString(phoneNumber));
         phoneNumberString.insert(7, '-');
         phoneNumberString.insert(4, '-');
         if (phoneNumberString.length() > 13)
-            phoneNumberString.insert(1, '-');
+            phoneNumberString.insert(1, '-');*/
 
         return id +
                 ": " + name +
                 ", " + address +
-                ", " + phoneNumberString +
+                ", " + phoneNumber +
                 ", " + balance;
     }
 

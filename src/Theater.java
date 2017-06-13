@@ -8,7 +8,7 @@ public class Theater implements Serializable {
     private static Theater INSTANCE;
 
     private Theater() {
-        clientList = new ClientList();
+        clientList = ClientList.getInstance();
     }
 
     public static Theater getInstance() {
@@ -21,25 +21,39 @@ public class Theater implements Serializable {
 
 
 
-    /* Singleton Serialisation *//*
+    /* Singleton Serialisation */
     private void readObject(java.io.ObjectInputStream input) {
         try {
             input.defaultReadObject();
 
-            //if (INSTANCE == null) {
+            if (INSTANCE == null) {
                 INSTANCE = (Theater) input.readObject();
-            //}
-            //else {
-            //    input.readObject();
-            //}
+            }
+            else {
+                input.readObject();
+            }
         } catch(IOException ioe) {
             ioe.printStackTrace();
         } catch(Exception e) {
             e.printStackTrace();
         }
-    }*/
+    }
+
+    private void writeObject(java.io.ObjectOutputStream output) {
+        try {
+            output.defaultWriteObject();
+            output.writeObject(INSTANCE);
+        } catch(IOException ioe) {
+            ioe.printStackTrace();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
+
+    /* Helper Methods to Write/Read to/from Disk */
+    
     public static boolean storeData() {
         try {
             File file = new File(new File(System.getProperty("user.dir")), "372Groupwork_Persistence.bin");
@@ -60,7 +74,7 @@ public class Theater implements Serializable {
         try {
             FileInputStream in = new FileInputStream("372Groupwork_Persistence.bin");
             ObjectInputStream ois = new ObjectInputStream(in);
-            INSTANCE = (Theater) ois.readObject();
+            ois.readObject();
             return INSTANCE;
         } catch (IOException e) {
             System.out.println("Problem reading: " + e);
