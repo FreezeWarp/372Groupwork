@@ -14,4 +14,16 @@ public class CreditCard {
     	this.expirationDate = expirationDate;
     }
     
+    public long getCardNumber() {
+    	return cardNumber;
+    }
+    
+    public Date getExpirationDate() {
+    	return expirationDate;
+    }
+    
+    @Override
+    public String toString() {
+       return ", CC: " + cardNumber + " EXP: " + expirationDate.toString();
+    }
 }

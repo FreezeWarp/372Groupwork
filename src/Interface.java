@@ -127,19 +127,11 @@ public class Interface {
         String creditCardExpiration = InterfacePrompts.promptCreditCardExpiry("Credit card expiration (mmyyyy)? "); 
         //TODO: need to perform a check on the credit card expiry date to make sure it hasn't already expired, make another prompt method in InterfacePrompts
      
-       DateFormat formattedDate = new SimpleDateFormat("mmyyyy");
+       DateFormat formattedDate = new SimpleDateFormat("MMyyyy");
        Date expiryDate = formattedDate.parse(creditCardExpiration);
-        
-        
-        
-        
         
         CreditCard creditCard = new CreditCard(creditCardNo, expiryDate);
 	
-		
-
-        // Add New Account Object to Customer List
-     //   Theater.getInstance().getCustomerList().addAccount(new Customer("Bob", "12 North Hampton Ln", 9998001111L));
         Theater.getInstance().getCustomerList().addAccount(new Customer(name, address, phone, creditCard));
     }
 

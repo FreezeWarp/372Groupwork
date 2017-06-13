@@ -50,8 +50,7 @@ public class Account implements Serializable {
         return id +
                 ": " + name +
                 ", " + address +
-                ", " + phoneNumber +
-                ", " + balance;
+                ", " + phoneNumber;
     }
 
     public int adjustBalance(int balanceAdjustment) {
