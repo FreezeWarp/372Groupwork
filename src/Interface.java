@@ -124,10 +124,7 @@ public class Interface {
         String address = InterfacePrompts.promptLine("Client address? ");
         long phone = InterfacePrompts.promptPhone("Phone number? ");
         long creditCardNo = InterfacePrompts.promptCreditCard("Credit card number? ");
-        String creditCardExpiration = InterfacePrompts.promptCreditCardExpiry("Credit card expiration (MMyyyy)? "); 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MMyyyy");
-        Date expiryDate = dateFormat.parse(creditCardExpiration);
-        
+        Date expiryDate = InterfacePrompts.promptCreditCardExpiry("Credit card expiration (MMyyyy)? "); 
         CreditCard creditCard = new CreditCard(creditCardNo, expiryDate);
 	
         Theater.getInstance().getCustomerList().addAccount(new Customer(name, address, phone, creditCard));

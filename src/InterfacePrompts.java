@@ -170,21 +170,20 @@ public class InterfacePrompts {
      *
      * @return A string containing the expiry date of the credit card
      */
-    public static String promptCreditCardExpiry(String promptText) {
+    public static Date promptCreditCardExpiry(String promptText) {
 
     	 while(true) {
              try {
             	                    	 
                 String expiryStr = (promptLineRegex(promptText, "[\\s\\W]+", "^[0-9]{6}$", "That is not a valid expiry date. Please enter the 6 digit expiry date in the format MMyyyy.")); //removes unneeded characters
                  
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMyyyy");
-                simpleDateFormat.setLenient(false);
-                Date expiry = simpleDateFormat.parse(expiryStr);
+                Date expiry = new SimpleDateFormat("MMyy").parse(expiryStr);
+               
                 boolean expired = expiry.before(new Date()); //compares the expiry date of the CC with the current date
                 if (expired) { 
                 	System.out.println("This card is expired"); 
                 } else {
-                	return expiryStr; //if the card isn't expired, return the valid expiry date
+                	return expiry; //if the card isn't expired, return the valid expiry date
                 }
                  
              } catch (Exception ex) {
