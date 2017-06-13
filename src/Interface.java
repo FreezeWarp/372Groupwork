@@ -30,13 +30,17 @@ public class Interface {
 
 
     public static void main(String args[]) {
+        //if (InterfacePrompts.promptYesOrNo("Would you like to load available application data before starting? ")) {
+        //    storeData();
+        //}
+
         help();
 
-        long commandNumber;
+        int commandNumber;
         while ((commandNumber = InterfacePrompts.promptIntRange("Make a selection: ", 0, commands.length - 1)) != 0) {
             // Do stuff
 
-            switch ((int) commandNumber) {
+            switch (commandNumber) {
                 case 1: addClient(); break;
                 case 2: removeClient(); break;
                 case 3: listClients(); break;
@@ -47,8 +51,8 @@ public class Interface {
                 case 8: listCustomers(); break;
                 case 9: addShow(); break;
                 case 10: listShows(); break;
-                case 11: storeData(); break;
-                case 12: retrieveData(); break;
+                case 11: Theater.storeData(); break;
+                case 12: Theater.retrieveData(); break;
                 case 13: help(); break;
             }
         }
@@ -65,9 +69,9 @@ public class Interface {
     public static void addClient() {
         String name = InterfacePrompts.promptLine("Client name? ");
         String address = InterfacePrompts.promptLine("Client address? ");
-        long phone = InterfacePrompts.promptIntRange("Phone number? ", 0, 9999999999L);
+        long phone = InterfacePrompts.promptPhone("Phone number? ");
 
-        Theater.getClientList().addClient(new Client(name, address, phone));
+        Theater.getInstance().getClientList().addClient(new Client(name, address, phone));
     }
 
     /**
@@ -76,7 +80,7 @@ public class Interface {
     public static void removeClient() {
         int id = (int) InterfacePrompts.promptInt("Client ID? ");
 
-        if (Theater.getClientList().removeClient(id)) {
+        if (Theater.getInstance().getClientList().removeClient(id)) {
             System.out.println("The client was removed.");
         }
         else {
@@ -88,7 +92,7 @@ public class Interface {
      * @author Joseph
      */
     public static void listClients() {
-        for (Client client : Theater.getClientList()) {
+        for (Client client : Theater.getInstance().getClientList()) {
             System.out.println(client);
         }
     }
@@ -98,7 +102,7 @@ public class Interface {
     }
 
     public static void removeCustomer() {
-        long creditCardNo = InterfacePrompts.promptInt("Credit card number? ");
+        long creditCardNo = InterfacePrompts.promptCreditCard("Credit card number? ");
         //int creditCardExpiration = promptInt("Credit card expiration? "); // TODO: date
     }
 
@@ -119,14 +123,6 @@ public class Interface {
     }
 
     public static void listShows() {
-
-    }
-
-    public static void storeData() {
-
-    }
-
-    public static void retrieveData() {
 
     }
 

@@ -1,24 +1,23 @@
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 
 /**
  * Created by joseph on 12/06/17.
  */
-public enum ClientList implements Iterable<Client> {
-    INSTANCE;
-
-    private static HashMap<Integer, Client> clientList = new HashMap<Integer, Client>();
-    private static int lastClientId = 0;
+public class ClientList implements Iterable<Client>, Serializable {
+    private HashMap<Integer, Client> clientList = new HashMap<Integer, Client>();
+    private int lastClientId = 0;
 
     public Iterator<Client> iterator() {
         return clientList.values().iterator();
     }
 
-    public static void addClient(Client client) {
+    public void addClient(Client client) {
         clientList.put(client.getId(), client);
     }
 
-    public static boolean removeClient(int clientId) {
+    public boolean removeClient(int clientId) {
         if (clientList.containsKey(clientId)) {
             clientList.remove(clientId);
             return true;
@@ -28,7 +27,11 @@ public enum ClientList implements Iterable<Client> {
         }
     }
 
-    public static int getNewClientId() {
+    public int getNewClientId() {
         return lastClientId++;
+    }
+
+    public HashMap<Integer, Client> getMap() {
+        return this.clientList;
     }
 }

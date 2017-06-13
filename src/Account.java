@@ -1,7 +1,9 @@
+import java.io.Serializable;
+
 /**
  * Created by joseph on 12/06/17.
  */
-public class Account {
+public class Account implements Serializable {
     private int id;
     private String name;
     private String address;
@@ -37,10 +39,16 @@ public class Account {
 
     @Override
     public String toString() {
+        StringBuilder phoneNumberString = new StringBuilder(Long.toString(phoneNumber));
+        phoneNumberString.insert(7, '-');
+        phoneNumberString.insert(4, '-');
+        if (phoneNumberString.length() > 13)
+            phoneNumberString.insert(1, '-');
+
         return id +
                 ": " + name +
                 ", " + address +
-                ", " + phoneNumber +
+                ", " + phoneNumberString +
                 ", " + balance;
     }
 
