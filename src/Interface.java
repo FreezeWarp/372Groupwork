@@ -1,4 +1,5 @@
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -33,7 +34,7 @@ public class Interface {
     static boolean dataRetrieved = false;
 
 
-    public static void main(String args[]) {
+    public static void main(String args[]) throws ParseException {
         /* If we have saved data, prompt to load it. */
         if (Theater.hasData() && InterfacePrompts.promptYesOrNo("Would you like to load available application data before starting? ")) {
             Theater.retrieveData();
@@ -115,19 +116,27 @@ public class Interface {
      * Asks for a customer's information and sends a newly-created customer object to the CustomerList.
      *
      * @author Eric
+     * @throws ParseException 
      */
-    public static void addCustomer() {
+    public static void addCustomer() throws ParseException {
     	 // Inputs
         String name = InterfacePrompts.promptLine("Client name? ");
         String address = InterfacePrompts.promptLine("Client address? ");
         long phone = InterfacePrompts.promptPhone("Phone number? ");
         long creditCardNo = InterfacePrompts.promptCreditCard("Credit card number? ");
+        String creditCardExpiration = InterfacePrompts.promptCreditCardExpiry("Credit card expiration (mmyyyy)? "); 
+        //TODO: need to perform a check on the credit card expiry date to make sure it hasn't already expired, make another prompt method in InterfacePrompts
+     
+       DateFormat formattedDate = new SimpleDateFormat("mmyyyy");
+       Date expiryDate = formattedDate.parse(creditCardExpiration);
         
-        int creditCardExpiration = InterfacePrompts.promptInt("Credit card expiration (mmyyyy)? "); 
-        DateFormat  formattedDate = new  SimpleDateFormat("mmyyyy");
-        Date expiryDate = formattedDate.parse(creditCardExpiration);
         
-        CreditCard creditCard = new CreditCard(creditCardNo, creditCardExpiration);
+        
+        
+        
+        CreditCard creditCard = new CreditCard(creditCardNo, expiryDate);
+	
+		
 
         // Add New Account Object to Customer List
      //   Theater.getInstance().getCustomerList().addAccount(new Customer("Bob", "12 North Hampton Ln", 9998001111L));

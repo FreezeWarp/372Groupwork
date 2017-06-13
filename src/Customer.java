@@ -8,5 +8,6 @@ public class Customer extends Account {
 
     public Customer(String name, String address, long phoneNumber, CreditCard creditCard) {
         super(Theater.getInstance().getCustomerList().getNewAccountId(), name, address, phoneNumber);
+        this.creditCard = creditCard;
     }
 }

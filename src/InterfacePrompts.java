@@ -158,4 +158,16 @@ public class InterfacePrompts {
     public static boolean promptYesOrNo(String promptText) {
         return promptLine(promptText).substring(0, 1).toLowerCase().equals("y");
     }
+    
+    
+    /**
+     * Prompts the user for a credit card expiry date in the format mmyyyy
+     *
+     * @param promptText The text to display for the prompt.
+     *
+     * @return A string containing the expiry date of the credit card
+     */
+    public static String promptCreditCardExpiry(String promptText) {
+        return promptLine(promptText);
+    }
 }
