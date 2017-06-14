@@ -1,6 +1,3 @@
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -34,7 +31,7 @@ public class Interface {
     static boolean dataRetrieved = false;
 
 
-    public static void main(String args[]) throws ParseException {
+    public static void main(String args[]) {
         /* If we have saved data, prompt to load it. */
         if (Theater.hasData() && InterfacePrompts.promptYesOrNo("Would you like to load available application data before starting? ")) {
             Theater.retrieveData();
@@ -118,7 +115,7 @@ public class Interface {
      * @author Eric
      * @throws ParseException 
      */
-    public static void addCustomer() throws ParseException {
+    public static void addCustomer()  {
     	 // Inputs
         String name = InterfacePrompts.promptLine("Client name? ");
         String address = InterfacePrompts.promptLine("Client address? ");
@@ -126,7 +123,8 @@ public class Interface {
         long creditCardNo = InterfacePrompts.promptCreditCard("Credit card number? ");
         Date expiryDate = InterfacePrompts.promptCreditCardExpiry("Credit card expiration (MMyyyy)? "); 
         CreditCard creditCard = new CreditCard(creditCardNo, expiryDate);
-	
+        
+     // Add New Account Object to Customer List
         Theater.getInstance().getCustomerList().addAccount(new Customer(name, address, phone, creditCard));
     }
 
@@ -136,7 +134,11 @@ public class Interface {
 
 
     public static void addCreditCard() {
-
+    	   int id = (int) InterfacePrompts.promptInt("Client ID? ");
+    	   long creditCardNo = InterfacePrompts.promptCreditCard("Credit card number? ");
+           Date expiryDate = InterfacePrompts.promptCreditCardExpiry("Credit card expiration (MMyyyy)? ");  
+           CreditCard creditCard = new CreditCard(id, creditCardNo, expiryDate);
+    	
     }
 
 
