@@ -124,7 +124,7 @@ public class SingletonHashmap<E> implements Iterable<E>, Serializable {
      *
      * @return True on success, false on failure (ID doesn't exist, probably)
      */
-    public Account getCustomerAccount(int accountID) {
+    public Account getAccount(int accountID) {
          return (Account) singletonHashmap.get(accountID);
     	
     }
