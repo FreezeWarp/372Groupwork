@@ -141,7 +141,11 @@ public class Interface {
            
            
         // Add New Credit Card object to the specified Customer 
+           try {
         	   ((Customer) Theater.getInstance().getCustomerList().getCustomerAccount(id)).addCreditCard(creditCard);
+           } catch (NullPointerException e) {
+        	   System.out.println("Error, specified account does not exist, did you enter the correct accound Id?");
+           }
     	
     }
 

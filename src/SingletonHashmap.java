@@ -125,11 +125,7 @@ public class SingletonHashmap<E> implements Iterable<E>, Serializable {
      * @return True on success, false on failure (ID doesn't exist, probably)
      */
     public Account getCustomerAccount(int accountID) {
-    	try { //TODO: this error checking isn't working properly yet, need to fix
-    		return (Account) singletonHashmap.get(accountID);
-    	} catch (Exception e){
-    		System.out.println("Error, specified account does not exist, did you enter the correct accound Id?");
-    		return null;
-    	}
+         return (Account) singletonHashmap.get(accountID);
+    	
     }
 }
