@@ -116,16 +116,4 @@ public class SingletonHashmap<E> implements Iterable<E>, Serializable {
             return false;
         }
     }
-    
-    /**
-     * Retries an account from the AccountList, by its ID.
-     *
-     * @param accountId The accountID belonging to the account to be returned
-     *
-     * @return True on success, false on failure (ID doesn't exist, probably)
-     */
-    public Account getAccount(int accountID) {
-         return (Account) singletonHashmap.get(accountID);
-    	
-    }
 }

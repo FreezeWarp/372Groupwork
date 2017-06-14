@@ -44,6 +44,20 @@ public class AccountList<E extends Account> extends SingletonHashmap<E> {
         return removeEntry(accountId);
     }
 
+
+    /**
+     * Retries an account from the AccountList, by its ID.
+     *
+     * @param accountId The accountID belonging to the account to be returned
+     *
+     * @return True on success, false on failure (ID doesn't exist, probably)
+     */
+    public Account getAccount(int accountID) {
+        return (Account) singletonHashmap.get(accountID);
+
+    }
+
+
     /**
      * @return A new, unique account ID.
      */
