@@ -174,11 +174,13 @@ public class InterfacePrompts {
 
     	 while(true) {
              try {
-            	                    	 
+            	//TODO: This works, but not perfectly. If a user enters a date, say, 13/2020, it doesn't inform the user that 13 isn't a valid month, it simply increments the year, making the date 01/2021. I'm honestly scratching my head on this, it seems Regex isn't able to handle this type of scenario, and I'm not sure if I should recode this method (promptCreditCardExpiry()), or if one of you know how Regex can be made to handle this?                    	 
                 String expiryStr = (promptLineRegex(promptText, "[\\s\\W]+", "^[0-9]{6}$", "That is not a valid expiry date. Please enter the 6 digit expiry date in the format MMyyyy.")); //removes unneeded characters
                  
                 Date expiry = new SimpleDateFormat("MMyy").parse(expiryStr);
-               
+            
+              
+              
                 boolean expired = expiry.before(new Date()); //compares the expiry date of the CC with the current date
                 if (expired) { 
                 	System.out.println("This card is expired"); 
