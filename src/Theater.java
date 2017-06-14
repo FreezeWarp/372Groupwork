@@ -7,11 +7,7 @@ public class Theater implements Serializable {
     /* Singleton */
     private static Theater INSTANCE;
 
-    private Theater() {
-        clientList = ClientList.getInstance();
-        customerList = CustomerList.getInstance();
-        showList = ShowList.getInstance();
-    }
+    private Theater() {}
 
     public static Theater getInstance() {
         if (INSTANCE == null) {
@@ -119,9 +115,10 @@ public class Theater implements Serializable {
 
 
     /* Theater Core */
-    private ClientList clientList;
-    private CustomerList customerList;
-    private ShowList showList;
+    private ClientList clientList = ClientList.getInstance();
+    private CustomerList customerList = CustomerList.getInstance();
+    private ShowList showList = ShowList.getInstance();
+
     public ClientList getClientList() {
         return clientList;
     }
