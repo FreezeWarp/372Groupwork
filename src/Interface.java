@@ -137,7 +137,11 @@ public class Interface {
     	   int id = (int) InterfacePrompts.promptInt("Client ID? ");
     	   long creditCardNo = InterfacePrompts.promptCreditCard("Credit card number? ");
            Date expiryDate = InterfacePrompts.promptCreditCardExpiry("Credit card expiration (MMyyyy)? ");  
-           CreditCard creditCard = new CreditCard(id, creditCardNo, expiryDate);
+           CreditCard creditCard = new CreditCard(creditCardNo, expiryDate);
+           
+           
+        // Add New Credit Card object to the specified Customer 
+        	   ((Customer) Theater.getInstance().getCustomerList().getCustomerAccount(id)).addCreditCard(creditCard);
     	
     }
 
