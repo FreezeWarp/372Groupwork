@@ -117,8 +117,8 @@ public class Interface {
      */
     public static void addCustomer()  {
     	 // Inputs
-        String name = InterfacePrompts.promptLine("Client name? ");
-        String address = InterfacePrompts.promptLine("Client address? ");
+        String name = InterfacePrompts.promptLine("Customer name? ");
+        String address = InterfacePrompts.promptLine("Customer address? ");
         long phone = InterfacePrompts.promptPhone("Phone number? ");
         long creditCardNo = InterfacePrompts.promptCreditCard("Credit card number? ");
         Date expiryDate = InterfacePrompts.promptCreditCardExpiry("Credit card expiration (MMyyyy)? "); 
@@ -134,7 +134,7 @@ public class Interface {
 
 
     public static void addCreditCard() {
-    	   int id = (int) InterfacePrompts.promptInt("Client ID? ");
+    	   int id = (int) InterfacePrompts.promptInt("Customer ID? ");
     	   long creditCardNo = InterfacePrompts.promptCreditCard("Credit card number? ");
            Date expiryDate = InterfacePrompts.promptCreditCardExpiry("Credit card expiration (MMyyyy)? ");  
            CreditCard creditCard = new CreditCard(creditCardNo, expiryDate);
