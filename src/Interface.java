@@ -120,6 +120,7 @@ public class Interface {
         String name = InterfacePrompts.promptLine("Customer name? ");
         String address = InterfacePrompts.promptLine("Customer address? ");
         long phone = InterfacePrompts.promptPhone("Phone number? ");
+        // TODO: Expiration checking should cause reentering of CC number.
         long creditCardNo = InterfacePrompts.promptCreditCard("Credit card number? ");
         Date expiryDate = InterfacePrompts.promptCreditCardExpiry("Credit card expiration (MMyyyy)? "); 
         CreditCard creditCard = new CreditCard(creditCardNo, expiryDate);
@@ -144,7 +145,7 @@ public class Interface {
            try {
         	   ((Customer) Theater.getInstance().getCustomerList().getAccount(id)).addCreditCard(creditCard);
            } catch (NullPointerException e) {
-        	   System.out.println("Error, specified account does not exist, did you enter the correct accound Id?");
+        	   System.out.println("Error, specified account does not exist, did you enter the correct account Id?");
            }
     	
     }
