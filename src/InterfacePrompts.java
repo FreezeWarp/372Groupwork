@@ -174,20 +174,16 @@ public class InterfacePrompts {
 
     	 while(true) {
              try {
-                 //TODO: This works, but not perfectly. If a user enters a date, say, 13/2020, it doesn't inform the user that 13 isn't a valid month, it simply increments the year, making the date 01/2021. I'm honestly scratching my head on this, it seems Regex isn't able to handle this type of scenario, and I'm not sure if I should recode this method (promptCreditCardExpiry()), or if one of you know how Regex can be made to handle this?
-                 // TODO: you should test whether this works more thoroughly than I did, but I think it's fine.
-                String expiryStr = (promptLineRegex(promptText, "[\\s\\W]+", "^(0?[1-9]|10|11|12)[0-9]{4}$", "That is not a valid expiry date. Please enter the 6 digit expiry date in the format MMyyyy.")); //removes unneeded characters
-                 
-                Date expiry = new SimpleDateFormat("MMyy").parse(expiryStr);
-            
-              
-              
-                boolean expired = expiry.before(new Date()); //compares the expiry date of the CC with the current date
-                if (expired) { 
-                	System.out.println("This card is expired"); 
-                } else {
-                	return expiry; //if the card isn't expired, return the valid expiry date
-                }
+                 String expiryStr = (promptLineRegex(promptText, "[\\s\\W]+", "^(0?[1-9]|10|11|12)[0-9]{4}$", "That is not a valid expiry date. Please enter the 6 digit expiry date in the format MMyyyy.")); //removes unneeded characters
+
+                 Date expiry = new SimpleDateFormat("MMyy").parse(expiryStr);
+
+                 if (expiry.before(new Date())) { //compares the expiry date of the CC with the current date
+                     System.out.println("This card is expired");
+                 }
+                 else {
+                     return expiry; //if the card isn't expired, return the valid expiry date
+                 }
                  
              } catch (Exception ex) {
                  System.out.println("That credit card expiry date could not be parsed. This may reflect an internal error, but you probably just typed something really strange. Please try re-entering the expiry date in the format MMyyyy.");
