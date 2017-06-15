@@ -88,7 +88,7 @@ public class Interface {
      * @author Joseph
      */
     public static void removeClient() {
-        int id = (int) InterfacePrompts.promptInt("Client ID? ");
+        int id = InterfacePrompts.promptInt("Client ID? ");
 
         if (Theater.getInstance().getClientList().removeAccount(id)) {
             System.out.println("The client was removed.");
@@ -131,7 +131,7 @@ public class Interface {
 
 
     public static void addCreditCard() {
-        int id = (int) InterfacePrompts.promptInt("Customer ID? ");
+        int id = InterfacePrompts.promptInt("Customer ID? ");
         CreditCard creditCard = InterfacePrompts.promptCreditCard("Credit card number? ", "Credit card expiration (MMyyyy)? ", "This card is expired, please enter in a new credit card.");
            
            
