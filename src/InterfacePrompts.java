@@ -184,13 +184,13 @@ public class InterfacePrompts {
     }
 
     public static CreditCard promptCreditCard(String promptTextForNumber, String promptTextForExpiry, String expiredMessage) {
-        long creditCardNo = InterfacePrompts.promptCreditCardNumber(promptTextForExpiry);
-        Date expiryDate = InterfacePrompts.promptCreditCardExpiry(promptTextForNumber);
+        long creditCardNo = InterfacePrompts.promptCreditCardNumber(promptTextForNumber);
+        Date expiryDate = InterfacePrompts.promptCreditCardExpiry(promptTextForExpiry);
 
         while (expiryDate.before(new Date())) { //compares the expiry date of the CC with the current date
             System.out.println(expiredMessage);
-            creditCardNo = InterfacePrompts.promptCreditCardNumber(promptTextForExpiry);
-            expiryDate = InterfacePrompts.promptCreditCardExpiry(promptTextForNumber);
+            creditCardNo = InterfacePrompts.promptCreditCardNumber(promptTextForNumber);
+            expiryDate = InterfacePrompts.promptCreditCardExpiry(promptTextForExpiry);
         }
 
         return new CreditCard(creditCardNo, expiryDate);
