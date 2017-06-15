@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -6,7 +7,7 @@ import java.util.Date;
  *
  * Created by joseph on 12/06/17.
  */
-public class CreditCard {
+public class CreditCard implements Serializable {
    private long cardNumber;
    private Date expirationDate;
    private final SimpleDateFormat dateFormat = new SimpleDateFormat("MM/yyyy");
