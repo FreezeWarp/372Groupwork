@@ -176,16 +176,7 @@ public class InterfacePrompts {
              try {
                  String expiryStr = (promptLineRegex(promptText, "[\\s\\W]+", "^(0?[1-9]|10|11|12)[0-9]{4}$", "That is not a valid expiry date. Please enter the 6 digit expiry date in the format MMyyyy.")); //removes unneeded characters
 
-                 Date expiry = new SimpleDateFormat("MMyy").parse(expiryStr);
-
-                 if (expiry.before(new Date())) { //compares the expiry date of the CC with the current date
-                     System.out.println("This card is expired, please enter in a new credit card.");
-                     promptCreditCard("Credit card number? ");
-                 }
-                 else {
-                     return expiry; //if the card isn't expired, return the valid expiry date
-                 }
-                 
+                 return new SimpleDateFormat("MMyy").parse(expiryStr);
              } catch (Exception ex) {
                  System.out.println("That credit card expiry date could not be parsed. This may reflect an internal error, but you probably just typed something really strange. Please try re-entering the expiry date in the format MMyyyy.");
              }

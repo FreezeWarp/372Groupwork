@@ -134,10 +134,17 @@ public class Interface {
 
 
     public static void addCreditCard() {
-    	   int id = (int) InterfacePrompts.promptInt("Customer ID? ");
-    	   long creditCardNo = InterfacePrompts.promptCreditCard("Credit card number? ");
-           Date expiryDate = InterfacePrompts.promptCreditCardExpiry("Credit card expiration (MMyyyy)? ");  
-           CreditCard creditCard = new CreditCard(creditCardNo, expiryDate);
+        int id = (int) InterfacePrompts.promptInt("Customer ID? ");
+        long creditCardNo = InterfacePrompts.promptCreditCard("Credit card number? ");
+        Date expiryDate = InterfacePrompts.promptCreditCardExpiry("Credit card expiration (MMyyyy)? ");
+
+        while (expiryDate.before(new Date())) { //compares the expiry date of the CC with the current date
+            System.out.println("This card is expired, please enter in a new credit card.");
+            creditCardNo = InterfacePrompts.promptCreditCard("Credit card number? ");
+            expiryDate = InterfacePrompts.promptCreditCardExpiry("Credit card expiration (MMyyyy)? ");
+        }
+
+        CreditCard creditCard = new CreditCard(creditCardNo, expiryDate);
            
            
            // Add New Credit Card object to the specified Customer
