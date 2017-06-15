@@ -116,4 +116,15 @@ public class SingletonHashmap<E> implements Iterable<E>, Serializable {
             return false;
         }
     }
+
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        for (E entry : this) {
+            sb.append(entry.toString() + "\n");
+        }
+
+        return sb.toString();
+    }
 }

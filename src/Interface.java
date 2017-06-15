@@ -159,9 +159,7 @@ public class Interface {
      * Lists all customers in the CustomerList.
      */
     public static void listCustomers() {
-        for (Customer customer : Theater.getInstance().getCustomerList()) {
-            System.out.println(customer);
-        }
+        System.out.println(Theater.getInstance().getCustomerList());
     }
 
 
