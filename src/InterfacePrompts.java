@@ -92,7 +92,7 @@ public class InterfacePrompts {
      *
      * @return A long value input by the user.
      */
-    public static long promptCreditCard(String promptText) {
+    public static long promptCreditCardNumber(String promptText) {
         while(true) {
             try {
                 return Long.parseLong(promptLineRegex(promptText, "[\\s\\W]+", "^[0-9]{16}$", "That is not a valid credit card number. Please enter a 16-digit credit card number."));
@@ -184,12 +184,12 @@ public class InterfacePrompts {
     }
 
     public static CreditCard promptCreditCard(String promptTextForNumber, String promptTextForExpiry, String expiredMessage) {
-        long creditCardNo = InterfacePrompts.promptCreditCard(promptTextForExpiry);
+        long creditCardNo = InterfacePrompts.promptCreditCardNumber(promptTextForExpiry);
         Date expiryDate = InterfacePrompts.promptCreditCardExpiry(promptTextForNumber);
 
         while (expiryDate.before(new Date())) { //compares the expiry date of the CC with the current date
             System.out.println(expiredMessage);
-            creditCardNo = InterfacePrompts.promptCreditCard(promptTextForExpiry);
+            creditCardNo = InterfacePrompts.promptCreditCardNumber(promptTextForExpiry);
             expiryDate = InterfacePrompts.promptCreditCardExpiry(promptTextForNumber);
         }
 
