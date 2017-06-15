@@ -68,24 +68,6 @@ public class InterfacePrompts {
 
 
     /**
-     * Prompts the user for a phone number.
-     *
-     * @param promptText The text to display for the prompt.
-     *
-     * @return A long value input by the user.
-     */
-    public static long promptPhone(String promptText) {
-        while(true) {
-            try {
-                return Long.parseLong(promptLineRegex(promptText, "[\\s\\W]+", "^[0-9]{10,12}$", "That is not a valid phone number. Please enter a phone number, optionally containing an international calling code. For instance, enter 123-456-7890 or 1-123-456-7890."));
-            } catch (Exception ex) {
-                System.out.println("That phone number could not be parsed. This may reflect an internal error, but you probably just typed something really strange. Try typing something more phone-numbery.");
-            }
-        }
-    }
-
-
-    /**
      * Prompts the user for a line of text.
      *
      * @param promptText The text to display for the prompt.
@@ -141,6 +123,24 @@ public class InterfacePrompts {
      */
     public static boolean promptYesOrNo(String promptText) {
         return promptLine(promptText).substring(0, 1).toLowerCase().equals("y");
+    }
+
+
+    /**
+     * Prompts the user for a phone number.
+     *
+     * @param promptText The text to display for the prompt.
+     *
+     * @return A long value input by the user.
+     */
+    public static long promptPhone(String promptText) {
+        while(true) {
+            try {
+                return Long.parseLong(promptLineRegex(promptText, "[\\s\\W]+", "^[0-9]{10,12}$", "That is not a valid phone number. Please enter a phone number, optionally containing an international calling code. For instance, enter 123-456-7890 or 1-123-456-7890."));
+            } catch (Exception ex) {
+                System.out.println("That phone number could not be parsed. This may reflect an internal error, but you probably just typed something really strange. Try typing something more phone-numbery.");
+            }
+        }
     }
     
     
