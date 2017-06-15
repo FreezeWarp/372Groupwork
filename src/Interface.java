@@ -103,9 +103,7 @@ public class Interface {
      * Lists all clients in the ClientList.
      */
     public static void listClients() {
-        for (Client client : Theater.getInstance().getClientList()) {
-            System.out.println(client);
-        }
+        System.out.println(Theater.getInstance().getClientList());
     }
 
 
