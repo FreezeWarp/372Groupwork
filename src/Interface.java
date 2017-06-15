@@ -120,7 +120,6 @@ public class Interface {
         String name = InterfacePrompts.promptLine("Customer name? ");
         String address = InterfacePrompts.promptLine("Customer address? ");
         long phone = InterfacePrompts.promptPhone("Phone number? ");
-        // TODO: Expiration checking should cause reentering of CC number.
         long creditCardNo = InterfacePrompts.promptCreditCard("Credit card number? ");
         Date expiryDate = InterfacePrompts.promptCreditCardExpiry("Credit card expiration (MMyyyy)? "); 
         CreditCard creditCard = new CreditCard(creditCardNo, expiryDate);

@@ -179,7 +179,8 @@ public class InterfacePrompts {
                  Date expiry = new SimpleDateFormat("MMyy").parse(expiryStr);
 
                  if (expiry.before(new Date())) { //compares the expiry date of the CC with the current date
-                     System.out.println("This card is expired");
+                     System.out.println("This card is expired, please enter in a new credit card.");
+                     promptCreditCard("Credit card number? ");
                  }
                  else {
                      return expiry; //if the card isn't expired, return the valid expiry date
