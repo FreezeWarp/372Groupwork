@@ -181,6 +181,18 @@ public class InterfacePrompts {
                  System.out.println("That credit card expiry date could not be parsed. This may reflect an internal error, but you probably just typed something really strange. Please try re-entering the expiry date in the format MMyyyy.");
              }
          }
-          
+    }
+
+    public static CreditCard promptCreditCard(String promptTextForNumber, String promptTextForExpiry, String expiredMessage) {
+        long creditCardNo = InterfacePrompts.promptCreditCard(promptTextForExpiry);
+        Date expiryDate = InterfacePrompts.promptCreditCardExpiry(promptTextForNumber);
+
+        while (expiryDate.before(new Date())) { //compares the expiry date of the CC with the current date
+            System.out.println(expiredMessage);
+            creditCardNo = InterfacePrompts.promptCreditCard(promptTextForExpiry);
+            expiryDate = InterfacePrompts.promptCreditCardExpiry(promptTextForNumber);
+        }
+
+        return new CreditCard(creditCardNo, expiryDate);
     }
 }
