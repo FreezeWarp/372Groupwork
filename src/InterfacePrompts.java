@@ -86,20 +86,20 @@ public class InterfacePrompts {
 
 
     /**
-     * Prompts the user for a credit card number.
+     * Prompts the user for a line of text.
      *
      * @param promptText The text to display for the prompt.
      *
-     * @return A long value input by the user.
+     * @return A string of text, up to (but not including) a new line.
      */
-    public static long promptCreditCardNumber(String promptText) {
-        while(true) {
-            try {
-                return Long.parseLong(promptLineRegex(promptText, "[\\s\\W]+", "^[0-9]{16}$", "That is not a valid credit card number. Please enter a 16-digit credit card number."));
-            } catch (Exception ex) {
-                System.out.println("That credit card number could not be parsed. This may reflect an internal error, but you probably just typed something really strange. Try typing something more credit card-numbery.");
-            }
-        }
+    public static String promptLine(String promptText) {
+        Scanner s = new Scanner(System.in);
+
+        System.out.print(promptText);
+
+        String input = s.nextLine();
+
+        return input;
     }
 
 
@@ -133,24 +133,6 @@ public class InterfacePrompts {
 
 
     /**
-     * Prompts the user for a line of text.
-     *
-     * @param promptText The text to display for the prompt.
-     *
-     * @return A string of text, up to (but not including) a new line.
-     */
-    public static String promptLine(String promptText) {
-        Scanner s = new Scanner(System.in);
-
-        System.out.print(promptText);
-
-        String input = s.nextLine();
-
-        return input;
-    }
-
-
-    /**
      * Prompts the user for a yes or no answer.
      *
      * @param promptText The text to display for the prompt.
@@ -171,7 +153,6 @@ public class InterfacePrompts {
      * @return A string containing the expiry date of the credit card
      */
     public static Date promptCreditCardExpiry(String promptText) {
-
     	 while(true) {
              try {
                  String expiryStr = (promptLineRegex(promptText, "[\\s\\W]+", "^(0?[1-9]|10|11|12)[0-9]{4}$", "That is not a valid expiry date. Please enter the 6 digit expiry date in the format MMyyyy.")); //removes unneeded characters
@@ -182,6 +163,25 @@ public class InterfacePrompts {
              }
          }
     }
+
+
+    /**
+     * Prompts the user for a credit card number.
+     *
+     * @param promptText The text to display for the prompt.
+     *
+     * @return A long value input by the user.
+     */
+    public static long promptCreditCardNumber(String promptText) {
+        while(true) {
+            try {
+                return Long.parseLong(promptLineRegex(promptText, "[\\s\\W]+", "^[0-9]{16}$", "That is not a valid credit card number. Please enter a 16-digit credit card number."));
+            } catch (Exception ex) {
+                System.out.println("That credit card number could not be parsed. This may reflect an internal error, but you probably just typed something really strange. Try typing something more credit card-numbery.");
+            }
+        }
+    }
+
 
     public static CreditCard promptCreditCard(String promptTextForNumber, String promptTextForExpiry, String expiredMessage) {
         long creditCardNo = InterfacePrompts.promptCreditCardNumber(promptTextForNumber);
