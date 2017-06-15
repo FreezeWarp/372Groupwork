@@ -52,8 +52,8 @@ public class AccountList<E extends Account> extends SingletonHashmap<E> {
      *
      * @return True on success, false on failure (ID doesn't exist, probably)
      */
-    public Account getAccount(int accountID) {
-        return (Account) singletonHashmap.get(accountID);
+    public E getAccount(int accountID) {
+        return (E) singletonHashmap.get(accountID);
 
     }
 
