@@ -119,14 +119,14 @@ public class Theater implements Serializable {
     private CustomerList customerList = CustomerList.getInstance();
     private ShowList showList = ShowList.getInstance();
 
-    public ClientList getClientList() {
-        return clientList;
+    public static ClientList getClientList() {
+        return getInstance().clientList;
     }
-    public CustomerList getCustomerList() {
-        return customerList;
+    public static CustomerList getCustomerList() {
+        return getInstance().customerList;
     }
-    public ShowList getShowList() {
-        return showList;
+    public static ShowList getShowList() {
+        return getInstance().showList;
     }
 
 

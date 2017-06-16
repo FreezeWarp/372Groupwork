@@ -78,7 +78,7 @@ public class Interface {
         long phone = InterfacePrompts.promptPhone("Phone number? ");
 
         // Add New Account Object to Client List
-        Theater.getInstance().getClientList().addAccount(new Client(name, address, phone));
+        Theater.getClientList().addAccount(new Client(name, address, phone));
     }
 
 
@@ -90,7 +90,7 @@ public class Interface {
     public static void removeClient() {
         int id = InterfacePrompts.promptInt("Client ID? ");
 
-        if (Theater.getInstance().getClientList().removeAccount(id)) {
+        if (Theater.getClientList().removeAccount(id)) {
             System.out.println("The client was removed.");
         }
         else {
@@ -103,7 +103,7 @@ public class Interface {
      * Lists all clients in the ClientList.
      */
     public static void listClients() {
-        System.out.println(Theater.getInstance().getClientList());
+        System.out.println(Theater.getClientList());
     }
 
 
@@ -122,7 +122,7 @@ public class Interface {
         CreditCard creditCard = InterfacePrompts.promptCreditCard("Credit card number? ", "Credit card expiration (MMyyyy)? ", "This card is expired, please enter in a new credit card.");
         
      // Add New Account Object to Customer List
-        Theater.getInstance().getCustomerList().addAccount(new Customer(name, address, phone, creditCard));
+        Theater.getCustomerList().addAccount(new Customer(name, address, phone, creditCard));
     }
 
 
@@ -137,7 +137,7 @@ public class Interface {
            
            // Add New Credit Card object to the specified Customer
            try {
-        	   Theater.getInstance().getCustomerList().getAccount(id).addCreditCard(creditCard);
+        	   Theater.getCustomerList().getAccount(id).addCreditCard(creditCard);
            } catch (NullPointerException e) {
         	   System.out.println("Error, specified account does not exist, did you enter the correct account Id?");
            }
@@ -154,7 +154,7 @@ public class Interface {
      * Lists all customers in the CustomerList.
      */
     public static void listCustomers() {
-        System.out.println(Theater.getInstance().getCustomerList());
+        System.out.println(Theater.getCustomerList());
     }
 
 
