@@ -159,12 +159,24 @@ public class Interface {
 
 
     public static void addShow() {
-
+        int id = (int) InterfacePrompts.promptInt("Client ID? ");
+        if (Theater.getInstance().getClientList().validateAccount(id)) {
+            String name = InterfacePrompts.promptLine("Show name? ");
+            Date startDate = InterfacePrompts.promptShowDate("Start of Show (MM/DD/yyyy)? "); 
+            Date endDate = InterfacePrompts.promptShowDate("End of Show (MM/DD/yyyy)? "); 
+            // Add New Show Object to ShowList
+            Theater.getInstance().getShowList().addShow(new Show(id ,name, startDate, endDate));
+        }
+        else {
+            System.out.println("The client doesnt exist?");
+        }
     }
 
 
     public static void listShows() {
-
+        for (Show show : Theater.getInstance().getShowList()) {
+            System.out.println(show);
+        }
     }
 
 

@@ -57,6 +57,9 @@ public class AccountList<E extends Account> extends SingletonHashmap<E> {
 
     }
 
+    public boolean validateAccount(int accountId) {
+        return validateEntry(accountId);
+    }
 
     /**
      * @return A new, unique account ID.

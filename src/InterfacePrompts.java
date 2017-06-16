@@ -195,4 +195,27 @@ public class InterfacePrompts {
 
         return new CreditCard(creditCardNo, expiryDate);
     }
+    
+    public static Date promptShowDate(String promptText) {
+
+      	 while(true) {
+               try {
+              	                    	 
+               	String dateStr = (promptLineRegex(promptText, "[\\s\\W]+", "^[0-9]{8}$", "That is not a show date. Please enter the 8 digit expiry date in the format MM/dd/yyyy.")); //removes unneeded characters
+                   
+                  	Date myDate = new SimpleDateFormat("MMddyyyy").parse(dateStr);
+                 
+                  	boolean passed = myDate.before(new Date()); //compares the date of the show with the current date
+                  	if (passed) { 
+                  		System.out.println("This day has already passed."); 
+                  	} else {
+                  		return myDate; 
+                  	}
+                  
+               } catch (Exception ex) {
+                   System.out.println("Did you type something incorrectly? Please try re-entering the expiry show date in the format MMDDyyyy.");
+               }
+           }
+            
+      }
 }

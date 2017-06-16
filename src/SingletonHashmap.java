@@ -116,7 +116,22 @@ public class SingletonHashmap<E> implements Iterable<E>, Serializable {
             return false;
         }
     }
-
+    
+    /**
+     * Verifies an account exists from the AccountList, by its ID.
+     *
+     * @param accountId The accountID belonging to the account to remove.
+     *
+     * @return True on success, false on failure (ID doesn't exist, probably)
+     */
+    public boolean validateEntry(int keyId) {
+        if (singletonHashmap.containsKey(keyId)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();

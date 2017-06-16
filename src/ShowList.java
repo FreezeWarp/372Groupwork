@@ -15,4 +15,13 @@ public class ShowList extends SingletonHashmap<Show> {
 
         return INSTANCE;
     }
+
+    /**
+     * Adds a new account to the AccountList.
+     *
+     * @param account
+     */
+    public void addShow(E show) {
+        addEntry(getNewId(),show);
+    }
 }
