@@ -58,7 +58,7 @@ public class Interface {
                 case 13: help(); break;
             }
         }
-        /* We're about to exit, so prompt the user if they'd like to save data or not. */
+        /* Program exiting and saving*/
             Theater.storeData();
         }
 
