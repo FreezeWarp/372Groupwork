@@ -58,13 +58,9 @@ public class Interface {
                 case 13: help(); break;
             }
         }
-
         /* We're about to exit, so prompt the user if they'd like to save data or not. */
-        if (InterfacePrompts.promptYesOrNo("Would you like to save the application data before exiting? ")) {
             Theater.storeData();
         }
-    }
-
 
     /**
      * Asks for a client's information and sends a newly-created client object to the ClientList.
