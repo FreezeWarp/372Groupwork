@@ -67,11 +67,11 @@ public class Interface {
 
         final int COMMAND_STORE_DATA = 11;
         helpMap.put(COMMAND_STORE_DATA, "Store Data");
-        commandMap.put(COMMAND_STORE_DATA, () -> Theater.storeData());
+        commandMap.put(COMMAND_STORE_DATA, () -> storeData());
 
         final int COMMAND_LOAD_DATA = 12;
         helpMap.put(COMMAND_LOAD_DATA, "Retrieve Data");
-        commandMap.put(COMMAND_LOAD_DATA, () -> Theater.retrieveData());
+        commandMap.put(COMMAND_LOAD_DATA, () -> retrieveData());
 
         final int COMMAND_HELP = 13;
         helpMap.put(COMMAND_HELP, "Help");
@@ -218,6 +218,35 @@ public class Interface {
     public static void listShows() {
         for (Show show : Theater.getInstance().getShowList()) {
             System.out.println(show);
+        }
+    }
+
+
+    /**
+     * Stores data by invoking Theater.storeData()
+     */
+    public static void storeData() {
+        if (Theater.storeData()) {
+            System.out.println("The data was successfully saved.");
+        }
+        else {
+            System.out.println("The data could not be saved.");
+        }
+    }
+
+
+    /**
+     * Loads data by invoking Theater.retrieveData(). Ensures that data is not retrieved twice in a session.
+     */
+    public static void retrieveData() {
+        if (dataRetrieved) {
+            System.out.println("Application data has already been retrieved for this session.");
+        }
+        else if (Theater.retrieveData() == null) {
+            System.out.println("The application's data could not be retrieved.");
+        }
+        else {
+            System.out.println("The application's data was successfully loaded.");
         }
     }
 
