@@ -5,10 +5,16 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * Created by joseph on 12/06/17.
+ * This defines two things: a hashmap with entries identified by an integer ID; and that should be treated as a singleton, with persistence methods overridden accordingly,
+ * In a way, this essentially mimics a database table, and could even be implemented using those in the future.
+ *
+ * @author Joseph T. Parsons
  */
 public class SingletonHashmap<E> implements Iterable<E>, Serializable {
     /* Singleton Stuff */
+    /**
+     * The singleton instance.
+     */
     private static SingletonHashmap INSTANCE;
 
     protected SingletonHashmap() { }
@@ -67,43 +73,48 @@ public class SingletonHashmap<E> implements Iterable<E>, Serializable {
 
     /* The List Itself */
     /**
-     * A map of accounts. Keyed by a unique account ID.
+     * A Map of E-typed objects, keyed by an integer that should be entirely unique.
      */
     protected Map<Integer, E> singletonHashmap = new HashMap<Integer, E>();
 
+
     /**
-     * The last account ID that was assigned. Use {@link AccountList#getNewAccountId()} to get the next account ID in the series.
+     * The last Map key that was assigned. Use {@link SingletonHashmap#getNewId()} to get the next key in the series.
      */
     private int lastId = 0;
 
 
     /**
-     * An iterator that iterates through the list of Accounts.
+     * An iterator that iterates through the list of Map entries (values).
      */
     public Iterator<E> iterator() {
         return singletonHashmap.values().iterator();
     }
 
+
     /**
-     * @return A new, unique account ID.
+     * @return A new, unique Map key.
      */
     public int getNewId() {
         return lastId++;
     }
 
+
     /**
-     * Adds a new account to the AccountList.
+     * Adds a new Map entry to the Map.
      *
-     * @param account
+     * @param keyId The key to use for the entry.
+     * @param entry The entry object itself.
      */
     public void addEntry(int keyId, E entry) {
         singletonHashmap.put(keyId, entry);
     }
 
+
     /**
-     * Removes an account from the AccountList, by its ID.
+     * Removes a Map entry by its key.
      *
-     * @param accountId The accountID belonging to the account to remove.
+     * @param keyId The hashmap key to remove.
      *
      * @return True on success, false on failure (ID doesn't exist, probably)
      */
@@ -116,23 +127,23 @@ public class SingletonHashmap<E> implements Iterable<E>, Serializable {
             return false;
         }
     }
-    
+
+
     /**
-     * Verifies an account exists from the AccountList, by its ID.
+     * Checks whether an entry with the given key exists.
      *
-     * @param accountId The accountID belonging to the account to remove.
+     * @param keyId The hashmap key to check.
      *
-     * @return True on success, false on failure (ID doesn't exist, probably)
+     * @return True if an entry exists, false otherwise.
      */
     public boolean validateEntry(int keyId) {
-        if (singletonHashmap.containsKey(keyId)) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return singletonHashmap.containsKey(keyId);
     }
 
+
+    /**
+     * @return A string representation of the Map, with each entry on its own line.
+     */
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
