@@ -2,25 +2,25 @@
 
 actor Clerk
 
-activate ":Interface"
-Clerk -> ":Interface" : Add a Customer
-Clerk //- ":Interface": Data Request
-Clerk -// ":Interface": name, address, phone, creditcard number, creditcard date
+activate ":UserInterface"
+Clerk -> ":UserInterface" : Add a Customer
+Clerk //- ":UserInterface": Data Request
+Clerk -// ":UserInterface": name, address, phone, creditcard number, creditcard date
 
 create "creditCard :CreditCard"
-":Interface" -> "creditCard :CreditCard" : creditCard = new CreditCard(creditcard number, creditcard date)
+":UserInterface" -> "creditCard :CreditCard" : creditCard = new CreditCard(creditcard number, creditcard date)
 
-":Interface" -> ":Theater" : getCustomerList()
+":UserInterface" -> ":Theater" : getCustomerList()
 activate ":Theater"
-":Theater" -->> ":Interface": customerList
+":Theater" -->> ":UserInterface": customerList
 deactivate ":Theater"
-":Interface" -> ":CustomerList": id = getNewAccountId()
+":UserInterface" -> ":CustomerList": id = getNewAccountId()
 create "customer :Customer"
-":Interface" -> "customer :Customer": customer = Customer(id, name, address, phone, creditCard)
-":Interface" -> ":CustomerList" : boolean = addAccount(customer)
+":UserInterface" -> "customer :Customer": customer = Customer(id, name, address, phone, creditCard)
+":UserInterface" -> ":CustomerList" : boolean = addAccount(customer)
 activate ":CustomerList"
-":CustomerList" -->> ":Interface" : successful?
+":CustomerList" -->> ":UserInterface" : successful?
 deactivate ":CustomerList"
-":Interface" -->> Clerk : successful?
-deactivate ":Interface"
+":UserInterface" -->> Clerk : successful?
+deactivate ":UserInterface"
 @enduml

@@ -1,17 +1,17 @@
 @startuml
 
 actor Clerk
-participant ":Interface"
+participant ":UserInterface"
 participant ":Theater"
 participant ":ClientList"
 participant ":CustomerList"
 participant ":ShowList"
 database Disk
 
-Clerk -> ":Interface" : Save Data
-activate ":Interface"
+Clerk -> ":UserInterface" : Save Data
+activate ":UserInterface"
 
-":Interface" -> ":Theater" : storeData()
+":UserInterface" -> ":Theater" : storeData()
 activate ":Theater"
 
 ":Theater" -> ":ClientList": writeObject()
@@ -41,11 +41,11 @@ Disk -->> ":Theater": status
 
 deactivate Disk
 
-":Theater" -->> ":Interface": status
+":Theater" -->> ":UserInterface": status
 deactivate ":Theater"
 
-":Interface" -->> Clerk: Status
-deactivate ":Interface"
+":UserInterface" -->> Clerk: Status
+deactivate ":UserInterface"
 deactivate Clerk
 
 @enduml

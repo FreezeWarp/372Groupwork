@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * Created by joseph on 12/06/17.
  */
-public class InterfacePrompts {
+public class UserInterfacePrompts {
     /**
      * Prompts the user for an integer.
      *
@@ -184,13 +184,13 @@ public class InterfacePrompts {
 
 
     public static CreditCard promptCreditCard(String promptTextForNumber, String promptTextForExpiry, String expiredMessage) {
-        long creditCardNo = InterfacePrompts.promptCreditCardNumber(promptTextForNumber);
-        Date expiryDate = InterfacePrompts.promptCreditCardExpiry(promptTextForExpiry);
+        long creditCardNo = UserInterfacePrompts.promptCreditCardNumber(promptTextForNumber);
+        Date expiryDate = UserInterfacePrompts.promptCreditCardExpiry(promptTextForExpiry);
 
         while (expiryDate.before(new Date())) { //compares the expiry date of the CC with the current date
             System.out.println(expiredMessage);
-            creditCardNo = InterfacePrompts.promptCreditCardNumber(promptTextForNumber);
-            expiryDate = InterfacePrompts.promptCreditCardExpiry(promptTextForExpiry);
+            creditCardNo = UserInterfacePrompts.promptCreditCardNumber(promptTextForNumber);
+            expiryDate = UserInterfacePrompts.promptCreditCardExpiry(promptTextForExpiry);
         }
 
         return new CreditCard(creditCardNo, expiryDate);

@@ -1,4 +1,3 @@
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,14 +8,14 @@ import java.util.Map;
  ** The various singleton hashmaps are never interacted with directly; instead, their instances are always returned through the Theater façade. This is done to lower coupling.
  ** Classes that duplicate functionality have that functionality implemented in generic superclasses as much as possible. This is done to maximise cohesion and reduce bugs (if one class has a bug, the others will as well, making detection easier).
  */
-public class Interface {
+public class UserInterface {
     /**
      * A Map of callable commands that are supported by the interface, keyed by the command used to invoke them.
      */
     static final Map<Integer, Runnable> commandMap = new HashMap<Integer, Runnable>();
 
     /**
-     * A map of descriptions for {@link Interface#commandMap}.
+     * A map of descriptions for {@link UserInterface#commandMap}.
      */
     static final Map<Integer, String> helpMap = new HashMap<Integer, String>();
 
@@ -94,7 +93,7 @@ public class Interface {
 
     public static void main(String args[]) {
         /* If we have saved data, prompt to load it. */
-        if (Theater.hasData() && InterfacePrompts.promptYesOrNo("Would you like to load available application data before starting? ")) {
+        if (Theater.hasData() && UserInterfacePrompts.promptYesOrNo("Would you like to load available application data before starting? ")) {
             Theater.retrieveData();
         }
 
@@ -102,7 +101,7 @@ public class Interface {
 
         /* Loop until exit command is entered. Process other commands as entered. */
         int commandNumber;
-        while ((commandNumber = InterfacePrompts.promptIntRange("Make a selection: ", 0, commandMap.values().size() - 1)) != 0) {
+        while ((commandNumber = UserInterfacePrompts.promptIntRange("Make a selection: ", 0, commandMap.values().size() - 1)) != 0) {
             commandMap.get(commandNumber).run();
         }
 
@@ -118,9 +117,9 @@ public class Interface {
      */
     public static void addClient() {
         // Inputs
-        String name = InterfacePrompts.promptLine("Client name? ");
-        String address = InterfacePrompts.promptLine("Client address? ");
-        long phone = InterfacePrompts.promptPhone("Phone number? ");
+        String name = UserInterfacePrompts.promptLine("Client name? ");
+        String address = UserInterfacePrompts.promptLine("Client address? ");
+        long phone = UserInterfacePrompts.promptPhone("Phone number? ");
 
         // Add New Account Object to Client List
         Theater.getClientList().addAccount(new Client(name, address, phone));
@@ -133,7 +132,7 @@ public class Interface {
      * @author Joseph T. Parsons
      */
     public static void removeClient() {
-        int id = InterfacePrompts.promptInt("Client ID? ");
+        int id = UserInterfacePrompts.promptInt("Client ID? ");
 
         if (Theater.getClientList().removeAccount(id)) {
             System.out.println("The client was removed.");
@@ -162,13 +161,13 @@ public class Interface {
      */
     public static void addCustomer()  {
     	 // Inputs
-        String name = InterfacePrompts.promptLine("Customer name? ");
-        String address = InterfacePrompts.promptLine("Customer address? ");
-        long phone = InterfacePrompts.promptPhone("Phone number? ");
+        String name = UserInterfacePrompts.promptLine("Customer name? ");
+        String address = UserInterfacePrompts.promptLine("Customer address? ");
+        long phone = UserInterfacePrompts.promptPhone("Phone number? ");
 
-        CreditCard creditCard = InterfacePrompts.promptCreditCard("Credit card number? ", "Credit card expiration (MMyyyy)? ", "This card is expired, please enter in a new credit card.");
+        CreditCard creditCard = UserInterfacePrompts.promptCreditCard("Credit card number? ", "Credit card expiration (MMyyyy)? ", "This card is expired, please enter in a new credit card.");
         
-     // Add New Account Object to Customer List
+        // Add New Account Object to Customer List
         Theater.getCustomerList().addAccount(new Customer(name, address, phone, creditCard));
     }
 
@@ -179,8 +178,8 @@ public class Interface {
 
 
     public static void addCreditCard() {
-        int id = InterfacePrompts.promptInt("Customer ID? ");
-        CreditCard creditCard = InterfacePrompts.promptCreditCard("Credit card number? ", "Credit card expiration (MMyyyy)? ", "This card is expired, please enter in a new credit card.");
+        int id = UserInterfacePrompts.promptInt("Customer ID? ");
+        CreditCard creditCard = UserInterfacePrompts.promptCreditCard("Credit card number? ", "Credit card expiration (MMyyyy)? ", "This card is expired, please enter in a new credit card.");
            
            
            // Add New Credit Card object to the specified Customer
@@ -212,11 +211,11 @@ public class Interface {
      *@author Cory
      */
     public static void addShow() {
-        int id = (int) InterfacePrompts.promptInt("Client ID? ");
+        int id = (int) UserInterfacePrompts.promptInt("Client ID? ");
         if (Theater.getInstance().getClientList().validateAccount(id)) {
-            String name = InterfacePrompts.promptLine("Show name? ");
-            Date startDate = InterfacePrompts.promptShowDate("Start of Show (MM/DD/yyyy)? "); 
-            Date endDate = InterfacePrompts.promptShowDate("End of Show (MM/DD/yyyy)? "); 
+            String name = UserInterfacePrompts.promptLine("Show name? ");
+            Date startDate = UserInterfacePrompts.promptShowDate("Start of Show (MM/DD/yyyy)? ");
+            Date endDate = UserInterfacePrompts.promptShowDate("End of Show (MM/DD/yyyy)? ");
             // Add New Show Object to ShowList
             if (startDate.before(endDate)) {
 	            if (Theater.getShowList().validShowDate(startDate, endDate)){

@@ -2,17 +2,17 @@
 
 actor Clerk
 
-Clerk -> ":Interface" : List Customers
-activate ":Interface"
+Clerk -> ":UserInterface" : List Customers
+activate ":UserInterface"
 
-":Interface" -> ":Theater" : getCustomerList()
+":UserInterface" -> ":Theater" : getCustomerList()
 activate ":Theater"
-":Theater" -->> ":Interface": customerList
+":Theater" -->> ":UserInterface": customerList
 deactivate ":Theater"
-":Interface" -> ":CustomerList": customerList.iterator()
+":UserInterface" -> ":CustomerList": customerList.iterator()
 activate ":CustomerList"
-":CustomerList" -->> ":Interface": iterator
+":CustomerList" -->> ":UserInterface": iterator
 deactivate ":CustomerList"
-":Interface" -->> Clerk: customers
-deactivate ":Interface"
+":UserInterface" -->> Clerk: customers
+deactivate ":UserInterface"
 @enduml

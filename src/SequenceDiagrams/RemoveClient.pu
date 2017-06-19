@@ -2,22 +2,22 @@
 
 actor Clerk
 
-Clerk -> ":Interface" : Remove a Client
-activate ":Interface"
-Clerk //- ":Interface": Data Request
-Clerk -// ":Interface": id
+Clerk -> ":UserInterface" : Remove a Client
+activate ":UserInterface"
+Clerk //- ":UserInterface": Data Request
+Clerk -// ":UserInterface": id
 
-":Interface" -> ":Theater" : getClientList()
+":UserInterface" -> ":Theater" : getClientList()
 activate ":Theater"
-":Theater" -->> ":Interface": clientList
+":Theater" -->> ":UserInterface": clientList
 deactivate ":Theater"
-":Interface" -> ":ClientList": boolean = removeAccount(id)
+":UserInterface" -> ":ClientList": boolean = removeAccount(id)
 activate ":ClientList"
 create "client :Client"
 ":ClientList" -> "client :Client": client = get(id)
 destroy "client :Client"
-":ClientList" -->> ":Interface": successful?
+":ClientList" -->> ":UserInterface": successful?
 deactivate ":ClientList"
-":Interface" -->> Clerk: successful?
-deactivate ":Interface"
+":UserInterface" -->> Clerk: successful?
+deactivate ":UserInterface"
 @enduml

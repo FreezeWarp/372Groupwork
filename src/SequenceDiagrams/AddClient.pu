@@ -2,22 +2,22 @@
 
 actor Clerk
 
-activate ":Interface"
-Clerk -> ":Interface" : Add a Client
-Clerk //- ":Interface": Data Request
-Clerk -// ":Interface": name, address, phone
+activate ":UserInterface"
+Clerk -> ":UserInterface" : Add a Client
+Clerk //- ":UserInterface": Data Request
+Clerk -// ":UserInterface": name, address, phone
 
-":Interface" -> ":Theater" : getClientList()
+":UserInterface" -> ":Theater" : getClientList()
 activate ":Theater"
-":Theater" -->> ":Interface": clientList
+":Theater" -->> ":UserInterface": clientList
 deactivate ":Theater"
-":Interface" -> ":ClientList": id = getNewAccountId()
+":UserInterface" -> ":ClientList": id = getNewAccountId()
 create "client :Client"
-":Interface" -> "client :Client": client = Client(id, name, address, phone)
-":Interface" -> ":ClientList" : boolean = addAccount(client)
+":UserInterface" -> "client :Client": client = Client(id, name, address, phone)
+":UserInterface" -> ":ClientList" : boolean = addAccount(client)
 activate ":ClientList"
-":ClientList" -->> ":Interface" : successful?
+":ClientList" -->> ":UserInterface" : successful?
 deactivate ":ClientList"
-":Interface" -->> Clerk : successful?
-deactivate ":Interface"
+":UserInterface" -->> Clerk : successful?
+deactivate ":UserInterface"
 @enduml
