@@ -90,7 +90,7 @@ public class Theater implements Serializable {
             return true;
             //oos.flush();
         } catch (Exception e) {
-            System.out.println("Unable to serialise a value: " + e);
+            System.err.println("Theater.storeData: Unable to serialise a value: " + e);
             return false;
         }
     }
@@ -108,10 +108,10 @@ public class Theater implements Serializable {
             ois.readObject();
             return INSTANCE;
         } catch (IOException e) {
-            System.out.println("Problem reading: " + e);
+            System.err.println("Theater.retrieveData: Problem reading: " + e);
             return null;
         } catch (ClassNotFoundException e) {
-            System.out.println("Class not found: " + e);
+            System.err.println("Theater.retrieveData: Class not found: " + e);
             return null;
         }
     }
