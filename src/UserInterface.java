@@ -1,3 +1,4 @@
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +21,7 @@ public class UserInterface {
     static final Map<Integer, String> helpMap = new HashMap<Integer, String>();
 
     /*
-     * A one-stop initialisation of all values for both commandMap and helpMap.
+     * A one-stop initialization of all values for both commandMap and helpMap.
      */
     static {
         final int COMMAND_EXIT = 0;
@@ -109,7 +110,6 @@ public class UserInterface {
         Theater.storeData();
     }
 
-
     /**
      * Asks for a client's information and sends a newly-created client object to the ClientList.
      *
@@ -130,15 +130,20 @@ public class UserInterface {
      * Asks for a client's ID and asks the client list to remove the client with the corresponding ID.
      *
      * @author Joseph T. Parsons
+     * @modified Cory
      */
     public static void removeClient() {
         int id = UserInterfacePrompts.promptInt("Client ID? ");
-
-        if (Theater.getClientList().removeAccount(id)) {
-            System.out.println("The client was removed.");
+        if (Theater.getClientList().checkShowDates(id)) {
+	        if (Theater.getClientList().removeAccount(id)) {
+	        	System.out.println("The client was removed.");
+	        }
+	        else {
+	            System.out.println("The client could not be removed; does it exist?");
+	        }
         }
         else {
-            System.out.println("The client could not be removed; does it exist?");
+            System.out.println("The client still has a show scheduled that hasn't ended yet");
         }
     }
 
