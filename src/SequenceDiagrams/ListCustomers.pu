@@ -1,0 +1,18 @@
+@startuml
+
+actor Clerk
+
+Clerk -> ":Interface" : List Customers
+activate ":Interface"
+
+":Interface" -> ":Theater" : getCustomerList()
+activate ":Theater"
+":Theater" -->> ":Interface": customerList
+deactivate ":Theater"
+":Interface" -> ":CustomerList": customerList.iterator()
+activate ":CustomerList"
+":CustomerList" -->> ":Interface": iterator
+deactivate ":CustomerList"
+":Interface" -->> Clerk: customers
+deactivate ":Interface"
+@enduml
