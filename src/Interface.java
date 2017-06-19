@@ -66,8 +66,8 @@ public class Interface {
         commandMap.put(COMMAND_LIST_SHOWS, () -> listShows());
 
         final int COMMAND_STORE_DATA = 11;
-        helpMap.put(COMMAND_LIST_SHOWS, "Store Data");
-        commandMap.put(COMMAND_LIST_SHOWS, () -> Theater.storeData());
+        helpMap.put(COMMAND_STORE_DATA, "Store Data");
+        commandMap.put(COMMAND_STORE_DATA, () -> Theater.storeData());
 
         final int COMMAND_LOAD_DATA = 12;
         helpMap.put(COMMAND_LOAD_DATA, "Retrieve Data");
