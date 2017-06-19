@@ -123,6 +123,7 @@ public class Interface {
 
 
     public static void removeCustomer() {
+    	//beginning implementation of this -Eric
     }
 
 
@@ -142,7 +143,7 @@ public class Interface {
 
 
     public static void removeCreditCard() {
-
+    	//beginning implementation of this -Eric
     }
 
 
@@ -161,7 +162,7 @@ public class Interface {
             Date startDate = InterfacePrompts.promptShowDate("Start of Show (MM/DD/yyyy)? "); 
             Date endDate = InterfacePrompts.promptShowDate("End of Show (MM/DD/yyyy)? "); 
             // Add New Show Object to ShowList
-            Theater.getInstance().getShowList().addShow(new Show(id ,name, startDate, endDate));
+            Theater.getShowList().addShow(new Show(id ,name, startDate, endDate)); //TODO: Error with this, need to modify the ShowList class to fix
         }
         else {
             System.out.println("The client doesnt exist?");
