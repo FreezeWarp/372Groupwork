@@ -196,12 +196,20 @@ public class InterfacePrompts {
         return new CreditCard(creditCardNo, expiryDate);
     }
     
+    /**
+     * Prompts the user for a date to start or end a show.
+     *
+     * @param promptText The text to display for the prompt.
+     *
+     * @return Date the user input
+     */
     public static Date promptShowDate(String promptText) {
 
       	 while(true) {
                try {
               	                    	 
-               	String dateStr = (promptLineRegex(promptText, "[\\s\\W]+", "^[0-9]{8}$", "That is not a show date. Please enter the 8 digit expiry date in the format MM/dd/yyyy.")); //removes unneeded characters
+               	String dateStr = (promptLineRegex(promptText, "[\\s\\W]+", "^[0-9]{8}$", //removes unneeded characters
+               			"That is not a show date. Please enter the 8 digit expiry date in the format MM/dd/yyyy.")); 
                    
                   	Date myDate = new SimpleDateFormat("MMddyyyy").parse(dateStr);
                  

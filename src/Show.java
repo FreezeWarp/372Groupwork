@@ -19,18 +19,34 @@ public class Show implements Serializable {
         this.endDate = endDate;
     }
 
+	/** Gets the id of a show
+	 * 
+	 * @return id
+	 */
 	public int getId() {
 	    return id;
 	}
     
+	/** Gets the Name of a show
+	 * 
+	 * @return name
+	 */
 	public String getName() {
 	    return name;
 	}
 	
+	/** Gets the Start Date of a show
+	 * 
+	 * @return startDate
+	 */
 	public Date getStartDate() {
 		return startDate;
 	}
 	
+	/** Gets the End Date of a show
+	 * 
+	 * @return endDate
+	 */
 	public Date getEndDate() {
 		return endDate;
 	}
