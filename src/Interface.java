@@ -21,47 +21,61 @@ public class Interface {
      * A one-stop initialisation of all values for both commandMap and helpMap.
      */
     static {
-        helpMap.put(0, "Exit the application.");
-        commandMap.put(0, () -> {}); // Do nothing -- this is handled specially inside of the command loop.
+        final int COMMAND_EXIT = 0;
+        helpMap.put(COMMAND_EXIT, "Exit the application.");
+        commandMap.put(COMMAND_EXIT, () -> {}); // Do nothing -- this is handled specially inside of the command loop.
 
-        helpMap.put(1, "Add Client.");
-        commandMap.put(1, () -> addClient());
+        final int COMMAND_ADD_CLIENT = 1;
+        helpMap.put(COMMAND_ADD_CLIENT, "Add Client.");
+        commandMap.put(COMMAND_ADD_CLIENT, () -> addClient());
 
-        helpMap.put(2, "Remove Client.");
-        commandMap.put(2, () -> removeClient());
+        final int COMMAND_REMOVE_CLIENT = 2;
+        helpMap.put(COMMAND_REMOVE_CLIENT, "Remove Client.");
+        commandMap.put(COMMAND_REMOVE_CLIENT, () -> removeClient());
 
-        helpMap.put(3, "List all Clients.");
-        commandMap.put(3, () -> listClients());
+        final int COMMAND_LIST_CLIENTS = 3;
+        helpMap.put(COMMAND_LIST_CLIENTS, "List all Clients.");
+        commandMap.put(COMMAND_LIST_CLIENTS, () -> listClients());
 
-        helpMap.put(4, "Add Customer.");
-        commandMap.put(4, () -> addCustomer());
+        final int COMMAND_ADD_CUSTOMER = 4;
+        helpMap.put(COMMAND_ADD_CUSTOMER, "Add Customer.");
+        commandMap.put(COMMAND_ADD_CUSTOMER, () -> addCustomer());
 
-        helpMap.put(5, "Remove Customer.");
-        commandMap.put(5, () -> removeCustomer());
+        final int COMMAND_REMOVE_CUSTOMER = 5;
+        helpMap.put(COMMAND_REMOVE_CUSTOMER, "Remove Customer.");
+        commandMap.put(COMMAND_REMOVE_CUSTOMER, () -> removeCustomer());
 
-        helpMap.put(6, "Add a Credit Card.");
-        commandMap.put(6, () -> addCreditCard());
+        final int COMMAND_ADD_CREDITCARD = 6;
+        helpMap.put(COMMAND_ADD_CREDITCARD, "Add a Credit Card.");
+        commandMap.put(COMMAND_ADD_CREDITCARD, () -> addCreditCard());
 
-        helpMap.put(7, "Remove a Credit Card.");
-        commandMap.put(7, () -> removeCreditCard());
+        final int COMMAND_REMOVE_CREDITCARD = 7;
+        helpMap.put(COMMAND_REMOVE_CREDITCARD, "Remove a Credit Card.");
+        commandMap.put(COMMAND_REMOVE_CREDITCARD, () -> removeCreditCard());
 
-        helpMap.put(8, "List all Customers.");
-        commandMap.put(8, () -> listCustomers());
+        final int COMMAND_LIST_CUSTOMERS = 8;
+        helpMap.put(COMMAND_LIST_CUSTOMERS, "List all Customers.");
+        commandMap.put(COMMAND_LIST_CUSTOMERS, () -> listCustomers());
 
-        helpMap.put(9, "Add a Show/Play.");
-        commandMap.put(9, () -> addShow());
+        final int COMMAND_ADD_SHOW = 9;
+        helpMap.put(COMMAND_ADD_SHOW, "Add a Show/Play.");
+        commandMap.put(COMMAND_ADD_SHOW, () -> addShow());
 
-        helpMap.put(10, "List All Shows");
-        commandMap.put(10, () -> listShows());
+        final int COMMAND_LIST_SHOWS = 10;
+        helpMap.put(COMMAND_LIST_SHOWS, "List All Shows");
+        commandMap.put(COMMAND_LIST_SHOWS, () -> listShows());
 
-        helpMap.put(11, "Store Data");
-        commandMap.put(11, () -> Theater.storeData());
+        final int COMMAND_STORE_DATA = 11;
+        helpMap.put(COMMAND_LIST_SHOWS, "Store Data");
+        commandMap.put(COMMAND_LIST_SHOWS, () -> Theater.storeData());
 
-        helpMap.put(12, "Retrieve Data");
-        commandMap.put(12, () -> Theater.retrieveData());
+        final int COMMAND_LOAD_DATA = 12;
+        helpMap.put(COMMAND_LOAD_DATA, "Retrieve Data");
+        commandMap.put(COMMAND_LOAD_DATA, () -> Theater.retrieveData());
 
-        helpMap.put(13, "Help");
-        commandMap.put(13, () -> help());
+        final int COMMAND_HELP = 13;
+        helpMap.put(COMMAND_HELP, "Help");
+        commandMap.put(COMMAND_HELP, () -> help());
 
         if (!helpMap.keySet().equals(commandMap.keySet())) { // Basically, one map can't include a key the other doesn't have.
             throw new IllegalStateException("The help map and command map do not have matching key sets. Both must have identical key sets.");
