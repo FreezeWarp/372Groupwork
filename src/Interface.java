@@ -110,7 +110,7 @@ public class Interface {
     /**
      * Asks for a client's information and sends a newly-created client object to the ClientList.
      *
-     * @author Joseph
+     * @author Joseph T. Parsons
      */
     public static void addClient() {
         // Inputs
@@ -126,7 +126,7 @@ public class Interface {
     /**
      * Asks for a client's ID and asks the client list to remove the client with the corresponding ID.
      *
-     * @author Joseph
+     * @author Joseph T. Parsons
      */
     public static void removeClient() {
         int id = InterfacePrompts.promptInt("Client ID? ");
@@ -142,6 +142,8 @@ public class Interface {
 
     /**
      * Lists all clients in the ClientList.
+     *
+     * @author Joseph T. Parsons
      */
     public static void listClients() {
         System.out.println(Theater.getClientList());
@@ -224,6 +226,8 @@ public class Interface {
 
     /**
      * Stores data by invoking Theater.storeData()
+     *
+     * @author Joseph T. Parsons
      */
     public static void storeData() {
         if (Theater.storeData()) {
@@ -237,6 +241,8 @@ public class Interface {
 
     /**
      * Loads data by invoking Theater.retrieveData(). Ensures that data is not retrieved twice in a session.
+     *
+     * @author Joseph T. Parsons
      */
     public static void retrieveData() {
         if (dataRetrieved) {
@@ -253,7 +259,8 @@ public class Interface {
 
     /**
      * Shows a list of commands that can be used.
-     * @author Joseph
+     *
+     * @author Joseph T. Parsons
      */
     public static void help() {
         for (Integer i : helpMap.keySet()) {

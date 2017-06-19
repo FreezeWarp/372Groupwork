@@ -78,6 +78,8 @@ public class Theater implements Serializable {
 
     /**
      * Writes Theater's state to the persistence file.
+     *
+     * @return True on success, false on failure.
      */
     public static boolean storeData() {
         try {
@@ -96,6 +98,8 @@ public class Theater implements Serializable {
 
     /**
      * Loads in data from the persistence file.
+     *
+     * @return The Theater instance on success, or null on failure.
      */
     public static Theater retrieveData() {
         try {
