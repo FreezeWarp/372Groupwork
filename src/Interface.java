@@ -200,8 +200,13 @@ public class Interface {
     public static void listCustomers() {
         System.out.println(Theater.getCustomerList());
     }
-
-
+    
+    /**
+     * Prompts for info about new show then creates it.
+     * Adds newly created Show object to the ShowList.
+     *
+     *@author Cory
+     */
     public static void addShow() {
         int id = (int) InterfacePrompts.promptInt("Client ID? ");
         if (Theater.getInstance().getClientList().validateAccount(id)) {
@@ -209,14 +214,27 @@ public class Interface {
             Date startDate = InterfacePrompts.promptShowDate("Start of Show (MM/DD/yyyy)? "); 
             Date endDate = InterfacePrompts.promptShowDate("End of Show (MM/DD/yyyy)? "); 
             // Add New Show Object to ShowList
-            Theater.getShowList().addShow(new Show(id ,name, startDate, endDate)); //TODO: Error with this, need to modify the ShowList class to fix
+            if (startDate.before(endDate)) {
+	            if (Theater.getShowList().validShowDate(startDate, endDate)){
+	            	Theater.getShowList().addShow(new Show(id ,name, startDate, endDate));
+	            }
+	            else {
+	            	System.out.println("These dates interfere with another show.");
+	            }
+            }
+            else {
+            	System.out.println("The show cant end before it starts.");
+            }
         }
         else {
             System.out.println("The client doesnt exist?");
         }
     }
 
-
+    /**
+     * Lists all shows in the ShowList.
+     * @author Cory
+     */
     public static void listShows() {
         for (Show show : Theater.getInstance().getShowList()) {
             System.out.println(show);
