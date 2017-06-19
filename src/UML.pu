@@ -3,7 +3,7 @@
 skinparam classAttributeIconSize 0
 hide empty members
 
-class SingletonMap<E> {
+class SingletonMap<K, E implements Identifiable<K>> {
     -INSTANCE: SingletonMap
     -singletonHashmap : Hashmap<Integer, E>
     -lastId: int
@@ -37,6 +37,22 @@ class CustomerList {
     +getInstance() : ClientList
 }
 
+class ShowList {
+    -INSTANCE: ShowList
+    +ShowList()
+    +getInstance() : ShowList
+}
+
+interface Identifiable<K> {
+    +getId(): K
+    +setId(K)
+    +nextId(K): K
+}
+
+class IdentifiableInteger {
+    -id: Integer
+}
+
 class Account {
     -id: int
     -name: String
@@ -55,6 +71,39 @@ class Customer {
     -creditCard: CreditCard
 }
 
+class Show {
+    -name: String
+    -endDate: Date
+    -startDate: Date
+    -showDateFormat: SimpleDateFormat
+    +getName(): String
+    +getEndDate(): Date
+    +getStartDate(): Date
+    +toString(): String
+}
+
+class Theater {
+    -INSTANCE: Theater
+    -clientList: ClientList
+    -customerList: CustomerList
+    -showList: ShowList
+    +getInstance() : Theater
+    +getClientList(): ClientList
+    +getCustomerList(): CustomerList
+    +getShowList(): ShowList
+    +storeData()
+    +retrieveData(): Theater
+    +hasData(): boolean
+    -readObject(ObjectInputStream)
+    -writeObject(ObjectInputStream)
+}
+
+Theater <-- "ClientList"
+Theater <-- "CustomerList"
+Theater <-- "ShowList"
+
+"Identifiable" <|-- "Identifiable<Integer>" : "«bind» K::Integer"
+"Identifiable<Integer>" <|-- "IdentifiableInteger"
 SingletonMap <|-- "SingletonMap<Account>" : "«bind» E::Account"
 SingletonMap <|-- "SingletonMap<Show>" : "«bind» E::Show"
 "SingletonMap<Account>" <|-- AccountList
@@ -63,6 +112,9 @@ AccountList <|-- "AccountList<Client>" : "«bind» E::Client"
 AccountList <|-- "AccountList<Customer>" : "«bind» E::Customer"
 "AccountList<Client>" <|-- ClientList
 "AccountList<Customer>" <|-- CustomerList
+
+IdentifiableInteger <|-- Account
+IdentifiableInteger <|-- Show
 
 Account <|-- Client
 Account <|-- Customer
