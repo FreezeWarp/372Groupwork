@@ -1,28 +1,72 @@
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by joseph on 12/06/17.
  */
 public class Interface {
     /**
-     * Text strings representing actions that can be shown to users, as part of help text.
+     * A Map of callable commands that are supported by the interface, keyed by the command used to invoke them.
      */
-    static String commands[] = {
-        "Exit the application.",
-        "Add Client.",
-        "Remove Client.",
-        "List all Clients.",
-        "Add Customer.",
-        "Remove Customer.",
-        "Add a Credit Card.",
-        "Remove a Credit Card.",
-        "List all Customers.",
-        "Add a Show/Play.",
-        "List All Shows",
-        "Store Data",
-        "Retrieve Data",
-        "Help"
-    };
+    static final Map<Integer, Runnable> commandMap = new HashMap<Integer, Runnable>();
+
+    /**
+     * A map of descriptions for {@link Interface#commandMap}.
+     */
+    static final Map<Integer, String> helpMap = new HashMap<Integer, String>();
+
+    /*
+     * A one-stop initialisation of all values for both commandMap and helpMap.
+     */
+    static {
+        helpMap.put(0, "Exit the application.");
+        commandMap.put(0, () -> {}); // Do nothing -- this is handled specially inside of the command loop.
+
+        helpMap.put(1, "Add Client.");
+        commandMap.put(1, () -> addClient());
+
+        helpMap.put(2, "Remove Client.");
+        commandMap.put(2, () -> removeClient());
+
+        helpMap.put(3, "List all Clients.");
+        commandMap.put(3, () -> listClients());
+
+        helpMap.put(4, "Add Customer.");
+        commandMap.put(4, () -> addCustomer());
+
+        helpMap.put(5, "Remove Customer.");
+        commandMap.put(5, () -> removeCustomer());
+
+        helpMap.put(6, "Add a Credit Card.");
+        commandMap.put(6, () -> addCreditCard());
+
+        helpMap.put(7, "Remove a Credit Card.");
+        commandMap.put(7, () -> removeCreditCard());
+
+        helpMap.put(8, "List all Customers.");
+        commandMap.put(8, () -> listCustomers());
+
+        helpMap.put(9, "Add a Show/Play.");
+        commandMap.put(9, () -> addShow());
+
+        helpMap.put(10, "List All Shows");
+        commandMap.put(10, () -> listShows());
+
+        helpMap.put(11, "Store Data");
+        commandMap.put(11, () -> Theater.storeData());
+
+        helpMap.put(12, "Retrieve Data");
+        commandMap.put(12, () -> Theater.retrieveData());
+
+        helpMap.put(13, "Help");
+        commandMap.put(13, () -> help());
+
+        if (!helpMap.keySet().equals(commandMap.keySet())) { // Basically, one map can't include a key the other doesn't have.
+            throw new IllegalStateException("The help map and command map do not have matching key sets. Both must have identical key sets.");
+        }
+    }
 
     /**
      * Whether or not data has already been loaded for this session.
@@ -41,26 +85,13 @@ public class Interface {
 
         /* Loop until exit command is entered. Process other commands as entered. */
         int commandNumber;
-        while ((commandNumber = InterfacePrompts.promptIntRange("Make a selection: ", 0, commands.length - 1)) != 0) {
-            switch (commandNumber) {
-                case 1: addClient(); break;
-                case 2: removeClient(); break;
-                case 3: listClients(); break;
-                case 4: addCustomer(); break;
-                case 5: removeCustomer(); break;
-                case 6: addCreditCard(); break;
-                case 7: removeCreditCard(); break;
-                case 8: listCustomers(); break;
-                case 9: addShow(); break;
-                case 10: listShows(); break;
-                case 11: Theater.storeData(); break;
-                case 12: Theater.retrieveData(); break;
-                case 13: help(); break;
-            }
+        while ((commandNumber = InterfacePrompts.promptIntRange("Make a selection: ", 0, commandMap.values().size() - 1)) != 0) {
+            commandMap.get(commandNumber).run();
         }
-        /* Program exiting and saving*/
-            Theater.storeData();
-        }
+
+        /* Program exiting and saving */
+        Theater.storeData();
+    }
 
     /**
      * Asks for a client's information and sends a newly-created client object to the ClientList.
@@ -107,7 +138,7 @@ public class Interface {
      * Asks for a customer's information and sends a newly-created customer object to the CustomerList.
      *
      * @author Eric
-     * @throws ParseException 
+     * @throws ParseException
      */
     public static void addCustomer()  {
     	 // Inputs
@@ -182,8 +213,8 @@ public class Interface {
      * @author Joseph
      */
     public static void help() {
-        for (int i = 0; i < commands.length; i++) {
-            System.out.println(i + ": " + commands[i]);
+        for (Integer i : helpMap.keySet()) {
+            System.out.println(i + ": " + helpMap.get(i));
         }
     }
 }
