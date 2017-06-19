@@ -48,12 +48,12 @@ public class AccountList<E extends Account> extends SingletonMap<E> {
     /**
      * Retries an account from the AccountList, by its ID.
      *
-     * @param accountId The accountID belonging to the account to be returned
+     * @param accountId The accountId belonging to the account to be returned
      *
      * @return True on success, false on failure (ID doesn't exist, probably)
      */
-    public E getAccount(int accountID) {
-        return (E) singletonMap.get(accountID);
+    public E getAccount(int accountId) {
+        return (E) singletonMap.get(accountId);
 
     }
 

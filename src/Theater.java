@@ -78,6 +78,8 @@ public class Theater implements Serializable {
 
     /**
      * Writes Theater's state to the persistence file.
+     *
+     * @return True on success, false on failure.
      */
     public static boolean storeData() {
         try {
@@ -88,7 +90,7 @@ public class Theater implements Serializable {
             return true;
             //oos.flush();
         } catch (Exception e) {
-            System.out.println("Unable to serialise a value: " + e);
+            System.err.println("Theater.storeData: Unable to serialise a value: " + e);
             return false;
         }
     }
@@ -96,6 +98,8 @@ public class Theater implements Serializable {
 
     /**
      * Loads in data from the persistence file.
+     *
+     * @return The Theater instance on success, or null on failure.
      */
     public static Theater retrieveData() {
         try {
@@ -104,10 +108,10 @@ public class Theater implements Serializable {
             ois.readObject();
             return INSTANCE;
         } catch (IOException e) {
-            System.out.println("Problem reading: " + e);
+            System.err.println("Theater.retrieveData: Problem reading: " + e);
             return null;
         } catch (ClassNotFoundException e) {
-            System.out.println("Class not found: " + e);
+            System.err.println("Theater.retrieveData: Class not found: " + e);
             return null;
         }
     }
