@@ -105,9 +105,17 @@ public class SingletonMap<E> implements Iterable<E>, Serializable {
      *
      * @param key The key to use for the entry.
      * @param entry The entry object itself.
+     *
+     * @return True on success, false on failure (typically, an entry with the same key already exists).
      */
-    public void addEntry(int key, E entry) {
-        singletonMap.put(key, entry);
+    public boolean addEntry(int key, E entry) {
+        if (hasEntry(key)) {
+            return false;
+        }
+        else {
+            singletonMap.put(key, entry);
+            return true;
+        }
     }
 
 
@@ -136,7 +144,7 @@ public class SingletonMap<E> implements Iterable<E>, Serializable {
      *
      * @return True if an entry exists, false otherwise.
      */
-    public boolean validateEntry(int key) {
+    public boolean hasEntry(int key) {
         return singletonMap.containsKey(key);
     }
 

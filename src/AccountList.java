@@ -27,10 +27,12 @@ public class AccountList<E extends Account> extends SingletonMap<E> {
     /**
      * Adds a new account to the AccountList.
      *
-     * @param account
+     * @param account The account object to add to the AccountList.
+     *
+     * @return True on success, false on failure (typically, an entry with the same account ID already exists; this should not happen as long as getNewAccountId() is used when creating the Account object).
      */
-    public void addAccount(E account) {
-        addEntry(account.getId(), account);
+    public boolean addAccount(E account) {
+        return addEntry(account.getId(), account);
     }
 
     /**
@@ -58,7 +60,7 @@ public class AccountList<E extends Account> extends SingletonMap<E> {
     }
 
     public boolean validateAccount(int accountId) {
-        return validateEntry(accountId);
+        return hasEntry(accountId);
     }
 
     /**

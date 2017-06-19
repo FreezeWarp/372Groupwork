@@ -4,7 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by joseph on 12/06/17.
+ * The interface used for all program interactions.
+ * Note a couple of design decisions:
+ ** The various singleton hashmaps are never interacted with directly; instead, their instances are always returned through the Theater façade. This is done to lower coupling.
+ ** Classes that duplicate functionality have that functionality implemented in generic superclasses as much as possible. This is done to maximise cohesion and reduce bugs (if one class has a bug, the others will as well, making detection easier).
  */
 public class Interface {
     /**
@@ -106,6 +109,7 @@ public class Interface {
         /* Program exiting and saving */
         Theater.storeData();
     }
+
 
     /**
      * Asks for a client's information and sends a newly-created client object to the ClientList.
