@@ -5,27 +5,17 @@ import java.util.Date;
 /**
  * Created by joseph on 12/06/17.
  */
-public class Show implements Serializable {
-	private int id;
+public class Show extends IdentifiableInteger implements Serializable {
     private String name;
     private Date startDate;
     private Date endDate;
     private final SimpleDateFormat showDateFormat = new SimpleDateFormat("MM/dd/yyyy");
     
-    public Show(int id, String name, Date startDate, Date endDate) {
-        this.id = id;
+    public Show(String name, Date startDate, Date endDate) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
     }
-
-	/** Gets the id of a show
-	 * 
-	 * @return id
-	 */
-	public int getId() {
-	    return id;
-	}
     
 	/** Gets the Name of a show
 	 * 

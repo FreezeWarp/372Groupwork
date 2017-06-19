@@ -5,12 +5,16 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * This defines two things: a hashmap with entries identified by an integer ID; and that should be treated as a singleton, with persistence methods overridden accordingly,
+ * This defines two things: a hashmap with entries identified by an ID; and that should be treated as a singleton, with persistence methods overridden accordingly.
  * In a way, this essentially mimics a database table, and could even be implemented using those in the future.
+ * Some justification for using the hashmap approach over a list with an equals search:
+ ** It is much faster (searches perform O(1) hash lookups instead of linear O(n) searches). In my experience, this is generally a compelling reason on its own terms, especially since searches are used for all operations: remove, add, and has.
+ ** The increase in coupling is minor; we only require that an object stored with this implement the Identifiable interface correctly (if the interface is implemented incorrectly, we will typically detect this and return responses accordingly). This is three simple methods.
+ ** Plus, by having these methods, a lot of extra work can be simplified; we automatically assign new IDs to the objects, for instance.
  *
  * @author Joseph T. Parsons
  */
-public class SingletonMap<E> implements Iterable<E>, Serializable {
+public class SingletonMap<K, E extends Identifiable<K>> implements Iterable<E>, Serializable {
     /* Singleton Stuff */
     /**
      * The singleton instance.
@@ -75,13 +79,13 @@ public class SingletonMap<E> implements Iterable<E>, Serializable {
     /**
      * A Map of E-typed objects, keyed by an integer that should be entirely unique.
      */
-    protected Map<Integer, E> singletonMap = new HashMap<Integer, E>();
+    protected Map<K, E> singletonMap = new HashMap<K, E>();
 
 
     /**
-     * The last Map key that was assigned. Use {@link SingletonMap#getNewKey()} to get the next key in the series.
+     * The last Map key that was assigned. Use {@link SingletonMap#getNewKey(E)} to get the next key in the series.
      */
-    private int lastKey = 0;
+    private K lastKey;
 
 
     /**
@@ -95,25 +99,26 @@ public class SingletonMap<E> implements Iterable<E>, Serializable {
     /**
      * @return A new, unique Map key.
      */
-    public int getNewKey() {
-        return lastKey++;
+    public K getNewKey(E entry) {
+        return lastKey = entry.nextId(lastKey);
     }
 
 
     /**
      * Adds a new Map entry to the Map.
      *
-     * @param key The key to use for the entry.
-     * @param entry The entry object itself.
+     * @param entry The entry object to add.
      *
      * @return True on success, false on failure (typically, an entry with the same key already exists).
      */
-    public boolean addEntry(int key, E entry) {
-        if (hasEntry(key)) {
+    public boolean addEntry(E entry) {
+        entry.setId(getNewKey(entry)); // Set the ID to a newly-created ID used for uniquely identifying objects in the hashmap.
+
+        if (hasEntry(entry.getId())) { // Basically, detect a failure to set the ID correctly. While unlikely, this could happen if Identifiable is incorrectly implemented.
             return false;
         }
         else {
-            singletonMap.put(key, entry);
+            singletonMap.put(entry.getId(), entry);
             return true;
         }
     }
@@ -126,8 +131,8 @@ public class SingletonMap<E> implements Iterable<E>, Serializable {
      *
      * @return True on success, false on failure (ID doesn't exist, probably)
      */
-    public boolean removeEntry(int key) {
-        if (singletonMap.containsKey(key)) {
+    public boolean removeEntry(K key) {
+        if (hasEntry(key)) {
             singletonMap.remove(key);
             return true;
         }
@@ -140,11 +145,11 @@ public class SingletonMap<E> implements Iterable<E>, Serializable {
     /**
      * Checks whether an entry with the given key exists.
      *
-     * @param key The hashmap key to check.
+     * @param key The map key to check for.
      *
      * @return True if an entry exists, false otherwise.
      */
-    public boolean hasEntry(int key) {
+    public boolean hasEntry(K key) {
         return singletonMap.containsKey(key);
     }
 

@@ -219,7 +219,7 @@ public class UserInterface {
             // Add New Show Object to ShowList
             if (startDate.before(endDate)) {
 	            if (Theater.getShowList().validShowDate(startDate, endDate)){
-	            	Theater.getShowList().addShow(new Show(id ,name, startDate, endDate));
+	            	Theater.getShowList().addShow(new Show(name, startDate, endDate));
 	            }
 	            else {
 	            	System.out.println("These dates interfere with another show.");

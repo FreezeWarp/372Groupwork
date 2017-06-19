@@ -5,22 +5,16 @@ import java.io.Serializable;
  *
  * Created by joseph on 12/06/17.
  */
-public class Account implements Serializable {
-    private int id;
+public class Account extends IdentifiableInteger implements Serializable {
     private String name;
     private String address;
     private long phoneNumber;
     private int balance = 0;
 
-    public Account(int id, String name, String address, long phoneNumber) {
-        this.id = id;
+    public Account(String name, String address, long phoneNumber) {
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getName() {

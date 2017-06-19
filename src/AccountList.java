@@ -3,11 +3,7 @@
  *
  * Created by joseph on 12/06/17.
  */
-
-/**
- * Created by joseph on 12/06/17.
- */
-public class AccountList<E extends Account> extends SingletonMap<E> {
+public class AccountList<E extends Account> extends SingletonMap<Integer, E> {
     /* Singleton Stuff */
     private static AccountList INSTANCE;
 
@@ -32,7 +28,7 @@ public class AccountList<E extends Account> extends SingletonMap<E> {
      * @return True on success, false on failure (typically, an entry with the same account ID already exists; this should not happen as long as getNewAccountId() is used when creating the Account object).
      */
     public boolean addAccount(E account) {
-        return addEntry(account.getId(), account);
+        return addEntry(account);
     }
 
     /**
@@ -61,12 +57,5 @@ public class AccountList<E extends Account> extends SingletonMap<E> {
 
     public boolean validateAccount(int accountId) {
         return hasEntry(accountId);
-    }
-
-    /**
-     * @return A new, unique account ID.
-     */
-    public int getNewAccountId() {
-        return getNewKey();
     }
 }

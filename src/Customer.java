@@ -9,9 +9,8 @@ public class Customer extends Account {
     private ArrayList<CreditCard> creditCardList = new ArrayList<CreditCard>();
 
     public Customer(String name, String address, long phoneNumber, CreditCard creditCard) {
-        super(Theater.getInstance().getCustomerList().getNewAccountId(), name, address, phoneNumber);
+        super(name, address, phoneNumber);
         creditCardList.add(creditCard);
-      
     }
     
     public void addCreditCard(CreditCard creditCard) {

@@ -5,7 +5,7 @@ import java.util.Date;
  */
 
 // Look at AccountList for how to implement this.
-public class ShowList extends SingletonMap<Show> {
+public class ShowList extends SingletonMap<Integer, Show> {
     private static ShowList INSTANCE;
 
     protected ShowList() { }
@@ -18,14 +18,14 @@ public class ShowList extends SingletonMap<Show> {
         return INSTANCE;
     }
 
-    
+
     /**
      * Adds a new account to the AccountList.
      *
-     * @param account
+     * @param show
      */
     public void addShow(Show show) {
-        addEntry(getNewKey(), show);
+        addEntry(show);
     }
 
 
