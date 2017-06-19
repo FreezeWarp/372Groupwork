@@ -21,7 +21,7 @@ public class ShowList extends SingletonHashmap<Show> {
      *
      * @param account
      */
-    public void addShow(E show) {
-        addEntry(getNewId(),show);
+    public void addShow(Show show) {
+        addEntry(getNewId(), show);
     }
 }
