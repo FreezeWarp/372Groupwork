@@ -7,7 +7,7 @@
 /**
  * Created by joseph on 12/06/17.
  */
-public class AccountList<E extends Account> extends SingletonHashmap<E> {
+public class AccountList<E extends Account> extends SingletonMap<E> {
     /* Singleton Stuff */
     private static AccountList INSTANCE;
 
@@ -53,7 +53,7 @@ public class AccountList<E extends Account> extends SingletonHashmap<E> {
      * @return True on success, false on failure (ID doesn't exist, probably)
      */
     public E getAccount(int accountID) {
-        return (E) singletonHashmap.get(accountID);
+        return (E) singletonMap.get(accountID);
 
     }
 
@@ -65,6 +65,6 @@ public class AccountList<E extends Account> extends SingletonHashmap<E> {
      * @return A new, unique account ID.
      */
     public int getNewAccountId() {
-        return getNewId();
+        return getNewKey();
     }
 }

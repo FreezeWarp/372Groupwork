@@ -10,18 +10,18 @@ import java.util.Map;
  *
  * @author Joseph T. Parsons
  */
-public class SingletonHashmap<E> implements Iterable<E>, Serializable {
+public class SingletonMap<E> implements Iterable<E>, Serializable {
     /* Singleton Stuff */
     /**
      * The singleton instance.
      */
-    private static SingletonHashmap INSTANCE;
+    private static SingletonMap INSTANCE;
 
-    protected SingletonHashmap() { }
+    protected SingletonMap() { }
 
-    public static SingletonHashmap getInstance() {
+    public static SingletonMap getInstance() {
         if (INSTANCE == null) {
-            INSTANCE = new SingletonHashmap();
+            INSTANCE = new SingletonMap();
         }
 
         return INSTANCE;
@@ -40,7 +40,7 @@ public class SingletonHashmap<E> implements Iterable<E>, Serializable {
             input.defaultReadObject();
 
             if (INSTANCE == null) {
-                INSTANCE = (SingletonHashmap) input.readObject();
+                INSTANCE = (SingletonMap) input.readObject();
             }
             else {
                 input.readObject();
@@ -75,52 +75,52 @@ public class SingletonHashmap<E> implements Iterable<E>, Serializable {
     /**
      * A Map of E-typed objects, keyed by an integer that should be entirely unique.
      */
-    protected Map<Integer, E> singletonHashmap = new HashMap<Integer, E>();
+    protected Map<Integer, E> singletonMap = new HashMap<Integer, E>();
 
 
     /**
-     * The last Map key that was assigned. Use {@link SingletonHashmap#getNewId()} to get the next key in the series.
+     * The last Map key that was assigned. Use {@link SingletonMap#getNewKey()} to get the next key in the series.
      */
-    private int lastId = 0;
+    private int lastKey = 0;
 
 
     /**
      * An iterator that iterates through the list of Map entries (values).
      */
     public Iterator<E> iterator() {
-        return singletonHashmap.values().iterator();
+        return singletonMap.values().iterator();
     }
 
 
     /**
      * @return A new, unique Map key.
      */
-    public int getNewId() {
-        return lastId++;
+    public int getNewKey() {
+        return lastKey++;
     }
 
 
     /**
      * Adds a new Map entry to the Map.
      *
-     * @param keyId The key to use for the entry.
+     * @param key The key to use for the entry.
      * @param entry The entry object itself.
      */
-    public void addEntry(int keyId, E entry) {
-        singletonHashmap.put(keyId, entry);
+    public void addEntry(int key, E entry) {
+        singletonMap.put(key, entry);
     }
 
 
     /**
      * Removes a Map entry by its key.
      *
-     * @param keyId The hashmap key to remove.
+     * @param key The hashmap key to remove.
      *
      * @return True on success, false on failure (ID doesn't exist, probably)
      */
-    public boolean removeEntry(int keyId) {
-        if (singletonHashmap.containsKey(keyId)) {
-            singletonHashmap.remove(keyId);
+    public boolean removeEntry(int key) {
+        if (singletonMap.containsKey(key)) {
+            singletonMap.remove(key);
             return true;
         }
         else {
@@ -132,12 +132,12 @@ public class SingletonHashmap<E> implements Iterable<E>, Serializable {
     /**
      * Checks whether an entry with the given key exists.
      *
-     * @param keyId The hashmap key to check.
+     * @param key The hashmap key to check.
      *
      * @return True if an entry exists, false otherwise.
      */
-    public boolean validateEntry(int keyId) {
-        return singletonHashmap.containsKey(keyId);
+    public boolean validateEntry(int key) {
+        return singletonMap.containsKey(key);
     }
 
 

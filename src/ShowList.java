@@ -3,7 +3,7 @@
  */
 
 // Look at AccountList for how to implement this.
-public class ShowList extends SingletonHashmap<Show> {
+public class ShowList extends SingletonMap<Show> {
     private static ShowList INSTANCE;
 
     protected ShowList() { }
@@ -22,6 +22,6 @@ public class ShowList extends SingletonHashmap<Show> {
      * @param account
      */
     public void addShow(Show show) {
-        addEntry(getNewId(), show);
+        addEntry(getNewKey(), show);
     }
 }

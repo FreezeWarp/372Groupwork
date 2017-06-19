@@ -3,12 +3,12 @@
 skinparam classAttributeIconSize 0
 hide empty members
 
-class SingletonHashmap<E> {
-    -INSTANCE: SingletonHashmap
+class SingletonMap<E> {
+    -INSTANCE: SingletonMap
     -singletonHashmap : Hashmap<Integer, E>
     -lastId: int
-    #SingletonHashmap()
-    +getInstance() : SingletonHashmap
+    #SingletonMap()
+    +getInstance() : SingletonMap
     +getNewId(): int
     +addEntry(keyId: int, entry: E)
     +removeEntry(keyId: int): boolean
@@ -19,7 +19,7 @@ class SingletonHashmap<E> {
 class AccountList<E extends Account> {
     -INSTANCE: AccountList
     +AccountList()
-    +getInstance() : SingletonHashmap
+    +getInstance() : SingletonMap
     +getNewAccountId(): int
     +addAccount(account: E)
     +removeEntry(accountId: int): boolean
@@ -55,10 +55,10 @@ class Customer {
     -creditCard: CreditCard
 }
 
-SingletonHashmap <|-- "SingletonHashmap<Account>" : "«bind» E::Account"
-SingletonHashmap <|-- "SingletonHashmap<Show>" : "«bind» E::Show"
-"SingletonHashmap<Account>" <|-- AccountList
-"SingletonHashmap<Show>" <|-- ShowList
+SingletonMap <|-- "SingletonMap<Account>" : "«bind» E::Account"
+SingletonMap <|-- "SingletonMap<Show>" : "«bind» E::Show"
+"SingletonMap<Account>" <|-- AccountList
+"SingletonMap<Show>" <|-- ShowList
 AccountList <|-- "AccountList<Client>" : "«bind» E::Client"
 AccountList <|-- "AccountList<Customer>" : "«bind» E::Customer"
 "AccountList<Client>" <|-- ClientList
