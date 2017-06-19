@@ -1,10 +1,12 @@
+import java.io.Serializable;
+
 /**
  * A basic integer implementation of the Identifiable interface.
  *
  * @author Joseph T. Parsons
  */
 
-public class IdentifiableInteger implements Identifiable<Integer> {
+public class IdentifiableInteger implements Identifiable<Integer>, Serializable {
     Integer id;
 
     public Integer getId() {
