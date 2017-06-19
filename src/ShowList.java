@@ -18,6 +18,7 @@ public class ShowList extends SingletonMap<Show> {
         return INSTANCE;
     }
 
+    
     /**
      * Adds a new account to the AccountList.
      *
@@ -26,7 +27,8 @@ public class ShowList extends SingletonMap<Show> {
     public void addShow(Show show) {
         addEntry(getNewKey(), show);
     }
-    
+
+
     /**
      * Checks if the date interferes with another date in ShowList
      *
@@ -36,14 +38,15 @@ public class ShowList extends SingletonMap<Show> {
      * @return flag true if the date is valid, else false
      */
     public boolean validShowDate(Date start, Date end) {
-    	boolean flag = true;
-    	for (Show show : Theater.getInstance().getShowList()) {
-            if (!((start.before(show.getStartDate())
-            		&& end.before(show.getEndDate()))
-            		||(start.after(show.getStartDate())
-            		&& end.after(show.getEndDate()))))
-            flag=false;
+        for (Show show : Theater.getInstance().getShowList()) {
+            if ( // our dates conflict if they:
+               (start.after(show.getStartDate()) && start.before(show.getEndDate())) // start during another show
+               || (end.after(show.getStartDate()) && end.before(show.getEndDate())) // or end during another show
+            ) {
+                return false; // return false if any show conflicts
+            }
         }
-        return flag;
+
+        return true; // return show when no show conflicts
     }
 }
