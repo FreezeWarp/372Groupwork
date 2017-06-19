@@ -1,12 +1,23 @@
 @startuml
 
-actor Interface
-participant Theater
+actor Clerk
 
-Interface -> Theater : getClientList()
-Theater -> Interface: ClientList
-create Client
-Interface -> Client: new
-Interface -> ClientList : addAccount()
+activate ":Interface"
+Clerk -> ":Interface" : Add a Client
+Clerk //- ":Interface": Data Request
+Clerk -// ":Interface": name, address, phone
 
+":Interface" -> ":Theater" : getClientList()
+activate ":Theater"
+":Theater" -->> ":Interface": clientList
+deactivate ":Theater"
+":Interface" -> ":ClientList": id = getNewAccountId()
+create "client :Client"
+":Interface" -> "client :Client": client = Client(id, name, address, phone)
+":Interface" -> ":ClientList" : boolean = addAccount(client)
+activate ":ClientList"
+":ClientList" -->> ":Interface" : successful?
+deactivate ":ClientList"
+":Interface" -->> Clerk : successful?
+deactivate ":Interface"
 @enduml

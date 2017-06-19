@@ -1,0 +1,23 @@
+@startuml
+
+actor Clerk
+
+Clerk -> ":Interface" : Remove a Client
+activate ":Interface"
+Clerk //- ":Interface": Data Request
+Clerk -// ":Interface": id
+
+":Interface" -> ":Theater" : getClientList()
+activate ":Theater"
+":Theater" -->> ":Interface": clientList
+deactivate ":Theater"
+":Interface" -> ":ClientList": boolean = removeAccount(id)
+activate ":ClientList"
+create "client :Client"
+":ClientList" -> "client :Client": client = get(id)
+destroy "client :Client"
+":ClientList" -->> ":Interface": successful?
+deactivate ":ClientList"
+":Interface" -->> Clerk: successful?
+deactivate ":Interface"
+@enduml

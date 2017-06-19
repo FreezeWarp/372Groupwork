@@ -14,29 +14,29 @@ activate ":Interface"
 ":Interface" -> ":Theater" : storeData()
 activate ":Theater"
 
-":Theater" -> ":ClientList": writeObject()
+":Theater" -> ":ClientList": readObject()
 activate ":ClientList"
-":ClientList" -> Disk: writeObject()
+":ClientList" -> Disk: readObject()
 activate Disk
 Disk -->> ":ClientList": status
 ":ClientList" -->> ":Theater": status
 deactivate ":ClientList"
 
-":Theater" -> ":CustomerList": writeObject()
+":Theater" -> ":CustomerList": readObject()
 activate ":CustomerList"
-":CustomerList" -> Disk: writeObject()
+":CustomerList" -> Disk: readObject()
 Disk -->> ":CustomerList": status
 ":CustomerList" -->> ":Theater": status
 deactivate ":CustomerList"
 
-":Theater" -> ":ShowList": writeObject()
+":Theater" -> ":ShowList": readObject()
 activate ":ShowList"
-":ShowList" -> Disk: writeObject()
+":ShowList" -> Disk: readObject()
 Disk -->> ":ShowList": status
 ":ShowList" -->> ":Theater": status
 deactivate ":ShowList"
 
-":Theater" -> Disk: writeObject()
+":Theater" -> Disk: readObject()
 Disk -->> ":Theater": status
 
 deactivate Disk
