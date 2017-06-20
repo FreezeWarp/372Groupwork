@@ -6,16 +6,26 @@ import java.util.Date;
  * Created by joseph on 12/06/17.
  */
 public class Show extends IdentifiableInteger implements Serializable {
+	private int clientId;
     private String name;
     private Date startDate;
     private Date endDate;
     private final SimpleDateFormat showDateFormat = new SimpleDateFormat("MM/dd/yyyy");
     
-    public Show(String name, Date startDate, Date endDate) {
+    public Show(int clientId, String name, Date startDate, Date endDate) {
+    	this.clientId = clientId;
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
     }
+    
+	/** Gets the clientId of a show
+	 * 
+	 * @return clientId
+	 */
+	public int getClientId() {
+	    return clientId;
+	}
     
 	/** Gets the Name of a show
 	 * 
@@ -44,7 +54,8 @@ public class Show extends IdentifiableInteger implements Serializable {
     @Override
     public String toString() {
         return id +
-                ": " + name +
+        		": Client " + clientId +
+                ", " + name +
                 " " + showDateFormat.format(startDate)+
                 "-" + showDateFormat.format(endDate);
     }
