@@ -133,13 +133,17 @@ public class UserInterface {
      * @modified Cory
      */
     public static void removeClient() {
-        int id = UserInterfacePrompts.promptInt("Client ID? ");
-        if (Theater.getClientList().checkShowDates(id)) {
-	        if (Theater.getClientList().removeAccount(id)) {
+        Client client = Theater.getClientList().getAccount(UserInterfacePrompts.promptInt("Client ID? "));
+
+        if (client == null) {
+            System.out.println("The client does not exist.");
+        }
+        else if (Theater.getShowList().checkShowDates(client)) {
+	        if (Theater.getClientList().removeAccount(client.getId())) {
 	        	System.out.println("The client was removed.");
 	        }
 	        else {
-	            System.out.println("The client could not be removed; does it exist?");
+                System.out.println("The client could not be removed.");
 	        }
         }
         else {
@@ -245,7 +249,7 @@ public class UserInterface {
      */
     public static void listShows() {
         System.out.println(Theater.getShowList());
-    }
+        }
 
 
     /**
