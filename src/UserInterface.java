@@ -216,7 +216,7 @@ public class UserInterface {
      *@author Cory
      */
     public static void addShow() {
-        int clientId = (int) UserInterfacePrompts.promptInt("Client ID? ");
+        int clientId = UserInterfacePrompts.promptInt("Client ID? ");
         if (Theater.getClientList().validateAccount(clientId)) {
             String name = UserInterfacePrompts.promptLine("Show name? ");
             Date startDate = UserInterfacePrompts.promptShowDate("Start of Show (MM/DD/yyyy)? ");
@@ -244,9 +244,7 @@ public class UserInterface {
      * @author Cory
      */
     public static void listShows() {
-        for (Show show : Theater.getInstance().getShowList()) {
-            System.out.println(show);
-        }
+        System.out.println(Theater.getShowList());
     }
 
 
