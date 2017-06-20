@@ -27,7 +27,7 @@ public class ClientList extends AccountList<Client> {
     public boolean checkShowDates(int accountId) {
     	boolean flag = true;
     	for (Show show : Theater.getInstance().getShowList()) {
-    		if (accountId==show.getClientId()) {
+    		if (accountId == show.getClient().getId()) {
     			if (show.getEndDate().after(new Date())) {
     				flag=false;
     			}

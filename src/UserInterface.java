@@ -217,14 +217,14 @@ public class UserInterface {
      */
     public static void addShow() {
         int clientId = (int) UserInterfacePrompts.promptInt("Client ID? ");
-        if (Theater.getInstance().getClientList().validateAccount(clientId)) {
+        if (Theater.getClientList().validateAccount(clientId)) {
             String name = UserInterfacePrompts.promptLine("Show name? ");
             Date startDate = UserInterfacePrompts.promptShowDate("Start of Show (MM/DD/yyyy)? ");
             Date endDate = UserInterfacePrompts.promptShowDate("End of Show (MM/DD/yyyy)? ");
             // Add New Show Object to ShowList
             if (startDate.before(endDate)) {
 	            if (Theater.getShowList().validShowDate(startDate, endDate)){
-	            	Theater.getShowList().addShow(new Show(clientId, name, startDate, endDate));
+	            	Theater.getShowList().addShow(new Show(Theater.getClientList().getAccount(clientId), name, startDate, endDate));
 	            }
 	            else {
 	            	System.out.println("These dates interfere with another show.");
