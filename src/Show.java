@@ -4,6 +4,7 @@ import java.util.Date;
 
 /**
  * Created by Joseph T. Parsons on 12/06/17.
+ * Modified by Cory Stadther
  */
 public class Show extends IdentifiableInteger implements Serializable {
 	private Client client;
@@ -41,7 +42,7 @@ public class Show extends IdentifiableInteger implements Serializable {
 	}
     
 	/** 
-	 * Gets the Name of a show
+	 * Gets the name of a show
 	 * 
 	 * @param nothing
 	 * 
@@ -52,7 +53,7 @@ public class Show extends IdentifiableInteger implements Serializable {
 	}
 	
 	/**
-	 * Gets the Start Date of a show
+	 * Gets the start Date of a show
 	 *  
 	 * @param nothing
 	 * 
@@ -63,7 +64,7 @@ public class Show extends IdentifiableInteger implements Serializable {
 	}
 	
 	/** 
-	 * Gets the End Date of a show
+	 * Gets the end Date of a show
 	 * 
 	 * @param nothing
 	 * 

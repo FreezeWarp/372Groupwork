@@ -2,6 +2,7 @@ import java.util.Date;
 
 /**
  * Created by Joseph T. Parsons on 13/06/17.
+ * Modified by Cory Stadther
  */
 public class ShowList extends SingletonMap<Integer, Show> {
 	 /* Singleton Stuff */
@@ -34,10 +35,10 @@ public class ShowList extends SingletonMap<Integer, Show> {
     /**
      * Checks if the date interferes with another date in ShowList
      *
-     * @param start The Date to start the show
-     * @param end The Date to end the show
+     * @param The Date to start the show
+     * @param The Date to end the show
      *
-     * @return flag true if the date is valid, else false
+     * @return true if the date is valid, else false
      */
     public boolean validShowDate(Date start, Date end) {
         for (Show show : Theater.getInstance().getShowList()) {
@@ -45,17 +46,16 @@ public class ShowList extends SingletonMap<Integer, Show> {
                (start.after(show.getStartDate()) && start.before(show.getEndDate())) // start during another show
                || (end.after(show.getStartDate()) && end.before(show.getEndDate())) // or end during another show
             ) {
-                return false; // return false if any show conflicts
+                return false; // returns false if any shows conflict
             }
         }
-        
-        return true; // return show when no show conflicts
+        return true; // returns true when no shows conflict
     }
 
     /**
      * Checks if client has a future show scheduled
      *
-     * @param account The account to be checked
+     * @param The account to be checked
      * 
      * @return true if it can be removed, else false
      */
