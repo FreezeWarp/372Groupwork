@@ -29,7 +29,7 @@ public class Account extends IdentifiableInteger implements Serializable {
         return phoneNumber;
     }
 
-    public int getBalance() { //right now this is being shared with Customer() class as well, even though it doesn't use it. Should we delete this maybe and move it to Client() class?
+    public int getBalance() { //TODO: right now this is being shared with Customer() class as well, even though it doesn't use it. Should we delete this maybe and move it to Client() class? His rubric seems to imply it should be in this Account class, but doesn't that violate encapsulation laws given that the Customer() class would never have a use for it?
         return balance;
     }
 
