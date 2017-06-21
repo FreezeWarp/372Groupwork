@@ -56,12 +56,9 @@ public class Customer extends Account {
      * @param creditCardNumber
      * 					the number of the credit card to be removed
      */
-    public void removeCreditCard(int creditCardNumber) {
-    	if (creditCardList.contains(creditCardNumber)) {
-    		System.out.println("Test");
-    	} else {
-    		System.out.println("The credit card number entered is not registered to the customer");
-    	}
+    public void removeCreditCard(long creditCardNumber) {
+    	 creditCardList.removeIf((CreditCard creditCard) -> creditCard.getCardNumber() == creditCardNumber);
+   
     }
     
     /**
@@ -69,11 +66,7 @@ public class Customer extends Account {
      * 
      */
     public void removeCreditCards() {
-    	int index = 0;
-    	while (!creditCardList.isEmpty()) {
-    		creditCardList.remove(index);
-    		index++;
-    	}
+    	creditCardList.clear();
     }
     
     /**

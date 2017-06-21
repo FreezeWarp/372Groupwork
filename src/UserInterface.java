@@ -209,16 +209,15 @@ public class UserInterface {
      */
     public static void addCreditCard() {
         int id = UserInterfacePrompts.promptInt("Customer ID? ");
-        CreditCard creditCard = UserInterfacePrompts.promptCreditCard("Credit card number? ", "Credit card expiration (MMyyyy)? ", "This card is expired, please enter in a new credit card.");
            
-           
-           // Add New Credit Card object to the specified Customer
-           try {
-        	   Theater.getCustomerList().getAccount(id).addCreditCard(creditCard);
-           } catch (NullPointerException e) {
-        	   System.out.println("Error, specified account does not exist, did you enter the correct account Id?");
-           }
-    	
+        //adds a new credit card to the customer's account, if the customer account exists
+        if (Theater.getCustomerList().getAccount(id)  == null) {
+        	 System.out.println("Error, specified account does not exist, did you enter the correct account Id?");
+        } else { 
+        	CreditCard creditCard = UserInterfacePrompts.promptCreditCard("Credit card number? ", "Credit card expiration (MMyyyy)? ", "This card is expired, please enter in a new credit card.");
+     	    Theater.getCustomerList().getAccount(id).addCreditCard(creditCard);
+        }
+
     }
 
     /**
@@ -227,7 +226,23 @@ public class UserInterface {
      * @author Eric
      */
     public static void removeCreditCard() {
-    //	 Theater.getCustomerList().getAccount().addCreditCard(creditCard);
+    	 Customer customer = Theater.getCustomerList().getAccount(UserInterfacePrompts.promptInt("Customer ID of the credit card holder? "));
+    	 
+    	 if (customer == null) {
+             System.out.println("The customer does not exist.");
+         } else {
+         	try {
+         		
+         	    if (customer.getCreditCardList().size() > 1 ) {
+         		    customer.removeCreditCard(UserInterfacePrompts.promptCreditCardNumber("Credit card number?"));
+         	    } else {
+         		    System.out.println("Cannot delete the last credit card a user has");
+         	    }
+         		
+         	} catch (Exception ex) {
+         		System.out.println("The customer's credit card could not be deleted.");
+         	}
+ 	    }   	
     }
 
 
