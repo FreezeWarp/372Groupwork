@@ -1,10 +1,13 @@
 /**
  * A list of Accounts.
  *
- * Created by joseph on 12/06/17.
+ * Created by Joseph T. Parsons on 12/06/17.
  */
 public class AccountList<E extends Account> extends SingletonMap<Integer, E> {
-    /* Singleton Stuff */
+	 /* Singleton Stuff */
+	/**
+     * The singleton instance.
+     */
     private static AccountList INSTANCE;
 
     protected AccountList() { }
@@ -16,8 +19,6 @@ public class AccountList<E extends Account> extends SingletonMap<Integer, E> {
 
         return INSTANCE;
     }
-
-
 
     /* The List Itself */
     /**
@@ -44,17 +45,23 @@ public class AccountList<E extends Account> extends SingletonMap<Integer, E> {
 
 
     /**
-     * Retries an account from the AccountList, by its ID.
+     * Retrieves an account from the AccountList, by its ID.
      *
      * @param accountId The accountId belonging to the account to be returned
-     *
-     * @return True on success, false on failure (ID doesn't exist, probably)
+     * 
+     * @returns True on success, false on failure (ID doesn't exist, probably)
      */
     public E getAccount(int accountId) {
         return (E) singletonMap.get(accountId);
-
     }
 
+    /**
+     * Checks to see if an account exists, given an accountId
+     *
+     * @param accountId The accountId belonging to the account to be checked
+     *
+     * @return True if it exists, false if it does not exist
+     */
     public boolean validateAccount(int accountId) {
         return hasEntry(accountId);
     }

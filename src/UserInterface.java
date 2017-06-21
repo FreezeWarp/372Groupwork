@@ -1,4 +1,3 @@
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -112,7 +111,7 @@ public class UserInterface {
 
     /**
      * Asks for a client's information and sends a newly-created client object to the ClientList.
-     *
+     * 
      * @author Joseph T. Parsons
      */
     public static void addClient() {
@@ -128,9 +127,9 @@ public class UserInterface {
 
     /**
      * Asks for a client's ID and asks the client list to remove the client with the corresponding ID.
-     *
+     * 
      * @author Joseph T. Parsons
-     * @modified Cory
+     * @modified Cory Stadther
      */
     public static void removeClient() {
         Client client = Theater.getClientList().getAccount(UserInterfacePrompts.promptInt("Client ID? "));
@@ -154,7 +153,7 @@ public class UserInterface {
 
     /**
      * Lists all clients in the ClientList.
-     *
+     * 
      * @author Joseph T. Parsons
      */
     public static void listClients() {
@@ -164,8 +163,8 @@ public class UserInterface {
 
     /**
      * Asks for a customer's information and sends a newly-created customer object to the CustomerList.
-     *
-     * @author Eric
+     * 
+     * @author Eric Fulwiler
      * @throws ParseException
      */
     public static void addCustomer()  {
@@ -182,8 +181,8 @@ public class UserInterface {
 
     /**
      * Asks for a customer's ID and asks the customer list to remove the customer with the corresponding ID.
-     *
-     * @author Eric
+     * 
+     * @author Eric Fulwiler
      */
     public static void removeCustomer() {
     	Customer customer = Theater.getCustomerList().getAccount(UserInterfacePrompts.promptInt("Customer ID? "));
@@ -204,8 +203,8 @@ public class UserInterface {
 
     /**
      * Asks for a customer's credit card information and stores the newly created CreditCard object corresponding to the entered customer ID.
-     *
-     * @author Eric
+     * 
+     * @author Eric Fulwiler
      */
     public static void addCreditCard() {
         int id = UserInterfacePrompts.promptInt("Customer ID? ");
@@ -222,8 +221,8 @@ public class UserInterface {
 
     /**
      * Asks for a credit card number to be entered, then deletes the corresponding credit card from whichever customer added it.
-     *
-     * @author Eric
+     * 
+     * @author Eric Fulwiler
      */
     public static void removeCreditCard() {
     	 Customer customer = Theater.getCustomerList().getAccount(UserInterfacePrompts.promptInt("Customer ID of the credit card holder? "));

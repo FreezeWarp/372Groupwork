@@ -1,11 +1,13 @@
 import java.util.Date;
 
 /**
- * Created by joseph on 13/06/17.
+ * Created by Joseph T. Parsons on 13/06/17.
  */
-
-// Look at AccountList for how to implement this.
 public class ShowList extends SingletonMap<Integer, Show> {
+	 /* Singleton Stuff */
+	/**
+     * The singleton instance.
+     */
     private static ShowList INSTANCE;
 
     protected ShowList() { }
@@ -18,16 +20,16 @@ public class ShowList extends SingletonMap<Integer, Show> {
         return INSTANCE;
     }
 
-
     /**
-     * Adds a new account to the AccountList.
+     * Adds a new show to the ShowList.
      *
-     * @param show
+     * @param show The show to be added 
+     * 
+     * @return nothing
      */
     public void addShow(Show show) {
         addEntry(show);
     }
-
 
     /**
      * Checks if the date interferes with another date in ShowList
@@ -46,15 +48,15 @@ public class ShowList extends SingletonMap<Integer, Show> {
                 return false; // return false if any show conflicts
             }
         }
-
+        
         return true; // return show when no show conflicts
     }
-
 
     /**
      * Checks if client has a future show scheduled
      *
-     * @param account
+     * @param account The account to be checked
+     * 
      * @return true if it can be removed, else false
      */
     public boolean checkShowDates(Account account) {

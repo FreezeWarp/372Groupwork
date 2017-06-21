@@ -3,7 +3,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 /**
- * Created by joseph on 12/06/17.
+ * Created by Joseph T. Parsons on 12/06/17.
  */
 public class UserInterfacePrompts {
     /**
@@ -87,6 +87,7 @@ public class UserInterfacePrompts {
 
     /**
      * Prompts the user for a string of text matching certain parameters.
+     * 
      * @param promptText The text to display for the prompt.
      * @param regexToFilterOut A regex that will be removed from the user's input text.
      * @param regexToMatch A regex that the user's text must match, after regexToFilterOut has been applied.

@@ -4,7 +4,10 @@ import java.io.*;
  * Created by joseph on 12/06/17.
  */
 public class Theater implements Serializable {
-    /* Singleton */
+	 /* Singleton Stuff */
+	/**
+     * The singleton instance.
+     */
     private static Theater INSTANCE;
 
     private Theater() {}
@@ -18,12 +21,13 @@ public class Theater implements Serializable {
     }
 
 
-
     /* Singleton Serialisation */
     /**
      * Reads the Theater object (and its static instance variable) from the ObjectOutputStream.
      *
-     * @param input
+     * @param input The stream being read from
+     * 
+     * @return nothing
      */
     private void readObject(java.io.ObjectInputStream input) {
         try {
@@ -46,7 +50,9 @@ public class Theater implements Serializable {
     /**
      * Writes the Theater object (and its static instance variable) to the ObjectOutputStream.
      *
-     * @param output
+     * @param output The stream being written to
+     * 
+     * @return nothing
      */
     private void writeObject(java.io.ObjectOutputStream output) {
         try {
@@ -60,7 +66,6 @@ public class Theater implements Serializable {
     }
 
 
-
     /* Helper Methods to Write/Read to/from Disk */
     /**
      * A file object corresponding to the persistence file, whether or whether not it exists.
@@ -69,6 +74,10 @@ public class Theater implements Serializable {
 
 
     /**
+     * Determines if the persistence file exists with data
+     * 
+     * @param nothing
+     * 
      * @return True if the persistence file exists, false otherwise.
      */
     public static boolean hasData() {
@@ -78,6 +87,8 @@ public class Theater implements Serializable {
 
     /**
      * Writes Theater's state to the persistence file.
+     *
+     * @param nothing
      *
      * @return True on success, false on failure.
      */
@@ -98,6 +109,8 @@ public class Theater implements Serializable {
 
     /**
      * Loads in data from the persistence file.
+     * 
+     * @param nothing
      *
      * @return The Theater instance on success, or null on failure.
      */
@@ -126,6 +139,7 @@ public class Theater implements Serializable {
     public static ClientList getClientList() {
         return getInstance().clientList;
     }
+    
     public static CustomerList getCustomerList() {
         return getInstance().customerList;
     }
