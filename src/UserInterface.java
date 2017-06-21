@@ -102,7 +102,7 @@ public class UserInterface {
 
         /* Loop until exit command is entered. Process other commands as entered. */
         int commandNumber;
-        while ((commandNumber = UserInterfacePrompts.promptIntRange("Make a selection: ", 0, commandMap.values().size() - 1)) != 0) {
+        while ((commandNumber = UserInterfacePrompts.promptIntRange("Make a selection (13 for Help): ", 0, commandMap.values().size() - 1)) != 0) {
             commandMap.get(commandNumber).run();
         }
 
@@ -180,12 +180,33 @@ public class UserInterface {
         Theater.getCustomerList().addAccount(new Customer(name, address, phone, creditCard));
     }
 
-
+    /**
+     * Asks for a customer's ID and asks the customer list to remove the customer with the corresponding ID.
+     *
+     * @author Eric
+     */
     public static void removeCustomer() {
-    	//beginning implementation of this -Eric
+    	Customer customer = Theater.getCustomerList().getAccount(UserInterfacePrompts.promptInt("Customer ID? "));
+
+        if (customer == null) {
+            System.out.println("The customer does not exist.");
+        } else {
+        	try {
+        	    customer.removeCreditCards();
+        	    Theater.getCustomerList().removeAccount(customer.getId());
+	            System.out.println("The customer was removed, along with all associated credit cards.");
+        	} catch (Exception ex) {
+        		System.out.println("The customer could not be deleted.");
+        	}
+	        
+	    }   
     }
 
-
+    /**
+     * Asks for a customer's credit card information and stores the newly created CreditCard object corresponding to the entered customer ID.
+     *
+     * @author Eric
+     */
     public static void addCreditCard() {
         int id = UserInterfacePrompts.promptInt("Customer ID? ");
         CreditCard creditCard = UserInterfacePrompts.promptCreditCard("Credit card number? ", "Credit card expiration (MMyyyy)? ", "This card is expired, please enter in a new credit card.");
@@ -200,9 +221,13 @@ public class UserInterface {
     	
     }
 
-
+    /**
+     * Asks for a credit card number to be entered, then deletes the corresponding credit card from whichever customer added it.
+     *
+     * @author Eric
+     */
     public static void removeCreditCard() {
-    	//beginning implementation of this -Eric
+    //	 Theater.getCustomerList().getAccount().addCreditCard(creditCard);
     }
 
 
