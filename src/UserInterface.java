@@ -114,8 +114,6 @@ public class UserInterface {
 
     /**
      * Asks for a client's information and sends a newly-created client object to the ClientList.
-     * 
-     * @author Joseph T. Parsons
      */
     public static void addClient() {
         // Inputs
@@ -130,9 +128,6 @@ public class UserInterface {
 
     /**
      * Asks for a client's ID and asks the client list to remove the client with the corresponding ID.
-     * 
-     * @author Joseph T. Parsons
-     * @modified Cory Stadther
      */
     public static void removeClient() {
         Client client = Theater.getClientList().getAccount(UserInterfacePrompts.promptInt("Client ID? "));
@@ -156,8 +151,6 @@ public class UserInterface {
 
     /**
      * Lists all clients in the ClientList.
-     * 
-     * @author Joseph T. Parsons
      */
     public static void listClients() {
         System.out.println(Theater.getClientList());
@@ -166,8 +159,6 @@ public class UserInterface {
 
     /**
      * Asks for a customer's information and sends a newly-created customer object to the CustomerList.
-     * 
-     * @author Eric Fulwiler
      */
     public static void addCustomer()  {
     	 // Inputs
@@ -188,8 +179,6 @@ public class UserInterface {
 
     /**
      * Asks for a customer's ID and asks the customer list to remove the customer with the corresponding ID.
-     * 
-     * @author Eric Fulwiler
      */
     public static void removeCustomer() {
     	Customer customer = Theater.getCustomerList().getAccount(UserInterfacePrompts.promptInt("Customer ID? "));
@@ -213,8 +202,6 @@ public class UserInterface {
 
     /**
      * Asks for a customer's credit card information and stores the newly created CreditCard object corresponding to the entered customer ID.
-     * 
-     * @author Eric Fulwiler
      */
     public static void addCreditCard() {
         int customerId = UserInterfacePrompts.promptInt("Customer ID? ");
@@ -236,8 +223,6 @@ public class UserInterface {
 
     /**
      * Asks for a credit card number to be entered, then deletes the corresponding credit card from whichever customer added it.
-     * 
-     * @author Eric Fulwiler
      */
     public static void removeCreditCard() {
     	 Customer customer = Theater.getCustomerList().getAccount(UserInterfacePrompts.promptInt("Customer ID of the credit card holder? "));
@@ -261,8 +246,6 @@ public class UserInterface {
 
     /**
      * Lists all customers in the CustomerList.
-     *
-     * @author Eric Fulwiler
      */
     public static void listCustomers() {
         System.out.println(Theater.getCustomerList());
@@ -272,8 +255,6 @@ public class UserInterface {
     /**
      * Prompts for info about new show then creates it.
      * Adds newly created Show object to the ShowList.
-     *
-     * @author Cory Stadther
      */
     public static void addShow() {
         int clientId = UserInterfacePrompts.promptInt("Client ID? ");
@@ -302,8 +283,6 @@ public class UserInterface {
 
     /**
      * Lists all shows in the ShowList.
-     *
-     * @author Cory Stadther
      */
     public static void listShows() {
         System.out.println(Theater.getShowList());
@@ -312,8 +291,6 @@ public class UserInterface {
 
     /**
      * Stores data by invoking Theater.storeData()
-     *
-     * @author Joseph T. Parsons
      */
     public static void storeData() {
         if (Theater.storeData()) {
@@ -327,8 +304,6 @@ public class UserInterface {
 
     /**
      * Loads data by invoking Theater.retrieveData(). Ensures that data is not retrieved twice in a session.
-     *
-     * @author Joseph T. Parsons
      */
     public static void retrieveData() {
         if (dataRetrieved) {
@@ -345,8 +320,6 @@ public class UserInterface {
 
     /**
      * Shows a list of commands that can be used.
-     *
-     * @author Joseph T. Parsons
      */
     public static void help() {
         for (Integer i : helpMap.keySet()) {
