@@ -4,10 +4,10 @@ actor Clerk
 activate ":UserInterface"
 Clerk -> ":UserInterface" : Exit program
 
-":UserInterface" -> ":Theater" : boolean = StoreData()
+":UserInterface" -> ":Theater" : boolean = storeData()
 activate ":Theater"
 ":Theater" -->> ":UserInterface": successful?
-deactivate ":Theater"
+destroy ":Theater"
 ":UserInterface" -->> Clerk : successful?
-deactivate ":UserInterface"
+destroy ":UserInterface"
 @enduml

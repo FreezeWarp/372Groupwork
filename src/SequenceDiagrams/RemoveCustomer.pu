@@ -13,9 +13,9 @@ activate ":Theater"
 deactivate ":Theater"
 ":UserInterface" -> ":CustomerList": boolean = removeAccount(id)
 activate ":CustomerList"
-create "customer :Customer"
-":CustomerList" -> "customer :Customer": customer = get(id)
-destroy "customer :Customer"
+create "customer: Customer"
+":CustomerList" -> "customer: Customer": customer
+destroy "customer: Customer"
 ":CustomerList" -->> ":UserInterface": successful?
 deactivate ":CustomerList"
 ":UserInterface" -->> Clerk: successful?

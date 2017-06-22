@@ -14,7 +14,7 @@ deactivate ":Theater"
 ":UserInterface" -> ":ClientList": boolean = removeAccount(id)
 activate ":ClientList"
 create "client :Client"
-":ClientList" -> "client :Client": client = get(id)
+":ClientList" -> "client :Client": client
 destroy "client :Client"
 ":ClientList" -->> ":UserInterface": successful?
 deactivate ":ClientList"

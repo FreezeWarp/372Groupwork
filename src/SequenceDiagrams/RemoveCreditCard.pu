@@ -11,11 +11,14 @@ activate ":Theater"
 ":Theater" -->> ":UserInterface": CustomerList
 deactivate ":Theater"
 ":UserInterface" -> ":CustomerList": customer = getAccount(customerId)
+create "customer: Customer"
+":CustomerList" -> "customer: Customer": customer
 Clerk //- ":UserInterface": Data Request
 Clerk -// ":UserInterface": creditCardNumber
-":UserInterface" -> ":customer: Customer" : boolean = customer.removeCreditCard(creditCardNumber)
-activate ":customer: Customer"
-":customer: Customer" -->> ":UserInterface" : successful?
+":UserInterface" -> "customer: Customer" : boolean = customer.removeCreditCard(creditCardNumber)
+activate "customer: Customer"
+"customer: Customer" -->> ":UserInterface" : successful?
+deactivate "customer: Customer"
 deactivate ":CustomerList"
 ":UserInterface" -->> Clerk : successful?
 deactivate ":UserInterface"
