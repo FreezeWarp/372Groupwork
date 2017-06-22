@@ -111,9 +111,20 @@ class Theater {
     -writeObject(ObjectInputStream)
 }
 
-Theater <-- "ClientList"
-Theater <-- "CustomerList"
-Theater <-- "ShowList"
+class CreditCard {
+    -cardNumber: long
+    -expirationDate: Date
+    -dateFormat: SimpleDateFormat
+    +CreditCard(cardNumber: long, expirateDate: Date)
+    +setExpirationDate(Date)
+    +setCardNumber(long)
+    +getExpirationDate(): Date
+    +getCardNumber(): long
+}
+
+Theater -- "ClientList"
+Theater -- "CustomerList"
+Theater -- "ShowList"
 
 "Identifiable" <|-- "Identifiable<Integer>" : "«bind» K::Integer"
 "Identifiable<Integer>" <|-- "IdentifiableInteger"
@@ -136,4 +147,6 @@ AccountList *-- Account
 ClientList *-- Client
 CustomerList *-- Customer
 ShowList *-- Show
+
+Customer *-- CreditCard
 @enduml
