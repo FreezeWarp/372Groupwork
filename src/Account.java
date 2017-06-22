@@ -1,14 +1,38 @@
 import java.io.Serializable;
 
 /**
- * A generic financial account.
+ * A generic account for individuals (or organisations) with a name, address, and phone number.
  *
- * Created by Joseph T. Parsons on 12/06/17.
+ * @author  Joseph Parsons
+ * @version 1.0
+ * @since   2017-06-22
  */
 public class Account extends IdentifiableInteger implements Serializable {
+    /**
+     * The name of the account holder.
+     */
     private String name;
+
+    /**
+     * The address of the account holder.
+     */
     private String address;
+
+    /**
+     * The phone number of the account holder.
+     */
     private long phoneNumber;
+
+    /**
+     * The minimum valid phone number.
+     */
+    private static final long PHONE_NUMBER_MINIMUM = 1L;
+
+    /**
+     * The maximum valid phone number.
+     */
+    private static final long PHONE_NUMBER_MAXIMUM = 99999999999L;
+
 
     /**
     * @param name the name of the account holder
@@ -20,6 +44,7 @@ public class Account extends IdentifiableInteger implements Serializable {
         this.address = address;
         setPhoneNumber(phoneNumber);
     }
+
 
     /**
     * Gets the name associated with an account
@@ -49,9 +74,13 @@ public class Account extends IdentifiableInteger implements Serializable {
     }
 
 
+    /**
+     * @param phoneNumber The account holder's phone number, {@link Account#phoneNumber}
+     * @throws AccountPhoneNumberOutOfRangeException When the phone number is not within the valid phone number range.
+     */
     private void setPhoneNumber(long phoneNumber) throws AccountPhoneNumberOutOfRangeException {
-        if (phoneNumber < 0
-                || phoneNumber > 99999999999L) {
+        if (phoneNumber < PHONE_NUMBER_MINIMUM
+                || phoneNumber > PHONE_NUMBER_MAXIMUM) {
             throw new AccountPhoneNumberOutOfRangeException();
         }
         else {
@@ -60,10 +89,8 @@ public class Account extends IdentifiableInteger implements Serializable {
     }
 
     /**
-    * Overrides the toString method of Object
-    * 
-    * @return a string representation concatenating basic account information
-    */
+     * @return a string representation concatenating basic account information
+     */
     @Override
     public String toString() {
         StringBuilder phoneNumberString = new StringBuilder(Long.toString(phoneNumber));
