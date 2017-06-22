@@ -51,7 +51,7 @@ public class Account extends IdentifiableInteger implements Serializable {
 
     private void setPhoneNumber(long phoneNumber) throws AccountPhoneNumberOutOfRangeException {
         if (phoneNumber < 0
-                || phoneNumber > 9999999999L) {
+                || phoneNumber > 99999999999L) {
             throw new AccountPhoneNumberOutOfRangeException();
         }
         else {
