@@ -1,5 +1,9 @@
 /**
- * Created by joseph on 22/06/17.
+ * An exception for when trying to create a {@link CreditCard} with an invalid card number.
+ *
+ * @author  Joseph Parsons
+ * @version 1.0
+ * @since   2017-06-22
  */
 public class CreditCardOutOfRangeException extends Exception {
     CreditCardOutOfRangeException() {

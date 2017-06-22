@@ -1,5 +1,9 @@
 /**
- * Created by joseph on 22/06/17.
+ * An exception for when trying to create a {@link Show} with an end date that is in the future of the start date.
+ *
+ * @author  Joseph Parsons
+ * @version 1.0
+ * @since   2017-06-22
  */
 public class ShowDateMismatchException extends Exception {
     ShowDateMismatchException() {
