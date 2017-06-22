@@ -10,6 +10,7 @@ import java.io.Serializable;
 public class Client extends Account implements Serializable {
     private int balance = 0;
 
+
     /**
      * @param name the name of the client account holder
      * @param address the address of the client account holder
@@ -19,6 +20,7 @@ public class Client extends Account implements Serializable {
         super(name, address, phoneNumber);
     }
 
+
     /**
      * Gets the current balance of the client
      *
@@ -27,6 +29,7 @@ public class Client extends Account implements Serializable {
     public int getBalance() {
         return balance;
     }
+
 
     /**
      * Adjusts the balance of the client
@@ -38,6 +41,7 @@ public class Client extends Account implements Serializable {
     public int adjustBalance(int balanceAdjustment) {
         return this.balance += balanceAdjustment;
     }
+
 
     /**
      * Overrides the toString method of Account

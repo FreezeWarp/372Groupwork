@@ -20,15 +20,18 @@ public class SingletonMap<K, E extends Identifiable<K>> implements Iterable<E>, 
     /*################################
      * Singleton-Specific Functionality
      *###############################*/
+
     /**
      * The global singleton instance of SingletonMap. It can be initialised by {@link SingletonMap#getInstance()}, if needed.
      */
     private static SingletonMap INSTANCE;
 
+
     /**
      * An unused constructor that overrides the default public constructor, preventing SingletonMap from being initialised outside of getInstance().
      */
     protected SingletonMap() { }
+
 
     /**
      * @return The singleton instance of SingletonMap. It will be initialised, if necessary.
@@ -46,6 +49,7 @@ public class SingletonMap<K, E extends Identifiable<K>> implements Iterable<E>, 
     /*################################
      * Singleton Serialisation
      *###############################*/
+
     /**
      * Reads the Theater object (and its static instance variable) from the ObjectOutputStream.
      *
@@ -90,6 +94,7 @@ public class SingletonMap<K, E extends Identifiable<K>> implements Iterable<E>, 
     /*################################
      * The Core List Functionality
      *###############################*/
+
     /**
      * A Map of E-typed objects, keyed by an integer that should be entirely unique.
      */

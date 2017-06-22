@@ -86,6 +86,7 @@ public class Show extends IdentifiableInteger implements Serializable {
         return endDate;
     }
 
+
     /**
      * Overrides the toString method of Object
      *

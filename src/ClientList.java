@@ -10,16 +10,19 @@ public class ClientList extends AccountList<Client> {
     /*################################
      * Singleton-Specific Functionality
      *###############################*/
+
     /**
      * The global singleton instance of ClientList. It can be initialised by {@link ClientList#getInstance()}, if needed.
      */
     private static ClientList INSTANCE;
-    
+
+
     /**
      * An unused constructor that overrides the default public constructor, preventing ClientList from being initialised outside of getInstance().
      */
     protected ClientList() { }
-    
+
+
     /**
      * @return The singleton instance of ClientList. It will be initialised, if necessary.
      */

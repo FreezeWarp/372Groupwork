@@ -9,15 +9,18 @@ public class AccountList<E extends Account> extends SingletonMap<Integer, E> {
     /*################################
      * Singleton-Specific Functionality
      *###############################*/
+
     /**
      * The global singleton instance of AccountList. It can be initialised by {@link AccountList#getInstance()}, if needed.
      */
     private static AccountList INSTANCE;
 
+
     /**
      * An unused constructor that overrides the default public constructor, preventing AccountList from being initialised outside of getInstance().
      */
     protected AccountList() { }
+
 
     /**
      * @return The singleton instance of AccountList. It will be initialised, if necessary.
@@ -31,9 +34,11 @@ public class AccountList<E extends Account> extends SingletonMap<Integer, E> {
     }
 
 
+
     /*################################
      * Alter List Member Functionality
      *###############################*/
+
     /**
      * Adds a new account to the AccountList.
      *
@@ -44,6 +49,7 @@ public class AccountList<E extends Account> extends SingletonMap<Integer, E> {
     public boolean addAccount(E account) {
         return addEntry(account);
     }
+
 
     /**
      * Removes an account from the AccountList, by its ID.
@@ -56,6 +62,7 @@ public class AccountList<E extends Account> extends SingletonMap<Integer, E> {
         return removeEntry(accountId);
     }
 
+
     /**
      * Retrieves an account from the AccountList, by its ID.
      *
@@ -66,6 +73,7 @@ public class AccountList<E extends Account> extends SingletonMap<Integer, E> {
     public E getAccount(int accountId) {
         return singletonMap.get(accountId);
     }
+
 
     /**
      * Checks to see if an account exists, given an accountId

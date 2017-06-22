@@ -11,15 +11,18 @@ public class ShowList extends SingletonMap<Integer, Show> {
     /*################################
      * Singleton-Specific Functionality
      *###############################*/
+
     /**
      * The global singleton instance of ShowList. It can be initialised by {@link ShowList#getInstance()}, if needed.
      */
     private static ShowList INSTANCE;
 
+
     /**
      * An unused constructor that overrides the default public constructor, preventing ShowList from being initialised outside of getInstance().
      */
     protected ShowList() { }
+
 
     /**
      * @return The singleton instance of ShowList. It will be initialised, if necessary.
@@ -33,9 +36,11 @@ public class ShowList extends SingletonMap<Integer, Show> {
     }
 
 
+
     /*################################
      * Alter List Member Functionality
      *###############################*/
+
     /**
      * Adds a new show to the ShowList.
      *
@@ -44,6 +49,7 @@ public class ShowList extends SingletonMap<Integer, Show> {
     public void addShow(Show show) {
         addEntry(show);
     }
+
 
     /**
      * Checks if the date interferes with another date in ShowList
@@ -65,11 +71,12 @@ public class ShowList extends SingletonMap<Integer, Show> {
         return true; // returns true when no shows conflict
     }
 
+
     /**
      * Checks if client has a future show scheduled
      *
      * @param account the account to be checked
-     * 
+     *
      * @return True if it can be removed, false if it cannot
      */
     public boolean checkShowDates(Account account) {

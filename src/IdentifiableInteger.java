@@ -13,6 +13,7 @@ public class IdentifiableInteger implements Identifiable<Integer>, Serializable 
      */
     Integer id;
 
+
     /**
      * @return the unique ID of the object, {@link IdentifiableInteger#id}
      */
@@ -26,6 +27,7 @@ public class IdentifiableInteger implements Identifiable<Integer>, Serializable 
     public void setId(Integer id) {
         this.id = id;
     }
+
 
     /**
      * Returns a new, unique ID based on the previously issued ID by incrementing it by 1.
