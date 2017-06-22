@@ -12,14 +12,27 @@ import java.util.Map;
  ** The increase in coupling is minor; we only require that an object stored with this implement the Identifiable interface correctly (if the interface is implemented incorrectly, we will typically detect this and return responses accordingly). This is three simple methods.
  ** Plus, by having these methods, a lot of extra work can be simplified; we automatically assign new IDs to the objects, for instance.
  *
- * @author Joseph T. Parsons
+ * @author  Joseph T. Parsons
+ * @version 1.0
+ * @since   2017-06-22
  */
 public class SingletonMap<K, E extends Identifiable<K>> implements Iterable<E>, Serializable {
-    /* Singleton Stuff */
+    /*################################
+     * Singleton-Specific Functionality
+     *###############################*/
+    /**
+     * The global singleton instance of SingletonMap. It can be initialised by {@link SingletonMap#getInstance()}, if needed.
+     */
     private static SingletonMap INSTANCE;
 
+    /**
+     * An unused constructor that overrides the default public constructor, preventing SingletonMap from being initialised outside of getInstance().
+     */
     protected SingletonMap() { }
 
+    /**
+     * @return The singleton instance of SingletonMap. It will be initialised, if necessary.
+     */
     public static SingletonMap getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new SingletonMap();
@@ -28,8 +41,11 @@ public class SingletonMap<K, E extends Identifiable<K>> implements Iterable<E>, 
         return INSTANCE;
     }
 
+
     
-    /* Singleton Serialisation Stuff */
+    /*################################
+     * Singleton Serialisation
+     *###############################*/
     /**
      * Reads the Theater object (and its static instance variable) from the ObjectOutputStream.
      *
@@ -70,7 +86,10 @@ public class SingletonMap<K, E extends Identifiable<K>> implements Iterable<E>, 
     }
 
 
-    /* The List Itself */
+
+    /*################################
+     * The Core List Functionality
+     *###############################*/
     /**
      * A Map of E-typed objects, keyed by an integer that should be entirely unique.
      */
