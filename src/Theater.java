@@ -4,6 +4,9 @@ import java.io.*;
  * A façade (and singleton) for the Theater.
  * This should be the main entry point for all interface actions; in a sense, it is the API layer.
  * Much of the overall functionality is actually implemented through getClientList, getCustomer, and getShowList, however.
+ * Note a couple of design decisions:
+ ** The various singleton hashmaps are never interacted with directly; instead, their instances are always returned through the Theater façade. This is done to lower coupling.
+ ** Classes that duplicate functionality have that functionality implemented in generic superclasses as much as possible. This is done to maximise cohesion and reduce bugs (if one class has a bug, the others will as well, making detection easier).
  *
  * @author  Eric Fulwiler, Daniel Johnson, Joseph Parsons, and Cory Stadther
  * @version 1.0

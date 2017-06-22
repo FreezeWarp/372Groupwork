@@ -2,11 +2,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+
 /**
- * The interface used for all program interactions.
- * Note a couple of design decisions:
- ** The various singleton hashmaps are never interacted with directly; instead, their instances are always returned through the Theater façade. This is done to lower coupling.
- ** Classes that duplicate functionality have that functionality implemented in generic superclasses as much as possible. This is done to maximise cohesion and reduce bugs (if one class has a bug, the others will as well, making detection easier).
+ * The interface used for all program interactions. Refer to {@link UserInterfacePrompts} for common input methods.
+ *
+ * @author  Eric Fulwiler, Daniel Johnson, Joseph Parsons, and Cory Stadther
+ * @version 1.0
+ * @since   2017-06-22
  */
 public class UserInterface {
     /**
@@ -105,9 +107,10 @@ public class UserInterface {
             commandMap.get(commandNumber).run();
         }
 
-        /* Program exiting and saving */
+        /* Save the program data on exit. */
         Theater.storeData();
     }
+
 
     /**
      * Asks for a client's information and sends a newly-created client object to the ClientList.
@@ -165,7 +168,6 @@ public class UserInterface {
      * Asks for a customer's information and sends a newly-created customer object to the CustomerList.
      * 
      * @author Eric Fulwiler
-     * @throws ParseException
      */
     public static void addCustomer()  {
     	 // Inputs
@@ -182,6 +184,7 @@ public class UserInterface {
         }
         
     }
+
 
     /**
      * Asks for a customer's ID and asks the customer list to remove the customer with the corresponding ID.
@@ -207,6 +210,7 @@ public class UserInterface {
 	    }   
     }
 
+
     /**
      * Asks for a customer's credit card information and stores the newly created CreditCard object corresponding to the entered customer ID.
      * 
@@ -228,6 +232,7 @@ public class UserInterface {
         }
 
     }
+
 
     /**
      * Asks for a credit card number to be entered, then deletes the corresponding credit card from whichever customer added it.
@@ -256,16 +261,19 @@ public class UserInterface {
 
     /**
      * Lists all customers in the CustomerList.
+     *
+     * @author Eric Fulwiler
      */
     public static void listCustomers() {
         System.out.println(Theater.getCustomerList());
     }
-    
+
+
     /**
      * Prompts for info about new show then creates it.
      * Adds newly created Show object to the ShowList.
      *
-     *@author Cory
+     * @author Cory Stadther
      */
     public static void addShow() {
         int clientId = UserInterfacePrompts.promptInt("Client ID? ");
@@ -291,9 +299,11 @@ public class UserInterface {
         }
     }
 
+
     /**
      * Lists all shows in the ShowList.
-     * @author Cory
+     *
+     * @author Cory Stadther
      */
     public static void listShows() {
         System.out.println(Theater.getShowList());
