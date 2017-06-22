@@ -4,13 +4,13 @@ hide empty members
 
 class SingletonMap<K, E implements Identifiable<K>> {
     -INSTANCE: SingletonMap
-    -singletonMap : Hashmap<Integer, E>
-    -lastKey: Integer
+    -singletonMap : Hashmap<K, E>
+    -lastKey: K
     #SingletonMap()
     +getInstance() : SingletonMap
-    +getNewKey(): Integer
+    +getNewKey(): K
     +addEntry(entry: E): boolean
-    +removeEntry(keyId: Integer): boolean
+    +removeEntry(keyId: K): boolean
     -readObject(ObjectInputStream)
     -writeObject(ObjectInputStream)
 }
@@ -117,10 +117,10 @@ Theater <-- "ShowList"
 
 "Identifiable" <|-- "Identifiable<Integer>" : "«bind» K::Integer"
 "Identifiable<Integer>" <|-- "IdentifiableInteger"
-SingletonMap <|-- "SingletonMap<Account>" : "«bind» E::Account"
-SingletonMap <|-- "SingletonMap<Show>" : "«bind» E::Show"
-"SingletonMap<Account>" <|-- AccountList
-"SingletonMap<Show>" <|-- ShowList
+SingletonMap <|-- "SingletonMap<Account, Integer>" : "«bind» E::Account\n«bind» K::Integer"
+SingletonMap <|-- "SingletonMap<Show, Integer>" : "«bind» E::Show\n«bind» K::Integer"
+"SingletonMap<Account, Integer>" <|-- AccountList
+"SingletonMap<Show, Integer>" <|-- ShowList
 AccountList <|-- "AccountList<Client>" : "«bind» E::Client"
 AccountList <|-- "AccountList<Customer>" : "«bind» E::Customer"
 "AccountList<Client>" <|-- ClientList
