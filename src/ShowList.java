@@ -1,15 +1,29 @@
 import java.util.Date;
 
 /**
- * Created by Joseph T. Parsons on 13/06/17.
- * Modified by Cory Stadther
+ * A list of {@link Show}s and associated functionality, complying with {@link SingletonMap}.
+ *
+ * @author  Cory Stadther
+ * @version 1.0
+ * @since   2017-06-22
  */
 public class ShowList extends SingletonMap<Integer, Show> {
-	 /* Singleton Stuff */
+    /*################################
+     * Singleton-Specific Functionality
+     *###############################*/
+    /**
+     * The global singleton instance of ShowList. It can be initialised by {@link ShowList#getInstance()}, if needed.
+     */
     private static ShowList INSTANCE;
 
+    /**
+     * An unused constructor that overrides the default public constructor, preventing ShowList from being initialised outside of getInstance().
+     */
     protected ShowList() { }
 
+    /**
+     * @return The singleton instance of ShowList. It will be initialised, if necessary.
+     */
     public static ShowList getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new ShowList();
@@ -18,6 +32,10 @@ public class ShowList extends SingletonMap<Integer, Show> {
         return INSTANCE;
     }
 
+
+    /*################################
+     * Alter List Member Functionality
+     *###############################*/
     /**
      * Adds a new show to the ShowList.
      *

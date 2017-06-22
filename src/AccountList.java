@@ -1,5 +1,5 @@
 /**
- * A list of {@link Account}s and associated functionality.
+ * A list of {@link Account}s and associated functionality, complying with {@link SingletonMap}.
  *
  * @author  Joseph Parsons
  * @version 1.0
@@ -55,7 +55,6 @@ public class AccountList<E extends Account> extends SingletonMap<Integer, E> {
     public boolean removeAccount(int accountId) {
         return removeEntry(accountId);
     }
-
 
     /**
      * Retrieves an account from the AccountList, by its ID.

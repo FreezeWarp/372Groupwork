@@ -3,8 +3,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by Joseph T. Parsons on 12/06/17.
- * Modified by Cory Stadther
+ * A theater show, with an associated Client, name, and start and end Dates.
+ *
+ * @author  Cory Stadther
+ * @version 1.0
+ * @since   2017-06-22
  */
 public class Show extends IdentifiableInteger implements Serializable {
 	private Client client;
