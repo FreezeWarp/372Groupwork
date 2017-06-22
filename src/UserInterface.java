@@ -251,15 +251,15 @@ public class UserInterface {
              System.out.println("Error, specified account does not exist, did you enter the correct account ID?");
          } 
     	 else {
-       	    if (customer.getCreditCardList().size() <= 1) {
+       	    try {
+                if (customer.removeCreditCard(UserInterfacePrompts.promptCreditCardNumber("Credit card number?"))) {
+                    System.out.println("The credit card was removed.");
+                } else {
+                    System.out.println("The customer's credit card could not be deleted.");
+                }
+            } catch (CustomerMinimumCreditCardsException ex) {
                 System.out.println("Cannot delete the last credit card a user has.");
             }
-   	    	else if (customer.removeCreditCard(UserInterfacePrompts.promptCreditCardNumber("Credit card number?"))) {
-       	        System.out.println("The credit card was removed.");
-            }
-            else {
-         		System.out.println("The customer's credit card could not be deleted.");
-         	}
  	    }   	
     }
 

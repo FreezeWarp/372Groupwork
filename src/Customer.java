@@ -50,9 +50,12 @@ public class Customer extends Account {
      * 
      * @return True if the card could be removed, False otherwise
      */
-    public boolean removeCreditCard(long creditCardNumber) {
+    public boolean removeCreditCard(long creditCardNumber) throws CustomerMinimumCreditCardsException {
+        if (this.creditCardList.size() <= 1) {
+            throw new CustomerMinimumCreditCardsException();
+        }
+
         return creditCardList.removeIf((CreditCard creditCard) -> creditCard.getCardNumber() == creditCardNumber);
-        
     }
     
     /**
