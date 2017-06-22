@@ -1,13 +1,7 @@
 /**
- * A list of Accounts.
- *
- * Created by Joseph T. Parsons on 12/06/17.
- */
-
-/**
  * A list of {@link Account}s and associated functionality.
  *
- * @author  Eric Fulwiler, Daniel Johnson, Joseph Parsons, and Cory Stadther
+ * @author  Joseph Parsons
  * @version 1.0
  * @since   2017-06-22
  */
