@@ -1,4 +1,3 @@
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -102,7 +101,7 @@ public class UserInterface {
 
         /* Loop until exit command is entered. Process other commands as entered. */
         int commandNumber;
-        while ((commandNumber = UserInterfacePrompts.promptIntRange("Make a selection: ", 0, commandMap.values().size() - 1)) != 0) {
+        while ((commandNumber = UserInterfacePrompts.promptIntRange("Make a selection (13 for Help): ", 0, commandMap.values().size() - 1)) != 0) {
             commandMap.get(commandNumber).run();
         }
 
@@ -112,7 +111,7 @@ public class UserInterface {
 
     /**
      * Asks for a client's information and sends a newly-created client object to the ClientList.
-     *
+     * 
      * @author Joseph T. Parsons
      */
     public static void addClient() {
@@ -128,9 +127,9 @@ public class UserInterface {
 
     /**
      * Asks for a client's ID and asks the client list to remove the client with the corresponding ID.
-     *
+     * 
      * @author Joseph T. Parsons
-     * @modified Cory
+     * @modified Cory Stadther
      */
     public static void removeClient() {
         Client client = Theater.getClientList().getAccount(UserInterfacePrompts.promptInt("Client ID? "));
@@ -154,7 +153,7 @@ public class UserInterface {
 
     /**
      * Lists all clients in the ClientList.
-     *
+     * 
      * @author Joseph T. Parsons
      */
     public static void listClients() {
@@ -164,8 +163,8 @@ public class UserInterface {
 
     /**
      * Asks for a customer's information and sends a newly-created customer object to the CustomerList.
-     *
-     * @author Eric
+     * 
+     * @author Eric Fulwiler
      * @throws ParseException
      */
     public static void addCustomer()  {
@@ -177,32 +176,81 @@ public class UserInterface {
         CreditCard creditCard = UserInterfacePrompts.promptCreditCard("Credit card number? ", "Credit card expiration (MMyyyy)? ", "This card is expired, please enter in a new credit card.");
         
         // Add New Account Object to Customer List
-        Theater.getCustomerList().addAccount(new Customer(name, address, phone, creditCard));
+        if (Theater.getCustomerList().addAccount(new Customer(name, address, phone, creditCard))) {}
+        else {
+        	System.out.println("The customer account could not be added.");
+        }
+        
     }
 
-
+    /**
+     * Asks for a customer's ID and asks the customer list to remove the customer with the corresponding ID.
+     * 
+     * @author Eric Fulwiler
+     */
     public static void removeCustomer() {
-    	//beginning implementation of this -Eric
+    	Customer customer = Theater.getCustomerList().getAccount(UserInterfacePrompts.promptInt("Customer ID? "));
+
+        if (customer == null) {
+            System.out.println("The customer does not exist.");
+        } 
+        else {
+        	customer.removeCreditCards(); 
+        	    
+        	if (Theater.getCustomerList().removeAccount(customer.getId())) {
+        	    System.out.println("The customer was removed, along with all associated credit cards.");
+        	}
+        	else {
+        	    System.out.println("The customer could not be deleted.");
+        	}
+ 
+	    }   
     }
 
-
+    /**
+     * Asks for a customer's credit card information and stores the newly created CreditCard object corresponding to the entered customer ID.
+     * 
+     * @author Eric Fulwiler
+     */
     public static void addCreditCard() {
-        int id = UserInterfacePrompts.promptInt("Customer ID? ");
-        CreditCard creditCard = UserInterfacePrompts.promptCreditCard("Credit card number? ", "Credit card expiration (MMyyyy)? ", "This card is expired, please enter in a new credit card.");
+        int customerId = UserInterfacePrompts.promptInt("Customer ID? ");
            
-           
-           // Add New Credit Card object to the specified Customer
-           try {
-        	   Theater.getCustomerList().getAccount(id).addCreditCard(creditCard);
-           } catch (NullPointerException e) {
-        	   System.out.println("Error, specified account does not exist, did you enter the correct account Id?");
-           }
-    	
+        //adds a new credit card to the customer's account, if the customer account exists
+        if (Theater.getCustomerList().getAccount(customerId)  == null) {
+        	 System.out.println("Error, specified account does not exist, did you enter the correct account Id?");
+        } else { 
+        	CreditCard creditCard = UserInterfacePrompts.promptCreditCard("Credit card number? ", "Credit card expiration (MMyyyy)? ", "This card is expired, please enter in a new credit card.");
+     	   if ( Theater.getCustomerList().getAccount(customerId).addCreditCard(creditCard)) {} //if we can add a credit card
+     	   else {
+     		   System.out.println("Could not add credit card to the customer's account.");
+     	   }
+     	   
+        }
+
     }
 
-
+    /**
+     * Asks for a credit card number to be entered, then deletes the corresponding credit card from whichever customer added it.
+     * 
+     * @author Eric Fulwiler
+     */
     public static void removeCreditCard() {
-    	//beginning implementation of this -Eric
+    	 Customer customer = Theater.getCustomerList().getAccount(UserInterfacePrompts.promptInt("Customer ID of the credit card holder? "));
+    	 
+    	 if (customer == null) {
+             System.out.println("The customer does not exist.");
+         } 
+    	 else {
+         	    if (customer.getCreditCardList().size() > 1  ) {
+         	    	if (customer.removeCreditCard(UserInterfacePrompts.promptCreditCardNumber("Credit card number?"))) {} //if we can delete the credit card
+         	    	else {
+         	    		System.out.println("The customer's credit card could not be deleted.");
+         	    	}    
+         	    } 
+         	    else {
+         		    System.out.println("Cannot delete the last credit card a user has");
+         	    }	
+ 	    }   	
     }
 
 
@@ -249,7 +297,7 @@ public class UserInterface {
      */
     public static void listShows() {
         System.out.println(Theater.getShowList());
-        }
+    }
 
 
     /**

@@ -1,0 +1,24 @@
+@startuml
+actor Clerk
+
+activate ":UserInterface"
+Clerk -> ":UserInterface" : Request to add a Credit Card
+Clerk //- ":UserInterface": Data Request
+Clerk -// ":UserInterface": customerId
+
+":UserInterface" -> ":Theater" : getCustomerList()
+activate ":Theater"
+":Theater" -->> ":UserInterface": CustomerList
+deactivate ":Theater"
+":UserInterface" -> ":CustomerList": customer = getAccount(customerId)
+Clerk //- ":UserInterface": Data Request
+Clerk -// ":UserInterface": cardNumber, expiryDate
+create "creditCard: CreditCard"
+":UserInterface" -> "creditCard: CreditCard": creditCard = CreditCard(creditCardNumber, expiryDate)
+":UserInterface" -> ":customer: Customer" : boolean = customer.addCreditCard(creditCardNumber)
+activate ":customer: Customer"
+":customer: Customer" -->> ":UserInterface" : successful?
+deactivate ":CustomerList"
+":UserInterface" -->> Clerk : successful?
+deactivate ":UserInterface"
+@enduml

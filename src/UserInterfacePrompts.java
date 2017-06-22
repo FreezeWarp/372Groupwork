@@ -3,7 +3,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 /**
- * Created by joseph on 12/06/17.
+ * Created by Joseph T. Parsons on 12/06/17.
  */
 public class UserInterfacePrompts {
     /**
@@ -87,6 +87,7 @@ public class UserInterfacePrompts {
 
     /**
      * Prompts the user for a string of text matching certain parameters.
+     * 
      * @param promptText The text to display for the prompt.
      * @param regexToFilterOut A regex that will be removed from the user's input text.
      * @param regexToMatch A regex that the user's text must match, after regexToFilterOut has been applied.
@@ -183,6 +184,15 @@ public class UserInterfacePrompts {
     }
 
 
+    /**
+     * Prompts the user to enter information for a credit card, including the number and expiration date
+     *
+     * @param promptTextForNumber the text to display for the credit card number prompt
+     * @param promptTextForExpiry the text to display for the credit card expiration date prompt
+     * @param expiredMessage the text to display if the credit card is expired
+     *
+     * @return A credit card object containing a number and expiration date
+     */
     public static CreditCard promptCreditCard(String promptTextForNumber, String promptTextForExpiry, String expiredMessage) {
         long creditCardNo = UserInterfacePrompts.promptCreditCardNumber(promptTextForNumber);
         Date expiryDate = UserInterfacePrompts.promptCreditCardExpiry(promptTextForExpiry);

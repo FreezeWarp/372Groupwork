@@ -1,11 +1,11 @@
 import java.util.Date;
 
 /**
- * Created by joseph on 13/06/17.
+ * Created by Joseph T. Parsons on 13/06/17.
+ * Modified by Cory Stadther
  */
-
-// Look at AccountList for how to implement this.
 public class ShowList extends SingletonMap<Integer, Show> {
+	 /* Singleton Stuff */
     private static ShowList INSTANCE;
 
     protected ShowList() { }
@@ -18,24 +18,22 @@ public class ShowList extends SingletonMap<Integer, Show> {
         return INSTANCE;
     }
 
-
     /**
-     * Adds a new account to the AccountList.
+     * Adds a new show to the ShowList.
      *
-     * @param show
+     * @param show The show to be added 
      */
     public void addShow(Show show) {
         addEntry(show);
     }
 
-
     /**
      * Checks if the date interferes with another date in ShowList
      *
-     * @param start The Date to start the show
-     * @param end The Date to end the show
+     * @param start the Date to start the show
+     * @param end the Date to end the show
      *
-     * @return flag true if the date is valid, else false
+     * @return True if the date is valid, false if invalid
      */
     public boolean validShowDate(Date start, Date end) {
         for (Show show : Theater.getInstance().getShowList()) {
@@ -43,19 +41,18 @@ public class ShowList extends SingletonMap<Integer, Show> {
                (start.after(show.getStartDate()) && start.before(show.getEndDate())) // start during another show
                || (end.after(show.getStartDate()) && end.before(show.getEndDate())) // or end during another show
             ) {
-                return false; // return false if any show conflicts
+                return false; // returns false if any shows conflict
             }
         }
-
-        return true; // return show when no show conflicts
+        return true; // returns true when no shows conflict
     }
-
 
     /**
      * Checks if client has a future show scheduled
      *
-     * @param account
-     * @return true if it can be removed, else false
+     * @param account the account to be checked
+     * 
+     * @return True if it can be removed, false if it cannot
      */
     public boolean checkShowDates(Account account) {
         for (Show show : this) {

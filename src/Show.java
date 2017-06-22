@@ -3,7 +3,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by joseph on 12/06/17.
+ * Created by Joseph T. Parsons on 12/06/17.
+ * Modified by Cory Stadther
  */
 public class Show extends IdentifiableInteger implements Serializable {
 	private Client client;
@@ -12,6 +13,12 @@ public class Show extends IdentifiableInteger implements Serializable {
     private Date endDate;
     private final SimpleDateFormat showDateFormat = new SimpleDateFormat("MM/dd/yyyy");
     
+    /**
+     * @param client the client hosting the show
+     * @param name the name of the show
+     * @param startDate the date the play showings first begin
+     * @param endDate the date the play showings end
+     */
     public Show(Client client, String name, Date startDate, Date endDate) {
     	this.client = client;
         this.name = name;
@@ -19,38 +26,47 @@ public class Show extends IdentifiableInteger implements Serializable {
         this.endDate = endDate;
     }
     
-	/** Gets the clientId of a show
+	/** 
+	 * Gets the client who is hosting the show
 	 * 
-	 * @return clientId
+	 * @return the client hosting the show
 	 */
 	public Client getClient() {
 	    return client;
 	}
     
-	/** Gets the Name of a show
-	 * 
-	 * @return name
+	/** 
+	 * Gets the name of a show
+	 *  
+	 * @return the name of the show
 	 */
 	public String getName() {
 	    return name;
 	}
 	
-	/** Gets the Start Date of a show
-	 * 
-	 * @return startDate
+	/**
+	 * Gets the start Date of a show
+	 *  
+	 * @return the date the play begins showing
 	 */
 	public Date getStartDate() {
 		return startDate;
 	}
 	
-	/** Gets the End Date of a show
+	/** 
+	 * Gets the end Date of a show
 	 * 
-	 * @return endDate
+	 * @return the date the play ends showing
 	 */
 	public Date getEndDate() {
 		return endDate;
 	}
 	
+	/**
+     * Overrides the toString method of Object
+     * 
+     * @return a string representation concatenating basic show information
+     */
     @Override
     public String toString() {
         return id +

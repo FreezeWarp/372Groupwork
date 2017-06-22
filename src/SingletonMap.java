@@ -16,9 +16,6 @@ import java.util.Map;
  */
 public class SingletonMap<K, E extends Identifiable<K>> implements Iterable<E>, Serializable {
     /* Singleton Stuff */
-    /**
-     * The singleton instance.
-     */
     private static SingletonMap INSTANCE;
 
     protected SingletonMap() { }
@@ -31,13 +28,12 @@ public class SingletonMap<K, E extends Identifiable<K>> implements Iterable<E>, 
         return INSTANCE;
     }
 
-
-
+    
     /* Singleton Serialisation Stuff */
     /**
      * Reads the Theater object (and its static instance variable) from the ObjectOutputStream.
      *
-     * @param input
+     * @param input The stream being read from
      */
     private void readObject(java.io.ObjectInputStream input) {
         try {
@@ -60,7 +56,7 @@ public class SingletonMap<K, E extends Identifiable<K>> implements Iterable<E>, 
     /**
      * Writes the Theater object (and its static instance variable) to the ObjectOutputStream.
      *
-     * @param output
+     * @param output The stream being written to
      */
     private void writeObject(java.io.ObjectOutputStream output) {
         try {
@@ -72,7 +68,6 @@ public class SingletonMap<K, E extends Identifiable<K>> implements Iterable<E>, 
             e.printStackTrace();
         }
     }
-
 
 
     /* The List Itself */
@@ -90,6 +85,8 @@ public class SingletonMap<K, E extends Identifiable<K>> implements Iterable<E>, 
 
     /**
      * An iterator that iterates through the list of Map entries (values).
+     * 
+     * @return the next value in the singletonMap
      */
     public Iterator<E> iterator() {
         return singletonMap.values().iterator();
@@ -97,6 +94,10 @@ public class SingletonMap<K, E extends Identifiable<K>> implements Iterable<E>, 
 
 
     /**
+     * Gets a new unique map key
+     * 
+     * @param entry The entry object that we are getting a map key for
+     * 
      * @return A new, unique Map key.
      */
     public K getNewKey(E entry) {
@@ -155,7 +156,9 @@ public class SingletonMap<K, E extends Identifiable<K>> implements Iterable<E>, 
 
 
     /**
-     * @return A string representation of the Map, with each entry on its own line.
+     * Overrides the toString method of Account
+     * 
+     * @return A string representation of the Map, with each entry on its own line
      */
     public String toString() {
         StringBuilder sb = new StringBuilder();
