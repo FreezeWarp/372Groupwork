@@ -46,7 +46,11 @@ public class ShowList extends SingletonMap<Integer, Show> {
      *
      * @param show The show to be added 
      */
-    public void addShow(Show show) {
+    public void addShow(Show show) throws ShowConflictException {
+        if (!validShowDate(show.getStartDate(), show.getEndDate())) {
+            throw new ShowConflictException();
+        }
+
         addEntry(show);
     }
 

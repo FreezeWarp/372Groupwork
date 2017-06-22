@@ -197,7 +197,7 @@ public class UserInterface {
     	Customer customer = Theater.getCustomerList().getAccount(UserInterfacePrompts.promptInt("Customer ID? "));
 
         if (customer == null) {
-            System.out.println("The customer does not exist.");
+            System.out.println("Error, specified customer does not exist, did you enter the correct account ID?");
         } 
         else {
         	customer.removeCreditCards(); 
@@ -221,7 +221,7 @@ public class UserInterface {
            
         //adds a new credit card to the customer's account, if the customer account exists
         if (customer == null) {
-        	 System.out.println("Error, specified account does not exist, did you enter the correct account ID?");
+        	 System.out.println("Error, specified customer does not exist, did you enter the correct account ID?");
         }
         else {
             CreditCard creditCard = UserInterfacePrompts.promptCreditCard("Credit card number? ", "Credit card expiration (MMyyyy)? ", "This card is expired, please enter in a new credit card.");
@@ -248,13 +248,14 @@ public class UserInterface {
     	 Customer customer = Theater.getCustomerList().getAccount(UserInterfacePrompts.promptInt("Customer ID of the credit card holder? "));
     	 
     	 if (customer == null) {
-             System.out.println("Error, specified account does not exist, did you enter the correct account ID?");
+             System.out.println("Error, specified customer does not exist, did you enter the correct account ID?");
          } 
     	 else {
        	    try {
                 if (customer.removeCreditCard(UserInterfacePrompts.promptCreditCardNumber("Credit card number?"))) {
                     System.out.println("The credit card was removed.");
-                } else {
+                }
+                else {
                     System.out.println("The customer's credit card could not be deleted.");
                 }
             } catch (CustomerMinimumCreditCardsException ex) {
@@ -277,26 +278,28 @@ public class UserInterface {
      * Adds newly created Show object to the ShowList.
      */
     public static void addShow() {
-        int clientId = UserInterfacePrompts.promptInt("Client ID? ");
-        if (Theater.getClientList().validateAccount(clientId)) {
+        Client client = Theater.getClientList().getAccount(UserInterfacePrompts.promptInt("Client ID? "));
+
+        if (client == null) {
+            System.out.println("Error, specified client does not exist, did you enter the correct account ID?");
+        }
+        else {
             String name = UserInterfacePrompts.promptLine("Show name? ");
             Date startDate = UserInterfacePrompts.promptShowDate("Start of Show (MM/DD/yyyy)? ");
             Date endDate = UserInterfacePrompts.promptShowDate("End of Show (MM/DD/yyyy)? ");
-            // Add New Show Object to ShowList
-            if (startDate.before(endDate)) {
-	            if (Theater.getShowList().validShowDate(startDate, endDate)){
-	            	Theater.getShowList().addShow(new Show(Theater.getClientList().getAccount(clientId), name, startDate, endDate));
-	            }
-	            else {
-	            	System.out.println("These dates interfere with another show.");
-	            }
+
+            try {
+                Show show = new Show(client, name, startDate, endDate);
+
+                try {
+                    Theater.getShowList().addShow(show);
+                }
+                catch (ShowConflictException ex) {
+                    System.out.println("These dates interfere with another show.");
+                }
+            } catch (ShowDateMismatchException ex) {
+                System.out.println("The show cannot end before it starts.");
             }
-            else {
-            	System.out.println("The show cant end before it starts.");
-            }
-        }
-        else {
-            System.out.println("The client doesnt exist?");
         }
     }
 

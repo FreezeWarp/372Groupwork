@@ -42,11 +42,10 @@ public class Show extends IdentifiableInteger implements Serializable {
      * @param startDate the date the play showings first begin
      * @param endDate the date the play showings end
      */
-    public Show(Client client, String name, Date startDate, Date endDate) {
+    public Show(Client client, String name, Date startDate, Date endDate) throws ShowDateMismatchException {
         this.client = client;
         this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        setDates(startDate, endDate);
     }
 
 
@@ -84,6 +83,23 @@ public class Show extends IdentifiableInteger implements Serializable {
      */
     public Date getEndDate() {
         return endDate;
+    }
+
+
+    /**
+     * Sets both {@link Show#startDate} and {@link Show#endDate}
+     * @param startDate The starting date of the show, {@link Show#startDate}.
+     * @param endDate The ending date of the show, {@link Show#endDate}
+     *
+     * @throws ShowDateMismatchException when the ending date is before the starting date.
+     */
+    private void setDates(Date startDate, Date endDate) throws ShowDateMismatchException {
+        if (endDate.before(startDate)) {
+            throw new ShowDateMismatchException();
+        }
+
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
 
