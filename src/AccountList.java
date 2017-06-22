@@ -3,12 +3,31 @@
  *
  * Created by Joseph T. Parsons on 12/06/17.
  */
+
+/**
+ * A list of {@link Account}s and associated functionality.
+ *
+ * @author  Eric Fulwiler, Daniel Johnson, Joseph Parsons, and Cory Stadther
+ * @version 1.0
+ * @since   2017-06-22
+ */
 public class AccountList<E extends Account> extends SingletonMap<Integer, E> {
-	 /* Singleton Stuff */
+    /*################################
+     * Singleton-Specific Functionality
+     *###############################*/
+    /**
+     * The global singleton instance of AccountList. It can be initialised by {@link AccountList#getInstance()}, if needed.
+     */
     private static AccountList INSTANCE;
 
+    /**
+     * An unused constructor that overrides the default public constructor, preventing AccountList from being initialised outside of getInstance().
+     */
     protected AccountList() { }
 
+    /**
+     * @return The singleton instance of AccountList. It will be initialised, if necessary.
+     */
     public static AccountList getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new AccountList();
@@ -17,7 +36,10 @@ public class AccountList<E extends Account> extends SingletonMap<Integer, E> {
         return INSTANCE;
     }
 
-    /* The List Itself */
+
+    /*################################
+     * Alter List Member Functionality
+     *###############################*/
     /**
      * Adds a new account to the AccountList.
      *
@@ -49,7 +71,7 @@ public class AccountList<E extends Account> extends SingletonMap<Integer, E> {
      * @returns True on success, false on failure (ID doesn't exist, probably)
      */
     public E getAccount(int accountId) {
-        return (E) singletonMap.get(accountId);
+        return singletonMap.get(accountId);
     }
 
     /**

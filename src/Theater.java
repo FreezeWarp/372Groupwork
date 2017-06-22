@@ -14,7 +14,7 @@ import java.io.*;
  */
 public class Theater implements Serializable {
     /*################################
-     *Singleton-Specific Functionality
+     * Singleton-Specific Functionality
      *###############################*/
     /**
      * The global singleton instance of Theater. It can be initialised by {@link Theater#getInstance()}, if needed.
@@ -27,7 +27,7 @@ public class Theater implements Serializable {
     private Theater() {}
 
     /**
-     * @return The singleton instance of Theater. It will be initialised, if neccessary.
+     * @return The singleton instance of Theater. It will be initialised, if necessary.
      */
     public static Theater getInstance() {
         if (INSTANCE == null) {
@@ -40,7 +40,7 @@ public class Theater implements Serializable {
 
 
     /*################################
-     *Singleton Serialisation
+     * Singleton Serialisation
      *###############################*/
     /**
      * Reads the Theater object (and its static instance variable) from the ObjectOutputStream.
@@ -84,7 +84,7 @@ public class Theater implements Serializable {
 
 
     /*################################
-     *Helper Methods to Write/Read to/from Disk
+     * Helper Methods to Write/Read to/from Disk
      *###############################*/
     /**
      * A file object corresponding to the persistence file, whether or whether not it exists.
@@ -145,7 +145,7 @@ public class Theater implements Serializable {
 
 
     /*################################
-     *Client/Customer/Show Instances
+     * Client/Customer/Show Instances
      *###############################*/
     /**
      * The global singleton instance of {@link ClientList}.
