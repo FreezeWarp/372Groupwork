@@ -2,16 +2,18 @@
 actor Clerk
 
 activate ":UserInterface"
-Clerk -> ":UserInterface" : Remove a Credit Card
+Clerk -> ":UserInterface" : Request to remove credit card
 Clerk //- ":UserInterface": Data Request
-Clerk -// ":UserInterface": id, cardNumber
+Clerk -// ":UserInterface": customerId
 
 ":UserInterface" -> ":Theater" : getCustomerList()
 activate ":Theater"
 ":Theater" -->> ":UserInterface": CustomerList
 deactivate ":Theater"
-":UserInterface" -> ":CustomerList": customer = getAccount(id)
-":CustomerList" -> ":customer: Customer" : customer = customer.removeCreditCard(cardNumber)
+":UserInterface" -> ":CustomerList": customer = getAccount(customerId)
+Clerk //- ":UserInterface": Data Request
+Clerk -// ":UserInterface": creditCardNumber
+":UserInterface" -> ":customer: Customer" : boolean = customer.removeCreditCard(creditCardNumber)
 activate ":customer: Customer"
 ":customer: Customer" -->> ":UserInterface" : successful?
 deactivate ":CustomerList"

@@ -2,18 +2,20 @@
 actor Clerk
 
 activate ":UserInterface"
-Clerk -> ":UserInterface" : Add a Credit Card
+Clerk -> ":UserInterface" : Request to add a Credit Card
 Clerk //- ":UserInterface": Data Request
-Clerk -// ":UserInterface": customerId, cardNumber, expiryDate
+Clerk -// ":UserInterface": customerId
 
 ":UserInterface" -> ":Theater" : getCustomerList()
 activate ":Theater"
 ":Theater" -->> ":UserInterface": CustomerList
 deactivate ":Theater"
 ":UserInterface" -> ":CustomerList": customer = getAccount(customerId)
+Clerk //- ":UserInterface": Data Request
+Clerk -// ":UserInterface": cardNumber, expiryDate
 create "creditCard: CreditCard"
-":UserInterface" -> "creditCard: CreditCard": creditCard = CreditCard(cardNumber, expiryDate)
-":UserInterface" -> ":customer: Customer" : customer = customer.addCreditCard(cardNumber)
+":UserInterface" -> "creditCard: CreditCard": creditCard = CreditCard(creditCardNumber, expiryDate)
+":UserInterface" -> ":customer: Customer" : boolean = customer.addCreditCard(creditCardNumber)
 activate ":customer: Customer"
 ":customer: Customer" -->> ":UserInterface" : successful?
 deactivate ":CustomerList"

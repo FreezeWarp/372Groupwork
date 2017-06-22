@@ -213,14 +213,14 @@ public class UserInterface {
      * @author Eric Fulwiler
      */
     public static void addCreditCard() {
-        int id = UserInterfacePrompts.promptInt("Customer ID? ");
+        int customerId = UserInterfacePrompts.promptInt("Customer ID? ");
            
         //adds a new credit card to the customer's account, if the customer account exists
-        if (Theater.getCustomerList().getAccount(id)  == null) {
+        if (Theater.getCustomerList().getAccount(customerId)  == null) {
         	 System.out.println("Error, specified account does not exist, did you enter the correct account Id?");
         } else { 
         	CreditCard creditCard = UserInterfacePrompts.promptCreditCard("Credit card number? ", "Credit card expiration (MMyyyy)? ", "This card is expired, please enter in a new credit card.");
-     	   if ( Theater.getCustomerList().getAccount(id).addCreditCard(creditCard)) {} //if we can add a credit card
+     	   if ( Theater.getCustomerList().getAccount(customerId).addCreditCard(creditCard)) {} //if we can add a credit card
      	   else {
      		   System.out.println("Could not add credit card to the customer's account.");
      	   }
