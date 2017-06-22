@@ -33,4 +33,36 @@ public class ClientList extends AccountList<Client> {
 
         return INSTANCE;
     }
+
+
+    /**
+     * Removes a {@link Client} entry from the ClientList.
+     *
+     * @param clientId The ID of the client object.
+     *
+     * @return True on success, false on failure.
+     *
+     * @throws ClientListOngoingShowsException if the client has existing shows registered in ShowList, and thus cannot be removed from the ClientList.
+     */
+    public boolean removeClient(int clientId) throws ClientListOngoingShowsException {
+        if (!ShowList.getInstance().checkShowDates(clientId)) {
+            throw new ClientListOngoingShowsException();
+        }
+
+        return super.removeAccount(clientId);
+    }
+
+    /**
+     * Disables the inherited removeAccount method, as removeClient must be used instead to ensure that all validation criteria are met prior to removal.
+     *
+     * @param accountId Dummy variable.
+     *
+     * @return none; the UnsupportedOperationException will always be thrown.
+     *
+     * @throws UnsupportedOperationException always.
+     */
+    @Override
+    public boolean removeAccount(int accountId) {
+        throw new UnsupportedOperationException("removeClient must be used instead of removeAccount when working with ClientList.");
+    }
 }

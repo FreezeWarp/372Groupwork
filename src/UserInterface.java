@@ -140,14 +140,16 @@ public class UserInterface {
         if (client == null) {
             System.out.println("The client does not exist.");
         }
-        else if (!Theater.getShowList().checkShowDates(client)) {
-            System.out.println("The client still has a show scheduled that hasn't ended yet.");
-        }
-        else if (Theater.getClientList().removeAccount(client.getId())) {
-            System.out.println("The client was removed.");
-        }
         else {
-            System.out.println("The client could not be removed.");
+            try {
+                if (Theater.getClientList().removeClient(client.getId())) {
+                    System.out.println("The client was removed.");
+                } else {
+                    System.out.println("The client could not be removed.");
+                }
+            } catch (ClientListOngoingShowsException ex) {
+                System.out.println("The client still has a show scheduled that hasn't ended yet.");
+            }
         }
     }
 

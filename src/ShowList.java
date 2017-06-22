@@ -79,13 +79,13 @@ public class ShowList extends SingletonMap<Integer, Show> {
     /**
      * Checks if client has a future show scheduled
      *
-     * @param account the account to be checked
+     * @param accountId the account to be checked
      *
      * @return True if it can be removed, false if it cannot
      */
-    public boolean checkShowDates(Account account) {
+    public boolean checkShowDates(int accountId) {
         for (Show show : this) {
-            if (account.getId() == show.getClient().getId()) {
+            if (accountId == show.getClient().getId()) {
                 if (show.getEndDate().after(new Date())) {
                     return false;
                 }
