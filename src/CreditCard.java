@@ -31,9 +31,29 @@ public class CreditCard implements Serializable {
      * @param cardNumber the 16 digit credit card number
      * @param expirationDate the credit card expiration date
      */
-    public CreditCard(long cardNumber, Date expirationDate) {
-        this.cardNumber = cardNumber;
-        this.expirationDate = expirationDate;
+    public CreditCard(long cardNumber, Date expirationDate) throws CreditCardExpiredException, CreditCardOutOfRangeException {
+        setCardNumber(cardNumber);
+        setExpirationDate(expirationDate);
+    }
+
+
+    private void setExpirationDate(Date expirationDate) throws CreditCardExpiredException {
+        if (expirationDate.before(new Date())) {
+            throw new CreditCardExpiredException();
+        }
+        else {
+            this.expirationDate = expirationDate;
+        }
+    }
+
+    private void setCardNumber(long cardNumber) throws CreditCardOutOfRangeException {
+        if (cardNumber < 0L
+                || cardNumber > 9999999999999999L) {
+            throw new CreditCardOutOfRangeException();
+        }
+        else {
+            this.cardNumber = cardNumber;
+        }
     }
 
 

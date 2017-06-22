@@ -197,13 +197,18 @@ public class UserInterfacePrompts {
         long creditCardNo = UserInterfacePrompts.promptCreditCardNumber(promptTextForNumber);
         Date expiryDate = UserInterfacePrompts.promptCreditCardExpiry(promptTextForExpiry);
 
-        while (expiryDate.before(new Date())) { //compares the expiry date of the CC with the current date
-            System.out.println(expiredMessage);
-            creditCardNo = UserInterfacePrompts.promptCreditCardNumber(promptTextForNumber);
-            expiryDate = UserInterfacePrompts.promptCreditCardExpiry(promptTextForExpiry);
+        while (true) {
+            try {
+                return new CreditCard(creditCardNo, expiryDate);
+            } catch (CreditCardExpiredException ex) {
+                System.out.println(expiredMessage);
+                creditCardNo = UserInterfacePrompts.promptCreditCardNumber(promptTextForNumber);
+                expiryDate = UserInterfacePrompts.promptCreditCardExpiry(promptTextForExpiry);
+            } catch (CreditCardOutOfRangeException ex) {
+                System.out.println("The credit card is out-of-range. This may be an internal error.");
+                return null;
+            }
         }
-
-        return new CreditCard(creditCardNo, expiryDate);
     }
     
     /**

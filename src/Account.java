@@ -15,10 +15,10 @@ public class Account extends IdentifiableInteger implements Serializable {
     * @param address the address of the account holder
     * @param phoneNumber the phone number of the account holder
     */
-    public Account(String name, String address, long phoneNumber) {
+    public Account(String name, String address, long phoneNumber) throws AccountPhoneNumberOutOfRangeException {
         this.name = name;
         this.address = address;
-        this.phoneNumber = phoneNumber;
+        setPhoneNumber(phoneNumber);
     }
 
     /**
@@ -46,6 +46,17 @@ public class Account extends IdentifiableInteger implements Serializable {
     */
     public long getPhoneNumber() {
         return phoneNumber;
+    }
+
+
+    private void setPhoneNumber(long phoneNumber) throws AccountPhoneNumberOutOfRangeException {
+        if (phoneNumber < 0
+                || phoneNumber > 9999999999L) {
+            throw new AccountPhoneNumberOutOfRangeException();
+        }
+        else {
+            this.phoneNumber = phoneNumber;
+        }
     }
 
     /**

@@ -15,7 +15,7 @@ public class Customer extends Account {
      * @param phoneNumber the phone number of the customer
      * @param creditCard the first credit card for the customer
      */
-    public Customer(String name, String address, long phoneNumber, CreditCard creditCard) {
+    public Customer(String name, String address, long phoneNumber, CreditCard creditCard) throws AccountPhoneNumberOutOfRangeException {
         super(name, address, phoneNumber);
         creditCardList.add(creditCard);
     }

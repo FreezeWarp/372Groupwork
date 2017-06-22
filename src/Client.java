@@ -16,7 +16,7 @@ public class Client extends Account implements Serializable {
      * @param address the address of the client account holder
      * @param phoneNumber the phone number of the client account holder
      */
-    public Client(String name, String address, long phoneNumber) {
+    public Client(String name, String address, long phoneNumber) throws AccountPhoneNumberOutOfRangeException {
         super(name, address, phoneNumber);
     }
 
