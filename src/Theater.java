@@ -1,14 +1,31 @@
 import java.io.*;
 
 /**
- * Created by joseph on 12/06/17.
+ * A façade (and singleton) for the Theater.
+ * This should be the main entry point for all interface actions; in a sense, it is the API layer.
+ * Much of the overall functionality is actually implemented through getClientList, getCustomer, and getShowList, however.
+ *
+ * @author  Eric Fulwiler, Daniel Johnson, Joseph Parsons, and Cory Stadther
+ * @version 1.0
+ * @since   2017-06-22
  */
 public class Theater implements Serializable {
-	 /* Singleton Stuff */
+    /*################################
+     *Singleton-Specific Functionality
+     *###############################*/
+    /**
+     * The global singleton instance of Theater. It can be initialised by {@link Theater#getInstance()}, if needed.
+     */
     private static Theater INSTANCE;
 
+    /**
+     * An unused constructor that overrides the default public constructor, preventing Theater from being initialised outside of getInstance().
+     */
     private Theater() {}
 
+    /**
+     * @return The singleton instance of Theater. It will be initialised, if neccessary.
+     */
     public static Theater getInstance() {
         if (INSTANCE == null) {
              INSTANCE = new Theater();
@@ -18,11 +35,14 @@ public class Theater implements Serializable {
     }
 
 
-    /* Singleton Serialisation */
+
+    /*################################
+     *Singleton Serialisation
+     *###############################*/
     /**
      * Reads the Theater object (and its static instance variable) from the ObjectOutputStream.
      *
-     * @param input The stream being read from
+     * @param input The stream being read from.
      */
     private void readObject(java.io.ObjectInputStream input) {
         try {
@@ -45,8 +65,7 @@ public class Theater implements Serializable {
     /**
      * Writes the Theater object (and its static instance variable) to the ObjectOutputStream.
      *
-     * @param output The stream being written to
-     * 
+     * @param output The stream being written to.
      */
     private void writeObject(java.io.ObjectOutputStream output) {
         try {
@@ -60,7 +79,10 @@ public class Theater implements Serializable {
     }
 
 
-    /* Helper Methods to Write/Read to/from Disk */
+
+    /*################################
+     *Helper Methods to Write/Read to/from Disk
+     *###############################*/
     /**
      * A file object corresponding to the persistence file, whether or whether not it exists.
      */
@@ -119,18 +141,41 @@ public class Theater implements Serializable {
 
 
 
-    /* Theater Core */
+    /*################################
+     *Client/Customer/Show Instances
+     *###############################*/
+    /**
+     * The global singleton instance of {@link ClientList}.
+     */
     private ClientList clientList = ClientList.getInstance();
+
+    /**
+     * The global singleton instance of {@link CustomerList}.
+     */
     private CustomerList customerList = CustomerList.getInstance();
+
+    /**
+     * The global singleton instance of {@link ShowList}.
+     */
     private ShowList showList = ShowList.getInstance();
 
+    /**
+     * @return The singleton instance of {@link ClientList}, allowing modification of the client list singleton or use of ClientList-specific functionality.
+     */
     public static ClientList getClientList() {
         return getInstance().clientList;
     }
-    
+
+    /**
+     * @return The singleton instance of {@link CustomerList}, allowing modification of the show list or use of CustomerList-specific functionality.
+     */
     public static CustomerList getCustomerList() {
         return getInstance().customerList;
     }
+
+    /**
+     * @return The singleton instance of {@link ShowList}, allowing modification of the show list or use of ShowList-specific functionality.
+     */
     public static ShowList getShowList() {
         return getInstance().showList;
     }
