@@ -30,10 +30,10 @@ public class ShowList extends SingletonMap<Integer, Show> {
     /**
      * Checks if the date interferes with another date in ShowList
      *
-     * @param The Date to start the show
-     * @param The Date to end the show
+     * @param start the Date to start the show
+     * @param end the Date to end the show
      *
-     * @return true if the date is valid, else false
+     * @return True if the date is valid, false if invalid
      */
     public boolean validShowDate(Date start, Date end) {
         for (Show show : Theater.getInstance().getShowList()) {
@@ -50,9 +50,9 @@ public class ShowList extends SingletonMap<Integer, Show> {
     /**
      * Checks if client has a future show scheduled
      *
-     * @param The account to be checked
+     * @param account the account to be checked
      * 
-     * @return true if it can be removed, else false
+     * @return True if it can be removed, false if it cannot
      */
     public boolean checkShowDates(Account account) {
         for (Show show : this) {
