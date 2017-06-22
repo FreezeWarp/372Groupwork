@@ -1,17 +1,16 @@
 @startuml
-
 skinparam classAttributeIconSize 0
 hide empty members
 
 class SingletonMap<K, E implements Identifiable<K>> {
     -INSTANCE: SingletonMap
-    -singletonHashmap : Hashmap<Integer, E>
-    -lastId: int
+    -singletonMap : Hashmap<Integer, E>
+    -lastKey: Integer
     #SingletonMap()
     +getInstance() : SingletonMap
-    +getNewId(): int
-    +addEntry(keyId: int, entry: E)
-    +removeEntry(keyId: int): boolean
+    +getNewKey(): Integer
+    +addEntry(entry: E): boolean
+    +removeEntry(keyId: Integer): boolean
     -readObject(ObjectInputStream)
     -writeObject(ObjectInputStream)
 }
@@ -41,6 +40,10 @@ class ShowList {
     -INSTANCE: ShowList
     +ShowList()
     +getInstance() : ShowList
+    +addShow(Show)
+    +validShowDate(Date) : boolean
+    +checkShowDates(Account) : boolean
+
 }
 
 interface Identifiable<K> {
@@ -51,24 +54,32 @@ interface Identifiable<K> {
 
 class IdentifiableInteger {
     -id: Integer
+    +getId() : Integer
+    +setId(Integer)
+    +nextId(Integer) : Integer
+     
 }
 
 class Account {
-    -id: int
     -name: String
     -address: string
     -phoneNumber: long
-    -balance: int
-    +getId(): int
+    +Account(String, String, Long)
     +getName(): String
     +getAddress(): String
     +getPhoneNumber(): long
-    +getBalance(): int
     +toString(): String
 }
 
 class Customer {
-    -creditCard: CreditCard
+    -creditCardList: ArrayList<CreditCard>
+    +Customer(String, String, long, CreditCard)
+    +addCreditCard(CreditCard) : boolean
+    +getCreditCard() : CreditCard
+    +removeCreditCard(long) : boolean
+    +removeCreditCards()
+    +getCreditCardList() : ArrayList<CreditCard>
+    +toString(): String
 }
 
 class Show {
@@ -76,6 +87,8 @@ class Show {
     -endDate: Date
     -startDate: Date
     -showDateFormat: SimpleDateFormat
+    +Show(Client, String, String, Date)
+    +getClient() : Client
     +getName(): String
     +getEndDate(): Date
     +getStartDate(): Date
@@ -91,7 +104,7 @@ class Theater {
     +getClientList(): ClientList
     +getCustomerList(): CustomerList
     +getShowList(): ShowList
-    +storeData()
+    +storeData() : boolean
     +retrieveData(): Theater
     +hasData(): boolean
     -readObject(ObjectInputStream)
@@ -123,5 +136,4 @@ AccountList *-- Account
 ClientList *-- Client
 CustomerList *-- Customer
 ShowList *-- Show
-
 @enduml
