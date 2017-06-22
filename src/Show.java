@@ -14,14 +14,10 @@ public class Show extends IdentifiableInteger implements Serializable {
     private final SimpleDateFormat showDateFormat = new SimpleDateFormat("MM/dd/yyyy");
     
     /**
-     * Constructor for the Show class 
-     * 
      * @param client the client hosting the show
      * @param name the name of the show
      * @param startDate the date the play showings first begin
      * @param endDate the date the play showings end
-     *                  
-     * @return nothing
      */
     public Show(Client client, String name, Date startDate, Date endDate) {
     	this.client = client;
@@ -33,8 +29,6 @@ public class Show extends IdentifiableInteger implements Serializable {
 	/** 
 	 * Gets the client who is hosting the show
 	 * 
-	 * @param nothing
-	 * 
 	 * @return the client hosting the show
 	 */
 	public Client getClient() {
@@ -43,9 +37,7 @@ public class Show extends IdentifiableInteger implements Serializable {
     
 	/** 
 	 * Gets the name of a show
-	 * 
-	 * @param nothing
-	 * 
+	 *  
 	 * @return the name of the show
 	 */
 	public String getName() {
@@ -55,8 +47,6 @@ public class Show extends IdentifiableInteger implements Serializable {
 	/**
 	 * Gets the start Date of a show
 	 *  
-	 * @param nothing
-	 * 
 	 * @return the date the play begins showing
 	 */
 	public Date getStartDate() {
@@ -66,8 +56,6 @@ public class Show extends IdentifiableInteger implements Serializable {
 	/** 
 	 * Gets the end Date of a show
 	 * 
-	 * @param nothing
-	 * 
 	 * @return the date the play ends showing
 	 */
 	public Date getEndDate() {
@@ -76,8 +64,6 @@ public class Show extends IdentifiableInteger implements Serializable {
 	
 	/**
      * Overrides the toString method of Object
-     * 
-     * @param nothing
      * 
      * @return a string representation concatenating basic show information
      */

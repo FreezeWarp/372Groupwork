@@ -6,9 +6,6 @@ import java.util.Date;
  */
 public class ShowList extends SingletonMap<Integer, Show> {
 	 /* Singleton Stuff */
-	/**
-     * The singleton instance.
-     */
     private static ShowList INSTANCE;
 
     protected ShowList() { }
@@ -25,8 +22,6 @@ public class ShowList extends SingletonMap<Integer, Show> {
      * Adds a new show to the ShowList.
      *
      * @param show The show to be added 
-     * 
-     * @return nothing
      */
     public void addShow(Show show) {
         addEntry(show);

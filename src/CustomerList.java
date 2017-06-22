@@ -5,9 +5,6 @@
  */
 public class CustomerList extends AccountList<Customer> {
 	 /* Singleton Stuff */
-	/**
-     * The singleton instance.
-     */
     private static CustomerList INSTANCE;
 
     protected CustomerList() { }

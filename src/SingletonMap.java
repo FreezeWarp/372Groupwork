@@ -16,9 +16,6 @@ import java.util.Map;
  */
 public class SingletonMap<K, E extends Identifiable<K>> implements Iterable<E>, Serializable {
     /* Singleton Stuff */
-    /**
-     * The singleton instance.
-     */
     private static SingletonMap INSTANCE;
 
     protected SingletonMap() { }
@@ -37,8 +34,6 @@ public class SingletonMap<K, E extends Identifiable<K>> implements Iterable<E>, 
      * Reads the Theater object (and its static instance variable) from the ObjectOutputStream.
      *
      * @param input The stream being read from
-     * 
-     * @return nothing
      */
     private void readObject(java.io.ObjectInputStream input) {
         try {
@@ -62,8 +57,6 @@ public class SingletonMap<K, E extends Identifiable<K>> implements Iterable<E>, 
      * Writes the Theater object (and its static instance variable) to the ObjectOutputStream.
      *
      * @param output The stream being written to
-     * 
-     * @return nothing
      */
     private void writeObject(java.io.ObjectOutputStream output) {
         try {
@@ -92,8 +85,6 @@ public class SingletonMap<K, E extends Identifiable<K>> implements Iterable<E>, 
 
     /**
      * An iterator that iterates through the list of Map entries (values).
-     * 
-     * @param nothing
      * 
      * @return the next value in the singletonMap
      */
@@ -166,8 +157,6 @@ public class SingletonMap<K, E extends Identifiable<K>> implements Iterable<E>, 
 
     /**
      * Overrides the toString method of Account
-     * 
-     * @param nothing
      * 
      * @return A string representation of the Map, with each entry on its own line
      */

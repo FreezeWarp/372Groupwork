@@ -11,13 +11,9 @@ public class Account extends IdentifiableInteger implements Serializable {
     private long phoneNumber;
 
     /**
-    * Constructor for the Account class
-    * 
     * @param name the name of the account holder
     * @param address the address of the account holder
     * @param phoneNumber the phone number of the account holder
-    * 
-    * @return nothing
     */
     public Account(String name, String address, long phoneNumber) {
         this.name = name;
@@ -28,8 +24,6 @@ public class Account extends IdentifiableInteger implements Serializable {
     /**
     * Gets the name associated with an account
     * 
-    * @param nothing
-    * 
     * @return a string representation of the account holder's name
     */
     public String getName() {
@@ -38,8 +32,6 @@ public class Account extends IdentifiableInteger implements Serializable {
 
     /**
     * Gets the address associated with an account
-    * 
-    * @param nothing
     * 
     * @return a string representation of the account holder's address
     */
@@ -50,8 +42,6 @@ public class Account extends IdentifiableInteger implements Serializable {
     /**
     * Gets the phone number associated with an account
     * 
-    * @param nothing
-    * 
     * @return a long representation of the account holder's phone number
     */
     public long getPhoneNumber() {
@@ -60,8 +50,6 @@ public class Account extends IdentifiableInteger implements Serializable {
 
     /**
     * Overrides the toString method of Object
-    * 
-    * @param nothing
     * 
     * @return a string representation concatenating basic account information
     */

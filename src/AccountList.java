@@ -5,9 +5,6 @@
  */
 public class AccountList<E extends Account> extends SingletonMap<Integer, E> {
 	 /* Singleton Stuff */
-	/**
-     * The singleton instance.
-     */
     private static AccountList INSTANCE;
 
     protected AccountList() { }

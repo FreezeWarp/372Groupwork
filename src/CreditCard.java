@@ -14,12 +14,8 @@ public class CreditCard implements Serializable {
    private final SimpleDateFormat dateFormat = new SimpleDateFormat("MM/yyyy");
     
    /**
-    * Constructor for the CreditCard class
-    * 
     * @param cardNumber the 16 digit credit card number 
     * @param expirationDate the credit card expiration date
-    * 
-    * @return nothing
     */
    public CreditCard(long cardNumber, Date expirationDate) {
        this.cardNumber = cardNumber;
@@ -29,8 +25,6 @@ public class CreditCard implements Serializable {
     /**
      * Gets the credit card number of the user as type long
      * 
-     * @param nothing
-     * 
      * @return cardNumber the 16 digit credit card number of the customer
      */
     public long getCardNumber() {
@@ -39,8 +33,7 @@ public class CreditCard implements Serializable {
     
     /**
      *Gets the expiration date of the credit card as a Date object
-     * @param nothing
-     * 
+     *
      * @return expirationDate the expiration date of the credit card
      */
     public Date getExpirationDate() {
@@ -49,8 +42,6 @@ public class CreditCard implements Serializable {
     
     /**
      * Overrides the toString method of Object
-     * 
-     * @param nothing
      * 
      * @return a string representation of the credit card information
      */

@@ -11,8 +11,6 @@ public class IdentifiableInteger implements Identifiable<Integer>, Serializable 
     /**
      * Gets the Id 
      * 
-     * @param nothing
-     * 
      * @return the Id to identify the account object
      */
     public Integer getId() {
@@ -23,8 +21,6 @@ public class IdentifiableInteger implements Identifiable<Integer>, Serializable 
      * Sets the Id
      * 
      * @param id The new Id for the account
-     * 
-     * @return nothing
      */
     public void setId(Integer id) {
         this.id = id;
