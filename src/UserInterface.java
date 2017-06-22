@@ -292,7 +292,12 @@ public class UserInterface {
                 Show show = new Show(client, name, startDate, endDate);
 
                 try {
-                    Theater.getShowList().addShow(show);
+                    if (Theater.getShowList().addShow(show)) {
+                        System.out.println("The show was added.");
+                    }
+                    else {
+                        System.out.println("The show could not be added.");
+                    }
                 }
                 catch (ShowConflictException ex) {
                     System.out.println("These dates interfere with another show.");
