@@ -189,11 +189,10 @@ public class UserInterfacePrompts {
      *
      * @param promptTextForNumber the text to display for the credit card number prompt
      * @param promptTextForExpiry the text to display for the credit card expiration date prompt
-     * @param expiredMessage the text to display if the credit card is expired
      *
      * @return A credit card object containing a number and expiration date
      */
-    public static CreditCard promptCreditCard(String promptTextForNumber, String promptTextForExpiry, String expiredMessage) {
+    public static CreditCard promptCreditCard(String promptTextForNumber, String promptTextForExpiry) {
         long creditCardNo = UserInterfacePrompts.promptCreditCardNumber(promptTextForNumber);
         Date expiryDate = UserInterfacePrompts.promptCreditCardExpiry(promptTextForExpiry);
 
@@ -201,7 +200,7 @@ public class UserInterfacePrompts {
             try {
                 return new CreditCard(creditCardNo, expiryDate);
             } catch (CreditCardExpiredException ex) {
-                System.out.println(expiredMessage);
+                System.out.println("This card is expired, please enter in a new credit card.");
                 creditCardNo = UserInterfacePrompts.promptCreditCardNumber(promptTextForNumber);
                 expiryDate = UserInterfacePrompts.promptCreditCardExpiry(promptTextForExpiry);
             } catch (CreditCardOutOfRangeException ex) {

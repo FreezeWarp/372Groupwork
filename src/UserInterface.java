@@ -169,7 +169,7 @@ public class UserInterface {
         String address = UserInterfacePrompts.promptLine("Customer address? ");
         long phone = UserInterfacePrompts.promptPhone("Phone number? ");
 
-        CreditCard creditCard = UserInterfacePrompts.promptCreditCard("Credit card number? ", "Credit card expiration (MMyyyy)? ", "This card is expired, please enter in a new credit card.");
+        CreditCard creditCard = UserInterfacePrompts.promptCreditCard("Credit card number? ", "Credit card expiration (MMyyyy)? ");
 
         if (creditCard == null) {
             System.out.println("An invalid credit card was detected. Unable to add the customer account.");
@@ -224,7 +224,7 @@ public class UserInterface {
         	 System.out.println("Error, specified customer does not exist, did you enter the correct account ID?");
         }
         else {
-            CreditCard creditCard = UserInterfacePrompts.promptCreditCard("Credit card number? ", "Credit card expiration (MMyyyy)? ", "This card is expired, please enter in a new credit card.");
+            CreditCard creditCard = UserInterfacePrompts.promptCreditCard("Credit card number? ", "Credit card expiration (MMyyyy)? ");
 
             if (creditCard == null) {
                 System.out.println("An invalid credit card was detected. Unable to add the credit card.");
