@@ -1,0 +1,20 @@
+@startuml
+actor Clerk
+
+activate ":UserInterface"
+Clerk -> ":UserInterface" : Remove a Credit Card
+Clerk //- ":UserInterface": Data Request
+Clerk -// ":UserInterface": id, cardNumber
+
+":UserInterface" -> ":Theater" : getCustomerList()
+activate ":Theater"
+":Theater" -->> ":UserInterface": CustomerList
+deactivate ":Theater"
+":UserInterface" -> ":CustomerList": customer = getAccount(id)
+":CustomerList" -> ":customer: Customer" : customer = customer.removeCreditCard(cardNumber)
+activate ":customer: Customer"
+":customer: Customer" -->> ":UserInterface" : successful?
+deactivate ":CustomerList"
+":UserInterface" -->> Clerk : successful?
+deactivate ":UserInterface"
+@enduml
