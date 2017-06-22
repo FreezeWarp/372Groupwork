@@ -1,0 +1,9 @@
+@startuml
+actor Clerk
+
+activate ":UserInterface"
+Clerk -> ":UserInterface" : Requests help
+
+":UserInterface" -->> Clerk : Outputs help
+deactivate ":UserInterface"
+@enduml

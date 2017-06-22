@@ -1,0 +1,13 @@
+@startuml
+actor Clerk
+
+activate ":UserInterface"
+Clerk -> ":UserInterface" : Exit program
+
+":UserInterface" -> ":Theater" : boolean = StoreData()
+activate ":Theater"
+":Theater" -->> ":UserInterface": successful?
+deactivate ":Theater"
+":UserInterface" -->> Clerk : successful?
+deactivate ":UserInterface"
+@enduml
