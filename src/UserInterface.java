@@ -176,7 +176,11 @@ public class UserInterface {
         CreditCard creditCard = UserInterfacePrompts.promptCreditCard("Credit card number? ", "Credit card expiration (MMyyyy)? ", "This card is expired, please enter in a new credit card.");
         
         // Add New Account Object to Customer List
-        Theater.getCustomerList().addAccount(new Customer(name, address, phone, creditCard));
+        if (Theater.getCustomerList().addAccount(new Customer(name, address, phone, creditCard))) {}
+        else {
+        	System.out.println("The customer account could not be added.");
+        }
+        
     }
 
     /**
@@ -189,15 +193,17 @@ public class UserInterface {
 
         if (customer == null) {
             System.out.println("The customer does not exist.");
-        } else {
-        	try {
-        	    customer.removeCreditCards();
-        	    Theater.getCustomerList().removeAccount(customer.getId());
-	            System.out.println("The customer was removed, along with all associated credit cards.");
-        	} catch (Exception ex) {
-        		System.out.println("The customer could not be deleted.");
+        } 
+        else {
+        	customer.removeCreditCards(); 
+        	    
+        	if (Theater.getCustomerList().removeAccount(customer.getId())) {
+        	    System.out.println("The customer was removed, along with all associated credit cards.");
         	}
-	        
+        	else {
+        	    System.out.println("The customer could not be deleted.");
+        	}
+ 
 	    }   
     }
 
@@ -214,7 +220,11 @@ public class UserInterface {
         	 System.out.println("Error, specified account does not exist, did you enter the correct account Id?");
         } else { 
         	CreditCard creditCard = UserInterfacePrompts.promptCreditCard("Credit card number? ", "Credit card expiration (MMyyyy)? ", "This card is expired, please enter in a new credit card.");
-     	    Theater.getCustomerList().getAccount(id).addCreditCard(creditCard);
+     	   if ( Theater.getCustomerList().getAccount(id).addCreditCard(creditCard)) {} //if we can add a credit card
+     	   else {
+     		   System.out.println("Could not add credit card to the customer's account.");
+     	   }
+     	   
         }
 
     }
@@ -229,18 +239,17 @@ public class UserInterface {
     	 
     	 if (customer == null) {
              System.out.println("The customer does not exist.");
-         } else {
-         	try {
-         		
-         	    if (customer.getCreditCardList().size() > 1 ) {
-         		    customer.removeCreditCard(UserInterfacePrompts.promptCreditCardNumber("Credit card number?"));
-         	    } else {
+         } 
+    	 else {
+         	    if (customer.getCreditCardList().size() > 1  ) {
+         	    	if (customer.removeCreditCard(UserInterfacePrompts.promptCreditCardNumber("Credit card number?"))) {} //if we can delete the credit card
+         	    	else {
+         	    		System.out.println("The customer's credit card could not be deleted.");
+         	    	}    
+         	    } 
+         	    else {
          		    System.out.println("Cannot delete the last credit card a user has");
-         	    }
-         		
-         	} catch (Exception ex) {
-         		System.out.println("The customer's credit card could not be deleted.");
-         	}
+         	    }	
  	    }   	
     }
 
@@ -288,7 +297,7 @@ public class UserInterface {
      */
     public static void listShows() {
         System.out.println(Theater.getShowList());
-        }
+    }
 
 
     /**

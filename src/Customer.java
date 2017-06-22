@@ -25,9 +25,12 @@ public class Customer extends Account {
      * Adds a credit card to the customer's account
      * 
      * @param creditCard the new credit card being added
+     * 
+     * @return True if the card could be added, False otherwise
      */
-    public void addCreditCard(CreditCard creditCard) {
-        creditCardList.add(creditCard);
+    public boolean addCreditCard(CreditCard creditCard) {
+       return creditCardList.add(creditCard);
+        
     }
     
     
@@ -44,9 +47,12 @@ public class Customer extends Account {
      * Removes the specified credit card from the customer's account
      * 
      * @param creditCardNumber the 16 digit number of the credit card to be removed
+     * 
+     * @return True if the card could be removed, False otherwise
      */
-    public void removeCreditCard(long creditCardNumber) {
-        creditCardList.removeIf((CreditCard creditCard) -> creditCard.getCardNumber() == creditCardNumber);
+    public boolean removeCreditCard(long creditCardNumber) {
+        return creditCardList.removeIf((CreditCard creditCard) -> creditCard.getCardNumber() == creditCardNumber);
+        
     }
     
     /**
@@ -75,8 +81,8 @@ public class Customer extends Account {
     public String toString() {
         String creditCardString = "";
         
-        for (int index = 0; index < creditCardList.size(); index++) {
-            creditCardString += index + ": " + creditCardList.get(index);
+        for (CreditCard creditCard : creditCardList) {
+        	creditCardString += creditCard;
         }
         
         return super.toString() + creditCardString;
