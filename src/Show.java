@@ -10,11 +10,31 @@ import java.util.Date;
  * @since   2017-06-22
  */
 public class Show extends IdentifiableInteger implements Serializable {
+    /**
+     * The client who owns the IP rights to the show.
+     */
     private Client client;
+
+    /**
+     * The name of the show.
+     */
     private String name;
+
+    /**
+     * The date the show begins on.
+     */
     private Date startDate;
+
+    /**
+     * The date the show ends on.
+     */
     private Date endDate;
-    private final SimpleDateFormat showDateFormat = new SimpleDateFormat("MM/dd/yyyy");
+
+    /**
+     * The format to use when displaying show dates in {@link Show#toString()}.
+     */
+    private static final SimpleDateFormat showDateFormat = new SimpleDateFormat("MM/dd/yyyy");
+
 
     /**
      * @param client the client hosting the show
@@ -28,6 +48,7 @@ public class Show extends IdentifiableInteger implements Serializable {
         this.startDate = startDate;
         this.endDate = endDate;
     }
+
 
     /**
      * Gets the client who is hosting the show
