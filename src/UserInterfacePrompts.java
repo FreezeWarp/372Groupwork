@@ -3,7 +3,11 @@ import java.util.Date;
 import java.util.Scanner;
 
 /**
- * Created by Joseph T. Parsons on 12/06/17.
+ * A collection of prompts to obtain user input.
+ *
+ * @author  Eric Fulwiler, Daniel Johnson, Joseph Parsons, and Cory Stadther
+ * @version 1.0
+ * @since   2017-06-22
  */
 public class UserInterfacePrompts {
     /**
@@ -210,6 +214,7 @@ public class UserInterfacePrompts {
         }
     }
 
+
     /**
      * Prompts the user for a date to start or end a show.
      *
@@ -218,10 +223,8 @@ public class UserInterfacePrompts {
      * @return Date the user input
      */
     public static Date promptShowDate(String promptText) {
-
         while(true) {
             try {
-
                 String dateStr = (promptLineRegex(promptText, "[\\s\\W]+", "^[0-9]{8}$", //removes unneeded characters
                         "That is not a show date. Please enter the 8 digit expiry date in the format MM/dd/yyyy."));
 
@@ -229,7 +232,7 @@ public class UserInterfacePrompts {
 
                 boolean passed = myDate.before(new Date()); //compares the date of the show with the current date
                 if (passed) {
-                    System.out.println("This day has already passed.");
+                    System.out.println("This day has already passed."); // TODO: move/copy validation into Show class
                 } else {
                     return myDate;
                 }
