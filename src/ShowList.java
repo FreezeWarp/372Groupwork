@@ -64,10 +64,11 @@ public class ShowList extends SingletonMap<Integer, Show> {
      * @return True if the date is valid, false if invalid
      */
     public boolean validShowDate(Date start, Date end) {
-        for (Show show : Theater.getInstance().getShowList()) {
+        for (Show show : Theater.getShowList()) { System.out.println(show);
             if ( // our dates conflict if they:
                (start.after(show.getStartDate()) && start.before(show.getEndDate())) // start during another show
-               || (end.after(show.getStartDate()) && end.before(show.getEndDate())) // or end during another show
+               || (end.after(show.getStartDate()) && end.before(show.getEndDate()))
+               || (start.before(show.getStartDate()) && end.before(show.getEndDate())) // or occurs entirely during another show
             ) {
                 return false; // returns false if any shows conflict
             }
@@ -83,8 +84,8 @@ public class ShowList extends SingletonMap<Integer, Show> {
      *
      * @return True if it can be removed, false if it cannot
      */
-    public boolean checkShowDates(int accountId) {
-        for (Show show : this) {
+    public static boolean checkShowDates(int accountId) {
+        for (Show show : Theater.getShowList()) { // TODO: figure out why "this" doesn't work instead of Theater.getShowList(); the Singleton property is likely not being maintained at present.
             if (accountId == show.getClient().getId()) {
                 if (show.getEndDate().after(new Date())) {
                     return false;
