@@ -8,13 +8,16 @@ import java.io.Serializable;
  * @since   2017-06-22
  */
 public class Client extends Account implements Serializable {
+    /**
+     * The Client's current monetary balance.
+     */
     private int balance = 0;
 
 
     /**
-     * @param name the name of the client account holder
-     * @param address the address of the client account holder
-     * @param phoneNumber the phone number of the client account holder
+     * @param name the name of the client account holder, {@link Account#name}
+     * @param address the address of the client account holder, {@link Account#address}
+     * @param phoneNumber the phone number of the client account holder, {@link Account#phoneNumber}
      */
     public Client(String name, String address, long phoneNumber) throws AccountPhoneNumberOutOfRangeException {
         super(name, address, phoneNumber);
@@ -22,9 +25,7 @@ public class Client extends Account implements Serializable {
 
 
     /**
-     * Gets the current balance of the client
-     *
-     * @return an integer representing the balance of the client
+     * @return the balance of the client, {@link Client#balance}
      */
     public int getBalance() {
         return balance;

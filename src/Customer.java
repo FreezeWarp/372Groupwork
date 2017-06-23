@@ -60,7 +60,6 @@ public class Customer extends Account {
     
     /**
      * Removes all credit cards from the customer's account
-     * 
      */
     public void removeCreditCards() {
         creditCardList.clear();
