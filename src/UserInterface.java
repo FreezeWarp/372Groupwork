@@ -349,6 +349,7 @@ public class UserInterface {
             System.out.println("The application's data could not be retrieved.");
         }
         else {
+            dataRetrieved = true;
             System.out.println("The application's data was successfully loaded.");
         }
     }
