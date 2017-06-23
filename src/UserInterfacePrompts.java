@@ -87,7 +87,7 @@ public class UserInterfacePrompts {
 
     /**
      * Prompts the user for a string of text matching certain parameters.
-     * 
+     *
      * @param promptText The text to display for the prompt.
      * @param regexToFilterOut A regex that will be removed from the user's input text.
      * @param regexToMatch A regex that the user's text must match, after regexToFilterOut has been applied.
@@ -143,8 +143,8 @@ public class UserInterfacePrompts {
             }
         }
     }
-    
-    
+
+
     /**
      * Prompts the user for a credit card expiry date in the format mmyyyy. Checks
      * to see if the expiry date entered is a valid date.
@@ -154,15 +154,15 @@ public class UserInterfacePrompts {
      * @return A string containing the expiry date of the credit card
      */
     public static Date promptCreditCardExpiry(String promptText) {
-    	 while(true) {
-             try {
-                 String expiryStr = (promptLineRegex(promptText, "[\\s\\W]+", "^(0?[1-9]|10|11|12)[0-9]{4}$", "That is not a valid expiry date. Please enter the 6 digit expiry date in the format MMyyyy.")); //removes unneeded characters
+        while(true) {
+            try {
+                String expiryStr = (promptLineRegex(promptText, "[\\s\\W]+", "^(0?[1-9]|10|11|12)[0-9]{4}$", "That is not a valid expiry date. Please enter the 6 digit expiry date in the format MMyyyy.")); //removes unneeded characters
 
-                 return new SimpleDateFormat("MMyy").parse(expiryStr);
-             } catch (Exception ex) {
-                 System.out.println("That credit card expiry date could not be parsed. This may reflect an internal error, but you probably just typed something really strange. Please try re-entering the expiry date in the format MMyyyy.");
-             }
-         }
+                return new SimpleDateFormat("MMyy").parse(expiryStr);
+            } catch (Exception ex) {
+                System.out.println("That credit card expiry date could not be parsed. This may reflect an internal error, but you probably just typed something really strange. Please try re-entering the expiry date in the format MMyyyy.");
+            }
+        }
     }
 
 
@@ -209,7 +209,7 @@ public class UserInterfacePrompts {
             }
         }
     }
-    
+
     /**
      * Prompts the user for a date to start or end a show.
      *
@@ -219,25 +219,25 @@ public class UserInterfacePrompts {
      */
     public static Date promptShowDate(String promptText) {
 
-      	 while(true) {
-               try {
-              	                    	 
-               	String dateStr = (promptLineRegex(promptText, "[\\s\\W]+", "^[0-9]{8}$", //removes unneeded characters
-               			"That is not a show date. Please enter the 8 digit expiry date in the format MM/dd/yyyy.")); 
-                   
-                  	Date myDate = new SimpleDateFormat("MMddyyyy").parse(dateStr);
-                 
-                  	boolean passed = myDate.before(new Date()); //compares the date of the show with the current date
-                  	if (passed) { 
-                  		System.out.println("This day has already passed."); 
-                  	} else {
-                  		return myDate; 
-                  	}
-                  
-               } catch (Exception ex) {
-                   System.out.println("Did you type something incorrectly? Please try re-entering the expiry show date in the format MMDDyyyy.");
-               }
-           }
-            
-      }
+        while(true) {
+            try {
+
+                String dateStr = (promptLineRegex(promptText, "[\\s\\W]+", "^[0-9]{8}$", //removes unneeded characters
+                        "That is not a show date. Please enter the 8 digit expiry date in the format MM/dd/yyyy."));
+
+                Date myDate = new SimpleDateFormat("MMddyyyy").parse(dateStr);
+
+                boolean passed = myDate.before(new Date()); //compares the date of the show with the current date
+                if (passed) {
+                    System.out.println("This day has already passed.");
+                } else {
+                    return myDate;
+                }
+
+            } catch (Exception ex) {
+                System.out.println("Did you type something incorrectly? Please try re-entering the expiry show date in the format MMDDyyyy.");
+            }
+        }
+
+    }
 }
