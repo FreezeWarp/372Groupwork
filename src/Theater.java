@@ -10,10 +10,14 @@ import java.io.*;
  ** Classes that duplicate functionality have that functionality implemented in generic superclasses as much as possible. This is done to maximise cohesion and reduce bugs (if one class has a bug, the others will as well, making detection easier).
  ** All operations that perform validation in Theater, ClientList, CustomerList, and ShowList will throw checked exceptions for the validation instead of integer status codes. A façade could copy most UserInterface functionality to specifically return the sentinel values to UserInterface, but that seemed a bit excessive for now. (UserInterface also performs its own basic validation in some cases; the validation performed by the singletons should be authoritative, however.) Note that I would aruge this is a workable paradigm in API design: APIs can return their own "exceptions" with detailed data to be parsed by the client, while before sending data to the server, the client should be performing some of its own validation as well.
  *
+ * Known Bugs:
+ ** The singleton property for the different lists is not correctly maintained through Class.getInstance(). It does seem to be maintained through Theater.getClass(). This should be fixed for it. 2.
+ *
  * @author  Eric Fulwiler, Daniel Johnson, Joseph Parsons, and Cory Stadther
  * @version 1.0
  * @since   2017-06-22
  */
+
 public class Theater implements Serializable {
     /*################################
      * Singleton-Specific Functionality
