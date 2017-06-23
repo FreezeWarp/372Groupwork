@@ -31,9 +31,10 @@ class ClientList {
 }
 
 class CustomerList {
-    -INSTANCE: ClientList
-    +ClientList()
-    +getInstance() : ClientList
+    -INSTANCE: CustomerList
+    +CustomerList()
+    +getInstance() : CustomerList
+    +getClient(clientId: int): Client
 }
 
 class ShowList {
@@ -43,7 +44,6 @@ class ShowList {
     +addShow(Show)
     +validShowDate(Date) : boolean
     +checkShowDates(Account) : boolean
-
 }
 
 interface Identifiable<K> {
@@ -143,10 +143,10 @@ IdentifiableInteger <|-- Show
 Account <|-- Client
 Account <|-- Customer
 
-AccountList *-- Account
-ClientList *-- Client
-CustomerList *-- Customer
-ShowList *-- Show
+AccountList "1" *-- "*" Account
+ClientList "1" *-- "*" Client
+CustomerList "1" *-- "*" Customer
+ShowList "1" *-- "*" Show
 
-Customer *-- CreditCard
+Customer "1" *-- "1..*" CreditCard
 @enduml

@@ -8,10 +8,10 @@ participant ":CustomerList"
 participant ":ShowList"
 database Disk
 
-Clerk -> ":UserInterface" : Save Data
+Clerk -> ":UserInterface" : Load Data
 activate ":UserInterface"
 
-":UserInterface" -> ":Theater" : storeData()
+":UserInterface" -> ":Theater" : retrieveData()
 activate ":Theater"
 
 ":Theater" -> ":ClientList": readObject()
