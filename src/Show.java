@@ -96,9 +96,7 @@ public class Show extends IdentifiableInteger implements Serializable {
 
 
     /**
-     * Overrides the toString method of Object
-     *
-     * @return a string representation concatenating basic show information
+     * @return a string representation concatenating the basic Show information
      */
     @Override
     public String toString() {

@@ -82,20 +82,24 @@ public class Account extends IdentifiableInteger implements Serializable {
         }
     }
 
+
     /**
      * @return a string representation concatenating basic account information
      */
     @Override
     public String toString() {
         StringBuilder phoneNumberString = new StringBuilder(Long.toString(phoneNumber));
+
         phoneNumberString.insert(7, '-');
         phoneNumberString.insert(4, '-');
-        if (phoneNumberString.length() > 13)
+
+        if (phoneNumberString.length() > 11) {
             phoneNumberString.insert(1, '-');
+        }
 
         return id +
                 ": " + name +
                 ", " + address +
-                ", " + phoneNumber;
+                ", " + phoneNumberString;
     }   
 }
