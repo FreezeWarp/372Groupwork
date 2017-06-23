@@ -86,17 +86,11 @@ public class UserInterface {
         }
     }
 
-    /**
-     * Whether or not data has already been loaded for this session.
-     * Once data is loaded, it should not be possible to load it again.
-     */
-    static boolean dataRetrieved = false;
-
 
     public static void main(String args[]) {
         /* If we have saved data, prompt to load it. */
         if (Theater.hasData() && UserInterfacePrompts.promptYesOrNo("Would you like to load available application data before starting? ")) {
-            Theater.retrieveData();
+            retrieveData();
         }
 
         help(); // Show help at first launch.
@@ -342,15 +336,14 @@ public class UserInterface {
      * Loads data by invoking Theater.retrieveData(). Ensures that data is not retrieved twice in a session.
      */
     public static void retrieveData() {
-        if (dataRetrieved) {
-            System.out.println("Application data has already been retrieved for this session.");
-        }
-        else if (Theater.retrieveData() == null) {
-            System.out.println("The application's data could not be retrieved.");
-        }
-        else {
-            dataRetrieved = true;
-            System.out.println("The application's data was successfully loaded.");
+        try {
+            if (Theater.retrieveData() == null) {
+                System.out.println("The application's data could not be retrieved.");
+            } else {
+                System.out.println("The application's data was successfully loaded.");
+            }
+        } catch (TheaterAlreadyLoadedDataException ex) {
+            System.out.println("The application's data can not be loaded twice in a session.");
         }
     }
 

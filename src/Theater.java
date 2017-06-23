@@ -100,6 +100,13 @@ public class Theater implements Serializable {
 
 
     /**
+     * Whether or not data has already been loaded for this session.
+     * Once data is loaded, it should not be possible to load it again.
+     */
+    static boolean dataRetrieved = false;
+
+
+    /**
      * Determines if the persistence file exists with data
      * 
      * @return True if the persistence file exists, false otherwise.
@@ -134,18 +141,23 @@ public class Theater implements Serializable {
      * 
      * @return The Theater instance on success, or null on failure.
      */
-    public static Theater retrieveData() {
-        try {
-            FileInputStream in = new FileInputStream(persistenceFile);
-            ObjectInputStream ois = new ObjectInputStream(in);
-            ois.readObject();
-            return INSTANCE;
-        } catch (IOException e) {
-            System.err.println("Theater.retrieveData: Problem reading: " + e);
-            return null;
-        } catch (ClassNotFoundException e) {
-            System.err.println("Theater.retrieveData: Class not found: " + e);
-            return null;
+    public static Theater retrieveData() throws TheaterAlreadyLoadedDataException {
+        if (dataRetrieved) {
+            throw new TheaterAlreadyLoadedDataException();
+        }
+        else {
+            try {
+                FileInputStream in = new FileInputStream(persistenceFile);
+                ObjectInputStream ois = new ObjectInputStream(in);
+                ois.readObject();
+                return INSTANCE;
+            } catch (IOException e) {
+                System.err.println("Theater.retrieveData: Problem reading: " + e);
+                return null;
+            } catch (ClassNotFoundException e) {
+                System.err.println("Theater.retrieveData: Class not found: " + e);
+                return null;
+            }
         }
     }
 
