@@ -37,10 +37,10 @@ public class Show extends IdentifiableInteger implements Serializable {
 
 
     /**
-     * @param client the client hosting the show
-     * @param name the name of the show
-     * @param startDate the date the play showings first begin
-     * @param endDate the date the play showings end
+     * @param client the client hosting the show, {@link Show#client}
+     * @param name the name of the show, {@link Show#name}
+     * @param startDate the date the play showings first begin, {@link Show#startDate}
+     * @param endDate the date the play showings end, {@link Show#endDate}
      */
     public Show(Client client, String name, Date startDate, Date endDate) throws ShowDateMismatchException {
         this.client = client;
@@ -50,36 +50,28 @@ public class Show extends IdentifiableInteger implements Serializable {
 
 
     /**
-     * Gets the client who is hosting the show
-     *
-     * @return the client hosting the show
+     * @return the client hosting the show, {@link Show#client}
      */
     public Client getClient() {
         return client;
     }
 
     /**
-     * Gets the name of a show
-     *
-     * @return the name of the show
+     * @return the name of the show, {@link Show#name}
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Gets the start Date of a show
-     *
-     * @return the date the play begins showing
+     * @return the date the play begins showing, {@link Show#startDate}
      */
     public Date getStartDate() {
         return startDate;
     }
 
     /**
-     * Gets the end Date of a show
-     *
-     * @return the date the play ends showing
+     * @return the date the play ends showing, {@link Show#endDate}
      */
     public Date getEndDate() {
         return endDate;

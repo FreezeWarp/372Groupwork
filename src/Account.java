@@ -35,9 +35,9 @@ public class Account extends IdentifiableInteger implements Serializable {
 
 
     /**
-    * @param name the name of the account holder
-    * @param address the address of the account holder
-    * @param phoneNumber the phone number of the account holder
+    * @param name the name of the account holder, {@link Account#name}
+    * @param address the address of the account holder, {@link Account#address}
+    * @param phoneNumber the phone number of the account holder, {@link Account#phoneNumber}
     */
     public Account(String name, String address, long phoneNumber) throws AccountPhoneNumberOutOfRangeException {
         this.name = name;
@@ -47,28 +47,22 @@ public class Account extends IdentifiableInteger implements Serializable {
 
 
     /**
-    * Gets the name associated with an account
-    * 
-    * @return a string representation of the account holder's name
-    */
+     * @return the account holder's name, {@link Account#name}
+     */
     public String getName() {
         return name;
     }
 
     /**
-    * Gets the address associated with an account
-    * 
-    * @return a string representation of the account holder's address
-    */
+     * @return the account holder's address, {@link Account#address}
+     */
     public String getAddress() {
         return address;
     }
 
     /**
-    * Gets the phone number associated with an account
-    * 
-    * @return a long representation of the account holder's phone number
-    */
+     * @return the account holder's phone number, {@link Account#phoneNumber}
+     */
     public long getPhoneNumber() {
         return phoneNumber;
     }
