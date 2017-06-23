@@ -103,7 +103,7 @@ public class UserInterface {
 
         /* Loop until exit command is entered. Process other commands as entered. */
         int commandNumber;
-        while ((commandNumber = UserInterfacePrompts.promptIntRange("Make a selection (13 for Help): ", 0, commandMap.values().size() - 1)) != 0) {
+        while ((commandNumber = UserInterfacePrompts.promptIntRange(System.getProperty("line.separator") + "Make a selection (13 for Help): ", 0, commandMap.values().size() - 1)) != 0) {
             commandMap.get(commandNumber).run();
         }
 
@@ -124,7 +124,13 @@ public class UserInterface {
         try {
             // Add New Account Object to Client List
             Client client = new Client(name, address, phone);
-            Theater.getClientList().addAccount(client);
+
+            if (Theater.getClientList().addAccount(client)) {
+                System.out.println("The client was added.");
+            }
+            else {
+                System.out.println("The client could not be added.");
+            }
         } catch (AccountPhoneNumberOutOfRangeException ex) {
             System.out.println("The phone number was out-of-range. The client was not added. This may be an internal error.");
         }
@@ -254,7 +260,7 @@ public class UserInterface {
          } 
     	 else {
        	    try {
-                if (customer.removeCreditCard(UserInterfacePrompts.promptCreditCardNumber("Credit card number?"))) {
+                if (customer.removeCreditCard(UserInterfacePrompts.promptCreditCardNumber("Credit card number? "))) {
                     System.out.println("The credit card was removed.");
                 }
                 else {
