@@ -127,6 +127,10 @@ public class UserInterface {
             case Theater.ADD_CLIENT_PHONE_NUMBER_OUT_OF_RANGE:
                 System.out.println("The phone number was out-of-range. The client was not added. This may be an internal error.");
                 break;
+
+            default:
+                System.out.println("An unknown status code was returned.");
+                break;
         }
     }
 
@@ -150,6 +154,10 @@ public class UserInterface {
 
             case Theater.REMOVE_CLIENT_ONGOING_SHOW:
                 System.out.println("The client still has a show scheduled that hasn't ended yet.");
+                break;
+
+            default:
+                System.out.println("An unknown status code was returned.");
                 break;
         }
     }
@@ -328,10 +336,13 @@ public class UserInterface {
             case Theater.STORE_DATA_SUCCESS:
                 System.out.println("The data was successfully saved.");
                 break;
-
-
+            
             case Theater.STORE_DATA_FAILURE:
                 System.out.println("The data could not be saved.");
+                break;
+
+            default:
+                System.out.println("An unknown status code was returned.");
                 break;
         }
     }
@@ -352,6 +363,10 @@ public class UserInterface {
 
             case Theater.RETRIEVE_DATA_ALREADY_LOADED:
                 System.out.println("The application's data can not be loaded twice in a session.");
+                break;
+
+            default:
+                System.out.println("An unknown status code was returned.");
                 break;
         }
     }
