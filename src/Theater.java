@@ -168,6 +168,32 @@ public class Theater implements Serializable {
 
 
     /*################################
+     * API Methods
+     * These interact with objects, while UserInterface performs the IO and invokes these functions.
+     *###############################*/
+
+    public final static int ADD_CLIENT_FAILURE = 0;
+    public final static int ADD_CLIENT_SUCCESS = 1;
+    public final static int ADD_CLIENT_PHONE_NUMBER_OUT_OF_RANGE = 2;
+
+    public static int addClient(String name, String address, long phone) {
+        try {
+            // Add New Account Object to Client List
+            Client client = new Client(name, address, phone);
+
+            if (getClientList().addAccount(client)) {
+                return ADD_CLIENT_SUCCESS;
+            }
+            else {
+                return ADD_CLIENT_FAILURE;
+            }
+        } catch (AccountPhoneNumberOutOfRangeException ex) {
+            return ADD_CLIENT_PHONE_NUMBER_OUT_OF_RANGE;
+        }
+    }
+
+
+    /*################################
      * Client/Customer/Show Instances
      *###############################*/
 

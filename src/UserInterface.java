@@ -115,18 +115,18 @@ public class UserInterface {
         String address = UserInterfacePrompts.promptLine("Client address? ");
         long phone = UserInterfacePrompts.promptPhone("Phone number? ");
 
-        try {
-            // Add New Account Object to Client List
-            Client client = new Client(name, address, phone);
-
-            if (Theater.getClientList().addAccount(client)) {
-                System.out.println("The client was added.");
-            }
-            else {
+        switch (Theater.addClient(name, address, phone)) {
+            case Theater.ADD_CLIENT_FAILURE:
                 System.out.println("The client could not be added.");
-            }
-        } catch (AccountPhoneNumberOutOfRangeException ex) {
-            System.out.println("The phone number was out-of-range. The client was not added. This may be an internal error.");
+                break;
+
+            case Theater.ADD_CLIENT_SUCCESS:
+                System.out.println("The client was added.");
+                break;
+
+            case Theater.ADD_CLIENT_PHONE_NUMBER_OUT_OF_RANGE:
+                System.out.println("The phone number was out-of-range. The client was not added. This may be an internal error.");
+                break;
         }
     }
 
