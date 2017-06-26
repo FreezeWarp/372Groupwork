@@ -128,15 +128,15 @@ public class UserInterface {
         long phone = UserInterfacePrompts.promptPhone("Phone number? ");
 
         switch (Theater.addClient(name, address, phone)) {
-            case Theater.ADD_CLIENT_FAILURE:
+            case FAILURE:
                 System.out.println("The client could not be added.");
                 break;
 
-            case Theater.ADD_CLIENT_SUCCESS:
+            case SUCCESS:
                 System.out.println("The client was added.");
                 break;
 
-            case Theater.ADD_CLIENT_PHONE_NUMBER_OUT_OF_RANGE:
+            case PHONE_NUMBER_OUT_OF_RANGE:
                 System.out.println("The phone number was out-of-range. The client was not added. This may be an internal error.");
                 break;
 
@@ -152,19 +152,19 @@ public class UserInterface {
      */
     public static void removeClient() {
         switch (Theater.removeClient(UserInterfacePrompts.promptInt("Client ID? "))) {
-            case Theater.REMOVE_CLIENT_NOEXIST:
+            case NOEXIST:
                 System.out.println("The client does not exist.");
                 break;
 
-            case Theater.REMOVE_CLIENT_SUCCESS:
+            case SUCCESS:
                 System.out.println("The client was removed.");
                 break;
 
-            case Theater.REMOVE_CLIENT_FAILURE:
+            case FAILURE:
                 System.out.println("The client could not be removed.");
                 break;
 
-            case Theater.REMOVE_CLIENT_ONGOING_SHOW:
+            case ONGOING_SHOW:
                 System.out.println("The client still has a show scheduled that hasn't ended yet.");
                 break;
 
@@ -345,11 +345,11 @@ public class UserInterface {
      */
     public static void storeData() {
         switch (Theater.storeData()) {
-            case Theater.STORE_DATA_SUCCESS:
+            case SUCCESS:
                 System.out.println("The data was successfully saved.");
                 break;
 
-            case Theater.STORE_DATA_FAILURE:
+            case FAILURE:
                 System.out.println("The data could not be saved.");
                 break;
 
@@ -365,15 +365,15 @@ public class UserInterface {
      */
     public static void retrieveData() {
         switch (Theater.retrieveData()) {
-            case Theater.RETRIEVE_DATA_FAILURE:
+            case FAILURE:
                 System.out.println("The application's data could not be retrieved.");
                 break;
 
-            case Theater.RETRIEVE_DATA_SUCCESS:
+            case SUCCESS:
                 System.out.println("The application's data was successfully loaded.");
                 break;
 
-            case Theater.RETRIEVE_DATA_ALREADY_LOADED:
+            case ALREADY_LOADED:
                 System.out.println("The application's data can not be loaded twice in a session.");
                 break;
 

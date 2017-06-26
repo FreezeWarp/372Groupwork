@@ -123,54 +123,73 @@ public class Theater implements Serializable {
 
 
     /**
+     * Returned codes used from {@link Theater#storeData()}.
+     */
+    enum STORE_DATA_STATUS {
+        /**
+         * Generic failure occurred. */
+        FAILURE,
+        /**
+         * Method ended successfully. */
+        SUCCESS,
+    }
+
+    /**
      * Writes Theater's state to the persistence file.
      *
      * @return True on success, false on failure.
      */
-    public final static int STORE_DATA_FAILURE = 0;
-    public final static int STORE_DATA_SUCCESS = 1;
-
-    public static int storeData() {
+    public static STORE_DATA_STATUS storeData() {
         try {
             FileOutputStream out = new FileOutputStream(persistenceFile);
             ObjectOutputStream oos = new ObjectOutputStream(out);
 
             oos.writeObject(INSTANCE);
             oos.flush();
-            return STORE_DATA_SUCCESS;
+            return STORE_DATA_STATUS.SUCCESS;
         } catch (Exception e) {
             System.err.println("Theater.storeData: Unable to serialise a value: " + e);
-            return STORE_DATA_FAILURE;
+            return STORE_DATA_STATUS.FAILURE;
         }
     }
 
+
+    /**
+     * Returned codes used from {@link Theater#retrieveData()}.
+     */
+    enum RETRIEVE_DATA_STATUS {
+        /**
+         * Generic failure occurred. */
+        FAILURE,
+        /**
+         * Method ended successfully. */
+        SUCCESS,
+        /**
+         * Data was previously loaded this session. */
+        ALREADY_LOADED,
+    }
 
     /**
      * Loads in data from the persistence file.
      * 
      * @return The Theater instance on success, or null on failure.
      */
-
-    public final static int RETRIEVE_DATA_FAILURE = 0;
-    public final static int RETRIEVE_DATA_SUCCESS = 1;
-    public final static int RETRIEVE_DATA_ALREADY_LOADED = 2;
-
-    public static int retrieveData() {
+    public static RETRIEVE_DATA_STATUS retrieveData() {
         if (dataRetrieved) {
-            return RETRIEVE_DATA_ALREADY_LOADED;
+            return RETRIEVE_DATA_STATUS.ALREADY_LOADED;
         }
         else {
             try {
                 FileInputStream in = new FileInputStream(persistenceFile);
                 ObjectInputStream ois = new ObjectInputStream(in);
                 ois.readObject();
-                return RETRIEVE_DATA_SUCCESS;
+                return RETRIEVE_DATA_STATUS.SUCCESS;
             } catch (IOException e) {
                 System.err.println("Theater.retrieveData: Problem reading: " + e);
-                return RETRIEVE_DATA_FAILURE;
+                return RETRIEVE_DATA_STATUS.FAILURE;
             } catch (ClassNotFoundException e) {
                 System.err.println("Theater.retrieveData: Class not found: " + e);
-                return RETRIEVE_DATA_FAILURE;
+                return RETRIEVE_DATA_STATUS.FAILURE;
             }
         }
     }
@@ -182,49 +201,72 @@ public class Theater implements Serializable {
      * These interact with objects, while UserInterface performs the IO and invokes these functions.
      *###############################*/
 
-    public final static int ADD_CLIENT_FAILURE = 0;
-    public final static int ADD_CLIENT_SUCCESS = 1;
-    public final static int ADD_CLIENT_PHONE_NUMBER_OUT_OF_RANGE = 2;
+    /**
+     * Returned codes used from {@link Theater#addClient(String, String, long)}.
+     */
+    enum ADD_CLIENT_STATUS {
+        /**
+         * Generic failure occurred. */
+        FAILURE,
+        /**
+         * Method ended successfully. */
+        SUCCESS,
+        /**
+         * The phone number used is out of the valid range of phone numbers. */
+        PHONE_NUMBER_OUT_OF_RANGE
+    }
 
-    public static int addClient(String name, String address, long phone) {
+    public static ADD_CLIENT_STATUS addClient(String name, String address, long phone) {
         try {
             // Add New Account Object to Client List
             Client client = new Client(name, address, phone);
 
             if (getClientList().addAccount(client)) {
-                return ADD_CLIENT_SUCCESS;
+                return ADD_CLIENT_STATUS.SUCCESS;
             }
             else {
-                return ADD_CLIENT_FAILURE;
+                return ADD_CLIENT_STATUS.FAILURE;
             }
         } catch (AccountPhoneNumberOutOfRangeException ex) {
-            return ADD_CLIENT_PHONE_NUMBER_OUT_OF_RANGE;
+            return ADD_CLIENT_STATUS.PHONE_NUMBER_OUT_OF_RANGE;
         }
     }
 
 
+    /**
+     * Returned codes used from {@link Theater#removeClient(int)}.
+     */
+    enum REMOVE_CLIENT_STATUS {
+        /**
+         * The client to be removed does not exist. */
+        NOEXIST,
+        /**
+         * Generic failure occurred. */
+        FAILURE,
+        /**
+         * Method ended successfully. */
+        SUCCESS,
+        /**
+         * The method failed because the client to be removed has an ongoing show. */
+        ONGOING_SHOW
+    }
 
-    public final static int REMOVE_CLIENT_NOEXIST = -1;
-    public final static int REMOVE_CLIENT_FAILURE = 0;
-    public final static int REMOVE_CLIENT_SUCCESS = 1;
-    public final static int REMOVE_CLIENT_ONGOING_SHOW = 2;
-
-    public static int removeClient(int clientId) {
+    public static REMOVE_CLIENT_STATUS removeClient(int clientId) {
         Client client = getClientList().getAccount(clientId);
 
         if (client == null) {
-            return REMOVE_CLIENT_NOEXIST;
+            return REMOVE_CLIENT_STATUS.NOEXIST;
         }
         else {
             try {
                 if (getClientList().removeClient(client.getId())) {
-                    return REMOVE_CLIENT_SUCCESS;
+                    return REMOVE_CLIENT_STATUS.SUCCESS;
                 }
                 else {
-                    return REMOVE_CLIENT_FAILURE;
+                    return REMOVE_CLIENT_STATUS.FAILURE;
                 }
             } catch (ClientListOngoingShowsException ex) {
-                return REMOVE_CLIENT_ONGOING_SHOW;
+                return REMOVE_CLIENT_STATUS.ONGOING_SHOW;
             }
         }
     }
