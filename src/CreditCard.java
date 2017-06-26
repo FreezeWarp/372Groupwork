@@ -79,4 +79,29 @@ public class CreditCard implements Serializable {
     public String toString() {
         return ", CC: " + cardNumber + " EXP: " + dateFormat.format(expirationDate);
     }
+
+
+
+    /*################################
+     * Exceptions
+     *###############################*/
+    /**
+     * An exception for when trying to create a {@link CreditCard} with an expiration date in the past.
+     */
+    class CreditCardExpiredException extends Exception {
+        CreditCardExpiredException() {
+            super("The credit card is expired.");
+        }
+    }
+
+    /**
+     * An exception for when trying to create a {@link CreditCard} with an invalid card number.
+     */
+    class CreditCardOutOfRangeException extends Exception {
+        CreditCardOutOfRangeException() {
+            super("The credit card number is out-of-range.");
+        }
+    }
+
+
 }

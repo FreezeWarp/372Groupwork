@@ -101,5 +101,19 @@ public class Account extends IdentifiableInteger implements Serializable {
                 ": " + name +
                 ", " + address +
                 ", " + phoneNumberString;
-    }   
+    }
+
+
+    /*################################
+     * Exceptions
+     *###############################*/
+    /**
+     * An exception for when trying to create an {@link Account} with an invalid phone number.
+     */
+    public class AccountPhoneNumberOutOfRangeException extends Exception {
+        AccountPhoneNumberOutOfRangeException() {
+            super("The phone number is out-of-range.");
+        }
+    }
+
 }

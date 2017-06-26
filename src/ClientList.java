@@ -65,4 +65,18 @@ public class ClientList extends AccountList<Client> {
     public boolean removeAccount(int accountId) {
         throw new UnsupportedOperationException("removeClient must be used instead of removeAccount when working with ClientList.");
     }
+
+
+
+    /*################################
+     * Exceptions
+     *###############################*/
+    /**
+     * An exception for when trying to remove a {@link Client} from {@link ClientList} when the client has future {@link Show}s and thus cannot be removed.
+     */
+    public class ClientListOngoingShowsException extends Exception {
+        ClientListOngoingShowsException () {
+            super("The client cannot be removed if it has shows ongoing.");
+        }
+    }
 }

@@ -265,7 +265,7 @@ public class Theater implements Serializable {
                 else {
                     return REMOVE_CLIENT_STATUS.FAILURE;
                 }
-            } catch (ClientListOngoingShowsException ex) {
+            } catch (ClientList.ClientListOngoingShowsException ex) {
                 return REMOVE_CLIENT_STATUS.ONGOING_SHOW;
             }
         }
@@ -332,6 +332,4 @@ public class Theater implements Serializable {
     public static ShowList getShowList() {
         return getInstance().showList;
     }
-
-
 }

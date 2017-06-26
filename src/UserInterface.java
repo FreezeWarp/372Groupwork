@@ -205,7 +205,7 @@ public class UserInterface {
                 else {
                     System.out.println("The customer account could not be added.");
                 }
-            } catch (AccountPhoneNumberOutOfRangeException ex) {
+            } catch (Account.AccountPhoneNumberOutOfRangeException ex) {
                 System.out.println("The phone number was out-of-range. The customer was not added. This may be an internal error.");
             }
         }
@@ -281,7 +281,7 @@ public class UserInterface {
                 else {
                     System.out.println("The customer's credit card could not be deleted.");
                 }
-            } catch (CustomerMinimumCreditCardsException ex) {
+            } catch (Customer.CustomerMinimumCreditCardsException ex) {
                 System.out.println("Cannot delete the last credit card a user has.");
             }
         }
@@ -322,10 +322,10 @@ public class UserInterface {
                         System.out.println("The show could not be added.");
                     }
                 }
-                catch (ShowConflictException ex) {
+                catch (ShowList.ShowConflictException ex) {
                     System.out.println("These dates interfere with another show.");
                 }
-            } catch (ShowDateMismatchException ex) {
+            } catch (Show.ShowDateMismatchException ex) {
                 System.out.println("The show cannot end before it starts.");
             }
         }

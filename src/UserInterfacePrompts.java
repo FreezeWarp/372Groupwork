@@ -203,11 +203,11 @@ public class UserInterfacePrompts {
         while (true) {
             try {
                 return new CreditCard(creditCardNo, expiryDate);
-            } catch (CreditCardExpiredException ex) {
+            } catch (CreditCard.CreditCardExpiredException ex) {
                 System.out.println("This card is expired, please enter in a new credit card.");
                 creditCardNo = UserInterfacePrompts.promptCreditCardNumber(promptTextForNumber);
                 expiryDate = UserInterfacePrompts.promptCreditCardExpiry(promptTextForExpiry);
-            } catch (CreditCardOutOfRangeException ex) {
+            } catch (CreditCard.CreditCardOutOfRangeException ex) {
                 System.out.println("The credit card is out-of-range. This may be an internal error.");
                 return null;
             }

@@ -95,4 +95,17 @@ public class ShowList extends SingletonMap<Date, Show> {
 
         return true;
     }
+
+
+    /*################################
+     * Exceptions
+     *###############################*/
+    /**
+     * An exception for when trying to add a {@link Show} to {@link ShowList} when a conflicting Show already exists in the ShowList.
+     */
+    class ShowConflictException extends Exception {
+        ShowConflictException() {
+            super("The show conflicts with an existing show.");
+        }
+    }
 }

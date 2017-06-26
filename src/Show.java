@@ -120,7 +120,6 @@ public class Show implements Identifiable<Date>, Serializable {
         return new Date(0);
     }
 
-
     /**
      * Sets both {@link Show#startDate} and {@link Show#endDate}
      * @param startDate The starting date of the show, {@link Show#startDate}.
@@ -148,5 +147,18 @@ public class Show implements Identifiable<Date>, Serializable {
                 ", " + name +
                 " " + showDateFormat.format(startDate)+
                 "-" + showDateFormat.format(endDate);
+    }
+
+
+    /*################################
+     * Exceptions
+     *###############################*/
+    /**
+     * An exception for when trying to create a {@link Show} with an end date that is in the future of the start date.
+     */
+    class ShowDateMismatchException extends Exception {
+        ShowDateMismatchException() {
+            super("The end date of a show cannot be before its start date.");
+        }
     }
 }
