@@ -77,7 +77,19 @@ public class UserInterface {
         helpMap.put(COMMAND_LOAD_DATA, "Retrieve Data");
         commandMap.put(COMMAND_LOAD_DATA, () -> retrieveData());
 
-        final int COMMAND_HELP = 13;
+        final int COMMAND_SELL_REGULAR_TICKET = 13;
+        helpMap.put(COMMAND_SELL_REGULAR_TICKET, "Sell Regular Tickets");
+        commandMap.put(COMMAND_SELL_REGULAR_TICKET, () -> sellTickets(TicketType.Ticket));
+
+        final int COMMAND_SELL_ADVANCE_TICKET = 14;
+        helpMap.put(COMMAND_SELL_ADVANCE_TICKET, "Sell Advance Tickets");
+        commandMap.put(COMMAND_SELL_ADVANCE_TICKET, () -> sellTickets(TicketType.AdvanceTicket));
+
+        final int COMMAND_SELL_STUDENT_TICKET = 15;
+        helpMap.put(COMMAND_SELL_STUDENT_TICKET, "Sell Student Tickets");
+        commandMap.put(COMMAND_SELL_STUDENT_TICKET, () -> sellTickets(TicketType.StudentAdvanceTicket));
+
+        final int COMMAND_HELP = 18;
         helpMap.put(COMMAND_HELP, "Help");
         commandMap.put(COMMAND_HELP, () -> help());
 
@@ -300,7 +312,7 @@ public class UserInterface {
             Date endDate = UserInterfacePrompts.promptShowDate("End of Show (MM/DD/yyyy)? ");
 
             try {
-                Show show = new Show(client, name, startDate, endDate);
+                Show show = new Show(client, name, startDate, endDate, 0); // TODO: ticket price
 
                 try {
                     if (Theater.getShowList().addShow(show)) {
@@ -336,7 +348,7 @@ public class UserInterface {
             case Theater.STORE_DATA_SUCCESS:
                 System.out.println("The data was successfully saved.");
                 break;
-            
+
             case Theater.STORE_DATA_FAILURE:
                 System.out.println("The data could not be saved.");
                 break;
@@ -368,6 +380,22 @@ public class UserInterface {
             default:
                 System.out.println("An unknown status code was returned.");
                 break;
+        }
+    }
+
+
+    public static void sellTickets(TicketType t) {
+        try {
+            Theater.getShowList().addShow(new Show(
+                    new Client("Bob", "123 Downing St.", 5558002031l),
+                    "Cats on Ice",
+                    new Date(117, 10, 9),
+                    new Date(117, 10, 11),
+                    50 // ticket price
+            ));
+            Theater.sellTickets(t, 0, 0, 0, new Date(117, 10, 9));
+        } catch (Exception ex) {
+            System.out.println("Test failed.");
         }
     }
 

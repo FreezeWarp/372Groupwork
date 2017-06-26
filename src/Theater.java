@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.Date;
 import java.util.Iterator;
 
 /**
@@ -232,6 +233,20 @@ public class Theater implements Serializable {
 
     public static Iterator<Client> getClients() {
         return getClientList().iterator();
+    }
+
+
+
+
+
+    public final static int SELL_TICKET_FAILURE = 0;
+    public final static int SELL_TICKET_SUCCESS = 1;
+
+    public static int sellTickets(TicketType ticketType, int quantity, int customerId, long creditcardNumber, Date showDate) {
+        Ticket t = ticketType.getNewTicket(getShowList().getEntry(showDate));
+        System.out.println("Price of ticket:" + t.getPrice());
+
+        return SELL_TICKET_FAILURE;
     }
 
 

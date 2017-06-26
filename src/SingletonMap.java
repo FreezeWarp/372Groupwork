@@ -168,6 +168,18 @@ public class SingletonMap<K, E extends Identifiable<K>> implements Iterable<E>, 
 
 
     /**
+     * Retrieves a Map entry by its key.
+     *
+     * @param key The hashmap key whose value should be returned.
+     *
+     * @return A map entry, or null if none found.
+     */
+    public E getEntry(K key) {
+        return singletonMap.get(key);
+    }
+
+
+    /**
      * Checks whether an entry with the given key exists.
      *
      * @param key The map key to check for.

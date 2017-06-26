@@ -9,7 +9,7 @@ import java.util.Date;
  * @version 1.0
  * @since   2017-06-22
  */
-public class Show extends IdentifiableInteger implements Serializable {
+public class Show implements Identifiable<Date>, Serializable {
     /**
      * The client who owns the IP rights to the show.
      */
@@ -19,6 +19,11 @@ public class Show extends IdentifiableInteger implements Serializable {
      * The name of the show.
      */
     private String name;
+
+    /**
+     * The cost of admittance for the show.
+     */
+    private double ticketPrice;
 
     /**
      * The date the show begins on.
@@ -42,9 +47,10 @@ public class Show extends IdentifiableInteger implements Serializable {
      * @param startDate the date the play showings first begin, {@link Show#startDate}
      * @param endDate the date the play showings end, {@link Show#endDate}
      */
-    public Show(Client client, String name, Date startDate, Date endDate) throws ShowDateMismatchException {
+    public Show(Client client, String name, Date startDate, Date endDate, double ticketPrice) throws ShowDateMismatchException {
         this.client = client;
         this.name = name;
+        this.ticketPrice = ticketPrice;
         setDates(startDate, endDate);
     }
 
@@ -64,6 +70,13 @@ public class Show extends IdentifiableInteger implements Serializable {
     }
 
     /**
+     * @return the cost of admittance for the show, {@link Show#ticketPrice}
+     */
+    public double getTicketPrice() {
+        return ticketPrice;
+    }
+
+    /**
      * @return the date the play begins showing, {@link Show#startDate}
      */
     public Date getStartDate() {
@@ -75,6 +88,36 @@ public class Show extends IdentifiableInteger implements Serializable {
      */
     public Date getEndDate() {
         return endDate;
+    }
+
+    /**
+     * Implements {@link Identifiable#getId()}, returning the show's start date.
+     * (This obviously means that, at present, two shows may not have the same start date. Were this requirement dropped, the easiest solution would be to extend IdentifiableInteger in the normal way.)
+     *
+     * @return the unique ID of the object, the same as {@link Show#startDate}.
+     */
+    public Date getId() {
+        return getStartDate();
+    }
+
+
+    /**
+     * Implements {@link Identifiable#setId(Object)}, but does nothing: we do not allow for ID assignment in Show.
+     *
+     * @param id The new id for the object; unused.
+     */
+    public void setId(Date id) { }
+
+
+    /**
+     * Implements {@link Identifiable#nextId(Object)}, but does nothing: we do not allow for ID assignment in Show.
+     *
+     * @param date The previous date.
+     *
+     * @return A dummy date.
+     */
+    public Date nextId(Date date) {
+        return new Date(0);
     }
 
 
@@ -100,7 +143,7 @@ public class Show extends IdentifiableInteger implements Serializable {
      */
     @Override
     public String toString() {
-        return id +
+        return getId() +
                 ": Client " + client.getId() +
                 ", " + name +
                 " " + showDateFormat.format(startDate)+
