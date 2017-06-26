@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.Iterator;
 
 /**
  * A façade (and singleton) for the Theater.
@@ -193,6 +194,7 @@ public class Theater implements Serializable {
     }
 
 
+
     public final static int REMOVE_CLIENT_NOEXIST = -1;
     public final static int REMOVE_CLIENT_FAILURE = 0;
     public final static int REMOVE_CLIENT_SUCCESS = 1;
@@ -216,6 +218,12 @@ public class Theater implements Serializable {
                 return REMOVE_CLIENT_ONGOING_SHOW;
             }
         }
+    }
+
+
+
+    public static Iterator<Client> getClients() {
+        return getClientList().iterator();
     }
 
 

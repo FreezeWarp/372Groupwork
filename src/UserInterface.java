@@ -159,7 +159,7 @@ public class UserInterface {
      * Lists all clients in the ClientList.
      */
     public static void listClients() {
-        System.out.println(Theater.getClientList());
+        System.out.println(Theater.getClients());
     }
 
 
