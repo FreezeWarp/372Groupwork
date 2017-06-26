@@ -126,17 +126,20 @@ public class Theater implements Serializable {
      *
      * @return True on success, false on failure.
      */
-    public static boolean storeData() {
+    public final static int STORE_DATA_FAILURE = 0;
+    public final static int STORE_DATA_SUCCESS = 1;
+
+    public static int storeData() {
         try {
             FileOutputStream out = new FileOutputStream(persistenceFile);
             ObjectOutputStream oos = new ObjectOutputStream(out);
 
             oos.writeObject(INSTANCE);
-            return true;
-            //oos.flush();
+            oos.flush();
+            return STORE_DATA_SUCCESS;
         } catch (Exception e) {
             System.err.println("Theater.storeData: Unable to serialise a value: " + e);
-            return false;
+            return STORE_DATA_FAILURE;
         }
     }
 
@@ -146,22 +149,27 @@ public class Theater implements Serializable {
      * 
      * @return The Theater instance on success, or null on failure.
      */
-    public static Theater retrieveData() throws TheaterAlreadyLoadedDataException {
+
+    public final static int RETRIEVE_DATA_FAILURE = 0;
+    public final static int RETRIEVE_DATA_SUCCESS = 1;
+    public final static int RETRIEVE_DATA_ALREADY_LOADED = 2;
+
+    public static int retrieveData() {
         if (dataRetrieved) {
-            throw new TheaterAlreadyLoadedDataException();
+            return RETRIEVE_DATA_ALREADY_LOADED;
         }
         else {
             try {
                 FileInputStream in = new FileInputStream(persistenceFile);
                 ObjectInputStream ois = new ObjectInputStream(in);
                 ois.readObject();
-                return INSTANCE;
+                return RETRIEVE_DATA_SUCCESS;
             } catch (IOException e) {
                 System.err.println("Theater.retrieveData: Problem reading: " + e);
-                return null;
+                return RETRIEVE_DATA_FAILURE;
             } catch (ClassNotFoundException e) {
                 System.err.println("Theater.retrieveData: Class not found: " + e);
-                return null;
+                return RETRIEVE_DATA_FAILURE;
             }
         }
     }

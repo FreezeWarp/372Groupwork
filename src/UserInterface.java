@@ -324,11 +324,15 @@ public class UserInterface {
      * Stores data by invoking Theater.storeData()
      */
     public static void storeData() {
-        if (Theater.storeData()) {
-            System.out.println("The data was successfully saved.");
-        }
-        else {
-            System.out.println("The data could not be saved.");
+        switch (Theater.storeData()) {
+            case Theater.STORE_DATA_SUCCESS:
+                System.out.println("The data was successfully saved.");
+                break;
+
+
+            case Theater.STORE_DATA_FAILURE:
+                System.out.println("The data could not be saved.");
+                break;
         }
     }
 
@@ -337,14 +341,18 @@ public class UserInterface {
      * Loads data by invoking Theater.retrieveData(). Ensures that data is not retrieved twice in a session.
      */
     public static void retrieveData() {
-        try {
-            if (Theater.retrieveData() == null) {
+        switch (Theater.retrieveData()) {
+            case Theater.RETRIEVE_DATA_FAILURE:
                 System.out.println("The application's data could not be retrieved.");
-            } else {
+                break;
+
+            case Theater.RETRIEVE_DATA_SUCCESS:
                 System.out.println("The application's data was successfully loaded.");
-            }
-        } catch (TheaterAlreadyLoadedDataException ex) {
-            System.out.println("The application's data can not be loaded twice in a session.");
+                break;
+
+            case Theater.RETRIEVE_DATA_ALREADY_LOADED:
+                System.out.println("The application's data can not be loaded twice in a session.");
+                break;
         }
     }
 
