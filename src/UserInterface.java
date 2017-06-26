@@ -135,21 +135,22 @@ public class UserInterface {
      * Asks for a client's ID and asks the client list to remove the client with the corresponding ID.
      */
     public static void removeClient() {
-        Client client = Theater.getClientList().getAccount(UserInterfacePrompts.promptInt("Client ID? "));
+        switch (Theater.removeClient(UserInterfacePrompts.promptInt("Client ID? "))) {
+            case Theater.REMOVE_CLIENT_NOEXIST:
+                System.out.println("The client does not exist.");
+                break;
 
-        if (client == null) {
-            System.out.println("The client does not exist.");
-        }
-        else {
-            try {
-                if (Theater.getClientList().removeClient(client.getId())) {
-                    System.out.println("The client was removed.");
-                } else {
-                    System.out.println("The client could not be removed.");
-                }
-            } catch (ClientListOngoingShowsException ex) {
+            case Theater.REMOVE_CLIENT_SUCCESS:
+                System.out.println("The client was removed.");
+                break;
+
+            case Theater.REMOVE_CLIENT_FAILURE:
+                System.out.println("The client could not be removed.");
+                break;
+
+            case Theater.REMOVE_CLIENT_ONGOING_SHOW:
                 System.out.println("The client still has a show scheduled that hasn't ended yet.");
-            }
+                break;
         }
     }
 

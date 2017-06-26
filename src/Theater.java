@@ -193,6 +193,32 @@ public class Theater implements Serializable {
     }
 
 
+    public final static int REMOVE_CLIENT_NOEXIST = -1;
+    public final static int REMOVE_CLIENT_FAILURE = 0;
+    public final static int REMOVE_CLIENT_SUCCESS = 1;
+    public final static int REMOVE_CLIENT_ONGOING_SHOW = 2;
+
+    public static int removeClient(int clientId) {
+        Client client = getClientList().getAccount(clientId);
+
+        if (client == null) {
+            return REMOVE_CLIENT_NOEXIST;
+        }
+        else {
+            try {
+                if (getClientList().removeClient(client.getId())) {
+                    return REMOVE_CLIENT_SUCCESS;
+                }
+                else {
+                    return REMOVE_CLIENT_FAILURE;
+                }
+            } catch (ClientListOngoingShowsException ex) {
+                return REMOVE_CLIENT_ONGOING_SHOW;
+            }
+        }
+    }
+
+
     /*################################
      * Client/Customer/Show Instances
      *###############################*/
