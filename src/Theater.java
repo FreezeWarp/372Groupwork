@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.Date;
-import java.util.Iterator;
 
 /**
  * A façade (and singleton) for the Theater.
@@ -273,8 +272,8 @@ public class Theater implements Serializable {
 
 
 
-    public static Iterator<Client> getClients() {
-        return getClientList().iterator();
+    public static Iterable<Client> getClients() {
+        return getClientList();
     }
 
 
@@ -317,6 +316,7 @@ public class Theater implements Serializable {
      */
     public static ADD_SHOW_STATUS addShow(int clientId, String showName, Date startDate, Date endDate, double ticketPrice) {
         Client client = Theater.getClientList().getAccount(clientId);
+
         if (client == null) {
             return ADD_SHOW_STATUS.NOEXIST;
         }
