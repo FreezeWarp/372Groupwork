@@ -25,14 +25,13 @@ public class SingletonMap<K, E> implements Iterable<E>, Serializable {
     private void readObject(java.io.ObjectInputStream input) {
         try {
             Field field = this.getClass().getDeclaredField("INSTANCE");
-            SingletonMap<K, E> dummy = new SingletonMap<K, E>();
+            SingletonMap<K, E> dummy = new SingletonMap();
             Object instance = field.get(dummy);
             try {
                 input.defaultReadObject();
 
                 if (instance == null) {
-                    field.set(dummy, (SingletonMap) input.readObject());
-                    //INSTANCE = (SingletonMap) input.readObject();
+                    field.set(dummy, input.readObject());
                 } else {
                     input.readObject();
                 }
@@ -57,7 +56,7 @@ public class SingletonMap<K, E> implements Iterable<E>, Serializable {
     private void writeObject(java.io.ObjectOutputStream output) {
         try {
             Field field = this.getClass().getDeclaredField("INSTANCE");
-            SingletonMap<K, E> dummy = new SingletonMap<K, E>();
+            SingletonMap<K, E> dummy = new SingletonMap();
 
             output.defaultWriteObject();
             output.writeObject(field.get(dummy));
