@@ -430,7 +430,7 @@ public class Theater implements Serializable {
 
     public static int sellTickets(TicketType ticketType, int quantity, Customer customerId, CreditCard creditcardNumber, Date showDate) {
         Ticket t = ticketType.getNewTicket(getShowList().getEntry(showDate));
-        System.out.println("Price of ticket:" + t.getPrice());
+        //System.out.println("Price of ticket:" + t.getPrice());
 
         return SELL_TICKET_FAILURE;
     }
