@@ -121,6 +121,7 @@ public class Theater implements Serializable {
     }
 
 
+
     /**
      * Returned codes used from {@link Theater#storeData()}.
      */
@@ -136,7 +137,7 @@ public class Theater implements Serializable {
     /**
      * Writes Theater's state to the persistence file.
      *
-     * @return True on success, false on failure.
+     * @return A code from {@link STORE_DATA_STATUS}
      */
     public static STORE_DATA_STATUS storeData() {
         try {
@@ -151,6 +152,7 @@ public class Theater implements Serializable {
             return STORE_DATA_STATUS.FAILURE;
         }
     }
+
 
 
     /**
@@ -171,7 +173,7 @@ public class Theater implements Serializable {
     /**
      * Loads in data from the persistence file.
      * 
-     * @return The Theater instance on success, or null on failure.
+     * @return A code from {@link RETRIEVE_DATA_STATUS}
      */
     public static RETRIEVE_DATA_STATUS retrieveData() {
         if (dataRetrieved) {
@@ -215,6 +217,15 @@ public class Theater implements Serializable {
         PHONE_NUMBER_OUT_OF_RANGE
     }
 
+    /**
+     * Adds a {@link Client} to the {@link ClientList}.
+     *
+     * @param name The name of the client.
+     * @param address The address of the client.
+     * @param phone The phone # of the client.
+     *
+     * @return A code from {@link ADD_CLIENT_STATUS}.
+     */
     public static ADD_CLIENT_STATUS addClient(String name, String address, long phone) {
         try {
             // Add New Account Object to Client List
@@ -230,6 +241,7 @@ public class Theater implements Serializable {
             return ADD_CLIENT_STATUS.PHONE_NUMBER_OUT_OF_RANGE;
         }
     }
+
 
 
     /**
@@ -250,6 +262,13 @@ public class Theater implements Serializable {
         ONGOING_SHOW
     }
 
+    /**
+     * Removes a client from the {@link ClientList}.
+     *
+     * @param clientId The ID of the client to be removed.
+     *
+     * @return A code from {@link REMOVE_CLIENT_STATUS}.
+     */
     public static REMOVE_CLIENT_STATUS removeClient(int clientId) {
         Client client = getClientList().getAccount(clientId);
 
@@ -272,6 +291,9 @@ public class Theater implements Serializable {
 
 
 
+    /**
+     * @return An iterable class to be used for iterating through the client list.
+     */
     public static Iterable<Client> getClients() {
         return getClientList();
     }
@@ -285,19 +307,15 @@ public class Theater implements Serializable {
         /**
          * No client with the clientId exists. */
         NOEXIST,
-
         /**
          * Generic failure occured. */
         FAILURE,
-
         /**
          * Method completed successfully. */
         SUCCESS,
-
         /**
          * Another show already is happening during the given dates. */
         SHOW_CONFLICT,
-
         /**
          * The start date is after the end date. */
         DATE_MISMATCH
