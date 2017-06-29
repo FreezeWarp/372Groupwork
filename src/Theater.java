@@ -1,4 +1,4 @@
-import java.io.*;
+﻿import java.io.*;
 import java.util.Date;
 import java.util.Iterator;
 
@@ -284,7 +284,7 @@ public class Theater implements Serializable {
     public final static int SELL_TICKET_FAILURE = 0;
     public final static int SELL_TICKET_SUCCESS = 1;
 
-    public static int sellTickets(TicketType ticketType, int quantity, int customerId, long creditcardNumber, Date showDate) {
+    public static int sellTickets(TicketType ticketType, int quantity, Customer customerId, CreditCard creditcardNumber, Date showDate) {
         Ticket t = ticketType.getNewTicket(getShowList().getEntry(showDate));
         System.out.println("Price of ticket:" + t.getPrice());
 
