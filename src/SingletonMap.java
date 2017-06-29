@@ -16,36 +16,17 @@ import java.util.Map;
  * @version 1.0
  * @since   2017-06-22
  */
-public class SingletonMap<K, E> implements Iterable<E>, Serializable {
+public abstract class SingletonMap<K, E> implements Iterable<E>, Serializable {
     /*################################
      * Singleton-Specific Functionality
      *###############################*/
-
     /**
-     * The global singleton instance of SingletonMap. It can be initialised by {@link SingletonMap#getInstance()}, if needed.
+     * The global singleton instance of SingletonMap. This will be overwritten by all non-abstract extensions of SingletonMap, but notably is required for readObject/writeObject functionality.
      */
     private static SingletonMap INSTANCE;
 
 
-    /**
-     * An unused constructor that overrides the default public constructor, preventing SingletonMap from being initialised outside of getInstance().
-     */
-    protected SingletonMap() { }
 
-
-    /**
-     * @return The singleton instance of SingletonMap. It will be initialised, if necessary.
-     */
-    public static SingletonMap getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new SingletonMap();
-        }
-
-        return INSTANCE;
-    }
-
-
-    
     /*################################
      * Singleton Serialisation
      *###############################*/

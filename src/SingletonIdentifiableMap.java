@@ -3,41 +3,10 @@ import java.io.Serializable;
 /**
  * Created by joseph on 29/06/17.
  */
-public class SingletonIdentifiableMap<K, E extends Identifiable<K>> extends SingletonMap<K, E> implements Iterable<E>, Serializable {
-    /*################################
-     * Singleton-Specific Functionality
-     *###############################*/
-
-    /**
-     * The global singleton instance of SingletonMap. It can be initialised by {@link SingletonMap#getInstance()}, if needed.
-     */
-    private static SingletonIdentifiableMap INSTANCE;
-
-
-    /**
-     * An unused constructor that overrides the default public constructor, preventing SingletonMap from being initialised outside of getInstance().
-     */
-    protected SingletonIdentifiableMap() { }
-
-
-    /**
-     * @return The singleton instance of SingletonMap. It will be initialised, if necessary.
-     */
-    public static SingletonIdentifiableMap getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new SingletonIdentifiableMap();
-        }
-
-        return INSTANCE;
-    }
-
-
-
-
+public abstract class SingletonIdentifiableMap<K, E extends Identifiable<K>> extends SingletonMap<K, E> implements Iterable<E>, Serializable {
     /*################################
      * The Core List Functionality
      *###############################*/
-
     /**
      * The last Map key that was assigned. Use {@link SingletonIdentifiableMap#getNewKey(E)} to get the next key in the series.
      */

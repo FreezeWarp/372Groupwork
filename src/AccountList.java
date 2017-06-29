@@ -5,36 +5,7 @@
  * @version 1.0
  * @since   2017-06-22
  */
-public class AccountList<E extends Account> extends SingletonIdentifiableMap<Integer, E> {
-    /*################################
-     * Singleton-Specific Functionality
-     *###############################*/
-
-    /**
-     * The global singleton instance of AccountList. It can be initialised by {@link AccountList#getInstance()}, if needed.
-     */
-    private static AccountList INSTANCE;
-
-
-    /**
-     * An unused constructor that overrides the default public constructor, preventing AccountList from being initialised outside of getInstance().
-     */
-    protected AccountList() { }
-
-
-    /**
-     * @return The singleton instance of AccountList. It will be initialised, if necessary.
-     */
-    public static AccountList getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new AccountList();
-        }
-
-        return INSTANCE;
-    }
-
-
-
+public abstract class AccountList<E extends Account> extends SingletonIdentifiableMap<Integer, E> {
     /*################################
      * Alter List Member Functionality
      *###############################*/
