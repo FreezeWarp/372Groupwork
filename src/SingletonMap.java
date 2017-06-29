@@ -1,9 +1,7 @@
 import java.io.IOException;
 import java.io.Serializable;
 import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 /**
  * This defines a basic hashmap that should be treated as a Singleton, and thus contains a static INSTANCE field and the necessary serialising functionality.
@@ -78,7 +76,7 @@ public class SingletonMap<K, E> implements Iterable<E>, Serializable {
     /**
      * A Map of E-typed objects, keyed by an integer that should be entirely unique.
      */
-    protected Map<K, E> singletonMap = new HashMap<K, E>();
+    protected NavigableMap<K, E> singletonMap = new TreeMap<K, E>();
 
 
     /**

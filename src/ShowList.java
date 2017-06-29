@@ -89,7 +89,7 @@ public class ShowList extends SingletonIdentifiableMap<Date, Show> {
      * @return True if it can be removed, false if it cannot
      */
     public static boolean checkShowDates(int accountId) {
-        for (Show show : getInstance()) { // TODO: figure out why "this" doesn't work instead of Theater.getShowList(); the Singleton property is likely not being maintained at present.
+        for (Show show : getInstance()) {
             if (accountId == show.getClient().getId()) {
                 if (show.getEndDate().after(new Date())) {
                     return false;
@@ -99,7 +99,12 @@ public class ShowList extends SingletonIdentifiableMap<Date, Show> {
 
         return true;
     }
-    
+
+
+    public static Show getShow(Date date) {
+        return (Show) getInstance().singletonMap.floorEntry(date);
+    }
+
     /**
      * Checks if a show exists for a given date
      *

@@ -421,6 +421,7 @@ public class UserInterface {
         else {
             CreditCard creditCard = customer.getCreditCard();
             Date showDate = UserInterfacePrompts.promptShowDate("Date of the show? (MM/DD/yyyy)? ");
+            Show show = ShowList.getShow(showDate); // Get a show from the date, I think. I haven't tested.
             
             //THIS IS ALL TEMP STUFF NEEDS TO BE REFACTORED//
             
