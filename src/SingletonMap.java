@@ -16,7 +16,7 @@ import java.util.Map;
  * @version 1.0
  * @since   2017-06-22
  */
-public class SingletonMap<K, E extends Identifiable<K>> implements Iterable<E>, Serializable {
+public class SingletonMap<K, E> implements Iterable<E>, Serializable {
     /*################################
      * Singleton-Specific Functionality
      *###############################*/
@@ -102,12 +102,6 @@ public class SingletonMap<K, E extends Identifiable<K>> implements Iterable<E>, 
 
 
     /**
-     * The last Map key that was assigned. Use {@link SingletonMap#getNewKey(E)} to get the next key in the series.
-     */
-    private K lastKey;
-
-
-    /**
      * An iterator that iterates through the list of Map entries (values).
      * 
      * @return the next value in the singletonMap
@@ -118,32 +112,18 @@ public class SingletonMap<K, E extends Identifiable<K>> implements Iterable<E>, 
 
 
     /**
-     * Gets a new unique map key
-     * 
-     * @param entry The entry object that we are getting a map key for
-     * 
-     * @return A new, unique Map key.
-     */
-    public K getNewKey(E entry) {
-        return lastKey = entry.nextId(lastKey);
-    }
-
-
-    /**
      * Adds a new Map entry to the Map.
      *
      * @param entry The entry object to add.
      *
      * @return True on success, false on failure (typically, an entry with the same key already exists).
      */
-    public boolean addEntry(E entry) {
-        entry.setId(getNewKey(entry)); // Set the ID to a newly-created ID used for uniquely identifying objects in the hashmap.
-
-        if (hasEntry(entry.getId())) { // Basically, detect a failure to set the ID correctly. While unlikely, this could happen if Identifiable is incorrectly implemented.
+    public boolean addEntry(K value, E entry) {
+        if (hasEntry(value)) { // Basically, detect a failure to set the ID correctly. While unlikely, this could happen if Identifiable is incorrectly implemented.
             return false;
         }
         else {
-            singletonMap.put(entry.getId(), entry);
+            singletonMap.put(value, entry);
             return true;
         }
     }

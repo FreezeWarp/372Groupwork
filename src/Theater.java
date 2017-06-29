@@ -1,4 +1,4 @@
-﻿import java.io.*;
+import java.io.*;
 import java.util.Date;
 import java.util.Iterator;
 
@@ -227,7 +227,7 @@ public class Theater implements Serializable {
             else {
                 return ADD_CLIENT_STATUS.FAILURE;
             }
-        } catch (AccountPhoneNumberOutOfRangeException ex) {
+        } catch (Client.AccountPhoneNumberOutOfRangeException ex) {
             return ADD_CLIENT_STATUS.PHONE_NUMBER_OUT_OF_RANGE;
         }
     }

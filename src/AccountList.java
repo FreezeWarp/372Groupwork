@@ -5,7 +5,7 @@
  * @version 1.0
  * @since   2017-06-22
  */
-public class AccountList<E extends Account> extends SingletonMap<Integer, E> {
+public class AccountList<E extends Account> extends SingletonIdentifiableMap<Integer, E> {
     /*################################
      * Singleton-Specific Functionality
      *###############################*/

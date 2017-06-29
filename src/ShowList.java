@@ -7,7 +7,7 @@ import java.util.Date;
  * @version 1.0
  * @since   2017-06-22
  */
-public class ShowList extends SingletonMap<Date, Show> {
+public class ShowList extends SingletonIdentifiableMap<Date, Show> {
     /*################################
      * Singleton-Specific Functionality
      *###############################*/
