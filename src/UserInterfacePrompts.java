@@ -59,9 +59,11 @@ public class UserInterfacePrompts {
             if (inputInt < min) {
                 System.out.println("That number is too low. Please enter a number between " + min + " and " + max);
             }
-            else if (inputInt > max) {
-                System.out.println("That number is too high. Please enter a number between " + min + " and " + max);
+            else if (inputInt > 18) {
+                System.out.println("That number is too high. Please enter a number between " + min + " and " + 18);
             }
+            else if (inputInt == 16 || inputInt==17)
+                System.out.println("They aren't added yet, also delete this before we submit"); //delete this later
             else {
                 break;
             }
