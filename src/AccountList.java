@@ -2,8 +2,8 @@
  * A list of {@link Account}s and associated functionality, complying with {@link SingletonMap}.
  *
  * @author  Joseph Parsons
- * @version 1.0
- * @since   2017-06-22
+ * @version 2.0
+ * @since   2017-06-29
  */
 public abstract class AccountList<E extends Account> extends SingletonIdentifiableMap<Integer, E> {
     /*################################

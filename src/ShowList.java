@@ -4,8 +4,8 @@ import java.util.Date;
  * A list of {@link Show}s and associated functionality, complying with {@link SingletonMap}.
  *
  * @author  Cory Stadther
- * @version 1.0
- * @since   2017-06-22
+ * @version 2.0
+ * @since   2017-06-29
  */
 public class ShowList extends SingletonIdentifiableMap<Date, Show> {
     /*################################
