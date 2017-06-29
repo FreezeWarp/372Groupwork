@@ -384,21 +384,25 @@ public class UserInterface {
         }
     }
 
-
+    /**
+     * Sells tickets, but it doesn't update client or customer object, my man
+     */
+//TODO need to update client/customer objects
     public static void sellTickets(TicketType t) {
-        try {
-            Theater.getShowList().addShow(new Show(
-                    new Client("Bob", "123 Downing St.", 5558002031l),
-                    "Cats on Ice",
-                    new Date(117, 10, 9),
-                    new Date(117, 10, 11),
-                    50 // ticket price
-            ));
-            Theater.sellTickets(t, 0, 0, 0, new Date(117, 10, 9));
-        } catch (Exception ex) {
-            System.out.println("Test failed.");
+        int quantity = UserInterfacePrompts.promptInt("Quantity? ");
+        Customer customer = Theater.getCustomerList().getAccount(UserInterfacePrompts.promptInt("Customer ID? "));
+
+
+        //adds a new credit card to the customer's account, if the customer account exists
+        if (customer == null) {
+            System.out.println("Error, specified customer does not exist, did you enter the correct account ID?");
         }
-    }
+        else {
+            CreditCard creditCard = customer.getCreditCard();
+            Date showDate = UserInterfacePrompts.promptShowDate("Date of the show? (MM/DD/yyyy)? ");//TODO check showdate is valid
+            Theater.sellTickets(t, quantity, customer, creditCard, showDate);
+            }
+        }
 
 
     /**
