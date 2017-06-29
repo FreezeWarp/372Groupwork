@@ -301,6 +301,63 @@ public class Theater implements Serializable {
 
 
     /**
+     * Returned codes used from {@link Theater#removeCreditCard(int, long)}.
+     */
+    enum REMOVE_CREDIT_CARD_STATUS {
+        /**
+         * The {@link CreditCard} does not exist for the customer. */
+        NOEXIST,
+        /**
+         * Generic failure occurred. */
+        FAILURE,
+        /**
+         * Method ended successfully. */
+        SUCCESS,
+        /**
+         * The {@link CreditCard} to be deleted is the customer's last, and cannot be. */
+        LAST_CARD
+    };
+
+    /**
+     * Removes a {@link CreditCard} from a {@link Customer}.
+     *
+     * @param customerId The ID of the customer whose {@link CreditCard} is being deleted.
+     * @param creditCardNumber The number of the {@link CreditCard} to be deleted.
+     *
+     * @return A status code from {@link REMOVE_CLIENT_STATUS}
+     */
+    public static REMOVE_CREDIT_CARD_STATUS removeCreditCard(int customerId, long creditCardNumber) {
+        Customer customer = Theater.getCustomerList().getAccount(customerId);
+
+        if (customer == null) {
+            return REMOVE_CREDIT_CARD_STATUS.NOEXIST;
+        }
+        else {
+            try {
+                if (customer.removeCreditCard(UserInterfacePrompts.promptCreditCardNumber("Credit card number? "))) {
+                    return REMOVE_CREDIT_CARD_STATUS.SUCCESS;
+                }
+                else {
+                    return REMOVE_CREDIT_CARD_STATUS.FAILURE;
+                }
+            } catch (Customer.CustomerMinimumCreditCardsException ex) {
+                return REMOVE_CREDIT_CARD_STATUS.LAST_CARD;
+            }
+        }
+    }
+
+
+
+    /**
+     * @return An iterable class to be used for iterating through the customer list.
+     */
+    public static Iterable<Customer> getCustomers() {
+        return getCustomerList();
+    }
+
+
+
+    /**
      * Returned codes used from {@link Theater#addShow(int, String, Date, Date, double)}.
      */
     enum ADD_SHOW_STATUS {

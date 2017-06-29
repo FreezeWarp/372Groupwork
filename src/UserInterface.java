@@ -268,21 +268,30 @@ public class UserInterface {
      * Asks for a credit card number to be entered, then deletes the corresponding credit card from whichever customer added it.
      */
     public static void removeCreditCard() {
-        Customer customer = Theater.getCustomerList().getAccount(UserInterfacePrompts.promptInt("Customer ID of the credit card holder? "));
+        int customerId = UserInterfacePrompts.promptInt("Customer ID of the credit card holder? ");
 
-        if (customer == null) {
+        if (!Theater.getCustomerList().validateAccount(customerId)) {
             System.out.println("Error, specified customer does not exist, did you enter the correct account ID?");
         }
         else {
-            try {
-                if (customer.removeCreditCard(UserInterfacePrompts.promptCreditCardNumber("Credit card number? "))) {
+            long creditCardNumber = UserInterfacePrompts.promptCreditCardNumber("Credit card number? ");
+
+            switch (Theater.removeCreditCard(customerId, creditCardNumber)) {
+                case SUCCESS:
                     System.out.println("The credit card was removed.");
-                }
-                else {
+                    break;
+
+                case FAILURE:
                     System.out.println("The customer's credit card could not be deleted.");
-                }
-            } catch (Customer.CustomerMinimumCreditCardsException ex) {
-                System.out.println("Cannot delete the last credit card a user has.");
+                    break;
+
+                case LAST_CARD:
+                    System.out.println("Cannot delete the last credit card a user has.");
+                    break;
+
+                default:
+                    System.out.println("An unknown status code was returned.");
+                    break;
             }
         }
     }
@@ -292,7 +301,7 @@ public class UserInterface {
      * Lists all customers in the CustomerList.
      */
     public static void listCustomers() {
-        System.out.println(Theater.getCustomerList());
+        System.out.println(Theater.getCustomers());
     }
 
 
