@@ -40,6 +40,28 @@ public class UserInterfacePrompts {
         return inputInt;
     }
 
+    public static double promptDouble(String promptText) {
+        Scanner s  = new Scanner(System.in);
+         double inputDouble = 0;
+
+        System.out.print(promptText);
+
+        while (true) {
+            String input = s.nextLine();
+
+            // Remove space and punctuation characters from the input; we can reasonably assume they were typed in error. (Alphabetic characters will still go through, and likely cause an exception next.)
+            input = input.replace("[\\s\\W]+", "");
+
+            try {
+                inputDouble = Double.parseDouble(input);
+                break;
+            } catch (Exception ex) {
+                System.out.println("That is not a number. Please enter a number.");
+            }
+        }
+
+        return inputDouble;
+    }
 
     /**
      * Prompts the user for an integer that must fall between min and max
