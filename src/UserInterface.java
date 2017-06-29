@@ -109,7 +109,7 @@ public class UserInterface {
 
         /* Loop until exit command is entered. Process other commands as entered. */
         int commandNumber;
-        while ((commandNumber = UserInterfacePrompts.promptIntRange(System.getProperty("line.separator") + "Make a selection (13 for Help): ", 0, commandMap.values().size() - 1)) != 0) {
+        while ((commandNumber = UserInterfacePrompts.promptIntRange(System.getProperty("line.separator") + "Make a selection (18 for Help): ", 0, commandMap.values().size() - 1)) != 0) {
             commandMap.get(commandNumber).run();
         }
 
