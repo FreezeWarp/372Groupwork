@@ -310,9 +310,10 @@ public class UserInterface {
             String name = UserInterfacePrompts.promptLine("Show name? ");
             Date startDate = UserInterfacePrompts.promptShowDate("Start of Show (MM/DD/yyyy)? ");
             Date endDate = UserInterfacePrompts.promptShowDate("End of Show (MM/DD/yyyy)? ");
+            double ticketPrice = UserInterfacePrompts.promptDouble("Ticket price?");
 
             try {
-                Show show = new Show(client, name, startDate, endDate, 0); // TODO: ticket price
+                Show show = new Show(client, name, startDate, endDate, ticketPrice);
 
                 try {
                     if (Theater.getShowList().addShow(show)) {
