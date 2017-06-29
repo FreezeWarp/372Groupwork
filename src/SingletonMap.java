@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.io.Serializable;
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -11,17 +12,7 @@ import java.util.Map;
  * @version 2.0
  * @since   2017-06-29
  */
-public abstract class SingletonMap<K, E> implements Iterable<E>, Serializable {
-    /*################################
-     * Singleton-Specific Functionality
-     *###############################*/
-    /**
-     * The global singleton instance of SingletonMap. This will be overwritten by all non-abstract extensions of SingletonMap, but notably is required for readObject/writeObject functionality.
-     */
-    private static SingletonMap INSTANCE;
-
-
-
+public class SingletonMap<K, E> implements Iterable<E>, Serializable {
     /*################################
      * Singleton Serialisation
      *###############################*/
@@ -33,18 +24,27 @@ public abstract class SingletonMap<K, E> implements Iterable<E>, Serializable {
      */
     private void readObject(java.io.ObjectInputStream input) {
         try {
-            input.defaultReadObject();
+            Field field = this.getClass().getDeclaredField("INSTANCE");
+            SingletonMap<K, E> dummy = new SingletonMap<K, E>();
+            Object instance = field.get(dummy);
+            try {
+                input.defaultReadObject();
 
-            if (INSTANCE == null) {
-                INSTANCE = (SingletonMap) input.readObject();
+                if (instance == null) {
+                    field.set(dummy, (SingletonMap) input.readObject());
+                    //INSTANCE = (SingletonMap) input.readObject();
+                } else {
+                    input.readObject();
+                }
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            else {
-                input.readObject();
-            }
-        } catch(IOException ioe) {
-            ioe.printStackTrace();
-        } catch(Exception e) {
-            e.printStackTrace();
+        } catch (NoSuchFieldException e) {
+            System.err.println("INSTANCE variable unavailable in implementation of SingletonMap. Reading object failed.");
+        } catch (IllegalAccessException e) {
+            System.err.println("Unable to read INSTANCE method. Reading object failed.");
         }
     }
 
@@ -56,12 +56,17 @@ public abstract class SingletonMap<K, E> implements Iterable<E>, Serializable {
      */
     private void writeObject(java.io.ObjectOutputStream output) {
         try {
+            Field field = this.getClass().getDeclaredField("INSTANCE");
+            SingletonMap<K, E> dummy = new SingletonMap<K, E>();
+
             output.defaultWriteObject();
-            output.writeObject(INSTANCE);
+            output.writeObject(field.get(dummy));
         } catch(IOException ioe) {
             ioe.printStackTrace();
-        } catch(Exception e) {
-            e.printStackTrace();
+        } catch (NoSuchFieldException e) {
+            System.err.println("INSTANCE variable unavailable in implementation of SingletonMap. Writing object failed.");
+        } catch (IllegalAccessException e) {
+            System.err.println("Unable to read INSTANCE method. Writing object failed.");
         }
     }
 

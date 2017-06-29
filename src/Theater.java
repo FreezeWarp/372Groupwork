@@ -145,6 +145,9 @@ public class Theater implements Serializable {
             ObjectOutputStream oos = new ObjectOutputStream(out);
 
             oos.writeObject(INSTANCE);
+            oos.writeObject(ShowList.getInstance());
+            oos.writeObject(CustomerList.getInstance());
+            oos.writeObject(ClientList.getInstance());
             oos.flush();
             return STORE_DATA_STATUS.SUCCESS;
         } catch (Exception e) {
@@ -183,6 +186,9 @@ public class Theater implements Serializable {
             try {
                 FileInputStream in = new FileInputStream(persistenceFile);
                 ObjectInputStream ois = new ObjectInputStream(in);
+                ois.readObject();
+                ois.readObject();
+                ois.readObject();
                 ois.readObject();
                 return RETRIEVE_DATA_STATUS.SUCCESS;
             } catch (IOException e) {
@@ -434,40 +440,25 @@ public class Theater implements Serializable {
      * Client/Customer/Show Instances
      *###############################*/
 
-    /**
-     * The global singleton instance of {@link ClientList}.
-     */
-    private ClientList clientList = ClientList.getInstance();
-
-    /**
-     * The global singleton instance of {@link CustomerList}.
-     */
-    private CustomerList customerList = CustomerList.getInstance();
-
-    /**
-     * The global singleton instance of {@link ShowList}.
-     */
-    private ShowList showList = ShowList.getInstance();
-
 
     /**
      * @return The singleton instance of {@link ClientList}, allowing modification of the client list singleton or use of ClientList-specific functionality.
      */
     public static ClientList getClientList() {
-        return getInstance().clientList;
+        return ClientList.getInstance();
     }
 
     /**
      * @return The singleton instance of {@link CustomerList}, allowing modification of the show list or use of CustomerList-specific functionality.
      */
     public static CustomerList getCustomerList() {
-        return getInstance().customerList;
+        return CustomerList.getInstance();
     }
 
     /**
      * @return The singleton instance of {@link ShowList}, allowing modification of the show list or use of ShowList-specific functionality.
      */
     public static ShowList getShowList() {
-        return getInstance().showList;
+        return ShowList.getInstance();
     }
 }

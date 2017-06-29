@@ -7,15 +7,10 @@
  * @since   2017-06-22
  */
 public class CustomerList extends AccountList<Customer> {
-    /*################################
-     * Singleton-Specific Functionality
-     *###############################*/
-
     /**
-     * The global singleton instance of CustomerList. It can be initialised by {@link CustomerList#getInstance()}, if needed.
+     * The global singleton instance of CustomerList.
      */
-    private static CustomerList INSTANCE;
-
+    protected static CustomerList INSTANCE;
 
     /**
      * An unused constructor that overrides the default public constructor, preventing CustomerList from being initialised outside of getInstance().
@@ -28,7 +23,11 @@ public class CustomerList extends AccountList<Customer> {
      */
     public static CustomerList getInstance() {
         if (INSTANCE == null) {
-            INSTANCE = new CustomerList();
+            synchronized(ClientList.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = new CustomerList();
+                }
+            }
         }
 
         return INSTANCE;

@@ -11,17 +11,16 @@ public class ShowList extends SingletonIdentifiableMap<Date, Show> {
     /*################################
      * Singleton-Specific Functionality
      *###############################*/
-
     /**
-     * The global singleton instance of ShowList. It can be initialised by {@link ShowList#getInstance()}, if needed.
+     * The global singleton instance of ShowList.
      */
-    private static ShowList INSTANCE;
+    protected static SingletonMap INSTANCE;
 
 
     /**
      * An unused constructor that overrides the default public constructor, preventing ShowList from being initialised outside of getInstance().
      */
-    protected ShowList() { }
+    private ShowList() { }
 
 
     /**
@@ -29,10 +28,14 @@ public class ShowList extends SingletonIdentifiableMap<Date, Show> {
      */
     public static ShowList getInstance() {
         if (INSTANCE == null) {
-            INSTANCE = new ShowList();
+            synchronized(ShowList.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = new ShowList();
+                }
+            }
         }
 
-        return INSTANCE;
+        return (ShowList) INSTANCE;
     }
 
 
@@ -64,8 +67,10 @@ public class ShowList extends SingletonIdentifiableMap<Date, Show> {
      * @return True if the date is valid, false if invalid
      */
     public boolean validShowDate(Date start, Date end) {
-        for (Show show : Theater.getShowList()) { System.out.println(show);
+        System.out.println(this.getInstance());
+        for (Show show : this.getInstance()) { System.out.println(show);
             if ( // our dates conflict if they:
+                // TODO: also conflict if a date is shared (not before or after)
                (start.after(show.getStartDate()) && start.before(show.getEndDate())) // start during another show
                || (end.after(show.getStartDate()) && end.before(show.getEndDate()))
                || (start.before(show.getStartDate()) && end.before(show.getEndDate())) // or occurs entirely during another show
@@ -85,7 +90,7 @@ public class ShowList extends SingletonIdentifiableMap<Date, Show> {
      * @return True if it can be removed, false if it cannot
      */
     public static boolean checkShowDates(int accountId) {
-        for (Show show : Theater.getShowList()) { // TODO: figure out why "this" doesn't work instead of Theater.getShowList(); the Singleton property is likely not being maintained at present.
+        for (Show show : getInstance()) { // TODO: figure out why "this" doesn't work instead of Theater.getShowList(); the Singleton property is likely not being maintained at present.
             if (accountId == show.getClient().getId()) {
                 if (show.getEndDate().after(new Date())) {
                     return false;
@@ -95,7 +100,6 @@ public class ShowList extends SingletonIdentifiableMap<Date, Show> {
 
         return true;
     }
-
 
     /*################################
      * Exceptions
