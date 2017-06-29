@@ -279,6 +279,69 @@ public class Theater implements Serializable {
 
 
 
+    /**
+     * Returned codes used from {@link Theater#addShow(int, String, Date, Date, double)}.
+     */
+    enum ADD_SHOW_STATUS {
+        /**
+         * No client with the clientId exists. */
+        NOEXIST,
+
+        /**
+         * Generic failure occured. */
+        FAILURE,
+
+        /**
+         * Method completed successfully. */
+        SUCCESS,
+
+        /**
+         * Another show already is happening during the given dates. */
+        SHOW_CONFLICT,
+
+        /**
+         * The start date is after the end date. */
+        DATE_MISMATCH
+    };
+
+    /**
+     * Adds a show to the {@link ShowList}.
+     *
+     * @param clientId The client owning the show.
+     * @param showName The name of the show.
+     * @param startDate The starting Date of the show.
+     * @param endDate The ending Date of the show.
+     * @param ticketPrice The baseline price for admittance to the show.
+     *
+     * @return A code from {@link ADD_SHOW_STATUS}.
+     */
+    public static ADD_SHOW_STATUS addShow(int clientId, String showName, Date startDate, Date endDate, double ticketPrice) {
+        Client client = Theater.getClientList().getAccount(clientId);
+        if (client == null) {
+            return ADD_SHOW_STATUS.NOEXIST;
+        }
+        else {
+            try {
+                Show show = new Show(client, showName, startDate, endDate, ticketPrice);
+
+                try {
+                    if (Theater.getShowList().addShow(show)) {
+                        return ADD_SHOW_STATUS.SUCCESS;
+                    }
+                    else {
+                        return ADD_SHOW_STATUS.FAILURE;
+                    }
+                }
+                catch (ShowList.ShowConflictException ex) {
+                    return ADD_SHOW_STATUS.SHOW_CONFLICT;
+                }
+            } catch (Show.ShowDateMismatchException ex) {
+                return ADD_SHOW_STATUS.DATE_MISMATCH;
+            }
+        }
+    }
+
+
 
 
     public final static int SELL_TICKET_FAILURE = 0;

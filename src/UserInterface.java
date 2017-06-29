@@ -301,9 +301,9 @@ public class UserInterface {
      * Adds newly created Show object to the ShowList.
      */
     public static void addShow() {
-        Client client = Theater.getClientList().getAccount(UserInterfacePrompts.promptInt("Client ID? "));
+        int clientId = UserInterfacePrompts.promptInt("Client ID? ");
 
-        if (client == null) {
+        if (!Theater.getClientList().validateAccount(clientId)) {
             System.out.println("Error, specified client does not exist, did you enter the correct account ID?");
         }
         else {
@@ -312,22 +312,26 @@ public class UserInterface {
             Date endDate = UserInterfacePrompts.promptShowDate("End of Show (MM/DD/yyyy)? ");
             double ticketPrice = UserInterfacePrompts.promptDouble("Ticket price?");
 
-            try {
-                Show show = new Show(client, name, startDate, endDate, ticketPrice);
+            switch (Theater.addShow(clientId, name, startDate, endDate, ticketPrice)) {
+                case SUCCESS:
+                    System.out.println("The show was added.");
+                    break;
 
-                try {
-                    if (Theater.getShowList().addShow(show)) {
-                        System.out.println("The show was added.");
-                    }
-                    else {
-                        System.out.println("The show could not be added.");
-                    }
-                }
-                catch (ShowList.ShowConflictException ex) {
+                case FAILURE:
+                    System.out.println("The show could not be added.");
+                    break;
+
+                case SHOW_CONFLICT:
                     System.out.println("These dates interfere with another show.");
-                }
-            } catch (Show.ShowDateMismatchException ex) {
-                System.out.println("The show cannot end before it starts.");
+                    break;
+
+                case DATE_MISMATCH:
+                    System.out.println("The show cannot end before it starts.");
+                    break;
+
+                default:
+                    System.out.println("An unknown status code was returned.");
+                    break;
             }
         }
     }
