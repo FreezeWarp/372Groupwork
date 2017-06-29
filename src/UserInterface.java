@@ -420,8 +420,17 @@ public class UserInterface {
         }
         else {
             CreditCard creditCard = customer.getCreditCard();
-            Date showDate = UserInterfacePrompts.promptShowDate("Date of the show? (MM/DD/yyyy)? ");//TODO check showdate is valid
-            Theater.sellTickets(t, quantity, customer, creditCard, showDate);
+            Date showDate = UserInterfacePrompts.promptShowDate("Date of the show? (MM/DD/yyyy)? ");
+            
+            //THIS IS ALL TEMP STUFF NEEDS TO BE REFACTORED//
+            
+            Client client = Theater.getShowList().checkShowForTicketSales(showDate); //get the client the show belongs to.
+            if (client != null) //client will be null if no show exists during this time
+	            {
+	            	Theater.sellTickets(t, quantity, customer, creditCard, showDate);
+	            	client.adjustBalance(100);//TODO Get the correct balance adjustment
+	            }
+            else {System.out.println("No shows exist durring this time");}
             }
         }
 

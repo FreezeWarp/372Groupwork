@@ -95,6 +95,23 @@ public class ShowList extends SingletonIdentifiableMap<Date, Show> {
 
         return true;
     }
+    
+    /**
+     * Checks if a show exists for a given date
+     *
+     * @param date the date to be checked
+     *
+     * @return client the show belongs to
+     */
+    public Client checkShowForTicketSales(Date date) {
+        for (Show show : Theater.getShowList()) {
+            if (date.after(show.getStartDate()) && date.before(show.getEndDate())) {
+                return show.getClient(); // I'm not really sure what we want returned here
+                //returning client because balance needs to be updated anyways
+            }
+        }
+        return null; //if no show exists during this date
+    }
 
 
     /*################################
