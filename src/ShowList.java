@@ -67,13 +67,12 @@ public class ShowList extends SingletonIdentifiableMap<Date, Show> {
      * @return True if the date is valid, false if invalid
      */
     public boolean validShowDate(Date start, Date end) {
-        System.out.println(this.getInstance());
-        for (Show show : this.getInstance()) { System.out.println(show);
-            if ( // our dates conflict if they:
+        for (Show show : this.getInstance()) {
+            if ( // our dates conflict if:
                 // TODO: also conflict if a date is shared (not before or after)
                (start.after(show.getStartDate()) && start.before(show.getEndDate())) // start during another show
-               || (end.after(show.getStartDate()) && end.before(show.getEndDate()))
-               || (start.before(show.getStartDate()) && end.before(show.getEndDate())) // or occurs entirely during another show
+               || (end.after(show.getStartDate()) && end.before(show.getEndDate())) // ends during another show
+               || (start.before(show.getStartDate()) && end.after(show.getEndDate())) // or occurs entirely during another show
             ) {
                 return false; // returns false if any shows conflict
             }
