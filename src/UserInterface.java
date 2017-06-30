@@ -410,9 +410,9 @@ public class UserInterface {
     }
 
     /**
-     * Sells tickets, but it doesn't update client or customer object, my man
+     * Sells tickets, but it doesn't update the customer object and has a ghetto way of checking showDate.  
      */
-//TODO need to update client/customer objects
+//TODO need to refactor/update customer objects with the actual ticket
     public static void sellTickets(TicketType t) {
         int quantity = UserInterfacePrompts.promptInt("Quantity? ");
         if (quantity < 1) {
