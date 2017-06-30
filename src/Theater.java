@@ -1,4 +1,4 @@
-import java.io.*;
+﻿import java.io.*;
 import java.util.Date;
 
 /**
@@ -429,11 +429,38 @@ public class Theater implements Serializable {
     public final static int SELL_TICKET_SUCCESS = 1;
 
     public static int sellTickets(TicketType ticketType, int quantity, Customer customerId, CreditCard creditcardNumber, Date showDate) {
-        Ticket t = ticketType.getNewTicket(getShowList().getEntry(showDate));
-        //System.out.println("Price of ticket:" + t.getPrice());
+       Ticket t = ticketType.getNewTicket(getShowList().getEntry(showDate));
+
+        System.out.println("Price of ticket: $" + t.getPrice());
+        if (quantity > 1) {
+            System.out.println("Final price: $" + t.getPrice() * quantity);
+        }
+        adjustClientBalance(ticketType, quantity, showDate);
 
         return SELL_TICKET_FAILURE;
     }
+
+    public static void adjustClientBalance(TicketType ticketType, int quantity, Date showDate){
+        Ticket t = ticketType.getNewTicket(getShowList().getEntry(showDate));
+        if (ticketType == TicketType.StudentAdvanceTicket) {
+            for (int x = 0; x < quantity; x++) {
+                t.adjustStudentAdvanceClient();
+            }
+        }
+        else if (ticketType == TicketType.AdvanceTicket) {
+            for (int x = 0; x < quantity; x++) {
+                t.adjustAdvanceClient();
+            }
+        }
+        else if (ticketType == TicketType.Ticket)
+        {
+            for (int x = 0; x < quantity; x++) {
+                t.adjustClient();
+            }
+        }
+
+    }
+
 
 
     /*################################

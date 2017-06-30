@@ -89,6 +89,10 @@ public class UserInterface {
         helpMap.put(COMMAND_SELL_STUDENT_TICKET, "Sell Student Tickets");
         commandMap.put(COMMAND_SELL_STUDENT_TICKET, () -> sellTickets(TicketType.StudentAdvanceTicket));
 
+        final int COMMAND_PAY_CLIENT = 16;
+        helpMap.put(COMMAND_PAY_CLIENT, "Pay Client");
+        commandMap.put(COMMAND_PAY_CLIENT, () -> payClient());
+
         final int COMMAND_HELP = 18;
         helpMap.put(COMMAND_HELP, "Help");
         commandMap.put(COMMAND_HELP, () -> help());
@@ -411,6 +415,9 @@ public class UserInterface {
 //TODO need to update client/customer objects
     public static void sellTickets(TicketType t) {
         int quantity = UserInterfacePrompts.promptInt("Quantity? ");
+        if (quantity < 1) {
+            System.out.println("Please enter a positive integer for quantity.");
+        } else {
         Customer customer = Theater.getCustomerList().getAccount(UserInterfacePrompts.promptInt("Customer ID? "));
 
 
@@ -429,11 +436,35 @@ public class UserInterface {
             if (client != null) //client will be null if no show exists during this time
 	            {
 	            	Theater.sellTickets(t, quantity, customer, creditCard, showDate);
-	            	client.adjustBalance(100);//TODO Get the correct balance adjustment
+	            	//client.adjustBalance(100);//TODO Get the correct balance adjustment
 	            }
             else {System.out.println("No shows exist durring this time");}
             }
         }
+
+    public static void payClient() {
+        Client client = Theater.getClientList().getAccount(UserInterfacePrompts.promptInt("Client ID? "));
+        if (client == null) {
+            System.out.println("Error, specified client does not exist. Did you enter the correct account ID?");
+        } else {
+            System.out.println("The client's balance is :$" + client.getBalance());
+            double compare = client.getBalance();
+            if (compare == 0) {
+                System.out.println("We don't owe them anything!");
+            } else {
+                double payOff = UserInterfacePrompts.promptDouble("How much are we paying the client?");
+                if (compare < payOff) {
+                    System.out.println("This is more than we owe them.");
+                } else {
+                    double negative = payOff * -1;
+                    client.adjustBalance(negative);
+                    System.out.println("The client's new balance is :$" + client.getBalance());
+                }
+
+
+            }
+        }
+    }
 
 
     /**
