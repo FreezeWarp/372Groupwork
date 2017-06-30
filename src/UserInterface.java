@@ -232,7 +232,7 @@ public class UserInterface {
         Customer customer = Theater.getCustomerList().getAccount(UserInterfacePrompts.promptInt("Customer ID? "));
 
         if (customer == null) {
-            System.out.println("Error, specified customer does not exist, did you enter the correct account ID?");
+            System.out.println("Error, specified client does not exist. Did you enter the correct account ID?");
         }
         else {
             customer.removeCreditCards();
@@ -256,7 +256,7 @@ public class UserInterface {
 
         //adds a new credit card to the customer's account, if the customer account exists
         if (customer == null) {
-            System.out.println("Error, specified customer does not exist, did you enter the correct account ID?");
+            System.out.println("Error, specified client does not exist. Did you enter the correct account ID?");
         }
         else {
             CreditCard creditCard = UserInterfacePrompts.promptCreditCard("Credit card number? ", "Credit card expiration (MMyyyy)? ");
@@ -283,7 +283,7 @@ public class UserInterface {
         int customerId = UserInterfacePrompts.promptInt("Customer ID of the credit card holder? ");
 
         if (!Theater.getCustomerList().validateAccount(customerId)) {
-            System.out.println("Error, specified customer does not exist, did you enter the correct account ID?");
+            System.out.println("Error, specified client does not exist. Did you enter the correct account ID?");
         }
         else {
             long creditCardNumber = UserInterfacePrompts.promptCreditCardNumber("Credit card number? ");
@@ -325,7 +325,7 @@ public class UserInterface {
         int clientId = UserInterfacePrompts.promptInt("Client ID? ");
 
         if (!Theater.getClientList().validateAccount(clientId)) {
-            System.out.println("Error, specified client does not exist, did you enter the correct account ID?");
+            System.out.println("Error, specified client does not exist. Did you enter the correct account ID?");
         }
         else {
             String name = UserInterfacePrompts.promptLine("Show name? ");
@@ -423,7 +423,7 @@ public class UserInterface {
 
         //adds a new credit card to the customer's account, if the customer account exists
         if (customer == null) {
-            System.out.println("Error, specified customer does not exist, did you enter the correct account ID?");
+            System.out.println("Error, specified client does not exist. Did you enter the correct account ID?");
         }
         else {
             CreditCard creditCard = customer.getCreditCard();

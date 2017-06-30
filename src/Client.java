@@ -27,7 +27,7 @@ public class Client extends Account implements Serializable {
     /**
      * @return the balance of the client, {@link Client#balance}
      */
-    public int getBalance() {
+    public double getBalance() {
         return balance;
     }
 
@@ -39,9 +39,10 @@ public class Client extends Account implements Serializable {
      *
      * @return an integer reflecting the new, adjusted balance
      */
-    public int adjustBalance(int balanceAdjustment) {
+    public double adjustBalance(double balanceAdjustment) {
         return this.balance += balanceAdjustment;
     }
+
 
 
     /**
