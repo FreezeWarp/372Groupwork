@@ -423,23 +423,18 @@ public class UserInterface {
 
             //adds a new credit card to the customer's account, if the customer account exists
             if (customer == null) {
-                System.out.println("Error, specified client does not exist. Did you enter the correct account ID?");
+                System.out.println("Error, specified customer does not exist. Did you enter the correct account ID?");
             } else {
                 CreditCard creditCard = customer.getCreditCard();
-                Date showDate = UserInterfacePrompts.promptShowDate("Date of the show? (MM/DD/yyyy)? ");
-                Show show = ShowList.getShow(showDate); // Get a show from the date, I think. I haven't tested.
-
-                //THIS IS ALL TEMP STUFF NEEDS TO BE REFACTORED//
-
-                Client client = Theater.getShowList().checkShowForTicketSales(showDate); //get the client the show belongs to.
-                if (client != null) //client will be null if no show exists during this time
-                {
+                Date showDate = UserInterfacePrompts.promptShowDate("Date of the show? (MM/DD/yyyy)? ");//TODO better way to check proper show than nullpointer
+                try {
                     Theater.sellTickets(t, quantity, customer, creditCard, showDate);
-                    //client.adjustBalance(100);//TODO Get the correct balance adjustment
-                } else {
-                    System.out.println("No shows exist during this time");
+                } catch (NullPointerException e) {
+                    System.out.print("Please enter a proper date for the show");
                 }
             }
+
+
         }
     }
 
