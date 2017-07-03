@@ -204,22 +204,26 @@ public class UserInterface {
         String address = UserInterfacePrompts.promptLine("Customer address? ");
         long phone = UserInterfacePrompts.promptPhone("Phone number? ");
 
-        CreditCard creditCard = UserInterfacePrompts.promptCreditCard("Credit card number? ", "Credit card expiration (MMyyyy)? ");
+        switch (Theater.addCustomer(name, address, phone)) {
+            case CREDIT_CARD_INVALID:
+            	System.out.println("An invalid credit card was detected. Unable to add the customer account.");
+            	break;
+            	
+            case FAILURE:
+                System.out.println("The customer could not be added.");
+                break;
 
-        if (creditCard == null) {
-            System.out.println("An invalid credit card was detected. Unable to add the customer account.");
-        }
-        else {
-            try {
-                if (Theater.getCustomerList().addAccount(new Customer(name, address, phone, creditCard))) {
-                    System.out.println("The customer account was added.");
-                }
-                else {
-                    System.out.println("The customer account could not be added.");
-                }
-            } catch (Account.AccountPhoneNumberOutOfRangeException ex) {
+            case SUCCESS:
+                System.out.println("The customer was added.");
+                break;
+
+            case PHONE_NUMBER_OUT_OF_RANGE:
                 System.out.println("The phone number was out-of-range. The customer was not added. This may be an internal error.");
-            }
+                break;
+
+            default:
+                System.out.println("An unknown status code was returned.");
+                break;
         }
 
     }
@@ -229,22 +233,34 @@ public class UserInterface {
      * Asks for a customer's ID and asks the customer list to remove the customer with the corresponding ID.
      */
     public static void removeCustomer() {
-        Customer customer = Theater.getCustomerList().getAccount(UserInterfacePrompts.promptInt("Customer ID? "));
-
-        if (customer == null) {
-            System.out.println("Error, specified client does not exist. Did you enter the correct account ID?");
+        int customerId = UserInterfacePrompts.promptInt("Customer ID of the customer whose account is to be deleted? ");
+    	
+    	if (!Theater.getCustomerList().validateAccount(customerId)) {
+            System.out.println("Error, specified customer does not exist. Did you enter the correct account ID?");
         }
-        else {
-            customer.removeCreditCards();
+    	else {
+    		switch (Theater.removeCustomer(customerId)) {
+                case NOEXIST:
+           	        System.out.println("The customer does not exist");
+        	        break;
+        	
+                case FAILURE:
+                    System.out.println("The customer could not be removed.");
+                    break;
 
-            if (Theater.getCustomerList().removeAccount(customer.getId())) {
-                System.out.println("The customer was removed, along with all associated credit cards.");
-            }
-            else {
-                System.out.println("The customer could not be deleted.");
-            }
+                case SUCCESS:
+                    System.out.println("The customer was removed.");
+                    break;
 
-        }
+                case CREDIT_CARD_FAILURE:
+        	        System.out.println("The credit cards associated with the customer account could not be deleted. The customer was not deleted. This may be an internal error.");
+        	        break;
+        	
+                default:
+                    System.out.println("An unknown status code was returned.");
+                    break;
+           }
+       }    
     }
 
 
@@ -252,27 +268,34 @@ public class UserInterface {
      * Asks for a customer's credit card information and stores the newly created CreditCard object corresponding to the entered customer ID.
      */
     public static void addCreditCard() {
-        Customer customer = Theater.getCustomerList().getAccount(UserInterfacePrompts.promptInt("Customer ID? "));
-
-        //adds a new credit card to the customer's account, if the customer account exists
-        if (customer == null) {
-            System.out.println("Error, specified client does not exist. Did you enter the correct account ID?");
+    	int customerId = UserInterfacePrompts.promptInt("Customer ID of the credit card holder? ");
+    	
+    	if (!Theater.getCustomerList().validateAccount(customerId)) {
+            System.out.println("Error, specified customer does not exist. Did you enter the correct account ID?");
         }
-        else {
-            CreditCard creditCard = UserInterfacePrompts.promptCreditCard("Credit card number? ", "Credit card expiration (MMyyyy)? ");
+    	else {
+            switch (Theater.addCreditCard(customerId)) {
+                case NOEXIST:
+               	    System.out.println("The customer does not exist");
+            	    break;
+            	
+                case FAILURE:
+                    System.out.println("The credit card could not be added.");
+                    break;
 
-            if (creditCard == null) {
-                System.out.println("An invalid credit card was detected. Unable to add the credit card.");
-            }
-            else if (customer.addCreditCard(creditCard)) {
-                System.out.println("The credit card was added to the account.");
-            }
-            else {
-                System.out.println("Could not add credit card to the customer's account.");
-            }
+                case SUCCESS:
+                    System.out.println("The credit card was added.");
+                    break;
 
-        }
-
+                case CREDIT_CARD_DUPLICATE:
+            	    System.out.println("The credit card entered is already in use.");
+            	    break;
+            	
+                default:
+                    System.out.println("An unknown status code was returned.");
+                    break;
+            }
+    	}
     }
 
 
@@ -283,7 +306,7 @@ public class UserInterface {
         int customerId = UserInterfacePrompts.promptInt("Customer ID of the credit card holder? ");
 
         if (!Theater.getCustomerList().validateAccount(customerId)) {
-            System.out.println("Error, specified client does not exist. Did you enter the correct account ID?");
+            System.out.println("Error, specified customer does not exist. Did you enter the correct account ID?");
         }
         else {
             long creditCardNumber = UserInterfacePrompts.promptCreditCardNumber("Credit card number? ");
@@ -307,7 +330,7 @@ public class UserInterface {
             }
         }
     }
-
+    
 
     /**
      * Lists all customers in the CustomerList.

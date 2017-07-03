@@ -10,7 +10,7 @@ import java.util.Date;
  * @version 1.0
  * @since   2017-06-22
  */
-public class CreditCard implements Serializable {
+public class CreditCard implements Serializable, Comparable<CreditCard> {
     /**
      * The 16-digit card number.
      */
@@ -80,7 +80,12 @@ public class CreditCard implements Serializable {
         return ", CC: " + cardNumber + " EXP: " + dateFormat.format(expirationDate);
     }
 
-
+    
+    @Override
+	public int compareTo(CreditCard creditCard) {
+		
+		return (int) Long.compare(getCardNumber(), creditCard.getCardNumber()); 
+	}
 
     /*################################
      * Exceptions
@@ -102,6 +107,8 @@ public class CreditCard implements Serializable {
             super("The credit card number is out-of-range.");
         }
     }
-
+    
+    
+    
 
 }

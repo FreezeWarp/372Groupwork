@@ -1,6 +1,8 @@
 ﻿import java.io.*;
 import java.util.Date;
 
+
+
 /**
  * A façade (and singleton) for the Theater.
  * This should be the main entry point for all interface actions; in a sense, it is the API layer.
@@ -296,16 +298,169 @@ public class Theater implements Serializable {
     }
 
 
-
     /**
      * @return An iterable class to be used for iterating through the client list.
      */
     public static Iterable<Client> getClients() {
         return getClientList();
     }
+    
 
+    /**
+     * Returned codes used from {@link Theater#addCustomer(String, String, long)}.
+     */
+    enum ADD_CUSTOMER_STATUS {
+    	/**
+         * The credit card a user tried to enter is invalid. */
+        CREDIT_CARD_INVALID,
+        /**
+         * Generic failure occurred. */
+        FAILURE,
+        /**
+         * Method ended successfully. */
+        SUCCESS,
+        /**
+         * The phone number used is out of the valid range of phone numbers. */
+        PHONE_NUMBER_OUT_OF_RANGE,
+        /**
+         * The credit card already exists in the CreditCardList. */
+        CREDIT_CARD_DUPLICATE
+    }
 
+    /**
+     * Adds a {@link Customer} to the {@link CustomerList}.
+     *
+     * @param name The name of the customer.
+     * @param address The address of the customer.
+     * @param phone The phone # of the customer.
+     *
+     * @return A code from {@link ADD_CUSTOMER_STATUS}.
+     */
+    public static ADD_CUSTOMER_STATUS addCustomer(String name, String address, long phone) {
+    	CreditCard creditCard = UserInterfacePrompts.promptCreditCard("Credit card number? ", "Credit card expiration (MMyyyy)? ");
 
+        if (creditCard == null) {
+            return ADD_CUSTOMER_STATUS.CREDIT_CARD_INVALID;
+        }
+        else {
+            try {
+                // Add New Account Object to Customer List
+                Customer customer = new Customer(name, address, phone, creditCard);
+
+                if (getCustomerList().addAccount(customer)) {
+                    return ADD_CUSTOMER_STATUS.SUCCESS;
+                }
+                else {
+                    return ADD_CUSTOMER_STATUS.FAILURE;
+                }
+            } catch (Customer.AccountPhoneNumberOutOfRangeException ex) {
+                return ADD_CUSTOMER_STATUS.PHONE_NUMBER_OUT_OF_RANGE;
+            } catch(Customer.CreditCardListDuplicateCardException ex) {
+        	    return ADD_CUSTOMER_STATUS.CREDIT_CARD_DUPLICATE;
+            }
+        }
+    }
+    
+    /**
+     * Returned codes used from {@link Theater#removeCustomer(int)}.
+     */
+    enum REMOVE_CUSTOMER_STATUS {
+        /**
+         * The customer to be removed does not exist. */
+        NOEXIST,
+        /**
+         * Generic failure occurred. */
+        FAILURE,
+        /**
+         * Method ended successfully. */
+        SUCCESS,
+        /**
+         * The method failed because a credit card associated with the customer's account could not be deleted. */
+        CREDIT_CARD_FAILURE
+    }
+
+    /**
+     * Removes a customer from the {@link CustomerList}.
+     *
+     * @param customerId The ID of the customer to be removed.
+     *
+     * @return A code from {@link REMOVE_CLUSTOMER_STATUS}.
+     */
+    public static REMOVE_CUSTOMER_STATUS removeCustomer(int customerId) {
+        Customer customer = getCustomerList().getAccount(customerId);
+
+        if (customer == null) {
+            return REMOVE_CUSTOMER_STATUS.NOEXIST;
+        }
+        else {
+            try {
+                if (getCustomerList().removeAccount(customer.getId()) && customer.removeCreditCards()) {
+                    return REMOVE_CUSTOMER_STATUS.SUCCESS;
+                }
+                else {
+                    return REMOVE_CUSTOMER_STATUS.FAILURE;
+                }
+            } catch (Customer.CustomerCouldNotDeleteCreditCardsException ex) {
+                return REMOVE_CUSTOMER_STATUS.CREDIT_CARD_FAILURE;
+            }
+        }
+    }
+    
+    /**
+     * @return An iterable class to be used for iterating through the customer list.
+     */
+    public static Iterable<Customer> getCustomers() {
+        return getCustomerList();
+    }
+    
+    
+    /**
+     * Returned codes used from {@link Theater#addCreditCard(CreditCard, Customer)}.
+     */
+    enum ADD_CREDIT_CARD_STATUS {
+    	/**
+         * The customer to have a credit card added does not exist */
+        NOEXIST,
+        /**
+         * Generic failure occurred. */
+        FAILURE,
+        /**
+         * Method ended successfully. */
+        SUCCESS,
+        /**
+         * The credit card already exists in the CreditCardList. */
+        CREDIT_CARD_DUPLICATE
+    }
+
+    /**
+     * Adds a {@link CreditCard} to the {@link CreditCardList}.
+     *
+     * @param customerId The ID of the customer whose {@link CreditCard} is being deleted.
+     *
+     * @return A code from {@link ADD_CREDIT_CARD_STATUS}.
+     */
+    public static ADD_CREDIT_CARD_STATUS addCreditCard(int customerId) {
+    	Customer customer = Theater.getCustomerList().getAccount(customerId);
+  
+    	if (customer == null) {
+    		return ADD_CREDIT_CARD_STATUS.NOEXIST;
+    	}
+    	else {
+    		CreditCard creditCard = UserInterfacePrompts.promptCreditCard("Credit card number? ", "Credit card expiration (MMyyyy)? ");
+            try {
+				if (customer.addCreditCard(creditCard)) {
+				    return ADD_CREDIT_CARD_STATUS.SUCCESS;
+				}
+				else {
+				    return ADD_CREDIT_CARD_STATUS.FAILURE;
+				}
+			} catch (Customer.CreditCardListDuplicateCardException e) {
+			    return ADD_CREDIT_CARD_STATUS.CREDIT_CARD_DUPLICATE;
+				
+			}
+        }
+    }
+    
     /**
      * Returned codes used from {@link Theater#removeCreditCard(int, long)}.
      */
@@ -340,7 +495,7 @@ public class Theater implements Serializable {
         }
         else {
             try {
-                if (customer.removeCreditCard(UserInterfacePrompts.promptCreditCardNumber("Credit card number? "))) {
+                if (customer.removeCreditCard(creditCardNumber)) {
                     return REMOVE_CREDIT_CARD_STATUS.SUCCESS;
                 }
                 else {
@@ -351,16 +506,6 @@ public class Theater implements Serializable {
             }
         }
     }
-
-
-
-    /**
-     * @return An iterable class to be used for iterating through the customer list.
-     */
-    public static Iterable<Customer> getCustomers() {
-        return getCustomerList();
-    }
-
 
 
     /**
@@ -464,7 +609,7 @@ public class Theater implements Serializable {
 
 
     /*################################
-     * Client/Customer/Show Instances
+     * Client/Customer/Show/CreditCard Instances
      *###############################*/
 
 
@@ -488,4 +633,12 @@ public class Theater implements Serializable {
     public static ShowList getShowList() {
         return ShowList.getInstance();
     }
+    
+    /**
+     * @return The singleton instance of {@link CreditCardList}, allowing modification of the credit card list or use of CreditCardList-specific functionality.
+     */
+    public static CreditCardList getCreditCardList() {
+        return CreditCardList.getInstance();
+    }
+    
 }
