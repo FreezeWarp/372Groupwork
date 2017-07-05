@@ -203,8 +203,9 @@ public class UserInterface {
         String name = UserInterfacePrompts.promptLine("Customer name? ");
         String address = UserInterfacePrompts.promptLine("Customer address? ");
         long phone = UserInterfacePrompts.promptPhone("Phone number? ");
+        CreditCard creditCard = UserInterfacePrompts.promptCreditCard("Credit card number? ", "Credit card expiration (MMyyyy)? ");
 
-        switch (Theater.addCustomer(name, address, phone)) {
+        switch (Theater.addCustomer(name, address, phone, creditCard)) {
             case CREDIT_CARD_INVALID:
             	System.out.println("An invalid credit card was detected. Unable to add the customer account.");
             	break;
@@ -269,12 +270,13 @@ public class UserInterface {
      */
     public static void addCreditCard() {
     	int customerId = UserInterfacePrompts.promptInt("Customer ID of the credit card holder? ");
+        CreditCard creditCard = UserInterfacePrompts.promptCreditCard("Credit card number? ", "Credit card expiration (MMyyyy)? ");
     	
     	if (!Theater.getCustomerList().validateAccount(customerId)) {
             System.out.println("Error, specified customer does not exist. Did you enter the correct account ID?");
         }
     	else {
-            switch (Theater.addCreditCard(customerId)) {
+            switch (Theater.addCreditCard(customerId, creditCard)) {
                 case NOEXIST:
                	    System.out.println("The customer does not exist");
             	    break;

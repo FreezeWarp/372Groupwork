@@ -307,7 +307,7 @@ public class Theater implements Serializable {
     
 
     /**
-     * Returned codes used from {@link Theater#addCustomer(String, String, long)}.
+     * Returned codes used from {@link Theater#addCustomer(String, String, long, CreditCard)}.
      */
     enum ADD_CUSTOMER_STATUS {
     	/**
@@ -336,10 +336,9 @@ public class Theater implements Serializable {
      *
      * @return A code from {@link ADD_CUSTOMER_STATUS}.
      */
-    public static ADD_CUSTOMER_STATUS addCustomer(String name, String address, long phone) {
-    	CreditCard creditCard = UserInterfacePrompts.promptCreditCard("Credit card number? ", "Credit card expiration (MMyyyy)? ");
+    public static ADD_CUSTOMER_STATUS addCustomer(String name, String address, long phone, CreditCard creditCard) {
 
-        if (creditCard == null) {
+        if (creditCard == null) { // TODO: this is a good check to have; other objects may need to be checked for null in other Theater methods.
             return ADD_CUSTOMER_STATUS.CREDIT_CARD_INVALID;
         }
         else {
@@ -415,7 +414,7 @@ public class Theater implements Serializable {
     
     
     /**
-     * Returned codes used from {@link Theater#addCreditCard(CreditCard, Customer)}.
+     * Returned codes used from {@link Theater#addCreditCard(int, CreditCard)}.
      */
     enum ADD_CREDIT_CARD_STATUS {
     	/**
@@ -439,14 +438,13 @@ public class Theater implements Serializable {
      *
      * @return A code from {@link ADD_CREDIT_CARD_STATUS}.
      */
-    public static ADD_CREDIT_CARD_STATUS addCreditCard(int customerId) {
+    public static ADD_CREDIT_CARD_STATUS addCreditCard(int customerId, CreditCard creditCard) {
     	Customer customer = Theater.getCustomerList().getAccount(customerId);
   
     	if (customer == null) {
     		return ADD_CREDIT_CARD_STATUS.NOEXIST;
     	}
     	else {
-    		CreditCard creditCard = UserInterfacePrompts.promptCreditCard("Credit card number? ", "Credit card expiration (MMyyyy)? ");
             try {
 				if (customer.addCreditCard(creditCard)) {
 				    return ADD_CREDIT_CARD_STATUS.SUCCESS;
@@ -456,11 +454,11 @@ public class Theater implements Serializable {
 				}
 			} catch (Customer.CreditCardListDuplicateCardException e) {
 			    return ADD_CREDIT_CARD_STATUS.CREDIT_CARD_DUPLICATE;
-				
 			}
         }
     }
-    
+
+
     /**
      * Returned codes used from {@link Theater#removeCreditCard(int, long)}.
      */
