@@ -21,6 +21,11 @@ public enum TicketType {
         return new Ticket(show, customer);
     }
 
+    /**
+     * Performs the data updates that should occur whenever a ticket object is "sold."
+     *
+     * @param ticket The ticket that was just generated and should be considered "sold" for the first time.
+     */
     public static void onTicketSale(Ticket ticket) {
         // Add revenue from ticket sale to client account.
         ticket.getShow().getClient().adjustBalance(ticket.getPrice());

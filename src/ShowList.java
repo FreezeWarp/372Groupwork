@@ -81,7 +81,7 @@ public class ShowList extends SingletonIdentifiableMap<Date, Show> {
 
 
     /**
-     * Checks if client has a future show scheduled
+     * Checks if client has a future show scheduled.
      *
      * @param accountId the account to be checked
      *
@@ -100,6 +100,13 @@ public class ShowList extends SingletonIdentifiableMap<Date, Show> {
     }
 
 
+    /**
+     * Get the show that occurs on a specific date.
+     *
+     * @param date The date the show is occuring on.
+     *
+     * @return The show occurring on date, or null if none found.
+     */
     public static Show getShow(Date date) {
         Show show = getInstance().singletonMap.floorEntry(date).getValue();
 
@@ -113,6 +120,8 @@ public class ShowList extends SingletonIdentifiableMap<Date, Show> {
             return null;
         }
     }
+
+
 
     /*################################
      * Exceptions

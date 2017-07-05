@@ -34,6 +34,13 @@ public abstract class SingletonIdentifiableMap<K, E extends Identifiable<K>> ext
     }
 
 
+    /**
+     * Adds an entry to the singleton map. It's key will be from entry.getId(), which will (typically) be first set using entry.setId(unqiueID).
+     *
+     * @param entry The entry to add.
+     *
+     * @return True on success, false on failure.
+     */
     public boolean addEntry(E entry) {
         entry.setId(getNewKey(entry)); // Set the ID to a newly-created ID used for uniquely identifying objects in the hashmap.
 
