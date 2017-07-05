@@ -69,10 +69,9 @@ public class ShowList extends SingletonIdentifiableMap<Date, Show> {
     public boolean validShowDate(Date start, Date end) {
         for (Show show : this.getInstance()) {
             if ( // our dates conflict if:
-                // TODO: also conflict if a date is shared (not before or after)
-               (start.after(show.getStartDate()) && start.before(show.getEndDate())) // start during another show
-               || (end.after(show.getStartDate()) && end.before(show.getEndDate())) // ends during another show
-               || (start.before(show.getStartDate()) && end.after(show.getEndDate())) // or occurs entirely during another show
+               show.hasDate(start) // we start during another show
+               || show.hasDate(end) // we end during another show
+               || (start.before(show.getStartDate()) && end.after(show.getEndDate())) // we occur entirely during another show
             ) {
                 return false; // returns false if any shows conflict
             }
@@ -102,7 +101,17 @@ public class ShowList extends SingletonIdentifiableMap<Date, Show> {
 
 
     public static Show getShow(Date date) {
-        return (Show) getInstance().singletonMap.floorEntry(date);
+        Show show = getInstance().singletonMap.floorEntry(date).getValue();
+
+        if (show == null) { // Check for null, which happens when the given date is before all other shows.
+            return null;
+        }
+        else if (show.hasDate(date)) { // Make sure the returned show actually includes the specified date; the date could be between shows, or after all of them.
+            return show;
+        }
+        else {
+            return null;
+        }
     }
 
     /*################################

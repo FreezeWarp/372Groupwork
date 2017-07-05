@@ -138,6 +138,17 @@ public class Show implements Identifiable<Date>, Serializable {
 
 
     /**
+     * Check whether the Show has a given date as one of its showings.
+     *
+     * @param date A date to check for the show's happening on.
+     * @return True if the Show is occurring on the specified Date, false otherwise.
+     */
+    public boolean hasDate(Date date) {
+        return (getStartDate().before(date) && getEndDate().after(date)) || getStartDate().equals(date) || getEndDate().equals(date);
+    }
+
+
+    /**
      * @return a string representation concatenating the basic Show information
      */
     @Override
