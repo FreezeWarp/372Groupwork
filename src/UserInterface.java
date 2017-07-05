@@ -108,14 +108,6 @@ public class UserInterface {
         if (Theater.hasData() && UserInterfacePrompts.promptYesOrNo("Would you like to load available application data before starting? ")) {
             retrieveData();
         }
-        else {
-            // For easier testing (feel free to add your own entries after the needed refactoring into Theater).
-            Theater.addClient("Bobby Johnson", "123 Downing St.", 4445559100l); // client ID = 0
-            Theater.addShow(0, "Cats, on Ice!", new Date(199, 5, 11), new Date(199, 5, 16), 10);
-            Theater.addShow(0, "Dogs, on Grass!", new Date(199, 5, 21), new Date(199, 5, 25), 20);
-            Theater.addShow(0, "Birds, on Planes!", new Date(199, 6, 3), new Date(199, 6, 25), 30);
-            Theater.addShow(0, "You, in the Audience!", new Date(199, 7, 0), new Date(199, 7, 20), 40);
-        }
 
         help(); // Show help at first launch.
 
