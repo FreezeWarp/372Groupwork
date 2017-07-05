@@ -469,11 +469,11 @@ public class UserInterface {
             if (compare == 0) {
                 System.out.println("We don't owe them anything!");
             } else {
-                double payOff = UserInterfacePrompts.promptDouble("How much are we paying the client?");
-                if (compare < payOff) {
+                double payment = UserInterfacePrompts.promptDouble("How much are we paying the client?");
+                if (compare < payment) {
                     System.out.println("This is more than we owe them.");
                 } else {
-                    double negative = payOff * -1;
+                    double negative = payment * -1;
                     client.adjustBalance(negative);
                     System.out.println("The client's new balance is :$" + client.getBalance());
                 }
