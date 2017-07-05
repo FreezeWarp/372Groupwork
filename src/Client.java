@@ -11,7 +11,7 @@ public class Client extends Account implements Serializable {
     /**
      * The Client's current monetary balance.
      */
-    private int balance = 0;
+    private double balance = 0;
 
 
     /**
