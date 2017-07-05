@@ -8,7 +8,9 @@ import java.util.ArrayList;
  */
 public class Customer extends Account {
     private ArrayList<CreditCard> creditCardList = new ArrayList<CreditCard>();
-    
+    private ArrayList<Ticket> ticketList = new ArrayList<Ticket>();
+
+
     /**
      * @param name the name of the customer
      * @param address the address of the customer
@@ -97,7 +99,28 @@ public class Customer extends Account {
         	throw new CustomerCouldNotDeleteCreditCardsException();
         }
     }
-       
+
+    /**
+     * Adds a ticket.
+     *
+     * @param t The ticket to add.
+     * @return true on success, false on failure
+     */
+    public boolean addTicket(Ticket t) {
+        return ticketList.add(t);
+    }
+
+
+    /**
+     * Removes a ticket. If multiple identical tickets exist, only the first will be removed.
+     *
+     * @param t The ticket to remove.
+     * @return true on success, false on failure
+     */
+    public boolean removeTicket(Ticket t) {
+        return ticketList.remove(t);
+    }
+
     /**
      * Gets the entire credit card ArrayList
      * 
