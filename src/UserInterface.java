@@ -437,31 +437,31 @@ public class UserInterface {
     /**
      * Sells tickets, but it doesn't update the customer object and has a ghetto way of checking showDate.  
      */
-//TODO need to refactor/update customer objects with the actual ticket
     public static void sellTickets(TicketType t) {
-        int quantity = UserInterfacePrompts.promptInt("Quantity? ");
-        if (quantity < 1) {
-            System.out.println("Please enter a positive integer for quantity.");
-        } else {
-            Customer customer = Theater.getCustomerList().getAccount(UserInterfacePrompts.promptInt("Customer ID? "));
+        int quantity = UserInterfacePrompts.promptIntRange("Quantity? ", 1, Integer.MAX_VALUE);
+        int customerId = UserInterfacePrompts.promptInt("Customer ID? ");
+        long creditCardNumber = UserInterfacePrompts.promptCreditCardNumber("Customer Credit Card? ");
+        Date showDate = UserInterfacePrompts.promptShowDate("Date of the show? (MM/DD/yyyy)? ");
 
+        switch (Theater.sellTickets(t, quantity, customerId, creditCardNumber, showDate)) {
+            case INVALID_CUSTOMER_ID:
+                System.out.println("The entered customer ID does not exist.");
+                break;
 
-            //adds a new credit card to the customer's account, if the customer account exists
-            if (customer == null) {
-                System.out.println("Error, specified customer does not exist. Did you enter the correct account ID?");
-            } else {
-                CreditCard creditCard = customer.getCreditCard();
-                Date showDate = UserInterfacePrompts.promptShowDate("Date of the show? (MM/DD/yyyy)? ");//TODO better way to check proper show than nullpointer
-                try {
-                    Theater.sellTickets(t, quantity, customer, creditCard, showDate);
-                } catch (NullPointerException e) {
-                    System.out.print("Please enter a proper date for the show");
-                }
-            }
+            case INVALID_SHOW_DATE:
+                System.out.println("The entered show date does not correspond with a valid show.");
+                break;
 
+            case INVALID_CREDIT_CARD_NUMBER:
+                System.out.println("The entered credit card number is invalid.");
+                break;
 
+            default:
+                System.out.println("An unknown status code was returned.");
+                break;
         }
     }
+
 
     public static void payClient() {
         Client client = Theater.getClientList().getAccount(UserInterfacePrompts.promptInt("Client ID? "));

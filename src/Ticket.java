@@ -1,4 +1,5 @@
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Created by joseph on 26/06/17.
@@ -7,38 +8,39 @@ public class Ticket {
     private Show show;
     private Date date;
     private Customer customer;
-    private double price;
 
-    public Ticket(Show show) {
+    public Ticket(Show show, Customer customer) {
         this.show = show;
-        this.date = new Date();
+        this.customer = customer;
+        this.date = new Date(); // TODO: should be date of show
     }
 
-    public double getPrice() {
-        return show.getTicketPrice();
-    }
     public Date getDate() {
         return date;
     }
     public Customer getCustomer() {
         return customer;
     }
-
-    public void adjustClient() {
-
-        show.getClient().adjustBalance(show.getTicketPrice() * .5);
-        System.out.println("Client balance is now $"+ show.getClient().getBalance());
+    public Show getShow() {
+        return show;
     }
 
-    public void adjustAdvanceClient() {
-
-        show.getClient().adjustBalance(show.getTicketPrice() *.7 * .5);
-        System.out.println("Client balance is now $"+ show.getClient().getBalance());
+    public double getPrice() {
+        return show.getTicketPrice();
     }
 
-    public void adjustStudentAdvanceClient() {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ticket ticket = (Ticket) o;
+        return Double.compare(ticket.getPrice(), getPrice()) == 0 &&
+                Objects.equals(show, ticket.show) &&
+                Objects.equals(getDate(), ticket.getDate()) &&
+                Objects.equals(getCustomer(), ticket.getCustomer());
+    }
 
-        show.getClient().adjustBalance(show.getTicketPrice()*.5 * .5);
-        System.out.println("Client balance is now $"+ show.getClient().getBalance());
+    public void adjustClientBalance() {
+        System.out.println("Client balance is now $"+ show.getClient().getBalance()); // TODO: refactor this line into the invoking method.
     }
 }

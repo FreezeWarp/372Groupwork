@@ -568,40 +568,64 @@ public class Theater implements Serializable {
 
 
 
-    public final static int SELL_TICKET_FAILURE = 0;
-    public final static int SELL_TICKET_SUCCESS = 1;
-
-    public static int sellTickets(TicketType ticketType, int quantity, Customer customerId, CreditCard creditcardNumber, Date showDate) {
-       Ticket t = ticketType.getNewTicket(getShowList().getEntry(showDate));
-
-        System.out.println("Price of ticket: $" + t.getPrice());
-        if (quantity > 1) {
-            System.out.println("Final price: $" + t.getPrice() * quantity);
-        }
-        adjustClientBalance(ticketType, quantity, showDate);
-
-        return SELL_TICKET_FAILURE;
+    enum SELL_TICKETS_STATUS {
+        /**
+         * Too few or two many (e.g. 0 or -1) tickets to sell. */
+        INVALID_QUANTITY,
+        /**
+         * The entered show date does not correspond with a show. */
+        INVALID_SHOW_DATE,
+        /**
+         * The entered customer ID does not correspond with a customer. */
+        INVALID_CUSTOMER_ID,
+        /**
+         * The entered credit card number was not one of the customer's own credit cards. */
+        INVALID_CREDIT_CARD_NUMBER,
+        /**
+         * Generic failure occurred. */
+        FAILURE,
+        /**
+         * Method completed successfully. */
+        SUCCESS,
     }
 
-    public static void adjustClientBalance(TicketType ticketType, int quantity, Date showDate){
-        Ticket t = ticketType.getNewTicket(getShowList().getEntry(showDate));
-        if (ticketType == TicketType.StudentAdvanceTicket) {
-            for (int x = 0; x < quantity; x++) {
-                t.adjustStudentAdvanceClient();
-            }
+    public static SELL_TICKETS_STATUS sellTickets(TicketType ticketType, int quantity, int customerId, long creditCardNumber, Date showDate) {
+        if (quantity < 1) {
+            return SELL_TICKETS_STATUS.INVALID_QUANTITY;
         }
-        else if (ticketType == TicketType.AdvanceTicket) {
-            for (int x = 0; x < quantity; x++) {
-                t.adjustAdvanceClient();
-            }
-        }
-        else if (ticketType == TicketType.Ticket)
-        {
-            for (int x = 0; x < quantity; x++) {
-                t.adjustClient();
-            }
-        }
+        else {
+            Customer customer = Theater.getCustomerList().getAccount(customerId);
+            Show show = ShowList.getShow(showDate);
 
+            if (customer == null) {
+                return SELL_TICKETS_STATUS.INVALID_CUSTOMER_ID;
+            }
+            else if (show == null) { // TODO: also check and reject past shows
+                return SELL_TICKETS_STATUS.INVALID_SHOW_DATE;
+            }
+            else {
+                CreditCard creditCard = customer.getCreditCard(creditCardNumber);
+
+                if (creditCard == null) {
+                    return SELL_TICKETS_STATUS.INVALID_CREDIT_CARD_NUMBER;
+                }
+                else {
+                    Ticket ticket = ticketType.getNewTicket(show, customer);
+
+                    for (int i = 0; i < quantity; i++) {
+                        TicketType.onTicketSale(ticket); // TODO: Not sure if this is the best place to put this yet. May need refactor.
+                    }
+
+                    // TODO: Maybe refactor?
+                    System.out.println("Price of ticket: $" + ticket.getPrice());
+                    if (quantity > 1) {
+                        System.out.println("Final price: $" + ticket.getPrice() * quantity);
+                    }
+                }
+
+                return SELL_TICKETS_STATUS.SUCCESS;
+            }
+        }
     }
 
 
