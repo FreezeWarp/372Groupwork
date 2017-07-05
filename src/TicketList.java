@@ -46,7 +46,7 @@ public class TicketList extends SingletonMap<Date, List<Ticket>> {
 
         if (list == null) {
             List<Ticket> newList = new LinkedList<Ticket>();
-            list.add(ticket);
+            newList.add(ticket);
 
             singletonMap.put(ticket.getDate(), newList);
         }
