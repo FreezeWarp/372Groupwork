@@ -30,8 +30,9 @@ public class Account extends IdentifiableInteger implements Serializable {
 
     /**
      * The maximum valid phone number.
+     * Note that, as per https://en.wikipedia.org/wiki/E.164, phone numbers can be up to 15 digits.
      */
-    private static final long PHONE_NUMBER_MAXIMUM = 99999999999L;
+    private static final long PHONE_NUMBER_MAXIMUM = 999999999999999L;
 
 
     /**
@@ -109,6 +110,7 @@ public class Account extends IdentifiableInteger implements Serializable {
      *###############################*/
     /**
      * An exception for when trying to create an {@link Account} with an invalid phone number.
+     * Note that, as per https://en.wikipedia.org/wiki/E.164, phone numbers can be up to 15 digits.
      */
     public class AccountPhoneNumberOutOfRangeException extends Exception {
         AccountPhoneNumberOutOfRangeException() {
