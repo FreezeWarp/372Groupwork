@@ -17,7 +17,7 @@ public class Customer extends Account {
      * @param phoneNumber the phone number of the customer
      * @param creditCard the first credit card for the customer
      */
-    public Customer(String name, String address, long phoneNumber, CreditCard creditCard) throws AccountPhoneNumberOutOfRangeException, CreditCardListDuplicateCardException {
+    public Customer(String name, String address, long phoneNumber, CreditCard creditCard) throws AccountPhoneNumberOutOfRangeException, CustomerDuplicateCardException {
         super(name, address, phoneNumber);
         addCreditCard(creditCard);
     }
@@ -30,13 +30,12 @@ public class Customer extends Account {
      * 
      * @return True if the card could be added, False otherwise
      */
-    public boolean addCreditCard(CreditCard creditCard) throws CreditCardListDuplicateCardException {
+    public boolean addCreditCard(CreditCard creditCard) throws CustomerDuplicateCardException {
     	if (CreditCardList.getInstance().hasEntry(creditCard.getCardNumber())) {
-    		throw new CreditCardListDuplicateCardException();
+    		throw new CustomerDuplicateCardException();
     	}
-    	
-        Theater.getCreditCardList().addEntry(creditCard);
-        return creditCardList.add(creditCard);
+
+        return creditCardList.add(creditCard) && Theater.getCreditCardList().addEntry(creditCard);
      
     }
     
@@ -57,7 +56,7 @@ public class Customer extends Account {
     public CreditCard getCreditCard(long creditCardNumber) {
         CreditCard creditCard = CreditCardList.getInstance().getEntry(creditCardNumber);
 
-        // Only return the choosen credit card if it exists in our customer's own list.
+        // Only return the chosen credit card if it exists in our customer's own list.
         if (creditCardList.contains(creditCard)) {
             return creditCard;
         }
@@ -80,11 +79,11 @@ public class Customer extends Account {
        
         for (CreditCard creditCard : creditCardList) { //NEW IMPLEMENTATION
            if (creditCard.getCardNumber() == creditCardNumber) {
-                CreditCardList.getInstance().removeEntry(creditCard.getCardNumber());
+                return CreditCardList.getInstance().removeEntry(creditCard.getCardNumber());
             }
         }
 
-        return creditCardList.removeIf((CreditCard creditCard) -> creditCard.getCardNumber() == creditCardNumber);
+        return creditCardList.removeIf((CreditCard creditCard) -> creditCard.getCardNumber() == creditCardNumber) ;
     }
     
     /**
@@ -169,11 +168,11 @@ public class Customer extends Account {
     }
     
     /**
-     * An exception for when trying to remove a {@link CreditCard} from a {@link Customer} when the customer only has one associated {@link CreditCard}.
+     * An exception for when trying to add a {@link CreditCard} to a {@link Customer}'s account when the {@link CreditCard} is already in use.
      */
-    class CreditCardListDuplicateCardException extends Exception {
-    	CreditCardListDuplicateCardException() {
-            super("This credit card already exists in the database.");
+    class CustomerDuplicateCardException extends Exception {
+    	CustomerDuplicateCardException() {
+            super("The credit card entered is already in use.");
         }
     }
 

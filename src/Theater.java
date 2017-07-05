@@ -354,7 +354,7 @@ public class Theater implements Serializable {
                 }
             } catch (Customer.AccountPhoneNumberOutOfRangeException ex) {
                 return ADD_CUSTOMER_STATUS.PHONE_NUMBER_OUT_OF_RANGE;
-            } catch(Customer.CreditCardListDuplicateCardException ex) {
+            } catch(Customer.CustomerDuplicateCardException ex) {
         	    return ADD_CUSTOMER_STATUS.CREDIT_CARD_DUPLICATE;
             }
         }
@@ -452,7 +452,7 @@ public class Theater implements Serializable {
 				else {
 				    return ADD_CREDIT_CARD_STATUS.FAILURE;
 				}
-			} catch (Customer.CreditCardListDuplicateCardException e) {
+			} catch (Customer.CustomerDuplicateCardException e) {
 			    return ADD_CREDIT_CARD_STATUS.CREDIT_CARD_DUPLICATE;
 			}
         }
