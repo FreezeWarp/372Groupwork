@@ -198,6 +198,10 @@ public class UserInterface {
         CreditCard creditCard = UserInterfacePrompts.promptCreditCard("Credit card number? ", "Credit card expiration (MMyyyy)? ");
 
         switch (Theater.addCustomer(name, address, phone, creditCard)) {
+            case CREDIT_CARD_DUPLICATE:
+            	System.out.print("The credit card entered is already in use for another account.");
+            	break;
+            	
             case CREDIT_CARD_INVALID:
             	System.out.println("An invalid credit card was detected. Unable to add the customer account.");
             	break;
