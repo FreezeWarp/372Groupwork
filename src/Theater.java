@@ -1,4 +1,4 @@
-﻿import java.io.*;
+import java.io.*;
 import java.util.Date;
 
 
@@ -383,7 +383,7 @@ public class Theater implements Serializable {
      *
      * @param customerId The ID of the customer to be removed.
      *
-     * @return A code from {@link REMOVE_CLUSTOMER_STATUS}.
+     * @return A code from {@link REMOVE_CUSTOMER_STATUS}.
      */
     public static REMOVE_CUSTOMER_STATUS removeCustomer(int customerId) {
         Customer customer = getCustomerList().getAccount(customerId);
@@ -514,7 +514,7 @@ public class Theater implements Serializable {
          * No client with the clientId exists. */
         NOEXIST,
         /**
-         * Generic failure occured. */
+         * Generic failure occurred. */
         FAILURE,
         /**
          * Method completed successfully. */
