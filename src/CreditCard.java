@@ -27,6 +27,17 @@ public class CreditCard implements Identifiable<Long>, Serializable, Comparable<
      */
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("MM/yyyy");
 
+    /**
+     * The minimum valid credit card number.
+     */
+    private static final long CREDIT_CARD_NUMBER_MINIMUM = 0L;
+
+    /**
+     * The maximum valid credit card number.
+     */
+    private static final long CREDIT_CARD_NUMBER_MAXIMUM = 9999999999999999L;
+
+
 
     /**
      * @param cardNumber the 16 digit credit card number
@@ -48,8 +59,8 @@ public class CreditCard implements Identifiable<Long>, Serializable, Comparable<
     }
 
     private void setCardNumber(long cardNumber) throws CreditCardOutOfRangeException {
-        if (cardNumber < 0L
-                || cardNumber > 9999999999999999L) {
+        if (cardNumber < CREDIT_CARD_NUMBER_MINIMUM
+                || cardNumber > CREDIT_CARD_NUMBER_MAXIMUM) {
             throw new CreditCardOutOfRangeException();
         }
         else {
