@@ -165,7 +165,7 @@ public class UserInterfacePrompts {
     public static long promptPhone(String promptText) {
         while(true) {
             try {
-                return Long.parseLong(promptLineRegex(promptText, "[\\s\\W]+", "^[0-9]{10,11}$", "That is not a valid phone number. Please enter a phone number, optionally containing an international calling code. For instance, enter 123-456-7890 or 1-123-456-7890."));
+                return Long.parseLong(promptLineRegex(promptText, "[\\s\\W]+", "^[0-9]{10,15}$", "That is not a valid phone number. Please enter a phone number, optionally containing an international calling code. For instance, enter 123-456-7890 or 1-123-456-7890."));
             } catch (Exception ex) {
                 System.out.println("That phone number could not be parsed. This may reflect an internal error, but you probably just typed something really strange. Try typing something more phone-numbery.");
             }
