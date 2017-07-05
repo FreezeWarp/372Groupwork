@@ -1,6 +1,7 @@
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * A credit card, with both number and expiration date.
@@ -10,7 +11,7 @@ import java.util.Date;
  * @version 1.0
  * @since   2017-06-22
  */
-public class CreditCard implements Serializable, Comparable<CreditCard> {
+public class CreditCard implements Identifiable<Long>, Serializable, Comparable<CreditCard> {
     /**
      * The 16-digit card number.
      */
@@ -72,6 +73,45 @@ public class CreditCard implements Serializable, Comparable<CreditCard> {
     }
 
 
+
+    /*################################
+     * Read-Only Identifiable<Long> Implementation
+     *###############################*/
+    /**
+     * Implements {@link Identifiable#getId()}, returning the show's start date.
+     * (This obviously means that, at present, two shows may not have the same start date. Were this requirement dropped, the easiest solution would be to extend IdentifiableInteger in the normal way.)
+     *
+     * @return the unique ID of the object, the same as {@link Show#startDate}.
+     */
+    public Long getId() {
+        return getCardNumber();
+    }
+
+
+    /**
+     * Implements {@link Identifiable#setId(Object)}, but does nothing: we do not allow for ID assignment in Show.
+     *
+     * @param id The new id for the object; unused.
+     */
+    public void setId(Long id) { }
+
+
+    /**
+     * Implements {@link Identifiable#nextId(Object)}, but does nothing: we do not allow for ID assignment in Show.
+     *
+     * @param date The previous date.
+     *
+     * @return A dummy date.
+     */
+    public Long nextId(Long date) {
+        return 0L;
+    }
+
+
+
+    /*################################
+     * Object Overrides
+     *###############################*/
     /**
      * @return a string representation of the credit card information
      */
@@ -83,11 +123,21 @@ public class CreditCard implements Serializable, Comparable<CreditCard> {
     
     @Override
 	public int compareTo(CreditCard creditCard) {
-		
 		return (int) Long.compare(getCardNumber(), creditCard.getCardNumber()); 
 	}
 
-    /*################################
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CreditCard that = (CreditCard) o;
+        return getCardNumber() == that.getCardNumber() &&
+                Objects.equals(getExpirationDate(), that.getExpirationDate());
+    }
+
+
+
+	/*################################
      * Exceptions
      *###############################*/
     /**
@@ -107,8 +157,4 @@ public class CreditCard implements Serializable, Comparable<CreditCard> {
             super("The credit card number is out-of-range.");
         }
     }
-    
-    
-    
-
 }

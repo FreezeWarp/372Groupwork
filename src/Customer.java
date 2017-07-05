@@ -29,11 +29,11 @@ public class Customer extends Account {
      * @return True if the card could be added, False otherwise
      */
     public boolean addCreditCard(CreditCard creditCard) throws CreditCardListDuplicateCardException {
-    	if (CreditCardList.getInstance().hasEntry(creditCard)) {
+    	if (CreditCardList.getInstance().hasEntry(creditCard.getCardNumber())) {
     		throw new CreditCardListDuplicateCardException();
     	}
     	
-        Theater.getCreditCardList().addEntry(creditCard, this); //NEW IMPLEMENTATION
+        Theater.getCreditCardList().addEntry(creditCard);
         return creditCardList.add(creditCard);
      
     }
@@ -46,6 +46,22 @@ public class Customer extends Account {
      */
     public CreditCard getCreditCard() {
         return creditCardList.get(0);
+    }
+
+
+    /**
+     * @return the credit card with a given credit card number.
+     */
+    public CreditCard getCreditCard(long creditCardNumber) {
+        CreditCard creditCard = CreditCardList.getInstance().getEntry(creditCardNumber);
+
+        // Only return the choosen credit card if it exists in our customer's own list.
+        if (creditCardList.contains(creditCard)) {
+            return creditCard;
+        }
+        else {
+            return null;
+        }
     }
     
     /**
@@ -62,7 +78,7 @@ public class Customer extends Account {
        
         for (CreditCard creditCard : creditCardList) { //NEW IMPLEMENTATION
            if (creditCard.getCardNumber() == creditCardNumber) {
-                CreditCardList.getInstance().removeEntry(creditCard);
+                CreditCardList.getInstance().removeEntry(creditCard.getCardNumber());
             }
         }
 
