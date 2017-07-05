@@ -79,7 +79,7 @@ public class Customer extends Account {
        
         for (CreditCard creditCard : creditCardList) { //NEW IMPLEMENTATION
            if (creditCard.getCardNumber() == creditCardNumber) {
-                return CreditCardList.getInstance().removeEntry(creditCard.getCardNumber());
+               CreditCardList.getInstance().removeEntry(creditCard.getCardNumber());
             }
         }
 
@@ -90,7 +90,12 @@ public class Customer extends Account {
      * Removes all credit cards from the customer's account. To be used when a customer wishes to have their entire account deleted.
      */
     public boolean removeCreditCards() throws CustomerCouldNotDeleteCreditCardsException {
-        creditCardList.clear();
+
+        for (CreditCard creditCard : creditCardList) { 
+            CreditCardList.getInstance().removeEntry(creditCard.getCardNumber());
+         }
+        
+        creditCardList.clear(); 
         if (creditCardList.isEmpty())  {
         	return true;
         }
