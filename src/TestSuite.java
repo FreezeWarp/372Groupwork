@@ -29,9 +29,25 @@ public class TestSuite {
         /* Add Customer & Credit Card Tests */
         try {
             TestSuite.equalsTest(Theater.addCustomer("Homer Simpson", "742 Evergreen Terrace", 5552324499L, new CreditCard(9999999999999999L, new Date(200, 11, 0))), Theater.ADD_CUSTOMER_STATUS.SUCCESS, "Add customer 1 failed."); // customer ID = 0
+            TestSuite.equalsTest(Theater.addCustomer("Marge Simpson", "742 Evergreen Terrace", 5552324499L, new CreditCard(9898989898989898L, new Date(200, 11, 0))), Theater.ADD_CUSTOMER_STATUS.SUCCESS, "Add customer 2 failed."); // customer ID = 1
             TestSuite.equalsTest(Theater.addCreditCard(0, new CreditCard(8888888888888888L, new Date(190, 5, 0))), Theater.ADD_CREDIT_CARD_STATUS.SUCCESS, "Add creditcard 1 to customer 1 failed.");
+            TestSuite.equalsTest(Theater.addCreditCard(0, new CreditCard(7878787878787878L, new Date(190, 5, 0))), Theater.ADD_CREDIT_CARD_STATUS.SUCCESS, "Add creditcard 2 to customer 1 failed.");
+            TestSuite.equalsTest(Theater.addCreditCard(1, new CreditCard(5555555555555555L, new Date(190, 5, 0))), Theater.ADD_CREDIT_CARD_STATUS.SUCCESS, "Add creditcard 1 to customer 2 failed.");
+            TestSuite.equalsTest(Theater.addCreditCard(1, new CreditCard(5555555555555555L, new Date(190, 5, 0))), Theater.ADD_CREDIT_CARD_STATUS.CREDIT_CARD_DUPLICATE, "Add duplicate creditcard to customer 2 returns wrong status code..");
         } catch (Exception ex) {
             System.out.println("Erroneous exception caught.");
+        }
+
+        try {
+            new CreditCard(88888888888888888L, new Date(190, 5, 0));
+            System.out.println("Exception failed to fire on bad credit card number.");
+        } catch (Exception ex) {
+        }
+
+        try {
+            new CreditCard(8888888888888888L, new Date(100, 5, 0));
+            System.out.println("Exception failed to fire on bad credit card expiration.");
+        } catch (Exception ex) {
         }
 
 
