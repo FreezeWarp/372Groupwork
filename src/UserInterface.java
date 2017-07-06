@@ -305,6 +305,10 @@ public class UserInterface {
             long creditCardNumber = UserInterfacePrompts.promptCreditCardNumber("Credit card number? ");
 
             switch (Theater.removeCreditCard(creditCardNumber)) {
+                case NOEXIST:
+                    System.out.println("The credit card entered does not exist.");
+                    break;
+
                 case SUCCESS:
                     System.out.println("The credit card was removed.");
                     break;
