@@ -1,10 +1,11 @@
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
 /**
  * Created by joseph on 26/06/17.
  */
-public class Ticket {
+public class Ticket implements Serializable {
     private Show show;
     private Date date;
     private Customer customer;
