@@ -460,7 +460,7 @@ public class Theater implements Serializable {
 
 
     /**
-     * Returned codes used from {@link Theater#removeCreditCard(int, long)}.
+     * Returned codes used from {@link Theater#removeCreditCard(long)}.
      */
     enum REMOVE_CREDIT_CARD_STATUS {
         /**
@@ -487,23 +487,21 @@ public class Theater implements Serializable {
     public static REMOVE_CREDIT_CARD_STATUS removeCreditCard(long creditCardNumber) {
     	
         for (Customer customer : Theater.getCustomerList()) {
-    	    if (customer.getCreditCard(creditCardNumber).getCardNumber() == creditCardNumber) {
-    	        try {
+            try {
+                if (customer.getCreditCard(creditCardNumber).getCardNumber() == creditCardNumber) {
                     if (customer.removeCreditCard(creditCardNumber)) {
                         return REMOVE_CREDIT_CARD_STATUS.SUCCESS;
-                    }
-                    else {
-                        return REMOVE_CREDIT_CARD_STATUS.FAILURE;
-                    }
-                } catch (Customer.CustomerMinimumCreditCardsException ex) {
-                    return REMOVE_CREDIT_CARD_STATUS.LAST_CARD;
-                } catch (NullPointerException ex) {
-                	return REMOVE_CREDIT_CARD_STATUS.NOEXIST;
-                }
+                            } else {
+                                return REMOVE_CREDIT_CARD_STATUS.FAILURE;
+                            }
+                        }
+            } catch (Customer.CustomerMinimumCreditCardsException ex) {
+                return REMOVE_CREDIT_CARD_STATUS.LAST_CARD;
+            } catch (NullPointerException ex) {
+                return REMOVE_CREDIT_CARD_STATUS.NOEXIST;
             }
         }
-    
-        return REMOVE_CREDIT_CARD_STATUS.NOEXIST;		 
+        return REMOVE_CREDIT_CARD_STATUS.NOEXIST;
     }
 
 
