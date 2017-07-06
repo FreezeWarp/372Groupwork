@@ -301,31 +301,36 @@ public class UserInterface {
      * Asks for a credit card number to be entered, then deletes the corresponding credit card from whichever customer added it.
      */
     public static void removeCreditCard() {
-     
-            long creditCardNumber = UserInterfacePrompts.promptCreditCardNumber("Credit card number? ");
-
-            switch (Theater.removeCreditCard(creditCardNumber)) {
-                case NOEXIST:
-                    System.out.println("The credit card entered does not exist.");
-                    break;
-
-                case SUCCESS:
-                    System.out.println("The credit card was removed.");
-                    break;
-
-                case FAILURE:
-                    System.out.println("The customer's credit card could not be deleted.");
-                    break;
-
-                case LAST_CARD:
-                    System.out.println("Cannot delete the last credit card a user has.");
-                    break;
-
-                default:
-                    System.out.println("An unknown status code was returned.");
-                    break;
-            }
+    	
+        int customerId = UserInterfacePrompts.promptInt("Customer ID of the credit card holder? ");
         
+    	if (!Theater.getCustomerList().validateAccount(customerId)) {
+    	    System.out.println("Error, specified customer does not exist. Did you enter the correct account ID?");
+    	 }
+    	 else {
+    	     long creditCardNumber = UserInterfacePrompts.promptCreditCardNumber("Credit card number? ");
+    	     switch (Theater.removeCreditCard(customerId, creditCardNumber)) {
+    	         case NOEXIST:
+                     System.out.println("The credit card entered does not exist.");
+                     break;
+
+                 case SUCCESS:
+                     System.out.println("The credit card was removed.");
+                     break;
+
+                 case FAILURE:
+                     System.out.println("The customer's credit card could not be deleted.");
+                     break;
+
+                 case LAST_CARD:
+                     System.out.println("Cannot delete the last credit card a user has.");
+                     break;
+
+                 default:
+                     System.out.println("An unknown status code was returned.");
+                     break;
+    	     }
+    	 }
     }
     
 
