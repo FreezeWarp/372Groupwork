@@ -480,29 +480,30 @@ public class Theater implements Serializable {
     /**
      * Removes a {@link CreditCard} from a {@link Customer}.
      *
-     * @param customerId The ID of the customer whose {@link CreditCard} is being deleted.
      * @param creditCardNumber The number of the {@link CreditCard} to be deleted.
      *
      * @return A status code from {@link REMOVE_CLIENT_STATUS}
      */
-    public static REMOVE_CREDIT_CARD_STATUS removeCreditCard(int customerId, long creditCardNumber) {
-        Customer customer = Theater.getCustomerList().getAccount(customerId);
-
-        if (customer == null) {
-            return REMOVE_CREDIT_CARD_STATUS.NOEXIST;
-        }
-        else {
-            try {
-                if (customer.removeCreditCard(creditCardNumber)) {
-                    return REMOVE_CREDIT_CARD_STATUS.SUCCESS;
+    public static REMOVE_CREDIT_CARD_STATUS removeCreditCard(long creditCardNumber) {
+    	
+        for (Customer customer : Theater.getCustomerList()) {
+    	    if (customer.getCreditCard(creditCardNumber).getCardNumber() == creditCardNumber) {
+    	        try {
+                    if (customer.removeCreditCard(creditCardNumber)) {
+                        return REMOVE_CREDIT_CARD_STATUS.SUCCESS;
+                    }
+                    else {
+                        return REMOVE_CREDIT_CARD_STATUS.FAILURE;
+                    }
+                } catch (Customer.CustomerMinimumCreditCardsException ex) {
+                    return REMOVE_CREDIT_CARD_STATUS.LAST_CARD;
+                } catch (NullPointerException ex) {
+                	return REMOVE_CREDIT_CARD_STATUS.NOEXIST;
                 }
-                else {
-                    return REMOVE_CREDIT_CARD_STATUS.FAILURE;
-                }
-            } catch (Customer.CustomerMinimumCreditCardsException ex) {
-                return REMOVE_CREDIT_CARD_STATUS.LAST_CARD;
             }
         }
+    
+        return REMOVE_CREDIT_CARD_STATUS.NOEXIST;		 
     }
 
 

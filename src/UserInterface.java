@@ -301,15 +301,10 @@ public class UserInterface {
      * Asks for a credit card number to be entered, then deletes the corresponding credit card from whichever customer added it.
      */
     public static void removeCreditCard() {
-        int customerId = UserInterfacePrompts.promptInt("Customer ID of the credit card holder? ");
-
-        if (!Theater.getCustomerList().validateAccount(customerId)) {
-            System.out.println("Error, specified customer does not exist. Did you enter the correct account ID?");
-        }
-        else {
+     
             long creditCardNumber = UserInterfacePrompts.promptCreditCardNumber("Credit card number? ");
 
-            switch (Theater.removeCreditCard(customerId, creditCardNumber)) {
+            switch (Theater.removeCreditCard(creditCardNumber)) {
                 case SUCCESS:
                     System.out.println("The credit card was removed.");
                     break;
@@ -326,7 +321,7 @@ public class UserInterface {
                     System.out.println("An unknown status code was returned.");
                     break;
             }
-        }
+        
     }
     
 
