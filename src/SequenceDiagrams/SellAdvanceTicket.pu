@@ -1,0 +1,22 @@
+@startuml
+
+actor Clerk
+
+activate ":UserInterface"
+Clerk -> ":UserInterface" : Add a Client
+Clerk //- ":UserInterface": Data Request
+Clerk -// ":UserInterface": quantity, id, creditcard number, showDate
+":UserInterface" -> ":Theater" : sellTickets(quantity, id, creditcard number, showDate)
+activate ":Theater"
+":UserInterface" -> ":Theater": show = getShow(showDate)
+":UserInterface" -> ":Theater": customer = getCustomerList.getAccount(id)
+":Theater" -->> ":TicketType": getNewTicket(show, customer, showDate)
+activate ":TicketType"
+deactivate ":Theater"
+create "ticket :AdvanceTicket"
+":UserInterface" -> "ticket :AdvanceTicket": ticket = AdvanceTicket(show, customer, showDate)
+":TicketType" -->> ":UserInterface" : successful?
+deactivate ":TicketType"
+":UserInterface" -->> Clerk : successful?
+deactivate ":UserInterface"
+@enduml

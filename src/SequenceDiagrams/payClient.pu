@@ -1,0 +1,20 @@
+@startuml
+
+actor Clerk
+
+activate ":UserInterface"
+Clerk -> ":UserInterface" : Pay Client
+Clerk //- ":UserInterface": Data Request
+Clerk -// ":UserInterface": id
+
+":UserInterface" -> ":Client" : getBalance()
+activate ":Client"
+":Client" -->> ":UserInterface": balance
+Clerk //- ":UserInterface": Data Request
+Clerk -// ":UserInterface": payment
+":UserInterface" -> ":Client" : adjustBalance()
+":Client" -->> ":UserInterface" : successful?
+deactivate ":Client"
+":UserInterface" -->> Clerk : successful?
+deactivate ":UserInterface"
+@enduml
