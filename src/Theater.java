@@ -150,6 +150,7 @@ public class Theater implements Serializable {
             oos.writeObject(ShowList.getInstance());
             oos.writeObject(CustomerList.getInstance());
             oos.writeObject(ClientList.getInstance());
+            oos.writeObject(CustomerList.getInstance());
             oos.flush();
             return STORE_DATA_STATUS.SUCCESS;
         } catch (Exception e) {
@@ -188,6 +189,7 @@ public class Theater implements Serializable {
             try {
                 FileInputStream in = new FileInputStream(persistenceFile);
                 ObjectInputStream ois = new ObjectInputStream(in);
+                ois.readObject();
                 ois.readObject();
                 ois.readObject();
                 ois.readObject();
