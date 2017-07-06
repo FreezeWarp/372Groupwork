@@ -496,13 +496,16 @@ public class Theater implements Serializable {
                     if (customer.removeCreditCard(creditCardNumber)) {
                         return REMOVE_CREDIT_CARD_STATUS.SUCCESS;
                     }
+                    else {
+                        return REMOVE_CREDIT_CARD_STATUS.FAILURE;
+                    }
                 }
             } catch (Customer.CustomerMinimumCreditCardsException ex) {
                 return REMOVE_CREDIT_CARD_STATUS.LAST_CARD;
             }
         }
         return REMOVE_CREDIT_CARD_STATUS.NOEXIST; //if no other status was returned, the card does not exist
-        //TODO: I want to implement the 'FAILURE' status code here as a fail safe, but I'm not sure if that's even needed in this situation, as 'NOEXIST' is kinda already doing that.
+
     }
 
 
