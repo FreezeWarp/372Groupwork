@@ -440,7 +440,7 @@ public class UserInterface {
     }
 
     /**
-     * Sells tickets, but it doesn't update the customer object and has a ghetto way of checking showDate.  
+     * Sells tickets to customers.
      */
     public static void sellTickets(TicketType t) {
         int quantity = UserInterfacePrompts.promptIntRange("Quantity? ", 1, Integer.MAX_VALUE);
@@ -467,7 +467,9 @@ public class UserInterface {
         }
     }
 
-
+    /**
+     * Pays a payment to the balance of clients.
+     */
     public static void payClient() {
         Client client = Theater.getClientList().getAccount(UserInterfacePrompts.promptInt("Client ID? "));
         if (client == null) {
