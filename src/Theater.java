@@ -462,7 +462,7 @@ public class Theater implements Serializable {
 
 
     /**
-     * Returned codes used from {@link Theater#removeCreditCard(long)}.
+     * Returned codes used from {@link Theater#removeCreditCard(int, long)}.
      */
     enum REMOVE_CREDIT_CARD_STATUS {
         /**
@@ -488,24 +488,23 @@ public class Theater implements Serializable {
      * @return A status code from {@link REMOVE_CLIENT_STATUS}
      */
     public static REMOVE_CREDIT_CARD_STATUS removeCreditCard(int customerId, long creditCardNumber) {
-
         Customer customer = Theater.getCustomerList().getAccount(customerId);
-    	
-    	if (customer == null) {
-    	    return REMOVE_CREDIT_CARD_STATUS.NOEXIST;
-    	}
-    	else {
-    	    try {
-    	        if (customer.removeCreditCard(creditCardNumber)) {
-    	            return REMOVE_CREDIT_CARD_STATUS.SUCCESS;
-    	         }
-    	         else {
-    	             return REMOVE_CREDIT_CARD_STATUS.FAILURE;
-    	         }
-    	    } catch (Customer.CustomerMinimumCreditCardsException ex) {
-    	        return REMOVE_CREDIT_CARD_STATUS.LAST_CARD;
-    	    }
-       }
+
+        if (customer == null) {
+            return REMOVE_CREDIT_CARD_STATUS.NOEXIST;
+        }
+        else {
+            try {
+                if (customer.removeCreditCard(creditCardNumber)) {
+                    return REMOVE_CREDIT_CARD_STATUS.SUCCESS;
+                }
+                else {
+                    return REMOVE_CREDIT_CARD_STATUS.FAILURE;
+                }
+            } catch (Customer.CustomerMinimumCreditCardsException ex) {
+                return REMOVE_CREDIT_CARD_STATUS.LAST_CARD;
+            }
+        }
     }
 
 
@@ -613,7 +612,7 @@ public class Theater implements Serializable {
                     return SELL_TICKETS_STATUS.INVALID_CREDIT_CARD_NUMBER;
                 }
                 else {
-                    Ticket ticket = ticketType.getNewTicket(show, customer);
+                    Ticket ticket = ticketType.getNewTicket(show, customer, showDate);
 
                     for (int i = 0; i < quantity; i++) {
                         TicketType.onTicketSale(ticket); // TODO: Not sure if this is the best place to put this yet. May need refactor.
