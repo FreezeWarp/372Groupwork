@@ -506,12 +506,11 @@ public class UserInterface {
         Date date = UserInterfacePrompts.promptTicketDate("Date of Tickets to show? (MM/DD/yyyy)? ");
         List<Ticket> t = Theater.getTicketList(date);
 
-        //I know the .replace() isn't ideal.  But it does look better when you print.  Anyone have a better way to do this?
-        //If you print just t you get a list that looks like this [ticket1, ticket2, ticket3]
-
-        //if (t!=null) System.out.println(t);
-        if (t!= null)
-            System.out.println(t.toString().replace("]", "").replace("[", ""));
+        if (t!= null){
+        	for (Ticket tickets: t){
+        		System.out.println(tickets);
+        		}
+        }
     }
 
 

@@ -55,7 +55,7 @@ public class Ticket {
      */
     @Override
     public String toString() {
-        return "\n" + show.getName() +
+        return  show.getName() +
                 ": Customer " + customer.getId() +
                 ", Price: " + getPrice() +
                 ", " + dateFormat.format(date);
