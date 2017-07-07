@@ -235,6 +235,7 @@ public class UserInterface {
      * Asks for a customer's ID and asks the customer list to remove the customer with the corresponding ID.
      */
     public static void removeCustomer() {
+    	// Input
         int customerId = UserInterfacePrompts.promptInt("Customer ID of the customer whose account is to be deleted? ");
     	
     	if (!Theater.getCustomerList().validateAccount(customerId)) {
@@ -263,13 +264,14 @@ public class UserInterface {
                     break;
            }
        }    
-    }
+   }
 
 
     /**
      * Asks for a customer's credit card information and stores the newly created CreditCard object corresponding to the entered customer ID.
      */
     public static void addCreditCard() {
+    	// Inputs
     	int customerId = UserInterfacePrompts.promptInt("Customer ID of the credit card holder? ");
         CreditCard creditCard = UserInterfacePrompts.promptCreditCard("Credit card number? ", "Credit card expiration (MMyyyy)? ");
     	
@@ -306,7 +308,7 @@ public class UserInterface {
      * Asks for a credit card number to be entered, then deletes the corresponding credit card from whichever customer added it.
      */
     public static void removeCreditCard() {
-    	
+    	// Input
         int customerId = UserInterfacePrompts.promptInt("Customer ID of the credit card holder? ");
         
     	if (!Theater.getCustomerList().validateAccount(customerId)) {
@@ -314,11 +316,7 @@ public class UserInterface {
     	 }
     	 else {
     	     long creditCardNumber = UserInterfacePrompts.promptCreditCardNumber("Credit card number? ");
-    	     switch (Theater.removeCreditCard(customerId, creditCardNumber)) {
-    	         case NOEXIST:
-                     System.out.println("The credit card entered does not exist.");
-                     break;
-
+    	     switch (Theater.removeCreditCard(customerId, creditCardNumber)) { 
                  case SUCCESS:
                      System.out.println("The credit card was removed.");
                      break;
@@ -330,12 +328,16 @@ public class UserInterface {
                  case LAST_CARD:
                      System.out.println("Cannot delete the last credit card a user has.");
                      break;
+                     
+                 case NOEXIST:
+                     System.out.println("The credit card entered does not exist.");
+                     break;
 
                  default:
                      System.out.println("An unknown status code was returned.");
                      break;
     	     }
-    	 }
+        }
     }
     
 
@@ -352,6 +354,7 @@ public class UserInterface {
      * Adds newly created Show object to the ShowList.
      */
     public static void addShow() {
+    	// Input
         int clientId = UserInterfacePrompts.promptInt("Client ID? ");
 
         if (!Theater.getClientList().validateAccount(clientId)) {
@@ -443,6 +446,7 @@ public class UserInterface {
      * Sells tickets to customers.
      */
     public static void sellTickets(TicketType t) {
+    	// Inputs
         int quantity = UserInterfacePrompts.promptIntRange("Quantity? ", 1, Integer.MAX_VALUE);
         int customerId = UserInterfacePrompts.promptInt("Customer ID? ");
         long creditCardNumber = UserInterfacePrompts.promptCreditCardNumber("Customer Credit Card? ");
@@ -461,10 +465,9 @@ public class UserInterface {
                 System.out.println("The entered credit card number is invalid.");
                 break;
            
-	    case SUCCESS:
+	        case SUCCESS:
                 System.out.println("The transaction was successful.");
                 break;
-
 
             default:
                 System.out.println("An unknown status code was returned.");
@@ -472,29 +475,34 @@ public class UserInterface {
         }
     }
 
+    
     /**
      * Pays a payment to the balance of clients.
      */
-    public static void payClient() {
+    public static void payClient() { //TODO: Move logic out of UserInterface and into Theater. Mimic the above implementations with the switch/case
+    	// Input
         Client client = Theater.getClientList().getAccount(UserInterfacePrompts.promptInt("Client ID? "));
+        
         if (client == null) {
             System.out.println("Error, specified client does not exist. Did you enter the correct account ID?");
-        } else {
+        } 
+        else {
             System.out.println("The client's balance is :$" + client.getBalance());
             double compare = client.getBalance();
+            
             if (compare == 0) {
                 System.out.println("We don't owe them anything!");
-            } else {
+            } 
+            else {
                 double payment = UserInterfacePrompts.promptDouble("How much are we paying the client?");
                 if (compare < payment) {
                     System.out.println("This is more than we owe them.");
-                } else {
+                } 
+                else {
                     double negative = payment * -1;
                     client.adjustBalance(negative);
                     System.out.println("The client's new balance is :$" + client.getBalance());
                 }
-
-
             }
         }
     }
@@ -503,13 +511,14 @@ public class UserInterface {
      * Lists all tickets on a given day from TicketList.
      */
     public static void printAllTickets() {
+    	// Inputs
         Date date = UserInterfacePrompts.promptTicketDate("Date of Tickets to show? (MM/DD/yyyy)? ");
         List<Ticket> t = Theater.getTicketList(date);
 
-        if (t!= null){
-        	for (Ticket tickets: t){
-        		System.out.println(tickets);
-        		}
+        if (t!= null) {
+            for (Ticket tickets: t) {
+        	    System.out.println(tickets);
+            }
         }
     }
 

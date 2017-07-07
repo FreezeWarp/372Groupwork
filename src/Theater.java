@@ -550,18 +550,15 @@ public class Theater implements Serializable {
         else {
             try {
                 Show show = new Show(client, showName, startDate, endDate, ticketPrice);
-
-                try {
                     if (Theater.getShowList().addShow(show)) {
                         return ADD_SHOW_STATUS.SUCCESS;
                     }
                     else {
                         return ADD_SHOW_STATUS.FAILURE;
-                    }
-                }
-                catch (ShowList.ShowConflictException ex) {
+                    } 
+                    
+            } catch (ShowList.ShowConflictException ex) {
                     return ADD_SHOW_STATUS.SHOW_CONFLICT;
-                }
             } catch (Show.ShowDateMismatchException ex) {
                 return ADD_SHOW_STATUS.DATE_MISMATCH;
             }
@@ -624,10 +621,9 @@ public class Theater implements Serializable {
                     if (quantity > 1) {
                         System.out.println("Final price: $" + ticket.getPrice() * quantity);
                         return SELL_TICKETS_STATUS.SUCCESS;
-		    }
+		            }
                     return SELL_TICKETS_STATUS.SUCCESS;
-            }
-
+                }
             }
         }
     }
@@ -667,6 +663,9 @@ public class Theater implements Serializable {
         return CreditCardList.getInstance();
     }
     
+    /**
+     * @return The singleton instance of {@link TicketList}, allowing modification of the ticket list or use of TicketList-specific functionality.
+     */
     public static List<Ticket> getTicketList(Date date) {
         return TicketList.getTickets(date);
     }
