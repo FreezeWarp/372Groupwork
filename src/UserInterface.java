@@ -503,11 +503,8 @@ public class UserInterface {
         //If you print just t you get a list that looks like this [ticket1, ticket2, ticket3]
 
         //if (t!=null) System.out.println(t);
-        if (t== null) {
-
-        }else {
+        if (t!= null)
             System.out.println(t.toString().replace("]", "").replace("[", ""));
-        }
     }
 
 
