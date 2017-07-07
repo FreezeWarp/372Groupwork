@@ -153,8 +153,7 @@ public class Show implements Identifiable<Date>, Serializable {
      */
     @Override
     public String toString() {
-        return getId() +
-                ": Client " + client.getId() +
+        return "Client " + client.getId() +
                 ", " + name +
                 " " + showDateFormat.format(startDate)+
                 "-" + showDateFormat.format(endDate);

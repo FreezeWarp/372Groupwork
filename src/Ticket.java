@@ -1,3 +1,4 @@
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
@@ -12,8 +13,13 @@ public class Ticket {
     public Ticket(Show show, Customer customer, Date date) {
         this.show = show;
         this.customer = customer;
-        this.date = date; // TODO: should be date of show
+        this.date = date; 
     }
+    
+    /**
+     * The format to use when displaying ticket dates in {@link Ticket#toString()}.
+     */
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 
     public Date getDate() {
         return date;
@@ -44,12 +50,14 @@ public class Ticket {
         System.out.println("Client balance is now $"+ show.getClient().getBalance()); // TODO: refactor this line into the invoking method.
     }
     
+    /**
+     * @return a string representation concatenating the basic Ticket information
+     */
     @Override
     public String toString() {
-        return show.getName() +
+        return "\n" + show.getName() +
                 ": Customer " + customer.getId() +
                 ", Price: " + getPrice() +
-                ", " + date +
-                "\n";
+                ", " + dateFormat.format(date);
     }
 }

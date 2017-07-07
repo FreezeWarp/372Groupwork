@@ -248,7 +248,7 @@ public class UserInterfacePrompts {
         while(true) {
             try {
                 String dateStr = (promptLineRegex(promptText, "[\\s\\W]+", "^[0-9]{8}$", //removes unneeded characters
-                        "That is not a show date. Please enter the 8 digit expiry date in the format MM/dd/yyyy."));
+                        "That is not a show date. Please enter the 8 digit date in the format MM/dd/yyyy."));
 
                 Date myDate = new SimpleDateFormat("MMddyyyy").parse(dateStr);
 
@@ -258,6 +258,29 @@ public class UserInterfacePrompts {
                 } else {
                     return myDate;
                 }
+
+            } catch (Exception ex) {
+                System.out.println("Did you type something incorrectly? Please try re-entering the expiry show date in the format MMDDyyyy.");
+            }
+        }
+
+    }
+    
+    /**
+     * Prompts the user for a date to list Tickets.
+     *
+     * @param promptText The text to display for the prompt.
+     *
+     * @return Date the user input
+     */
+    public static Date promptTicketDate(String promptText) {
+        while(true) {
+            try {
+                String dateStr = (promptLineRegex(promptText, "[\\s\\W]+", "^[0-9]{8}$", //removes unneeded characters
+                        "That is not a valid date. Please enter the 8 digit date in the format MM/dd/yyyy."));
+
+                Date myDate = new SimpleDateFormat("MMddyyyy").parse(dateStr);
+                return myDate;
 
             } catch (Exception ex) {
                 System.out.println("Did you type something incorrectly? Please try re-entering the expiry show date in the format MMDDyyyy.");

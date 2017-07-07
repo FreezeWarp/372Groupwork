@@ -55,6 +55,9 @@ public class TicketList extends SingletonMap<Date, List<Ticket>> {
         }
     }
 
+    /**
+     * @return List<Ticket> The list of Tickets of a given date.
+     */
     public static List<Ticket> getTickets(Date date) {
         return getInstance().getEntry(date);
     }

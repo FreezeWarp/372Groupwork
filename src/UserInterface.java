@@ -1,5 +1,6 @@
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -491,10 +492,19 @@ public class UserInterface {
         }
     }
     
+    /**
+     * Lists all tickets on a given day from TicketList.
+     */
     public static void printAllTickets() {
-        Date date = UserInterfacePrompts.promptShowDate("Date of Tickets to show? (MM/DD/yyyy)? ");
-    	
-        System.out.println(Theater.getTicketList(date));
+        Date date = UserInterfacePrompts.promptTicketDate("Date of Tickets to show? (MM/DD/yyyy)? ");
+        List<Ticket> t = Theater.getTicketList(date);
+        
+        //I know the .replace() isn't ideal.  But it does look better when you print.  Anyone have a better way to do this?
+        //If you print just t you get a list that looks like this [ticket1, ticket2, ticket3]
+        
+        //if (t!=null) System.out.println(t);
+        if (t!=null) System.out.println(t.toString().replace("]", "").replace("[", ""));
+        else System.out.print("No tickets were sold for this date");
     }
 
 
