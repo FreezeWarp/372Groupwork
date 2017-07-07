@@ -1,19 +1,18 @@
-import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
 /**
  * Created by joseph on 26/06/17.
  */
-public class Ticket implements Serializable {
+public class Ticket {
     private Show show;
     private Date date;
     private Customer customer;
 
-    public Ticket(Show show, Customer customer) {
+    public Ticket(Show show, Customer customer, Date date) {
         this.show = show;
         this.customer = customer;
-        this.date = new Date(); // TODO: should be date of show
+        this.date = date; // TODO: should be date of show
     }
 
     public Date getDate() {
@@ -43,5 +42,14 @@ public class Ticket implements Serializable {
 
     public void adjustClientBalance() {
         System.out.println("Client balance is now $"+ show.getClient().getBalance()); // TODO: refactor this line into the invoking method.
+    }
+    
+    @Override
+    public String toString() {
+        return show.getName() +
+                ": Customer " + customer.getId() +
+                ", Price: " + getPrice() +
+                ", " + date +
+                "\n";
     }
 }
