@@ -1,11 +1,12 @@
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
+import java.io.Serializable;
 
 /**
  * Created by joseph on 26/06/17.
  */
-public class Ticket {
+public class Ticket implements Serializable {
     private Show show;
     private Date date;
     private Customer customer;

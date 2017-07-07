@@ -627,6 +627,8 @@ public class Theater implements Serializable {
 		    }
                     return SELL_TICKETS_STATUS.SUCCESS;
             }
+
+            }
         }
     }
 
