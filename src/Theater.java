@@ -666,4 +666,8 @@ public class Theater implements Serializable {
         return CreditCardList.getInstance();
     }
     
+    public static List<Ticket> getTicketList(Date date) {
+        return TicketList.getTickets(date);
+    }
+    
 }
