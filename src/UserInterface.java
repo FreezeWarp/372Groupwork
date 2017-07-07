@@ -460,6 +460,11 @@ public class UserInterface {
             case INVALID_CREDIT_CARD_NUMBER:
                 System.out.println("The entered credit card number is invalid.");
                 break;
+           
+	    case SUCCESS:
+                System.out.println("The transaction was successful.");
+                break;
+
 
             default:
                 System.out.println("An unknown status code was returned.");

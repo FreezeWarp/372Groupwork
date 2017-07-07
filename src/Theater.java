@@ -1,4 +1,4 @@
-import java.io.*;
+﻿import java.io.*;
 import java.util.Date;
 import java.util.List;
 
@@ -623,10 +623,9 @@ public class Theater implements Serializable {
                     System.out.println("Price of ticket: $" + ticket.getPrice());
                     if (quantity > 1) {
                         System.out.println("Final price: $" + ticket.getPrice() * quantity);
-                    }
-                }
-
-                return SELL_TICKETS_STATUS.SUCCESS;
+                        return SELL_TICKETS_STATUS.SUCCESS;
+		    }
+                    return SELL_TICKETS_STATUS.SUCCESS;
             }
         }
     }
