@@ -1,3 +1,5 @@
+import java.util.Date;
+
 /**
  * Created by joseph on 26/06/17.
  */
@@ -6,19 +8,19 @@ public enum TicketType {
     },
     AdvanceTicket {
         @Override
-        public AdvanceTicket getNewTicket(Show show, Customer customer) {
-            return new AdvanceTicket(show, customer);
+        public AdvanceTicket getNewTicket(Show show, Customer customer, Date date) {
+            return new AdvanceTicket(show, customer, date);
         }
     },
     StudentAdvanceTicket {
         @Override
-        public StudentAdvanceTicket getNewTicket(Show show, Customer customer) {
-            return new StudentAdvanceTicket(show, customer);
+        public StudentAdvanceTicket getNewTicket(Show show, Customer customer, Date date) {
+            return new StudentAdvanceTicket(show, customer, date);
         }
     };
 
-    public Ticket getNewTicket(Show show, Customer customer) {
-        return new Ticket(show, customer);
+    public Ticket getNewTicket(Show show, Customer customer, Date date) {
+        return new Ticket(show, customer, date);
     }
 
     /**

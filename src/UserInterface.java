@@ -92,6 +92,10 @@ public class UserInterface {
         final int COMMAND_PAY_CLIENT = 16;
         helpMap.put(COMMAND_PAY_CLIENT, "Pay Client");
         commandMap.put(COMMAND_PAY_CLIENT, () -> payClient());
+        
+        final int COMMAND_PRINT_ALL_TICKETS = 17;
+        helpMap.put(COMMAND_PRINT_ALL_TICKETS, "Print All Tickets");
+        commandMap.put(COMMAND_PRINT_ALL_TICKETS, () -> printAllTickets());
 
         final int COMMAND_HELP = 18;
         helpMap.put(COMMAND_HELP, "Help");
@@ -485,6 +489,12 @@ public class UserInterface {
 
             }
         }
+    }
+    
+    public static void printAllTickets() {
+        Date date = UserInterfacePrompts.promptShowDate("Date of Tickets to show? (MM/DD/yyyy)? ");
+    	
+        System.out.println(Theater.getTicketList(date));
     }
 
 
