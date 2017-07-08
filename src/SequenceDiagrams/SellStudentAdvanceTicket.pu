@@ -1,22 +1,5 @@
 @startuml
 
-actor Clerk
+note "This process is identical to Sell Tickets. The\nonly difference is what state the TicketType\nenum is in when Theater#sellTickets() is invoked." as N1
 
-activate ":UserInterface"
-Clerk -> ":UserInterface" : Add a Client
-Clerk //- ":UserInterface": Data Request
-Clerk -// ":UserInterface": quantity, id, creditcard number, showDate
-":UserInterface" -> ":Theater" : sellTickets(quantity, id, creditcard number, showDate)
-activate ":Theater"
-":UserInterface" -> ":Theater": show = getShow(showDate)
-":UserInterface" -> ":Theater": customer = getCustomerList.getAccount(id)
-":Theater" -->> ":TicketType": getNewTicket(show, customer, showDate)
-activate ":TicketType"
-deactivate ":Theater"
-create "ticket :StudentAdvanceTicket"
-":UserInterface" -> "ticket :StudentAdvanceTicket": ticket = StudentAdvanceTicket(show, customer, showDate)
-":TicketType" -->> ":UserInterface" : successful?
-deactivate ":TicketType"
-":UserInterface" -->> Clerk : successful?
-deactivate ":UserInterface"
 @enduml

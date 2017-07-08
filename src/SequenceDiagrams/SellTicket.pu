@@ -6,7 +6,7 @@ activate ":UserInterface"
 Clerk -> ":UserInterface" : Sell a Ticket of Type ticketType
 Clerk //- ":UserInterface": Data Request
 Clerk -// ":UserInterface": quantity, id, creditcard number, showDate
-":UserInterface" -> ":Theater" : sellTickets(TicketType, quantity, id, creditcard number, showDate)
+":UserInterface" -> ":Theater" : sellTickets(ticketType, quantity, id, creditcard number, showDate)
 activate ":Theater"
 ":Theater" -> ":ShowList" : show = getShow(showDate)
 activate ":ShowList"
