@@ -14,10 +14,9 @@ public class StudentAdvanceTicket extends AdvanceTicket implements Serializable{
     }
     
     /**
-     * @return a string representation concatenating the basic Ticket information, plus a notice informing buyers they must show a student id at the show.
+     * @return a string representation of the ticket type
      */
-    @Override
-    public String toString() {
-        return  super.toString() + ", Must show valid student id.";
+    public String getTicketType() {
+        return ", Ticket type: Student Advance Ticket ";
     }
 }
