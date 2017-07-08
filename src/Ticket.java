@@ -41,7 +41,7 @@ public class Ticket extends IdentifiableInteger implements Serializable {
     public Ticket(Show show, Customer customer, Date date) {
         this.show = show;
         this.customer = customer;
-        this.date = date; 
+        this.date = date;
     }
 
 
@@ -72,14 +72,14 @@ public class Ticket extends IdentifiableInteger implements Serializable {
     public double getPrice() {
         return show.getTicketPrice();
     }
-    
+
     /**
      * @return A string representation of the ticket type.
      */
     public String getTicketType() {
         return ", Ticket type: Standard Ticket ";
     }
-    
+
     /**
      * @return A string representation concatenating the basic Ticket information.
      */

@@ -79,7 +79,7 @@ public class UserInterfacePrompts {
      */
     public static double promptDouble(String promptText) {
         Scanner s  = new Scanner(System.in);
-         double inputDouble = 0;
+        double inputDouble = 0;
 
         System.out.print(promptText);
 

@@ -41,7 +41,7 @@ public class Theater implements Serializable {
      */
     public static Theater getInstance() {
         if (INSTANCE == null) {
-             INSTANCE = new Theater();
+            INSTANCE = new Theater();
         }
 
         return INSTANCE;
@@ -113,7 +113,7 @@ public class Theater implements Serializable {
 
     /**
      * Determines if the persistence file exists with data.
-     * 
+     *
      * @return True if the persistence file exists, false otherwise.
      */
     public static boolean hasData() {
@@ -177,7 +177,7 @@ public class Theater implements Serializable {
 
     /**
      * Loads in data from the persistence file.
-     * 
+     *
      * @return A code from {@link RETRIEVE_DATA_STATUS}.
      */
     public static RETRIEVE_DATA_STATUS retrieveData() {
@@ -307,14 +307,14 @@ public class Theater implements Serializable {
     public static Iterable<Client> getClients() {
         return getClientList();
     }
-    
+
 
 
     /**
      * Returned codes used from {@link Theater#addCustomer(String, String, long, CreditCard)}.
      */
     enum ADD_CUSTOMER_STATUS {
-    	/**
+        /**
          * The credit card a user tried to enter is invalid. */
         CREDIT_CARD_INVALID,
         /**
@@ -358,7 +358,7 @@ public class Theater implements Serializable {
             } catch (Customer.AccountPhoneNumberOutOfRangeException ex) {
                 return ADD_CUSTOMER_STATUS.PHONE_NUMBER_OUT_OF_RANGE;
             } catch(Customer.CustomerDuplicateCardException ex) {
-        	    return ADD_CUSTOMER_STATUS.CREDIT_CARD_DUPLICATE;
+                return ADD_CUSTOMER_STATUS.CREDIT_CARD_DUPLICATE;
             }
         }
     }
@@ -420,12 +420,12 @@ public class Theater implements Serializable {
     }
 
 
-    
+
     /**
      * Returned codes used from {@link Theater#addCreditCard(int, CreditCard)}.
      */
     enum ADD_CREDIT_CARD_STATUS {
-    	/**
+        /**
          * The customer to have a credit card added does not exist */
         NOEXIST,
         /**
@@ -447,22 +447,22 @@ public class Theater implements Serializable {
      * @return A code from {@link ADD_CREDIT_CARD_STATUS}.
      */
     public static ADD_CREDIT_CARD_STATUS addCreditCard(int customerId, CreditCard creditCard) {
-    	Customer customer = Theater.getCustomerList().getAccount(customerId);
-  
-    	if (customer == null) {
-    		return ADD_CREDIT_CARD_STATUS.NOEXIST;
-    	}
-    	else {
+        Customer customer = Theater.getCustomerList().getAccount(customerId);
+
+        if (customer == null) {
+            return ADD_CREDIT_CARD_STATUS.NOEXIST;
+        }
+        else {
             try {
-				if (customer.addCreditCard(creditCard)) {
-				    return ADD_CREDIT_CARD_STATUS.SUCCESS;
-				}
-				else {
-				    return ADD_CREDIT_CARD_STATUS.FAILURE;
-				}
-			} catch (Customer.CustomerDuplicateCardException e) {
-			    return ADD_CREDIT_CARD_STATUS.CREDIT_CARD_DUPLICATE;
-			}
+                if (customer.addCreditCard(creditCard)) {
+                    return ADD_CREDIT_CARD_STATUS.SUCCESS;
+                }
+                else {
+                    return ADD_CREDIT_CARD_STATUS.FAILURE;
+                }
+            } catch (Customer.CustomerDuplicateCardException e) {
+                return ADD_CREDIT_CARD_STATUS.CREDIT_CARD_DUPLICATE;
+            }
         }
     }
 
@@ -557,15 +557,15 @@ public class Theater implements Serializable {
         else {
             try {
                 Show show = new Show(client, showName, startDate, endDate, ticketPrice);
-                    if (Theater.getShowList().addShow(show)) {
-                        return ADD_SHOW_STATUS.SUCCESS;
-                    }
-                    else {
-                        return ADD_SHOW_STATUS.FAILURE;
-                    } 
-                    
+                if (Theater.getShowList().addShow(show)) {
+                    return ADD_SHOW_STATUS.SUCCESS;
+                }
+                else {
+                    return ADD_SHOW_STATUS.FAILURE;
+                }
+
             } catch (ShowList.ShowConflictException ex) {
-                    return ADD_SHOW_STATUS.SHOW_CONFLICT;
+                return ADD_SHOW_STATUS.SHOW_CONFLICT;
             } catch (Show.ShowDateMismatchException ex) {
                 return ADD_SHOW_STATUS.DATE_MISMATCH;
             }
@@ -747,14 +747,14 @@ public class Theater implements Serializable {
     public static ShowList getShowList() {
         return ShowList.getInstance();
     }
-    
+
     /**
      * @return The singleton instance of {@link CreditCardList}, allowing modification of the credit card list or use of CreditCardList-specific functionality.
      */
     public static CreditCardList getCreditCardList() {
         return CreditCardList.getInstance();
     }
-    
+
     /**
      * @return The singleton instance of {@link TicketList}, allowing modification of the ticket list or use of TicketList-specific functionality.
      */

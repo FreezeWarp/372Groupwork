@@ -24,22 +24,22 @@ public class Customer extends Account {
         super(name, address, phoneNumber);
         addCreditCard(creditCard);
     }
-    
+
 
     /**
      * Adds a credit card to the customer's account.
-     * 
+     *
      * @param creditCard the new credit card being added.
-     * 
+     *
      * @return True if the card could be added, false otherwise.
      */
     public boolean addCreditCard(CreditCard creditCard) throws CustomerDuplicateCardException {
-    	if (CreditCardList.getInstance().hasEntry(creditCard.getCardNumber())) {
-    		throw new CustomerDuplicateCardException();
-    	}
+        if (CreditCardList.getInstance().hasEntry(creditCard.getCardNumber())) {
+            throw new CustomerDuplicateCardException();
+        }
 
         return creditCardList.add(creditCard) && Theater.getCreditCardList().addEntry(creditCard);
-     
+
     }
 
 
@@ -58,43 +58,43 @@ public class Customer extends Account {
         }
     }
 
-    
+
     /**
      * Removes the specified credit card from the customer's account.
-     * 
+     *
      * @param creditCardNumber the 16 digit number of the credit card to be removed.
-     * 
+     *
      * @return True if the card could be removed, false otherwise.
      */
     public boolean removeCreditCard(long creditCardNumber) throws CustomerMinimumCreditCardsException {
         if (this.creditCardList.size() <= 1) {
             throw new CustomerMinimumCreditCardsException();
         }
-       
+
         for (CreditCard creditCard : creditCardList) { //NEW IMPLEMENTATION
-           if (creditCard.getCardNumber() == creditCardNumber) {
-               CreditCardList.getInstance().removeEntry(creditCard.getCardNumber());
+            if (creditCard.getCardNumber() == creditCardNumber) {
+                CreditCardList.getInstance().removeEntry(creditCard.getCardNumber());
             }
         }
 
         return creditCardList.removeIf((CreditCard creditCard) -> creditCard.getCardNumber() == creditCardNumber) ;
     }
 
-    
+
     /**
      * Removes all credit cards from the customer's account. To be used when a customer wishes to have their entire account deleted.
      */
     public boolean removeCreditCards() throws CustomerCouldNotDeleteCreditCardsException {
-        for (CreditCard creditCard : creditCardList) { 
+        for (CreditCard creditCard : creditCardList) {
             CreditCardList.getInstance().removeEntry(creditCard.getCardNumber());
-         }
-        
-        creditCardList.clear(); 
+        }
+
+        creditCardList.clear();
         if (creditCardList.isEmpty())  {
-        	return true;
+            return true;
         }
         else {
-        	throw new CustomerCouldNotDeleteCreditCardsException();
+            throw new CustomerCouldNotDeleteCreditCardsException();
         }
     }
 
@@ -122,7 +122,7 @@ public class Customer extends Account {
 
     /**
      * Gets the entire credit card ArrayList.
-     * 
+     *
      * @return The ArrayList containing credit card objects.
      */
     public Collection<CreditCard> getCreditCardList() {
@@ -132,7 +132,7 @@ public class Customer extends Account {
 
     /**
      * Overrides the toString method of Account.
-     * 
+     *
      * @return A string representation concatenating basic customer information.
      */
     @Override
@@ -140,17 +140,17 @@ public class Customer extends Account {
         String creditCardString = "";
         String ticketString = "";
         int count = 0;
-        
+
         for (CreditCard creditCard : creditCardList) {
-        	creditCardString += creditCard;
+            creditCardString += creditCard;
         }
-        
+
         for (Ticket ticket : ticketList) {
-        	ticketString += "\n    Ticket #" + count + ": " + ticket.getShow().getName() +
-                            ", Price: $" + ticket.getPrice() + ", " + dateFormat.format(ticket.getDate()) + ticket.getTicketType();
-        	count++;
+            ticketString += "\n    Ticket #" + count + ": " + ticket.getShow().getName() +
+                    ", Price: $" + ticket.getPrice() + ", " + dateFormat.format(ticket.getDate()) + ticket.getTicketType();
+            count++;
         }
-        
+
         return super.toString() + creditCardString + ticketString;
     }
 
@@ -166,24 +166,24 @@ public class Customer extends Account {
             super("The last credit card cannot be removed.");
         }
     }
-    
+
     /**
      * An exception for when an attempt at trying to remove all {@link CreditCard}s from the {@link CreditCardList} ends up failing.
      */
     class CustomerCouldNotDeleteCreditCardsException extends Exception {
-    	CustomerCouldNotDeleteCreditCardsException() {
+        CustomerCouldNotDeleteCreditCardsException() {
             super("The customer's credit card(s) could not be deleted.");
         }
     }
-    
+
     /**
      * An exception for when trying to add a {@link CreditCard} to a {@link Customer}'s account when the {@link CreditCard} is already in use.
      */
     class CustomerDuplicateCardException extends Exception {
-    	CustomerDuplicateCardException() {
+        CustomerDuplicateCardException() {
             super("The credit card entered is already in use.");
         }
     }
 
-    
+
 }

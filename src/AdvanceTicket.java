@@ -27,7 +27,7 @@ public class AdvanceTicket extends Ticket implements Serializable {
     public double getPrice() {
         return super.getPrice() * ADVANCE_TICKET_DISCOUNT;
     }
-    
+
     /**
      * @return A string representation of the ticket type.
      */
