@@ -1,0 +1,200 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide empty members
+
+note "This omits identical methods/properties\nfrom Iteration 1, as well as Identifiable completely.\n\nAdditionally, it omits custom Exceptions,\nin the interest of preventing excessive messiness." as N1
+
+class SingletonMap<K, E> {
+    -INSTANCE: SingletonMap
+    -singletonMap : TreeMap<K, E>
+    -lastKey: K
+    #SingletonMap()
+    +getInstance() : SingletonMap
+    +addEntry(K, E): boolean
+    +removeEntry(K): boolean
+    -readObject(ObjectInputStream)
+    -writeObject(ObjectInputStream)
+}
+
+class SingletonIdentifiableMap<K, E implements Identifiable<K>> {
+    -lastKey: K
+    +getNewKey(): K
+    +addEntry(E)
+}
+
+class UserInterface {
+    -commandMap: Map<Integer, Runnable>
+    -helpMap: Map<Integer, String>
+    +main(String[])
+    +addClient()
+    +removeClient()
+    +listClients()
+    +addCustomer()
+    +removeCustomer()
+    +addCreditCard()
+    +removeCreditCard()
+    +listCustomers()
+    +addShow()
+    +listShows()
+    +storeData()
+    +retrieveData()
+    +sellTickets(TicketType)
+    +payClient()
+    +printAllTickets()
+    +help()
+}
+
+
+class Theater {
+    ...
+    +storeData()
+    +retrieveData()
+    +addClient(name: String, address: String, phone: long): ADD_CLIENT_STATUS
+    +removeClient(clientId: int): REMOVE_CLIENT_STATUS
+    +getClients(): Iterable<Client>
+    +addCustomer(name: String, address: String, phone: long, creditCard: CreditCard): ADD_CUSTOMER_STAATUS
+    +removeCustomer(customerId: int): REMOVE_CUSTOMER_STATUS
+    +addCreditCard(customerId: int, creditCard: CreditCard): ADD_CREDIT_CARD_STATUS
+    +removeCreditCard(customerId: int, creditCardNumber: long): REMOVE_CREDIT_CARD_STATUS
+    +getCustomers(): Iterable<Customer>
+    +addShow(clientId: int, showName: String, startDate: Date, endDate: Date, ticketPrice: double): ADD_SHOW_STATUS
+    +getShows(): Iterable<Show>
+    +sellTickets(TicketType, quantity: int, customerId: int, creditCardNumber: long, showDate: Date): SELL_TICKET_STATUS
+    +payClient(clientId: int, amountToPay: double): PAY_CLIENT_STATUS
+    +getOwedToClient(clientId: int): double
+}
+
+note right of Theater
+  The status code enums are omitted,
+  as they would make the UML overly messy.
+end note
+
+class AccountList<E extends Account> {
+    ...
+}
+
+class ClientList {
+    ...
+}
+
+class CustomerList {
+    ...
+}
+
+class ShowList {
+    ...
+}
+
+class TicketList {
+    -INSTANCE: TicketList
+    -TicketList()
+    +getInstance() : TicketList
+    +addTicket(Ticket)
+    +getTicketsOn(Date): List<Ticket>
+}
+
+class CreditCardList {
+    -INSTANCE: CreditCardList
+    -CreditCardList()
+    +getInstance() : CreditCardList
+}
+
+class Account {
+    ...
+}
+
+class Customer {
+    -creditCardList: ArrayList<CreditCard>
+    +Customer(String, String, long, CreditCard)
+    +addCreditCard(CreditCard) : boolean
+    +getCreditCard() : CreditCard
+    +removeCreditCard(long) : boolean
+    +removeCreditCards()
+    +getCreditCardList() : ArrayList<CreditCard>
+    +toString(): String
+}
+
+class Client {
+   ...
+}
+
+class Show {
+    ...
+}
+
+class Ticket {
+    -show: Show
+    -date: Date
+    -customer: Customer
+    -dateFormat: SimpleDateFormat
+}
+
+class CreditCard {
+    ...
+}
+
+together {
+    class "SingletonMap<Date, Ticket>"
+    class "SingletonIdentifiableMap"
+}
+
+together {
+    class "SingletonIdentifiableMap<Integer, Account>"
+    class "SingletonIdentifiableMap<Integer, Show>"
+    class "SingletonIdentifiableMap<Long, CreditCard>"
+}
+
+together {
+    class "AccountList"
+    class "AccountList"
+    class "CreditCardList"
+    class "ShowList"
+    class "TicketList"
+}
+
+together {
+    class "Client"
+    class "Customer"
+    class "Show"
+    class "Ticket"
+    class "Account"
+}
+
+UserInterface -left- Theater
+
+Theater -- "ClientList"
+Theater -- "CustomerList"
+Theater -- "ShowList"
+Theater -- "CreditCardList"
+Theater -- "TicketList"
+
+SingletonMap <|-- SingletonIdentifiableMap
+SingletonMap <|-- "SingletonMap<Date, Ticket>" : "«bind» E::Ticket\n«bind» K:Date"
+"SingletonMap<Date, Ticket>" <|-- TicketList
+SingletonIdentifiableMap <|-- "SingletonIdentifiableMap<Integer, Account>" : "«bind» E::Account\n«bind» K::Integer"
+SingletonIdentifiableMap <|-- "SingletonIdentifiableMap<Integer, Show>" : "«bind» E::Show\n«bind» K::Integer"
+SingletonIdentifiableMap <|-- "SingletonIdentifiableMap<Long, CreditCard>" : "«bind» E::CreditCard\n«bind» K::Long"
+"SingletonIdentifiableMap<Integer, Account>" <|-- AccountList
+"SingletonIdentifiableMap<Integer, Show>" <|-- ShowList
+"SingletonIdentifiableMap<Long, CreditCard>" <|-- CreditCardList
+AccountList <|-- "AccountList<Client>" : "«bind» E::Client"
+AccountList <|-- "AccountList<Customer>" : "«bind» E::Customer"
+"AccountList<Client>" <|-- ClientList
+"AccountList<Customer>" <|-- CustomerList
+
+Account <|-- Client
+Account <|-- Customer
+
+AccountList "1" *-- "*" Account
+ClientList "1" *-- "*" Client
+CustomerList "1" *-- "*" Customer
+ShowList "1" *-- "*" Show
+TicketList "1" *-- "*" Ticket
+CreditCardList "1" *-- "*" CreditCard
+
+Ticket -- Show
+
+Client "1" *-- "*" Show
+Customer "1" *-- "1..*" CreditCard
+Customer "1" *-- "*" Ticket
+@enduml
