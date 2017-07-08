@@ -7,14 +7,25 @@ public enum TicketType {
     /*################################
      * Ticket Types
      *###############################*/
+    /**
+     * A regular ticket.
+     */
     Ticket {
     },
+
+    /**
+     * A ticket sold in advance.
+     */
     AdvanceTicket {
         @Override
         public AdvanceTicket getNewTicket(Show show, Customer customer, Date date) {
             return new AdvanceTicket(show, customer, date);
         }
     },
+
+    /**
+     * A ticket sold in advance to a student.
+     */
     StudentAdvanceTicket {
         @Override
         public StudentAdvanceTicket getNewTicket(Show show, Customer customer, Date date) {
@@ -28,6 +39,19 @@ public enum TicketType {
     /*################################
      * Ticket Factory
      *###############################*/
+
+    /**
+     * Creates a new ticket. If this is considered a "printing" or selling of a ticket, then you should also invoke {@link TicketType#whenTicketSold(Ticket)} after.
+     * Note that this method exists to facilitate in creating a ticket instance corresponding to the Enum value.
+     *
+     * @param show The show the ticket is admitting to.
+     * @param customer The customer buying the ticket.
+     * @param date The show date for the ticket.
+     *
+     * @return A new Ticket instance.
+     *
+     * @throws TicketExpired if the date is in the past.
+     */
     public Ticket getNewTicket(Show show, Customer customer, Date date) throws TicketExpired {
         if (date.before(new Date())) {
             throw new TicketExpired();
@@ -58,6 +82,14 @@ public enum TicketType {
     }
 
 
+    /**
+     * Returns a string copy of a receipt that would be printed given a ticket's show and quantity.
+     * Other information can be obtained directly from the ticket instance (this is intended to not require such an instance).
+     *
+     * @param show The show the ticket would belong to.
+     * @param quantity The number of tickets being purchased.
+     * @return A String "receipt."
+     */
     public String getReceipt(Show show, int quantity) {
         String string = "Price of ticket: $" + show.getTicketPrice();
 
