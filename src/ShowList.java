@@ -68,7 +68,7 @@ public class ShowList extends SingletonIdentifiableMap<Date, Show> {
      */
     public boolean validShowDate(Date start, Date end) {
         for (Show show : this.getInstance()) {
-            if ( // our dates conflict if:
+            if ( // Our dates conflict if:
                show.hasDate(start) // We start during another show.
                || show.hasDate(end) // We end during another show.
                || (start.before(show.getStartDate()) && end.after(show.getEndDate())) // We occur entirely during another show.
