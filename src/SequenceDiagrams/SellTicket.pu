@@ -3,20 +3,41 @@
 actor Clerk
 
 activate ":UserInterface"
-Clerk -> ":UserInterface" : Add a Client
+Clerk -> ":UserInterface" : Sell a Ticket of Type ticketType
 Clerk //- ":UserInterface": Data Request
 Clerk -// ":UserInterface": quantity, id, creditcard number, showDate
-":UserInterface" -> ":Theater" : sellTickets(quantity, id, creditcard number, showDate)
+":UserInterface" -> ":Theater" : sellTickets(TicketType, quantity, id, creditcard number, showDate)
 activate ":Theater"
-":UserInterface" -> ":Theater": show = getShow(showDate)
-":UserInterface" -> ":Theater": customer = getCustomerList.getAccount(id)
-":Theater" -->> ":TicketType": getNewTicket(show, customer, showDate)
-activate ":TicketType"
+":Theater" -> ":ShowList" : show = getShow(showDate)
+activate ":ShowList"
+deactivate ":ShowList"
+":Theater" -> ":CustomerList" : customer = getCustomerList.getAccount(id)
+activate ":CustomerList"
+deactivate ":CustomerList"
+
+loop until quantity is 0
+    ":Theater" -> "ticketType: TicketType": ticket = getNewTicket(show, customer, showDate)
+    activate "ticketType: TicketType"
+    create "ticket :Ticket"
+    "ticketType: TicketType" -> "ticket :Ticket": ticket = new Ticket(show, customer, showDate)
+    deactivate "ticketType: TicketType"
+
+    ":Theater" -> "ticketType: TicketType": whenTicketSold(ticket)
+    activate "ticketType: TicketType"
+    "ticketType: TicketType" -> ":ShowList": ticket.getShow().getClient().adjustBalance(ticket.getPrice())
+    activate ":ShowList"
+    deactivate ":ShowList"
+    "ticketType: TicketType" -> ":CustomerList": ticket.getCustomer().addTicket(ticket)
+    activate ":CustomerList"
+    deactivate ":CustomerList"
+    "ticketType: TicketType" -> ":TicketList": addTicket(ticket)
+    activate ":TicketList"
+    deactivate ":TicketList"
+    deactivate "ticketType: TicketType"
+end
+
+":Theater" -->> ":UserInterface" : successful?
 deactivate ":Theater"
-create "ticket :Ticket"
-":UserInterface" -> "ticket :Ticket": ticket = Ticket(show, customer, showDate)
-":TicketType" -->> ":UserInterface" : successful?
-deactivate ":TicketType"
 ":UserInterface" -->> Clerk : successful?
 deactivate ":UserInterface"
 @enduml
