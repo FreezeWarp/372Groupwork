@@ -56,10 +56,10 @@ public class UserInterfacePrompts {
             inputInt = promptInt(promptText);
 
             if (inputInt < min) {
-                System.out.println("That number is too low. Please enter a number between " + min + " and " + max);
+                System.out.println("That number is too low. Please enter a number between " + min + " and " + max + ".");
             }
             else if (inputInt > max) {
-                System.out.println("That number is too high. Please enter a number between " + min + " and " + max);
+                System.out.println("That number is too high. Please enter a number between " + min + " and " + max+ ".");
             }
             else {
                 break;
@@ -116,10 +116,10 @@ public class UserInterfacePrompts {
             inputDouble = promptDouble(promptText);
 
             if (inputDouble < min) {
-                System.out.println("That number is too low. Please enter a number between " + min + " and " + max);
+                System.out.println("That number is too low. Please enter a number between " + min + " and " + max+ ".");
             }
             else if (inputDouble > max) {
-                System.out.println("That number is too high. Please enter a number between " + min + " and " + max);
+                System.out.println("That number is too high. Please enter a number between " + min + " and " + max+ ".");
             }
             else {
                 break;

@@ -244,7 +244,7 @@ public class UserInterface {
     	else {
     		switch (Theater.removeCustomer(customerId)) {
                 case NOEXIST:
-           	        System.out.println("The customer does not exist");
+           	        System.out.println("The customer does not exist.");
         	        break;
         	
                 case FAILURE:
@@ -281,7 +281,7 @@ public class UserInterface {
     	else {
             switch (Theater.addCreditCard(customerId, creditCard)) {
                 case NOEXIST:
-               	    System.out.println("The customer does not exist");
+               	    System.out.println("The customer does not exist.");
             	    break;
             	
                 case FAILURE:
@@ -469,7 +469,6 @@ public class UserInterface {
 	        case SUCCESS:
 	            System.out.println("Your ticket has been sold:");
 
-	            // This isn't the best design (it has unfortunately high coupling), but is probably the best option if we want to ensure that the Theater methods are only returning status codes.
                 System.out.println(t.getReceipt(Theater.getShowList().getShow(showDate), quantity));
                 break;
 
@@ -494,7 +493,7 @@ public class UserInterface {
 
             switch (Theater.payClient(clientId, payment)) {
                 case SUCCESS:
-                    System.out.println("The client has been payed. They are now owed " + String.format("%10.2f", Theater.getOwedToClient(clientId)));
+                    System.out.println("The client has been paid. They are now owed " + String.format("%10.2f", Theater.getOwedToClient(clientId)));
                     break;
 
                 default:
