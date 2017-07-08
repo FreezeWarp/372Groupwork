@@ -619,12 +619,6 @@ public class Theater implements Serializable {
                             TicketType.whenTicketSold(ticket); // TODO: Not sure if this is the best place to put this yet. May need refactor.
                         }
 
-                        // TODO: Maybe refactor?
-                        System.out.println("Price of ticket: $" + ticket.getPrice());
-                        if (quantity > 1) {
-                            System.out.println("Final price: $" + ticket.getPrice() * quantity);
-                            return SELL_TICKETS_STATUS.SUCCESS;
-                        }
                         return SELL_TICKETS_STATUS.SUCCESS;
                     } catch (TicketType.TicketExpired exception) {
                         return SELL_TICKETS_STATUS.INVALID_SHOW_DATE;

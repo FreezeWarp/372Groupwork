@@ -466,7 +466,10 @@ public class UserInterface {
                 break;
            
 	        case SUCCESS:
-                System.out.println("The transaction was successful.");
+	            System.out.println("Your ticket has been sold:");
+	            
+	            // This isn't the best design (it has unfortunately high coupling), but is probably the best option if we want to ensure that the Theater methods are only returning status codes.
+                System.out.println(t.getReceipt(Theater.getShowList().getShow(showDate), quantity));
                 break;
 
             default:

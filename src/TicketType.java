@@ -57,6 +57,17 @@ public enum TicketType {
     }
 
 
+    public String getReceipt(Show show, int quantity) {
+        String string = "Price of ticket: $" + show.getTicketPrice();
+
+        if (quantity > 1) {
+            string += (System.getProperty("line.separator") + "Final price: $" + show.getTicketPrice() * quantity);
+        }
+
+        return string;
+    }
+
+
 
     /*################################
      * Exceptions
