@@ -57,11 +57,18 @@ public class TestSuite {
 
 
         /* Sell Ticket Tests */
-        TestSuite.equalsTest(Theater.sellTickets(TicketType.StudentAdvanceTicket, 3, 0, 9999999999999999L, new Date(199, 5, 15)), Theater.SELL_TICKETS_STATUS.SUCCESS, "Sell ticket 1 failed.");
-        TestSuite.equalsTest(Theater.sellTickets(TicketType.Ticket, 3, 0, 8888888888888888L, new Date(199, 5, 25)), Theater.SELL_TICKETS_STATUS.SUCCESS, "Sell ticket 2 failed.");
+        TestSuite.equalsTest(Theater.sellTickets(TicketType.StudentAdvanceTicket, 3, 0, 9999999999999999L, new Date(199, 5, 15)), Theater.SELL_TICKETS_STATUS.SUCCESS, "Sell ticket 1 failed."); // show 1
+        TestSuite.equalsTest(Theater.sellTickets(TicketType.Ticket, 3, 0, 8888888888888888L, new Date(199, 5, 25)), Theater.SELL_TICKETS_STATUS.SUCCESS, "Sell ticket 2 failed."); // show 2
         TestSuite.equalsTest(Theater.sellTickets(TicketType.Ticket, 3, 0, 7777777777777777L, new Date(199, 6, 20)), Theater.SELL_TICKETS_STATUS.INVALID_CREDIT_CARD_NUMBER, "Sell ticket 3 returns wrong status code.");
         TestSuite.equalsTest(Theater.sellTickets(TicketType.Ticket, 3, 0, 8888888888888888L, new Date(199, 8, 0)), Theater.SELL_TICKETS_STATUS.INVALID_SHOW_DATE, "Sell ticket 4 returns wrong status code.");
 
+        TestSuite.equalsTestDouble(Theater.getOwedToClient(0), 3 * 10 * .7 * .5, "Amount owed to client 1 is incorrect.");
+        TestSuite.equalsTest(Theater.payClient(0, 3 * 10 * .7 * .5), Theater.PAY_CLIENT_STATUS.SUCCESS, "Unable to pay client.");
+        TestSuite.equalsTestDouble(Theater.getOwedToClient(0), 0, "Amount owed to client 1 after payment is incorrect.");
+
+        TestSuite.equalsTestDouble(Theater.getOwedToClient(1), 3 * 20, "Amount owed to client 2 is incorrect.");
+        TestSuite.equalsTest(Theater.payClient(1, 30), Theater.PAY_CLIENT_STATUS.SUCCESS, "Unable to pay client.");
+        TestSuite.equalsTestDouble(Theater.getOwedToClient(1), 3 * 20 - 30, "Amount owed to client 2 after payment is incorrect.");
 
 
         if (UserInterfacePrompts.promptYesOrNo("Would you like to run the main userinterface now? ")) {
@@ -69,9 +76,33 @@ public class TestSuite {
         }
     }
 
+
+    /**
+     * Tests whether one value equals another, printing a message if not.
+     *
+     * @param returnValue The actual return value.
+     * @param shouldReturnValue The expected return value.
+     * @param failureMessage A message to show on failure.
+     */
     public static void equalsTest(Object returnValue, Object shouldReturnValue, String failureMessage) {
         if (returnValue != shouldReturnValue) {
             System.out.println(failureMessage);
+            System.out.println("   (Expected: " + shouldReturnValue + "; Found: " + returnValue + ")");
+        }
+    }
+
+    /**
+     * Tests whether one double equals another, allowing a small delta for rounding errors.
+     *
+     * @param returnValue The actual return value.
+     * @param shouldReturnValue The expected return value.
+     * @param failureMessage A message to show on failure.
+     */
+    public static void equalsTestDouble(double returnValue, double shouldReturnValue, String failureMessage) {
+        if (returnValue > (shouldReturnValue * 1.01) ||
+                returnValue < (shouldReturnValue * .99)) {
+            System.out.println(failureMessage);
+            System.out.println("   (Expected: " + shouldReturnValue + "; Found: " + returnValue + ")");
         }
     }
 }
