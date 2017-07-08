@@ -40,6 +40,43 @@ public class UserInterfacePrompts {
         return inputInt;
     }
 
+    /**
+     * Prompts the user for an integer that must fall between min and max
+     *
+     * @param promptText The text to display for the prompt.
+     * @param min The minimum allowed integer.
+     * @param max The maximum allowed integer.
+     *
+     * @return An integer value input by the user.
+     */
+    public static int promptIntRange(String promptText, int min, int max) {
+        int inputInt;
+
+        while (true) {
+            inputInt = promptInt(promptText);
+
+            if (inputInt < min) {
+                System.out.println("That number is too low. Please enter a number between " + min + " and " + max);
+            }
+            else if (inputInt > max) {
+                System.out.println("That number is too high. Please enter a number between " + min + " and " + max);
+            }
+            else {
+                break;
+            }
+        }
+
+        return inputInt;
+    }
+
+
+    /**
+     * Prompts the user for a double.
+     *
+     * @param promptText The text to display for the prompt.
+     *
+     * @return A double value input by the user.
+     */
     public static double promptDouble(String promptText) {
         Scanner s  = new Scanner(System.in);
          double inputDouble = 0;
@@ -64,32 +101,32 @@ public class UserInterfacePrompts {
     }
 
     /**
-     * Prompts the user for an integer that must fall between min and max
+     * Prompts the user for an double that must fall between min and max
      *
      * @param promptText The text to display for the prompt.
-     * @param min The minimum allowed integer.
-     * @param max The maximum allowed integer.
+     * @param min The minimum allowed double.
+     * @param max The maximum allowed double.
      *
-     * @return An integer value input by the user.
+     * @return A double value input by the user.
      */
-    public static int promptIntRange(String promptText, int min, int max) {
-        int inputInt;
+    public static double promptDoubleRange(String promptText, double min, double max) {
+        double inputDouble;
 
         while (true) {
-            inputInt = promptInt(promptText);
+            inputDouble = promptDouble(promptText);
 
-            if (inputInt < min) {
+            if (inputDouble < min) {
                 System.out.println("That number is too low. Please enter a number between " + min + " and " + max);
             }
-            else if (inputInt > 18) {
-                System.out.println("That number is too high. Please enter a number between " + min + " and " + 18);
+            else if (inputDouble > max) {
+                System.out.println("That number is too high. Please enter a number between " + min + " and " + max);
             }
             else {
                 break;
             }
         }
 
-        return inputInt;
+        return inputDouble;
     }
 
 

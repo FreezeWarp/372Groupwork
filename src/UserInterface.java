@@ -442,6 +442,7 @@ public class UserInterface {
         }
     }
 
+
     /**
      * Sells tickets to customers.
      */
@@ -482,34 +483,31 @@ public class UserInterface {
     /**
      * Pays a payment to the balance of clients.
      */
-    public static void payClient() { //TODO: Move logic out of UserInterface and into Theater. Mimic the above implementations with the switch/case
+    public static void payClient() {
     	// Input
-        Client client = Theater.getClientList().getAccount(UserInterfacePrompts.promptInt("Client ID? "));
-        
-        if (client == null) {
-            System.out.println("Error, specified client does not exist. Did you enter the correct account ID?");
-        } 
-        else {
-            System.out.println("The client's balance is :$" + client.getBalance());
-            double compare = client.getBalance();
-            
-            if (compare == 0) {
-                System.out.println("We don't owe them anything!");
-            } 
-            else {
-                double payment = UserInterfacePrompts.promptDouble("How much are we paying the client?");
-                if (compare < payment) {
-                    System.out.println("This is more than we owe them.");
-                } 
-                else {
-                    double negative = payment * -1;
-                    client.adjustBalance(negative);
-                    System.out.println("The client's new balance is :$" + client.getBalance());
-                }
+        int clientId = UserInterfacePrompts.promptInt("Client ID? ");
+
+        double maximumToPay = Theater.getOwedToClient(clientId);
+
+        if (maximumToPay > 0) {
+            double payment = UserInterfacePrompts.promptDoubleRange("How much are we paying the client (maximum=" + maximumToPay + ")? ", 0, maximumToPay);
+
+            switch (Theater.payClient(clientId, payment)) {
+                case SUCCESS:
+                    System.out.println("The client has been payed. They are now owed " + String.format("%10.2f", Theater.getOwedToClient(clientId)));
+                    break;
+
+                default:
+                    System.out.println("An unknown status code was returned.");
+                    break;
             }
         }
+        else {
+            System.out.println("The client is not owed anything (or does not exist).");
+        }
     }
-    
+
+
     /**
      * Lists all tickets on a given day from TicketList.
      */

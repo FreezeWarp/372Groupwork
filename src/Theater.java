@@ -578,6 +578,9 @@ public class Theater implements Serializable {
 
 
 
+    /**
+     * Returned codes used from {@link Theater#sellTickets(TicketType, int, int, long, Date)}.
+     */
     enum SELL_TICKETS_STATUS {
         /**
          * Too few or two many (e.g. 0 or -1) tickets to sell. */
@@ -592,7 +595,7 @@ public class Theater implements Serializable {
          * The entered credit card number was not one of the customer's own credit cards. */
         INVALID_CREDIT_CARD_NUMBER,
         /**
-         * Generic failure occurred. */
+         * Generic failure occurred. Currently unused. */
         FAILURE,
         /**
          * Method completed successfully. */
@@ -649,6 +652,73 @@ public class Theater implements Serializable {
 
 
 
+    /**
+     * Returned codes used from {@link Theater#payClient(int, double)}.
+     */
+    enum PAY_CLIENT_STATUS {
+        /**
+         * Generic failure occurred. Currently unused. */
+        FAILURE,
+        /**
+         * Method completed successfully. */
+        SUCCESS,
+        /**
+         * The client does not exist. */
+        NO_CLIENT,
+        /**
+         * The amount to be payed is greater than the amount owed. */
+        TOO_LITTLE_OWED,
+    }
+
+    /**
+     * Pays a client some amount of what they are owed.
+     *
+     * @param clientId The ID of the client to be payed.
+     * @param amountToPay The amount to pay the client.
+
+     * @return A code from {@link PAY_CLIENT_STATUS}.
+     */
+    public static PAY_CLIENT_STATUS payClient(int clientId, double amountToPay) {
+        Client client = Theater.getClientList().getAccount(clientId);
+
+        if (client == null) {
+            return PAY_CLIENT_STATUS.NO_CLIENT;
+        }
+        else {
+            double owed = getOwedToClient(client.getId());
+
+            if (owed < amountToPay) {
+                return PAY_CLIENT_STATUS.TOO_LITTLE_OWED;
+            }
+            else {
+                client.adjustBalance(amountToPay * -1);
+
+                return PAY_CLIENT_STATUS.SUCCESS;
+            }
+        }
+    }
+
+
+
+    /**
+     * Get the amount owed to a client.
+     *
+     * @param clientId The ID of the client.
+     * @return The amount the client is owed. Returns 0 if client does not exist.
+     */
+    public static double getOwedToClient(int clientId) {
+        Client client = Theater.getClientList().getAccount(clientId);
+
+        if (client == null) {
+            return 0;
+        }
+        else {
+            return client.getBalance();
+        }
+    }
+
+
+
     /*################################
      * Client/Customer/Show/CreditCard Instances
      *###############################*/
@@ -688,5 +758,5 @@ public class Theater implements Serializable {
     public static List<Ticket> getTicketList(Date date) {
         return TicketList.getTickets(date);
     }
-    
+
 }
