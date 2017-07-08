@@ -85,7 +85,7 @@ public class Ticket extends IdentifiableInteger implements Serializable {
      */
     @Override
     public String toString() {
-        return  "[Ticket# " + (String.format("%10d", getId())) + "]" +
+        return  "[Ticket# " + (String.format("%010d", getId())) + "]" +
                 show.getName() +
                 ": Customer " + customer.getId() +
                 ", Price: " + getPrice() +

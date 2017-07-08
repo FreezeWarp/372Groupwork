@@ -33,7 +33,6 @@ public enum TicketType {
     StudentAdvanceTicket {
         @Override
         public StudentAdvanceTicket getNewTicket(Show show, Customer customer, Date date) {
-            System.out.println("Must show valid student id.");
             return new StudentAdvanceTicket(show, customer, date);
         }
     };
