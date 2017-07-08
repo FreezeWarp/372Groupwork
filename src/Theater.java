@@ -602,7 +602,7 @@ public class Theater implements Serializable {
             if (customer == null) {
                 return SELL_TICKETS_STATUS.INVALID_CUSTOMER_ID;
             }
-            else if (show == null) { // TODO: also check and reject past shows
+            else if (show == null) {
                 return SELL_TICKETS_STATUS.INVALID_SHOW_DATE;
             }
             else {
@@ -612,19 +612,23 @@ public class Theater implements Serializable {
                     return SELL_TICKETS_STATUS.INVALID_CREDIT_CARD_NUMBER;
                 }
                 else {
-                    Ticket ticket = ticketType.getNewTicket(show, customer, showDate);
+                    try {
+                        Ticket ticket = ticketType.getNewTicket(show, customer, showDate);
 
-                    for (int i = 0; i < quantity; i++) {
-                        TicketType.whenTicketSold(ticket); // TODO: Not sure if this is the best place to put this yet. May need refactor.
-                    }
+                        for (int i = 0; i < quantity; i++) {
+                            TicketType.whenTicketSold(ticket); // TODO: Not sure if this is the best place to put this yet. May need refactor.
+                        }
 
-                    // TODO: Maybe refactor?
-                    System.out.println("Price of ticket: $" + ticket.getPrice());
-                    if (quantity > 1) {
-                        System.out.println("Final price: $" + ticket.getPrice() * quantity);
+                        // TODO: Maybe refactor?
+                        System.out.println("Price of ticket: $" + ticket.getPrice());
+                        if (quantity > 1) {
+                            System.out.println("Final price: $" + ticket.getPrice() * quantity);
+                            return SELL_TICKETS_STATUS.SUCCESS;
+                        }
                         return SELL_TICKETS_STATUS.SUCCESS;
-		            }
-                    return SELL_TICKETS_STATUS.SUCCESS;
+                    } catch (TicketType.TicketExpired exception) {
+                        return SELL_TICKETS_STATUS.INVALID_SHOW_DATE;
+                    }
                 }
             }
         }

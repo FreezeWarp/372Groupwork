@@ -4,6 +4,9 @@ import java.util.Date;
  * Created by joseph on 26/06/17.
  */
 public enum TicketType {
+    /*################################
+     * Ticket Types
+     *###############################*/
     Ticket {
     },
     AdvanceTicket {
@@ -19,10 +22,24 @@ public enum TicketType {
         }
     };
 
-    public Ticket getNewTicket(Show show, Customer customer, Date date) {
+
+
+    /*################################
+     * Ticket Factory
+     *###############################*/
+    public Ticket getNewTicket(Show show, Customer customer, Date date) throws TicketExpired {
+        if (date.before(new Date())) {
+            throw new TicketExpired();
+        }
+
         return new Ticket(show, customer, date);
     }
 
+
+
+    /*################################
+     * Ticket Events
+     *###############################*/
     /**
      * Performs the data updates that should occur whenever a ticket object is "sold."
      *
@@ -37,5 +54,19 @@ public enum TicketType {
 
         // Add ticket object to global TicketList (used for optimal retrieval of tickets on a given date)
         TicketList.getInstance().addTicket(ticket);
+    }
+
+
+
+    /*################################
+     * Exceptions
+     *###############################*/
+    /**
+     * An exception for when trying to create a {@link Show} with an end date that is in the future of the start date.
+     */
+    class TicketExpired extends Exception {
+        TicketExpired() {
+            super("The show date specified has already passed, and a ticket cannot be issued.");
+        }
     }
 }
