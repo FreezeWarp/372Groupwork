@@ -17,6 +17,6 @@ public class StudentAdvanceTicket extends AdvanceTicket implements Serializable{
      * @return a string representation of the ticket type
      */
     public String getTicketType() {
-        return ", Ticket type: Student Advance Ticket ";
+        return ", Ticket type: Student Advance Ticket -Must show valid student id ";
     }
 }
