@@ -12,7 +12,7 @@ public class StudentAdvanceTicket extends AdvanceTicket implements Serializable 
     /**
      * The price discount for a student advance ticket compared to an advanced ticket. (1 = no change/full price, .5 = 50% off, etc.)
      */
-    private final double STUDENT_ADVANCE_TICKET_DISCOUNT = .5;
+    public final static double STUDENT_ADVANCE_TICKET_DISCOUNT = .5;
 
     /**
      * Create a StudentAdvanceTicket instance. See {@link Ticket#Ticket(Show, Customer, Date)} for parameters.
