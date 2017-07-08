@@ -341,7 +341,7 @@ public class Theater implements Serializable {
      * @return A code from {@link ADD_CUSTOMER_STATUS}.
      */
     public static ADD_CUSTOMER_STATUS addCustomer(String name, String address, long phone, CreditCard creditCard) {
-        if (creditCard == null) { // TODO: This is a good check to have; other objects may need to be checked for null in other Theater methods.
+        if (creditCard == null) {
             return ADD_CUSTOMER_STATUS.CREDIT_CARD_INVALID;
         }
         else {
