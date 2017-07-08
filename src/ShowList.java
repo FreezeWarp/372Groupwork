@@ -47,7 +47,7 @@ public class ShowList extends SingletonIdentifiableMap<Date, Show> {
     /**
      * Adds a new show to the ShowList.
      *
-     * @param show The show to be added 
+     * @param show The show to be added.
      */
     public boolean addShow(Show show) throws ShowConflictException {
         if (!validShowDate(show.getStartDate(), show.getEndDate())) {
@@ -59,33 +59,33 @@ public class ShowList extends SingletonIdentifiableMap<Date, Show> {
 
 
     /**
-     * Checks if the date interferes with another date in ShowList
+     * Checks if the date interferes with another date in ShowList.
      *
-     * @param start the Date to start the show
-     * @param end the Date to end the show
+     * @param start the Date to start the show.
+     * @param end the Date to end the show.
      *
-     * @return True if the date is valid, false if invalid
+     * @return True if the date is valid, false if invalid.
      */
     public boolean validShowDate(Date start, Date end) {
         for (Show show : this.getInstance()) {
             if ( // our dates conflict if:
-               show.hasDate(start) // we start during another show
-               || show.hasDate(end) // we end during another show
-               || (start.before(show.getStartDate()) && end.after(show.getEndDate())) // we occur entirely during another show
+               show.hasDate(start) // We start during another show.
+               || show.hasDate(end) // We end during another show.
+               || (start.before(show.getStartDate()) && end.after(show.getEndDate())) // We occur entirely during another show.
             ) {
-                return false; // returns false if any shows conflict
+                return false; // Returns false if any shows conflict.
             }
         }
-        return true; // returns true when no shows conflict
+        return true; // Returns true when no shows conflict.
     }
 
 
     /**
      * Checks if client has a future show scheduled.
      *
-     * @param accountId the account to be checked
+     * @param accountId the account to be checked.
      *
-     * @return True if it can be removed, false if it cannot
+     * @return True if it can be removed, false if it cannot.
      */
     public static boolean checkShowDates(int accountId) {
         for (Show show : getInstance()) {

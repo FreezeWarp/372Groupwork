@@ -48,21 +48,21 @@ public class Account extends IdentifiableInteger implements Serializable {
 
 
     /**
-     * @return the account holder's name, {@link Account#name}
+     * @return The account holder's name. {@link Account#name}
      */
     public String getName() {
         return name;
     }
 
     /**
-     * @return the account holder's address, {@link Account#address}
+     * @return The account holder's address. {@link Account#address}
      */
     public String getAddress() {
         return address;
     }
 
     /**
-     * @return the account holder's phone number, {@link Account#phoneNumber}
+     * @return The account holder's phone number. {@link Account#phoneNumber}
      */
     public long getPhoneNumber() {
         return phoneNumber;
@@ -85,7 +85,7 @@ public class Account extends IdentifiableInteger implements Serializable {
 
 
     /**
-     * @return a string representation concatenating basic account information
+     * @return A string representation concatenating basic account information.
      */
     @Override
     public String toString() {

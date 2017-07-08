@@ -74,10 +74,10 @@ public enum TicketType {
         // Add revenue from ticket sale to client account.
         ticket.getShow().getClient().adjustBalance(ticket.getPrice());
 
-        // Add ticket object to Customer's ticket collection
+        // Add ticket object to Customer's ticket collection.
         ticket.getCustomer().addTicket(ticket);
 
-        // Add ticket object to global TicketList (used for optimal retrieval of tickets on a given date)
+        // Add ticket object to global TicketList. (used for optimal retrieval of tickets on a given date)
         TicketList.getInstance().addTicket(ticket);
     }
 

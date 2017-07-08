@@ -21,7 +21,7 @@ public class SingletonMap<K, E> implements Iterable<E>, Serializable {
     /**
      * Reads the Theater object (and its static instance variable) from the ObjectOutputStream.
      *
-     * @param input The stream being read from
+     * @param input The stream being read from.
      */
     private void readObject(java.io.ObjectInputStream input) {
         try {
@@ -52,7 +52,7 @@ public class SingletonMap<K, E> implements Iterable<E>, Serializable {
     /**
      * Writes the Theater object (and its static instance variable) to the ObjectOutputStream.
      *
-     * @param output The stream being written to
+     * @param output The stream being written to.
      */
     private void writeObject(java.io.ObjectOutputStream output) {
         try {
@@ -85,7 +85,7 @@ public class SingletonMap<K, E> implements Iterable<E>, Serializable {
     /**
      * An iterator that iterates through the list of Map entries (values).
      * 
-     * @return the next value in the singletonMap
+     * @return the next value in the singletonMap.
      */
     public Iterator<E> iterator() {
         return singletonMap.values().iterator();
@@ -115,7 +115,7 @@ public class SingletonMap<K, E> implements Iterable<E>, Serializable {
      *
      * @param key The hashmap key to remove.
      *
-     * @return True on success, false on failure (ID doesn't exist, probably)
+     * @return True on success, false on failure. (ID doesn't exist, probably)
      */
     public boolean removeEntry(K key) {
         if (hasEntry(key)) {
@@ -153,9 +153,9 @@ public class SingletonMap<K, E> implements Iterable<E>, Serializable {
 
 
     /**
-     * Overrides the toString method of Account
+     * Overrides the toString method of Account.
      * 
-     * @return A string representation of the Map, with each entry on its own line
+     * @return A string representation of the Map, with each entry on its own line.
      */
     public String toString() {
         StringBuilder sb = new StringBuilder();

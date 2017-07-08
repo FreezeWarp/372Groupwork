@@ -7,9 +7,9 @@ import java.util.Map;
 /**
  * The interface used for all program interactions. Refer to {@link UserInterfacePrompts} for common input methods.
  *
- * @author  Eric Fulwiler, Daniel Johnson, Joseph Parsons, and Cory Stadther
- * @version 1.0
- * @since   2017-06-22
+ + * @author  Eric Fulwiler, Daniel Johnson, Joseph T. Parsons, and Cory Stadther
+ + * @version 2.0
+ + * @since   2017-July-08
  */
 public class UserInterface {
     /**
@@ -114,7 +114,7 @@ public class UserInterface {
             retrieveData();
         }
 
-        help(); // Show help at first launch.
+        help(); // Shows help at first launch.
 
         /* Loop until exit command is entered. Process other commands as entered. */
         int commandNumber;
@@ -400,7 +400,7 @@ public class UserInterface {
 
 
     /**
-     * Stores data by invoking Theater.storeData()
+     * Stores data by invoking Theater.storeData().
      */
     public static void storeData() {
         switch (Theater.storeData()) {
@@ -515,7 +515,7 @@ public class UserInterface {
     	// Inputs
         Date date = UserInterfacePrompts.promptDate("Date of Tickets to show? (MM/DD/yyyy)? ");
 
-        // Get the ticket list for the date
+        // Get the ticket list for the date.
         Collection<Ticket> tickets = Theater.getTicketList().getTicketsOn(date);
 
         if (tickets == null) {

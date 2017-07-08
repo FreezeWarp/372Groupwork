@@ -15,14 +15,14 @@ public class IdentifiableInteger implements Identifiable<Integer>, Serializable 
 
 
     /**
-     * @return the unique ID of the object, {@link IdentifiableInteger#id}
+     * @return The unique ID of the object. {@link IdentifiableInteger#id}
      */
     public Integer getId() {
         return id;
     }
 
     /**
-     * @param id The new id for the object, {@link IdentifiableInteger#id}
+     * @param id The new id for the object. {@link IdentifiableInteger#id}
      */
     public void setId(Integer id) {
         this.id = id;
