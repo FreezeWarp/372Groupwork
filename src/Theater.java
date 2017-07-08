@@ -641,7 +641,7 @@ public class Theater implements Serializable {
                 else {
                     try {
                         for (int i = 0; i < quantity; i++) {
-                            TicketType.whenTicketSold(ticket);
+                            TicketType.whenTicketSold(ticketType.getNewTicket(show, customer, showDate)); // TODO: Not sure if this is the best place to put this yet. May need refactor.
                         }
 
                         return SELL_TICKETS_STATUS.SUCCESS;
