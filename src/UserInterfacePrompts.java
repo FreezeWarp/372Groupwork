@@ -238,54 +238,45 @@ public class UserInterfacePrompts {
 
 
     /**
-     * Prompts the user for a date to start or end a show.
+     * Prompts the user for a date.
      *
      * @param promptText The text to display for the prompt.
+     * @param onlyInFuture If true, the date must occur in the future.
      *
      * @return Date the user input
      */
-    public static Date promptShowDate(String promptText) {
-        while(true) {
-            try {
-                String dateStr = (promptLineRegex(promptText, "[\\s\\W]+", "^[0-9]{8}$", //removes unneeded characters
-                        "That is not a show date. Please enter the 8 digit date in the format MM/dd/yyyy."));
-
-                Date myDate = new SimpleDateFormat("MMddyyyy").parse(dateStr);
-
-                boolean passed = myDate.before(new Date()); //compares the date of the show with the current date
-                if (passed) {
-                    System.out.println("This day has already passed."); // TODO: move/copy validation into Show class
-                } else {
-                    return myDate;
-                }
-
-            } catch (Exception ex) {
-                System.out.println("Did you type something incorrectly? Please try re-entering the expiry show date in the format MMDDyyyy.");
-            }
-        }
-
-    }
-    
-    /**
-     * Prompts the user for a date to list Tickets.
-     *
-     * @param promptText The text to display for the prompt.
-     *
-     * @return Date the user input
-     */
-    public static Date promptTicketDate(String promptText) {
+    public static Date promptDate(String promptText, boolean onlyInFuture) {
         while(true) {
             try {
                 String dateStr = (promptLineRegex(promptText, "[\\s\\W]+", "^[0-9]{8}$", //removes unneeded characters
                         "That is not a valid date. Please enter the 8 digit date in the format MM/dd/yyyy."));
 
                 Date myDate = new SimpleDateFormat("MMddyyyy").parse(dateStr);
-                return myDate;
 
+
+                boolean passed = myDate.before(new Date()); //compares the date of the show with the current date
+                if (onlyInFuture && passed) {
+                    System.out.println("This day has already passed.");
+                } else {
+                    return myDate;
+                }
+
+                return myDate;
             } catch (Exception ex) {
                 System.out.println("Did you type something incorrectly? Please try re-entering the expiry show date in the format MMDDyyyy.");
             }
         }
+    }
 
+
+    /**
+     * Prompts the user for a date.
+     *
+     * @param promptText The text to display for the prompt.
+     *
+     * @return Date the user input
+     */
+    public static Date promptDate(String promptText) {
+        return promptDate(promptText, false);
     }
 }

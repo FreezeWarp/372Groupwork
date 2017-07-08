@@ -362,8 +362,8 @@ public class UserInterface {
         }
         else {
             String name = UserInterfacePrompts.promptLine("Show name? ");
-            Date startDate = UserInterfacePrompts.promptShowDate("Start of Show (MM/DD/yyyy)? ");
-            Date endDate = UserInterfacePrompts.promptShowDate("End of Show (MM/DD/yyyy)? ");
+            Date startDate = UserInterfacePrompts.promptDate("Start of Show (MM/DD/yyyy)? ", true);
+            Date endDate = UserInterfacePrompts.promptDate("End of Show (MM/DD/yyyy)? ", true);
             double ticketPrice = UserInterfacePrompts.promptDouble("Ticket price?");
 
             switch (Theater.addShow(clientId, name, startDate, endDate, ticketPrice)) {
@@ -450,7 +450,7 @@ public class UserInterface {
         int quantity = UserInterfacePrompts.promptIntRange("Quantity? ", 1, Integer.MAX_VALUE);
         int customerId = UserInterfacePrompts.promptInt("Customer ID? ");
         long creditCardNumber = UserInterfacePrompts.promptCreditCardNumber("Customer Credit Card? ");
-        Date showDate = UserInterfacePrompts.promptShowDate("Date of the show? (MM/DD/yyyy)? ");
+        Date showDate = UserInterfacePrompts.promptDate("Date of the show? (MM/DD/yyyy)? ", true);
 
         switch (Theater.sellTickets(t, quantity, customerId, creditCardNumber, showDate)) {
             case INVALID_CUSTOMER_ID:
@@ -512,7 +512,7 @@ public class UserInterface {
      */
     public static void printAllTickets() {
     	// Inputs
-        Date date = UserInterfacePrompts.promptTicketDate("Date of Tickets to show? (MM/DD/yyyy)? ");
+        Date date = UserInterfacePrompts.promptDate("Date of Tickets to show? (MM/DD/yyyy)? ");
         List<Ticket> t = Theater.getTicketList(date);
 
         if (t!= null) {
