@@ -32,9 +32,24 @@ class CreditCard {
 
 }
 
+class Ticket {
+    date
+}
+
+class AdvanceTicket extends Ticket {
+
+}
+
+class AdvanceStudentTicket extends AdvanceTicket {
+
+}
+
+Theater "1" *-- "*" Ticket: Sells
+Customer "1" *-- "*" Ticket: Buys
+Show "1" *-- "*" Ticket: Admits To
 Theater "1" *-- "*" Customer : Serves
 Theater "1" *-- "*" Show : Shows
-Theater "1" *-- "*" Client : Has
+Theater "1" *-- "*" Client : Has/Pays
 Client "1" *-- "*" Show : Produces
 Customer "1" *-- "*" CreditCard : Has
 Customer "*" --> "*" Show : Watches
