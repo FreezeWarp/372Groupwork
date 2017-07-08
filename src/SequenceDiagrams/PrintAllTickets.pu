@@ -2,15 +2,19 @@
 actor Clerk
 
 Clerk -> ":UserInterface" : Print All Tickets (of given date)
+activate ":UserInterface"
+
 Clerk //- ":UserInterface": Data Request
 Clerk -// ":UserInterface": date
-activate ":UserInterface"
 
 ":UserInterface" -> ":Theater" : getTicketList(date)
 activate ":Theater"
 ":Theater" -> ":TicketList" : getTickets(date)
 activate ":TicketList"
-":TicketList" -->> ":UserInterface": iterator
+":TicketList" -->> ":Theater": iterator
+deactivate ":TicketList"
+":Theater" -->> ":UserInterface": iterator
+deactivate ":Theater"
 deactivate ":TicketList"
 ":UserInterface" -->> Clerk: tickets
 deactivate ":UserInterface"
