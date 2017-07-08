@@ -1,6 +1,6 @@
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -516,7 +516,7 @@ public class UserInterface {
         Date date = UserInterfacePrompts.promptDate("Date of Tickets to show? (MM/DD/yyyy)? ");
 
         // Get the ticket list for the date
-        List<Ticket> tickets = Theater.getTicketList().getTicketsOn(date);
+        Collection<Ticket> tickets = Theater.getTicketList().getTicketsOn(date);
 
         if (tickets == null) {
             System.out.println("No tickets were sold for this date.");

@@ -1,3 +1,4 @@
+import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -5,7 +6,7 @@ import java.util.List;
 /**
  * Created by Joseph on 29/06/2017.
  */
-public class TicketList extends SingletonMap<Date, List<Ticket>> {
+public class TicketList extends SingletonMap<Date, Collection<Ticket>> {
     /*################################
      * Singleton-Specific Functionality
      *###############################*/
@@ -46,7 +47,7 @@ public class TicketList extends SingletonMap<Date, List<Ticket>> {
      * @param ticket The ticket to add.
      */
     public void addTicket(Ticket ticket) {
-        List<Ticket> list = singletonMap.get(ticket.getDate());
+        Collection<Ticket> list = singletonMap.get(ticket.getDate());
 
         if (list == null) {
             List<Ticket> newList = new LinkedList<Ticket>();
@@ -64,7 +65,7 @@ public class TicketList extends SingletonMap<Date, List<Ticket>> {
      * Gets the list of tickets so far sold for a given show date, or null if none yet sold.
      * @return List<Ticket> The list of Tickets of a given date.
      */
-    public List<Ticket> getTicketsOn(Date date) {
+    public Collection<Ticket> getTicketsOn(Date date) {
         if (getInstance().getEntry(date) == null) {
             return null;
         }
