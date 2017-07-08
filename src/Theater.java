@@ -615,7 +615,7 @@ public class Theater implements Serializable {
                     Ticket ticket = ticketType.getNewTicket(show, customer, showDate);
 
                     for (int i = 0; i < quantity; i++) {
-                        TicketType.onTicketSale(ticket); // TODO: Not sure if this is the best place to put this yet. May need refactor.
+                        TicketType.whenTicketSold(ticket); // TODO: Not sure if this is the best place to put this yet. May need refactor.
                     }
 
                     // TODO: Maybe refactor?

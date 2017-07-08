@@ -28,7 +28,7 @@ public enum TicketType {
      *
      * @param ticket The ticket that was just generated and should be considered "sold" for the first time.
      */
-    public static void onTicketSale(Ticket ticket) {
+    public static void whenTicketSold(Ticket ticket) {
         // Add revenue from ticket sale to client account.
         ticket.getShow().getClient().adjustBalance(ticket.getPrice());
 
