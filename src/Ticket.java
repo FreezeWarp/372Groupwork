@@ -10,7 +10,7 @@ import java.util.Date;
  * @version 2.0
  * @since   2017-July-08
  */
-public class Ticket implements Serializable {
+public class Ticket extends IdentifiableInteger implements Serializable {
     /**
      * The show for the ticket.
      */
@@ -85,7 +85,8 @@ public class Ticket implements Serializable {
      */
     @Override
     public String toString() {
-        return  show.getName() +
+        return  "[Ticket# " + (String.format("%10d", getId())) + "]" +
+                show.getName() +
                 ": Customer " + customer.getId() +
                 ", Price: " + getPrice() +
                 ", " + dateFormat.format(date);

@@ -43,6 +43,9 @@ public class TicketList extends SingletonMap<Date, Collection<Ticket>> {
     }
 
 
+    private static int lastId;
+
+
 
     /*################################
      * Ticket List Functionality
@@ -63,6 +66,9 @@ public class TicketList extends SingletonMap<Date, Collection<Ticket>> {
         else {
             list.add(ticket);
         }
+
+        // Set the ticket's serialisation number using the Identifiable interface. (Also updates our lastId.)
+        ticket.setId(lastId = ticket.nextId(lastId));
     }
 
 
