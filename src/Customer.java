@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 
 /**
  * A Theater Customer's Account.
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 public class Customer extends Account {
     private ArrayList<CreditCard> creditCardList = new ArrayList<CreditCard>();
     private ArrayList<Ticket> ticketList = new ArrayList<Ticket>();
-
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 
     /**
      * @param name the name of the customer
@@ -142,12 +143,20 @@ public class Customer extends Account {
     @Override
     public String toString() {
         String creditCardString = "";
+        String ticketString = "";
+        int count = 0;
         
         for (CreditCard creditCard : creditCardList) {
         	creditCardString += creditCard;
         }
         
-        return super.toString() + creditCardString;
+        for (Ticket ticket : ticketList) {
+        	ticketString += "\n    Ticket #" + count + ": " + ticket.getShow().getName() +
+                            ", Price: $" + ticket.getPrice() + ", " + dateFormat.format(ticket.getDate());
+        	count++;
+        }
+        
+        return super.toString() + creditCardString + ticketString;
     }
 
 

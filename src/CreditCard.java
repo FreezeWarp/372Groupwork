@@ -40,15 +40,17 @@ public class CreditCard implements Identifiable<Long>, Serializable, Comparable<
 
 
     /**
-     * @param cardNumber the 16 digit credit card number
-     * @param expirationDate the credit card expiration date
+     * @param cardNumber The 16 digit credit card number, {@link CreditCard#cardNumber}
+     * @param expirationDate The credit card expiration date, {@link CreditCard#expirationDate}
      */
     public CreditCard(long cardNumber, Date expirationDate) throws CreditCardExpiredException, CreditCardOutOfRangeException {
         setCardNumber(cardNumber);
         setExpirationDate(expirationDate);
     }
 
-
+    /**
+     * @param expirationDate The credit card expiration date, {@link CreditCard#expirationDate}
+     */
     private void setExpirationDate(Date expirationDate) throws CreditCardExpiredException {
         if (expirationDate.before(new Date())) {
             throw new CreditCardExpiredException();
@@ -58,6 +60,9 @@ public class CreditCard implements Identifiable<Long>, Serializable, Comparable<
         }
     }
 
+    /**
+     * @param cardNumber The 16 digit credit card number, {@link CreditCard#cardNumber}
+     */
     private void setCardNumber(long cardNumber) throws CreditCardOutOfRangeException {
         if (cardNumber < CREDIT_CARD_NUMBER_MINIMUM
                 || cardNumber > CREDIT_CARD_NUMBER_MAXIMUM) {
@@ -89,10 +94,9 @@ public class CreditCard implements Identifiable<Long>, Serializable, Comparable<
      * Read-Only Identifiable<Long> Implementation
      *###############################*/
     /**
-     * Implements {@link Identifiable#getId()}, returning the show's start date.
-     * (This obviously means that, at present, two shows may not have the same start date. Were this requirement dropped, the easiest solution would be to extend IdentifiableInteger in the normal way.)
+     * Implements {@link Identifiable#getId()}, returning the credit card's 16 digit number.)
      *
-     * @return the unique ID of the object, the same as {@link Show#startDate}.
+     * @return the unique ID of the object, the same as {@link CreditCard#cardNumber}.
      */
     public Long getId() {
         return getCardNumber();
@@ -100,7 +104,7 @@ public class CreditCard implements Identifiable<Long>, Serializable, Comparable<
 
 
     /**
-     * Implements {@link Identifiable#setId(Object)}, but does nothing: we do not allow for ID assignment in Show.
+     * Implements {@link Identifiable#setId(Object)}, but does nothing: we do not allow for ID assignment in CreditCard.
      *
      * @param id The new id for the object; unused.
      */
@@ -108,7 +112,7 @@ public class CreditCard implements Identifiable<Long>, Serializable, Comparable<
 
 
     /**
-     * Implements {@link Identifiable#nextId(Object)}, but does nothing: we do not allow for ID assignment in Show.
+     * Implements {@link Identifiable#nextId(Object)}, but does nothing: we do not allow for ID assignment in CreditCard.
      *
      * @param date The previous date.
      *
@@ -131,12 +135,21 @@ public class CreditCard implements Identifiable<Long>, Serializable, Comparable<
         return ", CC: " + cardNumber + " EXP: " + dateFormat.format(expirationDate);
     }
 
-    
+    /**
+     * @param creditCard The 16 digit credit card number, {@link CreditCard#cardNumber}. 
+     * 
+     * @return a negative integer, zero, or a positive integer as this object is less than, equal to, or greater than the specified object.  
+     */
     @Override
 	public int compareTo(CreditCard creditCard) {
 		return (int) Long.compare(getCardNumber(), creditCard.getCardNumber()); 
 	}
 
+    /**
+     * @param o The object being compared to this current CreditCard object to see if they "are equal."
+     * 
+     * @return True if the parameter object is equal to the current CreditCard object, false otherwise. 
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -161,7 +174,7 @@ public class CreditCard implements Identifiable<Long>, Serializable, Comparable<
     }
 
     /**
-     * An exception for when trying to create a {@link CreditCard} with an invalid card number.
+     * An exception for when trying to create a {@link CreditCard} with an invalid card number, {@link CreditCard#cardNumber}.
      */
     class CreditCardOutOfRangeException extends Exception {
         CreditCardOutOfRangeException() {
