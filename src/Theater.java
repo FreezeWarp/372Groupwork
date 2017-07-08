@@ -303,6 +303,7 @@ public class Theater implements Serializable {
     }
 
 
+
     /**
      * @return An iterable class to be used for iterating through the client list.
      */
@@ -310,6 +311,7 @@ public class Theater implements Serializable {
         return getClientList();
     }
     
+
 
     /**
      * Returned codes used from {@link Theater#addCustomer(String, String, long, CreditCard)}.
@@ -364,7 +366,9 @@ public class Theater implements Serializable {
             }
         }
     }
-    
+
+
+
     /**
      * Returned codes used from {@link Theater#removeCustomer(int)}.
      */
@@ -409,14 +413,17 @@ public class Theater implements Serializable {
             }
         }
     }
-    
+
+
+
     /**
      * @return An iterable class to be used for iterating through the customer list.
      */
     public static Iterable<Customer> getCustomers() {
         return getCustomerList();
     }
-    
+
+
     
     /**
      * Returned codes used from {@link Theater#addCreditCard(int, CreditCard)}.
@@ -464,6 +471,7 @@ public class Theater implements Serializable {
     }
 
 
+
     /**
      * Returned codes used from {@link Theater#removeCreditCard(int, long)}.
      */
@@ -509,6 +517,7 @@ public class Theater implements Serializable {
             }
         }
     }
+
 
 
     /**
@@ -569,7 +578,6 @@ public class Theater implements Serializable {
 
 
 
-
     enum SELL_TICKETS_STATUS {
         /**
          * Too few or two many (e.g. 0 or -1) tickets to sell. */
@@ -591,6 +599,17 @@ public class Theater implements Serializable {
         SUCCESS,
     }
 
+    /**
+     * Sells a ticket to a customer.
+     *
+     * @param ticketType The type of ticket being sold.
+     * @param quantity The number of tickets to sell.
+     * @param customerId The ID of the customer buying the tickets.
+     * @param creditCardNumber The card number to use for making the purchase.
+     * @param showDate The date of the show for the ticket.
+     *
+     * @return A code from {@link SELL_TICKETS_STATUS}.
+     */
     public static SELL_TICKETS_STATUS sellTickets(TicketType ticketType, int quantity, int customerId, long creditCardNumber, Date showDate) {
         if (quantity < 1) {
             return SELL_TICKETS_STATUS.INVALID_QUANTITY;
