@@ -34,9 +34,9 @@ public class Ticket extends IdentifiableInteger implements Serializable {
 
     /**
      * Create a new Ticket using a show, customer, and date.
-     * @param show {@link Ticket#show}
-     * @param customer {@link Ticket#customer}
-     * @param date {@link Ticket#date}
+     * @param show {@link Ticket#show}.
+     * @param customer {@link Ticket#customer}.
+     * @param date {@link Ticket#date}.
      */
     public Ticket(Show show, Customer customer, Date date) {
         this.show = show;
@@ -74,14 +74,14 @@ public class Ticket extends IdentifiableInteger implements Serializable {
     }
     
     /**
-     * @return a string representation of the ticket type
+     * @return A string representation of the ticket type.
      */
     public String getTicketType() {
         return ", Ticket type: Standard Ticket ";
     }
     
     /**
-     * @return a string representation concatenating the basic Ticket information
+     * @return A string representation concatenating the basic Ticket information.
      */
     @Override
     public String toString() {

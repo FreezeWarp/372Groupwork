@@ -10,7 +10,7 @@ import java.util.Date;
  */
 public class StudentAdvanceTicket extends AdvanceTicket implements Serializable {
     /**
-     * The price discount for a student advance ticket compared to an advanced ticket (1 = no change/full price, .5 = 50% off, etc.)
+     * The price discount for a student advance ticket compared to an advanced ticket. (1 = no change/full price, .5 = 50% off, etc.)
      */
     private final double STUDENT_ADVANCE_TICKET_DISCOUNT = .5;
 
@@ -29,7 +29,7 @@ public class StudentAdvanceTicket extends AdvanceTicket implements Serializable 
     }
     
     /**
-     * @return a string representation of the ticket type
+     * @return a string representation of the ticket type.
      */
     public String getTicketType() {
         return ", Ticket type: Student Advance Ticket -Must show valid student id ";

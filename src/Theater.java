@@ -112,7 +112,7 @@ public class Theater implements Serializable {
 
 
     /**
-     * Determines if the persistence file exists with data
+     * Determines if the persistence file exists with data.
      * 
      * @return True if the persistence file exists, false otherwise.
      */
@@ -137,7 +137,7 @@ public class Theater implements Serializable {
     /**
      * Writes Theater's state to the persistence file.
      *
-     * @return A code from {@link STORE_DATA_STATUS}
+     * @return A code from {@link STORE_DATA_STATUS}.
      */
     public static STORE_DATA_STATUS storeData() {
         try {
@@ -178,7 +178,7 @@ public class Theater implements Serializable {
     /**
      * Loads in data from the persistence file.
      * 
-     * @return A code from {@link RETRIEVE_DATA_STATUS}
+     * @return A code from {@link RETRIEVE_DATA_STATUS}.
      */
     public static RETRIEVE_DATA_STATUS retrieveData() {
         if (dataRetrieved) {
@@ -238,7 +238,7 @@ public class Theater implements Serializable {
      */
     public static ADD_CLIENT_STATUS addClient(String name, String address, long phone) {
         try {
-            // Add New Account Object to Client List
+            // Add New Account Object to Client List.
             Client client = new Client(name, address, phone);
 
             if (getClientList().addAccount(client)) {
@@ -341,12 +341,12 @@ public class Theater implements Serializable {
      * @return A code from {@link ADD_CUSTOMER_STATUS}.
      */
     public static ADD_CUSTOMER_STATUS addCustomer(String name, String address, long phone, CreditCard creditCard) {
-        if (creditCard == null) { // TODO: this is a good check to have; other objects may need to be checked for null in other Theater methods.
+        if (creditCard == null) {
             return ADD_CUSTOMER_STATUS.CREDIT_CARD_INVALID;
         }
         else {
             try {
-                // Add New Account Object to Customer List
+                // Add New Account Object to Customer List.
                 Customer customer = new Customer(name, address, phone, creditCard);
 
                 if (getCustomerList().addAccount(customer)) {
@@ -492,7 +492,7 @@ public class Theater implements Serializable {
      * @param customerId The ID of the customer whose {@link CreditCard} is being deleted.
      * @param creditCardNumber The number of the {@link CreditCard} to be deleted.
      *
-     * @return A status code from {@link REMOVE_CLIENT_STATUS}
+     * @return A status code from {@link REMOVE_CLIENT_STATUS}.
      */
     public static REMOVE_CREDIT_CARD_STATUS removeCreditCard(int customerId, long creditCardNumber) {
         Customer customer = Theater.getCustomerList().getAccount(customerId);
@@ -641,7 +641,7 @@ public class Theater implements Serializable {
                 else {
                     try {
                         for (int i = 0; i < quantity; i++) {
-                            TicketType.whenTicketSold(ticketType.getNewTicket(show, customer, showDate)); // TODO: Not sure if this is the best place to put this yet. May need refactor.
+                            TicketType.whenTicketSold(ticket);
                         }
 
                         return SELL_TICKETS_STATUS.SUCCESS;
@@ -676,7 +676,7 @@ public class Theater implements Serializable {
     /**
      * Pays a client some amount of what they are owed.
      *
-     * @param clientId The ID of the client to be payed.
+     * @param clientId The ID of the client to be paid.
      * @param amountToPay The amount to pay the client.
 
      * @return A code from {@link PAY_CLIENT_STATUS}.

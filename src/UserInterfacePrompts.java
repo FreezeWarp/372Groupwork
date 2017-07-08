@@ -5,9 +5,9 @@ import java.util.Scanner;
 /**
  * A collection of prompts to obtain user input.
  *
- * @author  Eric Fulwiler, Daniel Johnson, Joseph T. Parsons, and Cory Stadther
- * @version 2.0
- * @since   2017-July-08
+ + * @author  Eric Fulwiler, Daniel Johnson, Joseph T. Parsons, and Cory Stadther
+ + * @version 2.0
+ + * @since   2017-July-08
  */
 public class UserInterfacePrompts {
     /**
@@ -41,7 +41,7 @@ public class UserInterfacePrompts {
     }
 
     /**
-     * Prompts the user for an integer that must fall between min and max
+     * Prompts the user for an integer that must fall between min and max.
      *
      * @param promptText The text to display for the prompt.
      * @param min The minimum allowed integer.
@@ -101,7 +101,7 @@ public class UserInterfacePrompts {
     }
 
     /**
-     * Prompts the user for an double that must fall between min and max
+     * Prompts the user for an double that must fall between min and max.
      *
      * @param promptText The text to display for the prompt.
      * @param min The minimum allowed double.
@@ -214,7 +214,7 @@ public class UserInterfacePrompts {
      *
      * @param promptText The text to display for the prompt.
      *
-     * @return A string containing the expiry date of the credit card
+     * @return A string containing the expiry date of the credit card.
      */
     public static Date promptCreditCardExpiry(String promptText) {
         while(true) {
@@ -248,12 +248,12 @@ public class UserInterfacePrompts {
 
 
     /**
-     * Prompts the user to enter information for a credit card, including the number and expiration date
+     * Prompts the user to enter information for a credit card, including the number and expiration date.
      *
-     * @param promptTextForNumber the text to display for the credit card number prompt
-     * @param promptTextForExpiry the text to display for the credit card expiration date prompt
+     * @param promptTextForNumber the text to display for the credit card number prompt.
+     * @param promptTextForExpiry the text to display for the credit card expiration date prompt.
      *
-     * @return A credit card object containing a number and expiration date
+     * @return A credit card object containing a number and expiration date.
      */
     public static CreditCard promptCreditCard(String promptTextForNumber, String promptTextForExpiry) {
         long creditCardNo = UserInterfacePrompts.promptCreditCardNumber(promptTextForNumber);

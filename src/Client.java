@@ -15,9 +15,9 @@ public class Client extends Account implements Serializable {
 
 
     /**
-     * @param name the name of the client account holder, {@link Account#name}
-     * @param address the address of the client account holder, {@link Account#address}
-     * @param phoneNumber the phone number of the client account holder, {@link Account#phoneNumber}
+     * @param name the name of the client account holder, {@link Account#name}.
+     * @param address the address of the client account holder, {@link Account#address}.
+     * @param phoneNumber the phone number of the client account holder, {@link Account#phoneNumber}.
      */
     public Client(String name, String address, long phoneNumber) throws AccountPhoneNumberOutOfRangeException {
         super(name, address, phoneNumber);
@@ -25,7 +25,7 @@ public class Client extends Account implements Serializable {
 
 
     /**
-     * @return the balance of the client, {@link Client#balance}
+     * @return The balance of the client, {@link Client#balance}.
      */
     public double getBalance() {
         return balance;
@@ -33,11 +33,11 @@ public class Client extends Account implements Serializable {
 
 
     /**
-     * Adjusts the balance of the client
+     * Adjusts the balance of the client.
      *
-     * @param balanceAdjustment the amount the balance is to be incremented by
+     * @param balanceAdjustment the amount the balance is to be incremented by.
      *
-     * @return an integer reflecting the new, adjusted balance
+     * @return An integer reflecting the new, adjusted balance.
      */
     public double adjustBalance(double balanceAdjustment) {
         return this.balance += balanceAdjustment;
@@ -46,9 +46,9 @@ public class Client extends Account implements Serializable {
 
 
     /**
-     * Overrides the toString method of Account
+     * Overrides the toString method of Account.
      *
-     * @return a string representation concatenating basic client account information
+     * @return A string representation concatenating basic client account information.
      */
     @Override
     public String toString() {

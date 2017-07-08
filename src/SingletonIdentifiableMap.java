@@ -23,9 +23,9 @@ public abstract class SingletonIdentifiableMap<K, E extends Identifiable<K>> ext
 
 
     /**
-     * Gets a new unique map key
+     * Gets a new unique map key.
      *
-     * @param entry The entry object that we are getting a map key for
+     * @param entry The entry object that we are getting a map key for.
      *
      * @return A new, unique Map key.
      */
