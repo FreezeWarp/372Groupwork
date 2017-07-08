@@ -1,7 +1,11 @@
 import java.util.Date;
 
 /**
- * Created by joseph on 26/06/17.
+ * An enumeration for selecting and generating a specific ticket type.
+ *
+ * @author  Joseph T. Parsons
+ * @version 2.0
+ * @since   2017-July-08
  */
 public enum TicketType {
     /*################################
@@ -67,6 +71,7 @@ public enum TicketType {
      *###############################*/
     /**
      * Performs the data updates that should occur whenever a ticket object is "sold."
+     * (While this would make sense in Ticket itself, I think it makes somewhat more sense for this to be a method of the factory class itself.)
      *
      * @param ticket The ticket that was just generated and should be considered "sold" for the first time.
      */

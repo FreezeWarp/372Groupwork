@@ -3,9 +3,9 @@ import java.io.Serializable;
 /**
  * A generic account for individuals (or organisations) with a name, address, and phone number.
  *
- * @author  Joseph Parsons
- * @version 1.0
- * @since   2017-06-22
+ * @author  Joseph T. Parsons
+ * @version 2.0
+ * @since   2017-July-08
  */
 public class Account extends IdentifiableInteger implements Serializable {
     /**

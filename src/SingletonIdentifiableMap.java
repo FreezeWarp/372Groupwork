@@ -9,8 +9,8 @@ import java.io.Serializable;
  ** Plus, by having these methods, a lot of extra work can be simplified; we automatically assign new IDs to the objects, for instance.
  *
  * @author  Joseph T. Parsons
- * @version 1.0
- * @since   2017-06-29
+ * @version 2.0
+ * @since   2017-July-08
  */
 public abstract class SingletonIdentifiableMap<K, E extends Identifiable<K>> extends SingletonMap<K, E> implements Iterable<E>, Serializable {
     /*################################

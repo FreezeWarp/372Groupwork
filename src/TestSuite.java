@@ -1,7 +1,12 @@
 import java.util.Date;
 
 /**
- * Created by joseph on 05/07/17.
+ * A basic set of unit tests that is also used to prepopulate data for testing.
+ * While not all functionality is tested, this will catch quite a few bugs/regressions.
+ *
+ * @author  Joseph T. Parsons
+ * @version 2.0
+ * @since   2017-July-08
  */
 public class TestSuite {
     public static void main(String args[]) {

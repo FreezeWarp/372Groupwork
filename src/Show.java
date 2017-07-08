@@ -6,8 +6,8 @@ import java.util.Date;
  * A theater show, with an associated Client, name, and start and end Dates.
  *
  * @author  Cory Stadther
- * @version 1.0
- * @since   2017-06-22
+ * @version 2.0
+ * @since   2017-July-08
  */
 public class Show implements Identifiable<Date>, Serializable {
     /**

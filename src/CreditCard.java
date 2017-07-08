@@ -8,8 +8,8 @@ import java.util.Objects;
  * (Security code is not currently included.)
  *
  * @author  Eric Fulwiler
- * @version 1.0
- * @since   2017-06-22
+ * @version 2.0
+ * @since   2017-July-08
  */
 public class CreditCard implements Identifiable<Long>, Serializable, Comparable<CreditCard> {
     /**

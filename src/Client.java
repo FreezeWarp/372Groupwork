@@ -4,8 +4,8 @@ import java.io.Serializable;
  * The account of a theater client, one who actually owns the IP rights to shows being presented.
  *
  * @author  Joseph T. Parsons
- * @version 1.0
- * @since   2017-06-22
+ * @version 2.0
+ * @since   2017-July-08
  */
 public class Client extends Account implements Serializable {
     /**
