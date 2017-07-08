@@ -671,7 +671,7 @@ public class Theater implements Serializable {
          * The client does not exist. */
         NO_CLIENT,
         /**
-         * The amount to be payed is greater than the amount owed. */
+         * The amount to be paid is greater than the amount owed. */
         TOO_LITTLE_OWED,
     }
 
