@@ -640,10 +640,8 @@ public class Theater implements Serializable {
                 }
                 else {
                     try {
-                        Ticket ticket = ticketType.getNewTicket(show, customer, showDate);
-
                         for (int i = 0; i < quantity; i++) {
-                            TicketType.whenTicketSold(ticket);
+                            TicketType.whenTicketSold(ticketType.getNewTicket(show, customer, showDate));
                         }
 
                         return SELL_TICKETS_STATUS.SUCCESS;
