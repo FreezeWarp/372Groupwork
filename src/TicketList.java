@@ -41,6 +41,10 @@ public class TicketList extends SingletonMap<Date, List<Ticket>> {
     /*################################
      * Ticket List Functionality
      *###############################*/
+    /**
+     * Adds a ticket to the ticket list.
+     * @param ticket The ticket to add.
+     */
     public void addTicket(Ticket ticket) {
         List<Ticket> list = singletonMap.get(ticket.getDate());
 
@@ -55,15 +59,16 @@ public class TicketList extends SingletonMap<Date, List<Ticket>> {
         }
     }
 
+
     /**
+     * Gets the list of tickets so far sold for a given show date, or null if none yet sold.
      * @return List<Ticket> The list of Tickets of a given date.
      */
-    public static List<Ticket> getTickets(Date date) {
+    public List<Ticket> getTicketsOn(Date date) {
         if (getInstance().getEntry(date) == null) {
-            System.out.println("No tickets were sold for this date.");
             return null;
-
-        } else {
+        }
+        else {
             return getInstance().getEntry(date);
         }
     }

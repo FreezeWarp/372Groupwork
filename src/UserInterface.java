@@ -514,11 +514,16 @@ public class UserInterface {
     public static void printAllTickets() {
     	// Inputs
         Date date = UserInterfacePrompts.promptDate("Date of Tickets to show? (MM/DD/yyyy)? ");
-        List<Ticket> t = Theater.getTicketList(date);
 
-        if (t != null) {
-            for (Ticket tickets: t) {
-        	    System.out.println(tickets);
+        // Get the ticket list for the date
+        List<Ticket> tickets = Theater.getTicketList().getTicketsOn(date);
+
+        if (tickets == null) {
+            System.out.println("No tickets were sold for this date.");
+        }
+        else {
+            for (Ticket ticket: tickets) {
+                System.out.println(ticket);
             }
         }
     }

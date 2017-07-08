@@ -1,6 +1,5 @@
 ﻿import java.io.*;
 import java.util.Date;
-import java.util.List;
 
 
 
@@ -755,8 +754,8 @@ public class Theater implements Serializable {
     /**
      * @return The singleton instance of {@link TicketList}, allowing modification of the ticket list or use of TicketList-specific functionality.
      */
-    public static List<Ticket> getTicketList(Date date) {
-        return TicketList.getTickets(date);
+    public static TicketList getTicketList() {
+        return TicketList.getInstance();
     }
 
 }
