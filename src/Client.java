@@ -15,9 +15,9 @@ public class Client extends Account implements Serializable {
 
 
     /**
-     * @param name the name of the client account holder. {@link Account#name}
-     * @param address the address of the client account holder. {@link Account#address}
-     * @param phoneNumber the phone number of the client account holder. {@link Account#phoneNumber}
+     * @param name the name of the client account holder, {@link Account#name}.
+     * @param address the address of the client account holder, {@link Account#address}.
+     * @param phoneNumber the phone number of the client account holder, {@link Account#phoneNumber}.
      */
     public Client(String name, String address, long phoneNumber) throws AccountPhoneNumberOutOfRangeException {
         super(name, address, phoneNumber);
@@ -25,7 +25,7 @@ public class Client extends Account implements Serializable {
 
 
     /**
-     * @return The balance of the client. {@link Client#balance}
+     * @return The balance of the client, {@link Client#balance}.
      */
     public double getBalance() {
         return balance;

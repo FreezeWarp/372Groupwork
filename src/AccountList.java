@@ -15,7 +15,7 @@ public abstract class AccountList<E extends Account> extends SingletonIdentifiab
      *
      * @param account The account object to add to the AccountList.
      *
-     * @return True on success, false on failure. (typically, an entry with the same account ID already exists; this should not happen as long as getNewAccountId() is used when creating the Account object).
+     * @return True on success, false on failure. (Typically, an entry with the same account ID already exists; this should not happen as long as getNewAccountId() is used when creating the Account object).
      */
     public boolean addAccount(E account) {
         return addEntry(account);

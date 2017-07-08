@@ -36,9 +36,9 @@ public class Account extends IdentifiableInteger implements Serializable {
 
 
     /**
-    * @param name the name of the account holder, {@link Account#name}
-    * @param address the address of the account holder, {@link Account#address}
-    * @param phoneNumber the phone number of the account holder, {@link Account#phoneNumber}
+    * @param name the name of the account holder, {@link Account#name}.
+    * @param address the address of the account holder, {@link Account#address}.
+    * @param phoneNumber the phone number of the account holder, {@link Account#phoneNumber}.
     */
     public Account(String name, String address, long phoneNumber) throws AccountPhoneNumberOutOfRangeException {
         this.name = name;
@@ -48,21 +48,21 @@ public class Account extends IdentifiableInteger implements Serializable {
 
 
     /**
-     * @return The account holder's name. {@link Account#name}
+     * @return The account holder's name, {@link Account#name}.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * @return The account holder's address. {@link Account#address}
+     * @return The account holder's address, {@link Account#address}.
      */
     public String getAddress() {
         return address;
     }
 
     /**
-     * @return The account holder's phone number. {@link Account#phoneNumber}
+     * @return The account holder's phone number, {@link Account#phoneNumber}.
      */
     public long getPhoneNumber() {
         return phoneNumber;
@@ -70,7 +70,7 @@ public class Account extends IdentifiableInteger implements Serializable {
 
 
     /**
-     * @param phoneNumber The account holder's phone number, {@link Account#phoneNumber}
+     * @param phoneNumber The account holder's phone number, {@link Account#phoneNumber}.
      * @throws AccountPhoneNumberOutOfRangeException When the phone number is not within the valid phone number range.
      */
     private void setPhoneNumber(long phoneNumber) throws AccountPhoneNumberOutOfRangeException {

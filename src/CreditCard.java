@@ -40,8 +40,8 @@ public class CreditCard implements Identifiable<Long>, Serializable, Comparable<
 
 
     /**
-     * @param cardNumber The 16 digit credit card number. {@link CreditCard#cardNumber}
-     * @param expirationDate The credit card expiration date. {@link CreditCard#expirationDate}
+     * @param cardNumber The 16 digit credit card number, {@link CreditCard#cardNumber}.
+     * @param expirationDate The credit card expiration date, {@link CreditCard#expirationDate}.
      */
     public CreditCard(long cardNumber, Date expirationDate) throws CreditCardExpiredException, CreditCardOutOfRangeException {
         setCardNumber(cardNumber);
@@ -49,7 +49,7 @@ public class CreditCard implements Identifiable<Long>, Serializable, Comparable<
     }
 
     /**
-     * @param expirationDate The credit card expiration date. {@link CreditCard#expirationDate}
+     * @param expirationDate The credit card expiration date, {@link CreditCard#expirationDate}.
      */
     private void setExpirationDate(Date expirationDate) throws CreditCardExpiredException {
         if (expirationDate.before(new Date())) {
@@ -75,14 +75,14 @@ public class CreditCard implements Identifiable<Long>, Serializable, Comparable<
 
 
     /**
-     * @return the 16 digit credit card number. {@link CreditCard#cardNumber}
+     * @return the 16 digit credit card number, {@link CreditCard#cardNumber}.
      */
     public long getCardNumber() {
         return cardNumber;
     }
 
     /**
-     * @return the expiration date of the credit card. {@link CreditCard#expirationDate}
+     * @return the expiration date of the credit card, {@link CreditCard#expirationDate}.
      */
     public Date getExpirationDate() {
         return expirationDate;

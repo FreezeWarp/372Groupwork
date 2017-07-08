@@ -42,10 +42,10 @@ public class Show implements Identifiable<Date>, Serializable {
 
 
     /**
-     * @param client the client hosting the show, {@link Show#client}
-     * @param name the name of the show, {@link Show#name}
-     * @param startDate the date the play showings first begin, {@link Show#startDate}
-     * @param endDate the date the play showings end, {@link Show#endDate}
+     * @param client the client hosting the show, {@link Show#client}.
+     * @param name the name of the show, {@link Show#name}.
+     * @param startDate the date the play showings first begin, {@link Show#startDate}.
+     * @param endDate the date the play showings end, {@link Show#endDate}.
      */
     public Show(Client client, String name, Date startDate, Date endDate, double ticketPrice) throws ShowDateMismatchException {
         this.client = client;
@@ -56,35 +56,35 @@ public class Show implements Identifiable<Date>, Serializable {
 
 
     /**
-     * @return the client hosting the show. {@link Show#client}
+     * @return the client hosting the show, {@link Show#client}.
      */
     public Client getClient() {
         return client;
     }
 
     /**
-     * @return the name of the show. {@link Show#name}
+     * @return the name of the show, {@link Show#name}.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * @return the cost of admittance for the show. {@link Show#ticketPrice}
+     * @return the cost of admittance for the show, {@link Show#ticketPrice}.
      */
     public double getTicketPrice() {
         return ticketPrice;
     }
 
     /**
-     * @return the date the play begins showing. {@link Show#startDate}
+     * @return the date the play begins showing, {@link Show#startDate}.
      */
     public Date getStartDate() {
         return startDate;
     }
 
     /**
-     * @return the date the play ends showing. {@link Show#endDate}
+     * @return the date the play ends showing, {@link Show#endDate}.
      */
     public Date getEndDate() {
         return endDate;
