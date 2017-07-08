@@ -69,6 +69,13 @@ public class Ticket implements Serializable {
     }
     
     /**
+     * @return a string representation of the ticket type
+     */
+    public String getTicketType() {
+        return ", Ticket type: Standard Ticket ";
+    }
+    
+    /**
      * @return a string representation concatenating the basic Ticket information
      */
     @Override

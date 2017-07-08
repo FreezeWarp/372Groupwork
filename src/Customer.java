@@ -146,7 +146,7 @@ public class Customer extends Account {
         
         for (Ticket ticket : ticketList) {
         	ticketString += "\n    Ticket #" + count + ": " + ticket.getShow().getName() +
-                            ", Price: $" + ticket.getPrice() + ", " + dateFormat.format(ticket.getDate());
+                            ", Price: $" + ticket.getPrice() + ", " + dateFormat.format(ticket.getDate()) + ticket.getTicketType();
         	count++;
         }
         
