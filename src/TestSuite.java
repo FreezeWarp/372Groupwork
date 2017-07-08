@@ -62,13 +62,13 @@ public class TestSuite {
         TestSuite.equalsTest(Theater.sellTickets(TicketType.Ticket, 3, 0, 7777777777777777L, new Date(199, 6, 20)), Theater.SELL_TICKETS_STATUS.INVALID_CREDIT_CARD_NUMBER, "Sell ticket 3 returns wrong status code.");
         TestSuite.equalsTest(Theater.sellTickets(TicketType.Ticket, 3, 0, 8888888888888888L, new Date(199, 8, 0)), Theater.SELL_TICKETS_STATUS.INVALID_SHOW_DATE, "Sell ticket 4 returns wrong status code.");
 
-        TestSuite.equalsTestDouble(Theater.getOwedToClient(0), 3 * 10 * .7 * .5, "Amount owed to client 1 is incorrect.");
-        TestSuite.equalsTest(Theater.payClient(0, 3 * 10 * .7 * .5), Theater.PAY_CLIENT_STATUS.SUCCESS, "Unable to pay client.");
+        TestSuite.equalsTestDouble(Theater.getOwedToClient(0), 3 * 10 * AdvanceTicket.ADVANCE_TICKET_DISCOUNT * StudentAdvanceTicket.STUDENT_ADVANCE_TICKET_DISCOUNT * TicketType.CLIENT_CUT, "Amount owed to client 1 is incorrect.");
+        TestSuite.equalsTest(Theater.payClient(0, 3 * 10 * AdvanceTicket.ADVANCE_TICKET_DISCOUNT * StudentAdvanceTicket.STUDENT_ADVANCE_TICKET_DISCOUNT * TicketType.CLIENT_CUT), Theater.PAY_CLIENT_STATUS.SUCCESS, "Unable to pay client.");
         TestSuite.equalsTestDouble(Theater.getOwedToClient(0), 0, "Amount owed to client 1 after payment is incorrect.");
 
-        TestSuite.equalsTestDouble(Theater.getOwedToClient(1), 3 * 20, "Amount owed to client 2 is incorrect.");
-        TestSuite.equalsTest(Theater.payClient(1, 30), Theater.PAY_CLIENT_STATUS.SUCCESS, "Unable to pay client.");
-        TestSuite.equalsTestDouble(Theater.getOwedToClient(1), 3 * 20 - 30, "Amount owed to client 2 after payment is incorrect.");
+        TestSuite.equalsTestDouble(Theater.getOwedToClient(1), 3 * 20 * TicketType.CLIENT_CUT, "Amount owed to client 2 is incorrect.");
+        TestSuite.equalsTest(Theater.payClient(1, 15), Theater.PAY_CLIENT_STATUS.SUCCESS, "Unable to pay client.");
+        TestSuite.equalsTestDouble(Theater.getOwedToClient(1), 3 * 20 * TicketType.CLIENT_CUT - 15, "Amount owed to client 2 after payment is incorrect.");
 
 
         if (UserInterfacePrompts.promptYesOrNo("Would you like to run the main userinterface now? ")) {

@@ -52,6 +52,6 @@ public class Client extends Account implements Serializable {
      */
     @Override
     public String toString() {
-        return super.toString() + ", " + getBalance();
+        return super.toString() + ", Owed $" + getBalance();
     }
 }

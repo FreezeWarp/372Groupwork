@@ -40,6 +40,16 @@ public enum TicketType {
 
 
     /*################################
+     * Constants
+     *###############################*/
+    /**
+     * The percent of ticket sale revenue that goes to the client. (1 = everything, .5 = 50%, etc.)
+     */
+    public final static double CLIENT_CUT = .5;
+
+
+
+    /*################################
      * Ticket Factory
      *###############################*/
 
@@ -76,7 +86,7 @@ public enum TicketType {
      */
     public static void whenTicketSold(Ticket ticket) {
         // Add revenue from ticket sale to client account.
-        ticket.getShow().getClient().adjustBalance(ticket.getPrice());
+        ticket.getShow().getClient().adjustBalance(ticket.getPrice() * CLIENT_CUT);
 
         // Add ticket object to Customer's ticket collection.
         ticket.getCustomer().addTicket(ticket);
