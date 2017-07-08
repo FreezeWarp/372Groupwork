@@ -15,12 +15,12 @@ public class UserInterface {
     /**
      * A Map of callable commands that are supported by the interface, keyed by the command used to invoke them.
      */
-    static final Map<Integer, Runnable> commandMap = new HashMap<Integer, Runnable>();
+    static final private Map<Integer, Runnable> commandMap = new HashMap<Integer, Runnable>();
 
     /**
      * A map of descriptions for {@link UserInterface#commandMap}.
      */
-    static final Map<Integer, String> helpMap = new HashMap<Integer, String>();
+    static final private Map<Integer, String> helpMap = new HashMap<Integer, String>();
 
     /*
      * A one-stop initialization of all values for both commandMap and helpMap.
@@ -395,7 +395,7 @@ public class UserInterface {
      * Lists all shows in the ShowList.
      */
     public static void listShows() {
-        System.out.println(Theater.getShowList());
+        System.out.println(Theater.getShows());
     }
 
 

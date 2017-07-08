@@ -13,7 +13,7 @@ public class TicketList extends SingletonMap<Date, Collection<Ticket>> {
     /**
      * The global singleton instance of TicketList.
      */
-    protected static SingletonMap INSTANCE;
+    private static SingletonMap INSTANCE;
 
 
     /**

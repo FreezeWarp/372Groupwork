@@ -343,7 +343,6 @@ public class Theater implements Serializable {
      * @return A code from {@link ADD_CUSTOMER_STATUS}.
      */
     public static ADD_CUSTOMER_STATUS addCustomer(String name, String address, long phone, CreditCard creditCard) {
-
         if (creditCard == null) { // TODO: this is a good check to have; other objects may need to be checked for null in other Theater methods.
             return ADD_CUSTOMER_STATUS.CREDIT_CARD_INVALID;
         }
@@ -573,6 +572,15 @@ public class Theater implements Serializable {
                 return ADD_SHOW_STATUS.DATE_MISMATCH;
             }
         }
+    }
+
+
+
+    /**
+     * @return An iterable class to be used for iterating through the customer list.
+     */
+    public static Iterable<Show> getShows() {
+        return getShowList();
     }
 
 

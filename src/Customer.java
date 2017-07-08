@@ -1,5 +1,6 @@
-import java.util.ArrayList;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * A Theater Customer's Account.
@@ -8,8 +9,8 @@ import java.text.SimpleDateFormat;
  * Modified by Eric Fulwiler
  */
 public class Customer extends Account {
-    private ArrayList<CreditCard> creditCardList = new ArrayList<CreditCard>();
-    private ArrayList<Ticket> ticketList = new ArrayList<Ticket>();
+    private Collection<CreditCard> creditCardList = new ArrayList<CreditCard>();
+    private Collection<Ticket> ticketList = new ArrayList<Ticket>();
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 
     /**
@@ -39,16 +40,6 @@ public class Customer extends Account {
         return creditCardList.add(creditCard) && Theater.getCreditCardList().addEntry(creditCard);
      
     }
-    
-    
-    /**
-     * Returns the default credit card of the customer
-     * 
-     * @return the starting credit card object
-     */
-    public CreditCard getCreditCard() {
-        return creditCardList.get(0);
-    }
 
 
     /**
@@ -65,6 +56,7 @@ public class Customer extends Account {
             return null;
         }
     }
+
     
     /**
      * Removes the specified credit card from the customer's account
@@ -86,12 +78,12 @@ public class Customer extends Account {
 
         return creditCardList.removeIf((CreditCard creditCard) -> creditCard.getCardNumber() == creditCardNumber) ;
     }
+
     
     /**
      * Removes all credit cards from the customer's account. To be used when a customer wishes to have their entire account deleted.
      */
     public boolean removeCreditCards() throws CustomerCouldNotDeleteCreditCardsException {
-
         for (CreditCard creditCard : creditCardList) { 
             CreditCardList.getInstance().removeEntry(creditCard.getCardNumber());
          }
@@ -126,15 +118,17 @@ public class Customer extends Account {
         return ticketList.remove(t);
     }
 
+
     /**
      * Gets the entire credit card ArrayList
      * 
      * @return the ArrayList containing credit card objects 
      */
-    public ArrayList<CreditCard> getCreditCardList() {
+    public Collection<CreditCard> getCreditCardList() {
         return creditCardList;
     }
-     
+
+
     /**
      * Overrides the toString method of Account
      * 

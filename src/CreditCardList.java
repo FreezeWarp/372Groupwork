@@ -15,12 +15,12 @@ public class CreditCardList extends SingletonIdentifiableMap<Long, CreditCard> {
     /**
      * The global singleton instance of CreditCardList.
      */
-    protected static CreditCardList INSTANCE;
+    private static CreditCardList INSTANCE;
 
     /**
      * An unused constructor that overrides the default public constructor, preventing CreditCardList from being initialised outside of getInstance().
      */
-    protected CreditCardList() { }
+    private CreditCardList() { }
 
 
     /**
