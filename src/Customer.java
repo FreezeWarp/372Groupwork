@@ -3,10 +3,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * A Theater Customer's Account.
+ * A Theater customer's account.
  *
- * Created by Joseph T. Parsons on 12/06/17.
- * Modified by Eric Fulwiler
+ * @author  Joseph T. Parsons
+ * @version 2.0
+ * @since   2017-July-08
  */
 public class Customer extends Account {
     private Collection<CreditCard> creditCardList = new ArrayList<CreditCard>();

@@ -11,14 +11,12 @@ import java.util.Date;
  * Note a couple of design decisions:
  ** The various singleton hashmaps are never interacted with directly; instead, their instances are always returned through the Theater façade. This is done to lower coupling.
  ** Classes that duplicate functionality have that functionality implemented in generic superclasses as much as possible. This is done to maximise cohesion and reduce bugs (if one class has a bug, the others will as well, making detection easier).
- ** All operations that perform validation in Theater, ClientList, CustomerList, and ShowList will throw checked exceptions for the validation instead of integer status codes. A façade could copy most UserInterface functionality to specifically return the enumerated values to UserInterface, and in Iteration 2 Theater will do so (I would have done so now, but the change to the sequence diagrams would have been too large.)
+ ** All operations that perform validation in ClientList, CustomerList, and ShowList will throw checked exceptions for the validation instead of integer status codes.
+ ** Theater itself acts as a façade for UserInterface operations, catching exceptions and returning enumerated status codes to UserInterface.
  *
- * Known Bugs:
- ** The singleton property for the different lists is not correctly maintained through Class.getInstance(). It does seem to be maintained through Theater.getClass(). This should be fixed for it. 2.
- *
- * @author  Eric Fulwiler, Daniel Johnson, Joseph Parsons, and Cory Stadther
- * @version 1.0
- * @since   2017-06-22
+ * @author  Eric Fulwiler, Daniel Johnson, Joseph T. Parsons, and Cory Stadther
+ * @version 2.0
+ * @since   2017-July-08
  */
 
 public class Theater implements Serializable {

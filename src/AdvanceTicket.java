@@ -2,7 +2,11 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Created by joseph on 26/06/17.
+ * A ticket bought in advance.
+ *
+ * @author  Joseph T. Parsons
+ * @version 2.0
+ * @since   2017-July-08
  */
 public class AdvanceTicket extends Ticket implements Serializable {
     /**

@@ -5,9 +5,9 @@ import java.util.Scanner;
 /**
  * A collection of prompts to obtain user input.
  *
- * @author  Eric Fulwiler, Daniel Johnson, Joseph Parsons, and Cory Stadther
- * @version 1.0
- * @since   2017-06-22
+ * @author  Eric Fulwiler, Daniel Johnson, Joseph T. Parsons, and Cory Stadther
+ * @version 2.0
+ * @since   2017-July-08
  */
 public class UserInterfacePrompts {
     /**

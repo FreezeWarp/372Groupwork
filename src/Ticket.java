@@ -3,7 +3,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by joseph on 26/06/17.
+ * A regular ticket, including the show it admits to, the date it admits on, and the customer who bought it.
+ * (We separately index customer both for convenience and because it allows us to track if a ticket is not being used by the person who bought it, e.g. scalpers)
+ *
+ * @author  Joseph T. Parsons
+ * @version 2.0
+ * @since   2017-July-08
  */
 public class Ticket implements Serializable {
     /**

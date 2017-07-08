@@ -5,7 +5,7 @@ import java.util.Date;
  *
  * @author  Cory Stadther
  * @version 2.0
- * @since   2017-06-29
+ * @since   2017-July-08
  */
 public class ShowList extends SingletonIdentifiableMap<Date, Show> {
     /*################################

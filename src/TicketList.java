@@ -4,7 +4,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created by Joseph on 29/06/2017.
+ * A list of {@link Ticket}s and associated functionality.
+ * This class primarily exists to efficiently get a list of tickets for a certain date. Customers also have a separate list of tickets in order to efficiently get the tickets owned by a customer.
+ *
+ * @author  Joseph T. Parsons
+ * @version 2.0
+ * @since   2017-July-08
  */
 public class TicketList extends SingletonMap<Date, Collection<Ticket>> {
     /*################################

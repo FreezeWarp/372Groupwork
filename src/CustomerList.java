@@ -3,8 +3,8 @@
  * Note that we inherit the member modification methods from {@link AccountList}. The goal of this being its own class is to ensure that only {@link Client}s can be added to the list.
  *
  * @author  Eric Fulwiler
- * @version 1.0
- * @since   2017-06-22
+ * @version 2.0
+ * @since   2017-July-08
  */
 public class CustomerList extends AccountList<Customer> {
     /**
