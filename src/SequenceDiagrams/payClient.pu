@@ -5,16 +5,21 @@ actor Clerk
 activate ":UserInterface"
 Clerk -> ":UserInterface" : Pay Client
 Clerk //- ":UserInterface": Data Request
-Clerk -// ":UserInterface": id
+Clerk -// ":UserInterface": clientId
 
-":UserInterface" -> ":Client" : getBalance()
+activate ":Theater"
+":UserInterface" -> ":Theater": getOwedToClient(clientId)
+":Theater" -> ":Client": client = getClient(clientId)
 activate ":Client"
-":Client" -->> ":UserInterface": balance
+":Theater" -> ":UserInterface" : client.getBalance()
 Clerk //- ":UserInterface": Data Request
 Clerk -// ":UserInterface": payment
-":UserInterface" -> ":Client" : adjustBalance()
-":Client" -->> ":UserInterface" : successful?
+":UserInterface" -> ":Theater" : payClient(clientId, payment)
+":Theater" -> ":Client" : adjustBalance(payment)
+":Client" -->> ":Theater" : successful?
 deactivate ":Client"
+":Theater" -->> ":UserInterface" : successful?
+deactivate ":Theater"
 ":UserInterface" -->> Clerk : successful?
 deactivate ":UserInterface"
 @enduml
