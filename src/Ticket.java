@@ -76,8 +76,8 @@ public class Ticket extends IdentifiableInteger implements Serializable {
     /**
      * @return A string representation of the ticket type.
      */
-    public String getTicketType() {
-        return ", Ticket type: Standard Ticket ";
+    public String getTicketTypeName() {
+        return "Standard Ticket";
     }
 
     /**
@@ -90,6 +90,6 @@ public class Ticket extends IdentifiableInteger implements Serializable {
                 ": Customer " + customer.getId() +
                 ", Price: " + getPrice() +
                 ", " + dateFormat.format(date) +
-                getTicketType();
+                ", Type: " + getTicketTypeName();
     }
 }
