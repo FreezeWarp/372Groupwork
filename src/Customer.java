@@ -145,7 +145,7 @@ public class Customer extends Account {
         }
 
         for (Ticket ticket : ticketList) {
-            ticketString += "\n    " + ticket + ticket.getTicketType();
+            ticketString += "\n    " + ticket;
         }
 
         return super.toString() + creditCardString + ticketString;

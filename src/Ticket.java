@@ -89,6 +89,7 @@ public class Ticket extends IdentifiableInteger implements Serializable {
                 show.getName() +
                 ": Customer " + customer.getId() +
                 ", Price: " + getPrice() +
-                ", " + dateFormat.format(date);
+                ", " + dateFormat.format(date) +
+                getTicketType();
     }
 }
