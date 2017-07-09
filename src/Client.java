@@ -1,4 +1,6 @@
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * The account of a theater client, one who actually owns the IP rights to shows being presented.
@@ -13,6 +15,11 @@ public class Client extends Account implements Serializable {
      */
     private double balance = 0;
 
+    /**
+     * A list of shows the Client has. These are indexed in ShowList for most purposes, but having them indexed here as well is helpful.
+     */
+    private Collection<Show> showList = new ArrayList<Show>();
+
 
     /**
      * @param name the name of the client account holder, {@link Account#name}.
@@ -21,6 +28,36 @@ public class Client extends Account implements Serializable {
      */
     public Client(String name, String address, long phoneNumber) throws AccountPhoneNumberOutOfRangeException {
         super(name, address, phoneNumber);
+    }
+
+
+    /**
+     * Adds a show to the index.
+     *
+     * @param show The show to add.
+     * @return True on success, false on failure.
+     */
+    public boolean addShow(Show show) {
+        return showList.add(show);
+    }
+
+
+    /**
+     * Removes a show.
+     *
+     * @param show The show to remove.
+     * @return True on success, false on failure.
+     */
+    public boolean removeShow(Show show) {
+        return showList.remove(show);
+    }
+
+
+    /**
+     * @return All of the client's shows.
+     */
+    public Collection<Show> getShows() {
+        return showList;
     }
 
 
@@ -52,6 +89,13 @@ public class Client extends Account implements Serializable {
      */
     @Override
     public String toString() {
-        return super.toString() + ", Owed $" + getBalance();
+        String showListString = "";
+
+        for (Show show : showList) {
+            showListString += ("      " + show.toString() + System.getProperty("line.separator"));
+        }
+
+        return super.toString() + ", Owed $" + getBalance() + ", Shows:" + System.getProperty("line.separator") +
+            showListString; // A bit of a silly one-liner, I'll admit, but it gets the job done.
     }
 }

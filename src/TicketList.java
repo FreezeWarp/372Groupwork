@@ -6,6 +6,7 @@ import java.util.List;
 /**
  * A list of {@link Ticket}s and associated functionality.
  * This class primarily exists to efficiently get a list of tickets for a certain date. Customers also have a separate list of tickets in order to efficiently get the tickets owned by a customer.
+ * Note that the TicketList is never pruned, which in turns means that anything referenced by a Ticket (e.g. shows, customers) won't be removed either. This isn't necessarily a problem (since the data only exists for historical ticket records, and can't be used to, e.g., add a new credit card to a customer that is only referenced by a ticket).
  *
  * @author  Joseph T. Parsons
  * @version 2.0

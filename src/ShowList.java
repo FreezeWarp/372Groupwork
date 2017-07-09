@@ -54,7 +54,18 @@ public class ShowList extends SingletonIdentifiableMap<Date, Show> {
             throw new ShowConflictException();
         }
 
-        return addEntry(show);
+        return show.getClient().addShow(show) // Maintain the separate per-client index of shows.
+                && getInstance().addEntry(show);
+    }
+
+    /**
+     * Removes a show from the ShowList.
+     *
+     * @param show The show to be added.
+     */
+    public boolean removeShow(Show show) {
+        return show.getClient().removeShow(show) // Maintain the separate per-client index of shows.
+                && removeEntry(show.getStartDate());
     }
 
 
@@ -77,26 +88,6 @@ public class ShowList extends SingletonIdentifiableMap<Date, Show> {
             }
         }
         return true; // Returns true when no shows conflict.
-    }
-
-
-    /**
-     * Checks if client has a future show scheduled.
-     *
-     * @param accountId the account to be checked.
-     *
-     * @return True if it can be removed, false if it cannot.
-     */
-    public static boolean checkShowDates(int accountId) {
-        for (Show show : getInstance()) {
-            if (accountId == show.getClient().getId()) {
-                if (show.getEndDate().after(new Date())) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
     }
 
 

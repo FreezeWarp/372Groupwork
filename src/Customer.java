@@ -141,14 +141,18 @@ public class Customer extends Account {
         String ticketString = "";
 
         for (CreditCard creditCard : creditCardList) {
-            creditCardString += creditCard;
+            creditCardString += ("      " + creditCard.toString() + System.getProperty("line.separator"));
         }
 
         for (Ticket ticket : ticketList) {
-            ticketString += "\n    " + ticket;
+            ticketString += ticket.toString().replaceAll("(?m)^", "      ");
         }
 
-        return super.toString() + creditCardString + ticketString;
+        return super.toString() + System.getProperty("line.separator") +
+                "   Credit Cards:" + System.getProperty("line.separator") +
+                        creditCardString + System.getProperty("line.separator") +
+                "   Tickets:" + System.getProperty("line.separator") +
+                        ticketString + System.getProperty("line.separator");
     }
 
 

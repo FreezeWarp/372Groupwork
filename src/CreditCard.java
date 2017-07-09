@@ -132,7 +132,7 @@ public class CreditCard implements Identifiable<Long>, Serializable, Comparable<
      */
     @Override
     public String toString() {
-        return ", CC: " + cardNumber + " EXP: " + dateFormat.format(expirationDate);
+        return "Credit Card Number: " + cardNumber + "; Expires on: " + dateFormat.format(expirationDate);
     }
 
     /**
