@@ -139,16 +139,13 @@ public class Customer extends Account {
     public String toString() {
         String creditCardString = "";
         String ticketString = "";
-        int count = 0;
 
         for (CreditCard creditCard : creditCardList) {
             creditCardString += creditCard;
         }
 
         for (Ticket ticket : ticketList) {
-            ticketString += "\n    Ticket #" + count + ": " + ticket.getShow().getName() +
-                    ", Price: $" + ticket.getPrice() + ", " + dateFormat.format(ticket.getDate()) + ticket.getTicketType();
-            count++;
+            ticketString += "\n    " + ticket + ticket.getTicketType();
         }
 
         return super.toString() + creditCardString + ticketString;
