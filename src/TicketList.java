@@ -24,7 +24,7 @@ public class TicketList extends SingletonMap<Date, Collection<Ticket>> {
     /**
      * An unused constructor that overrides the default public constructor, preventing TicketList from being initialised outside of getInstance().
      */
-    protected TicketList() { }
+    private TicketList() { }
 
 
     /**

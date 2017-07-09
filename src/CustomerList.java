@@ -15,7 +15,7 @@ public class CustomerList extends AccountList<Customer> {
     /**
      * An unused constructor that overrides the default public constructor, preventing CustomerList from being initialised outside of getInstance().
      */
-    protected CustomerList() { }
+    private CustomerList() { }
 
 
     /**

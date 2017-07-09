@@ -19,7 +19,7 @@ public class CreditCardList extends SingletonIdentifiableMap<Long, CreditCard> {
     /**
      * An unused constructor that overrides the default public constructor, preventing CreditCardList from being initialised outside of getInstance().
      */
-    protected CreditCardList() { }
+    private CreditCardList() { }
 
 
     /**
