@@ -6,7 +6,8 @@ import java.util.NavigableMap;
 import java.util.TreeMap;
 
 /**
- * This defines a basic hashmap that should be treated as a Singleton, and thus contains a static INSTANCE field and the necessary serialising functionality.
+ * This defines a basic hashmap that should be treated as a Singleton.
+ * While this could almost be abstract, we want to be able to initialise it for the serilisation methods readObject/writeObject.
  *
  * @author  Joseph T. Parsons
  * @version 2.0

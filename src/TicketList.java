@@ -18,13 +18,13 @@ public class TicketList extends SingletonMap<Date, Collection<Ticket>> {
     /**
      * The global singleton instance of TicketList.
      */
-    private static SingletonMap INSTANCE;
+    protected static SingletonMap INSTANCE;
 
 
     /**
      * An unused constructor that overrides the default public constructor, preventing TicketList from being initialised outside of getInstance().
      */
-    private TicketList() { }
+    protected TicketList() { }
 
 
     /**
